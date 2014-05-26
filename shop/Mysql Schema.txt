@@ -1,0 +1,15 @@
+CREATE DATABASE shop;
+
+USE shop;
+
+GRANT ALL ON shop.* TO 'root'@'localhost' IDENTIFIED BY 'cabbage';
+
+CREATE TABLE user
+(
+	userid INT(11) NOT NULL AUTO_INCREMENT,
+	firstname VARCHAR(45) DEFAULT NULL,
+	lastname VARCHAR(45) DEFAULT NULL,
+	email VARCHAR(100) DEFAULT NULL,
+	dob DATE DEFAULT NULL,
+	PRIMARY KEY(userid)
+);
