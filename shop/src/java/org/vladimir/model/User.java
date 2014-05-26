@@ -61,13 +61,13 @@ public class User {
         return lastName;
     }
     
-    public String email() {
+    public String getEmail() {
     
         return email;
     
     }
     
-    public Date getDate(){
+    public Date getDob(){
     
         return dob;
         
