@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.vladimir.model.User;
 import org.vladimir.util.DbUtil;
 
@@ -18,7 +19,7 @@ import org.vladimir.util.DbUtil;
  */
 public class UserDao {
     
-    private Connection connection;
+    private final Connection connection;
     
     public UserDao() {
     
@@ -30,7 +31,7 @@ public class UserDao {
         
         try {
         
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO users(firstname, lastname, email, dob) VALUES(?, ?. ?. ?)");
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO user (firstname, lastname, email, dob) VALUES(?, ?, ?, ?)");
             preparedStatement.setString(1, user.getFirstName());
             preparedStatement.setString(2, user.getLastName());
             preparedStatement.setString(3, user.getEmail());
@@ -67,8 +68,8 @@ public class UserDao {
             preparedStatement.setInt(1, userId);
             preparedStatement.executeUpdate();
             
-        } catch (SQLException ex) {
-            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException e) {
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, e);
         }   
     }
     
@@ -78,14 +79,13 @@ public class UserDao {
         
         try {
             
-            PreparedStatement preparedStaement = connection.prepareStatement("SELECT * FROM user WHERE userid=?");
-            preparedStaement.setInt(1, userId);
-            ResultSet rs = preparedStaement.executeQuery();
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM user WHERE userid=?");
+            preparedStatement.setInt(1, userId);
+            ResultSet rs = preparedStatement.executeQuery();
             
             while(rs.next()) {
                 
-                user.setUserId(rs.getInt("userId"));
-                user.setUserId(rs.getInt("userId"));
+                user.setUserId(rs.getInt("userid"));
                 user.setFirstName(rs.getString("firstname"));
                 user.setLastName(rs.getString("lastname"));
                 user.setEmail(rs.getString("email"));
