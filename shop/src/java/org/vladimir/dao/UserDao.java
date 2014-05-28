@@ -24,7 +24,14 @@ public class UserDao {
     public UserDao() {
     
         connection = DbUtil.getConnection();
-    
+        
+        try {
+            
+            connection.setAutoCommit(false);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public void addUser(User user) {
@@ -37,9 +44,18 @@ public class UserDao {
             preparedStatement.setString(3, user.getEmail());
             preparedStatement.setDate(4, new java.sql.Date(user.getDob().getTime()));
             preparedStatement.executeUpdate();
+            connection.commit();
             
         } catch (SQLException e) {
-            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, e);
+            
+            try {
+                
+                connection.rollback();
+                Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, e);
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
     
@@ -54,9 +70,18 @@ public class UserDao {
             preparedStatement.setDate(4, new java.sql.Date(user.getDob().getTime()));
             preparedStatement.setInt(5, user.getUserId());
             preparedStatement.executeUpdate();
+            connection.commit();
             
-        } catch (SQLException ex) {
-            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException e) {
+            
+            try {
+                
+                connection.rollback();
+                Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, e);
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
     
@@ -67,9 +92,18 @@ public class UserDao {
             PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM user WHERE userid=?");
             preparedStatement.setInt(1, userId);
             preparedStatement.executeUpdate();
+            connection.commit();
             
         } catch (SQLException e) {
-            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, e);
+
+            try {
+                
+                connection.rollback();
+                Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, e);
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }   
     }
     
