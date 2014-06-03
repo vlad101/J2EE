@@ -4,6 +4,8 @@
     Author     : Vladimir
 --%>
 
+            <link type="text/css" rel="stylesheet" href="<c:url value="assets/css/checkout.css" />" />
+
             <div id="centerColumn">
 
                 <h2>checkout</h2>

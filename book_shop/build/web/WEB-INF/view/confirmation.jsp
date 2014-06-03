@@ -4,6 +4,8 @@
     Author     : Vladimir
 --%>
 
+            <link type="text/css" rel="stylesheet" href="<c:url value="assets/css/confirmation.css" />" />
+
             <div id="singleColumn">
 
                 <p id="confirmationText">

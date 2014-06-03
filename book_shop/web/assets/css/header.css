@@ -1,0 +1,45 @@
+/* 
+    Created on : Jun 3, 2014, 6:44:43 PM
+    Author     : Vladimir
+*/
+
+/* header styles */
+#header {
+    height: 180px;
+    background: #aaa;
+}
+
+#logo {
+    height: 70px;
+    width: 200px;
+    float: left;
+    margin-left: 7px;
+    margin-top: 7px;
+    border-radius: 15px;
+    border: 1px solid;
+}
+
+#logoText {
+    float: left;
+    margin: 20px 0 0 70px;
+    font-family: 'American Typewriter', Courier, monospace;
+    font-size: 50px;
+    font-weight: bold;
+    color: #333;
+}
+
+#widgetBar {
+    height: 50px;
+    width: 850px;
+    float: right;
+    background: #ccc;
+}
+
+.headerWidget {
+    width: 194px;
+    margin: 20px 2px;
+    font-size: small;
+    float: right;
+    line-height: 25px;
+    background: #aaa;
+}

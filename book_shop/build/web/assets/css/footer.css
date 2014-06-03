@@ -1,0 +1,12 @@
+/* 
+    Created on : Jun 3, 2014, 6:41:00 PM
+    Author     : Vladimir
+*/
+
+/* footer styles */
+#footer {
+    height: 60px;
+    width: 350px;
+    clear: left;
+    background: #aaa;
+}

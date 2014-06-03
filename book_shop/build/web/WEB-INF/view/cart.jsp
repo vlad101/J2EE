@@ -4,6 +4,8 @@
     Author     : Vladimir
 --%>
 
+            <link type="text/css" rel="stylesheet" href="<c:url value="assets/css/cart.css" />" />
+
             <div id="centerColumn">
 
                 <p>Your shopping cart contains x items.</p>
