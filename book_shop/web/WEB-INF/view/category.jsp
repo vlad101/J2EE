@@ -5,7 +5,7 @@
 --%>
 
             <link type="text/css" rel="stylesheet" href="<c:url value="assets/css/category.css" />" />
-
+            
             <div id="categoryLeftColumn">
                 <div class="categoryButton" id="selectedCategory">
                      <span class="categoryText">Science Fiction</span>
