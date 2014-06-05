@@ -2,6 +2,8 @@ package com.vladimir.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -12,27 +14,44 @@ import java.util.logging.Logger;
  */
 public class DbUtil {
     
-    private static Connection connection = null;
-    
-    public static Connection getConnection() throws SQLException {
-        
-        String driver = "com.mysql.jdbc.Driver";
-        String url = "jdbc:mysql://localhost:3306/serendipity";
-        String user = "root";
-        String password = "cabbage";
+    private Connection connection = null;
+    private final String DRIVER = "com.mysql.jdbc.Driver";
+    private final String URL = "jdbc:mysql://localhost:3306/serendipity";
+    private final String USER = "root";
+    private final String PASSWORD = "cabbage";
+     
+    public DbUtil() {
+                
+        try {
+            
+            Class.forName(DRIVER);
+                        
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DbUtil.class.getName()).log(Level.SEVERE, null, ex);
+        } 
         
         try {
             
-            Class.forName(driver);
-            connection = DriverManager.getConnection(url, user, password);
+            connection = DriverManager.getConnection(URL, USER, PASSWORD);
             
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(DbUtil.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(DbUtil.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+    }
+    
+    public Connection getConnection() {
         return connection;
-        
+    }
+
+    public void closeConnection() {
+        if (connection != null) {
+            try {
+                
+                connection.close();
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(DbUtil.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
+            }
+        }
     }
 }
