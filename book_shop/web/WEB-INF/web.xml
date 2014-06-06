@@ -9,6 +9,7 @@
         <jsp-property-group>
             <description>header and footer settings</description>
             <url-pattern>/index.jsp</url-pattern>
+            <url-pattern>/error.jsp</url-pattern>
             <url-pattern>/WEB-INF/view/*</url-pattern>
             <include-prelude>/WEB-INF/jspf/header.jspf</include-prelude>
             <include-coda>/WEB-INF/jspf/footer.jspf</include-coda>
@@ -23,13 +24,30 @@
     
     <servlet-mapping>
         <servlet-name>SerendipityController</servlet-name>
+        
+        <!-- administration page -->
+        <url-pattern>/admin</url-pattern>
+        
+        <!--
+        <url-pattern>/admin/editCategory</url-pattern>
+        <url-pattern>/admin/editBook</url-pattern>
+        <url-pattern>/admin/editCategory</url-pattern>
+        <url-pattern>/admin/editCustomer</url-pattern>
+        <url-pattern>/admin/editCustomerOrder</url-pattern>
+        <url-pattern>/admin/editOrderedBook</url-pattern>
+                                                        -->
+
+        <!-- get request  -->
         <url-pattern>/category</url-pattern>
-        <url-pattern>/addToCart</url-pattern>
-        <url-pattern>/viewCart</url-pattern>
-        <url-pattern>/updateCart</url-pattern>
+        <url-pattern>/cart</url-pattern>
         <url-pattern>/checkout</url-pattern>
-        <url-pattern>/purchase</url-pattern>
         <url-pattern>/chooseLanguage</url-pattern>
+        
+        <!-- post request  -->
+        <url-pattern>/addToCart</url-pattern>
+        <url-pattern>/updateCart</url-pattern>
+        <url-pattern>/purchase</url-pattern>
+                
     </servlet-mapping>
     
 </web-app>

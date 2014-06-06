@@ -11,14 +11,6 @@ body {
     margin: 20px auto;
 }
 
-hr {
-    border: 0;
-    background-color: #333;
-    height: 1px;
-    margin: 0 25px;
-    width: 300px;
-}
-
 table {
     margin: 0 20px;
     border-spacing: 0;

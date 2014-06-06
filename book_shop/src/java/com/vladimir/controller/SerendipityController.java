@@ -7,6 +7,9 @@
 package com.vladimir.controller;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,15 +25,18 @@ import javax.servlet.http.HttpServletResponse;
             loadOnStartup = 1,
             urlPatterns = {"/category",
                            "/addToCart",
-                           "/viewCart",
+                           "/cart",
                            "/updateCart",
                            "/checkout",
                            "/purchase",
-                           "/chooseLanguage"})
+                           "/chooseLanguage",
+                           
+                           "/admin"})
 public class SerendipityController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
     private static final String START_URL = "/WEB-INF/view";
+    private static final String START_URL_ADMIN = "/WEB-INF/view/admin";
     private static final String END_URL = ".jsp";
     //private UserDao dao;
     
@@ -41,95 +47,133 @@ public class SerendipityController extends HttpServlet {
     
     }
     
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
+    @SuppressWarnings("UseSpecificCatch")
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, ParseException {
+
         String forward = "";
         String action = request.getServletPath();
         
-//      category page request
-        if(action.equals("/category")) {
+//      get - category page request
+        if(action.equalsIgnoreCase("/category")) {
             
 //          TODO: category
             forward = "/category";
             
         }
         
-//      cart page request
-        else if(action.equals("/viewCart")) {
+//      get - cart page request
+        else if(action.equalsIgnoreCase("/cart")) {
         
 //          TODO: cart
             forward = "/cart";
-        
+            
         }
         
-//      checkout page request
-        else if(action.equals("/checkout")) {
+//      get - checkout page request
+        else if(action.equalsIgnoreCase("/checkout")) {
         
 //          TODO: checkout
             forward = "/checkout";
             
         }
         
-//      switch language request
-        else if(action.equals("chooseLanguage")) {
+//      get - switch language request
+        else if(action.equalsIgnoreCase("chooselanguage")) {
         
 //          TODO: switch language
-            
         
         }
-        
-//      create view and forward request
-        try {
-            
-            String url = START_URL + forward + END_URL;
-            RequestDispatcher view = request.getRequestDispatcher(url);
-            view.forward(request, response);
-            
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
-        String forward = "";
-        String action = request.getServletPath();
-        
-//      add books to cart request
-        if(action.equals("/addToCart")) {
+//      post - add books to cart request
+        else if(action.equalsIgnoreCase("/addtocart")) {
         
 //          TODO: implement add to cart
         
         }
         
-//      update books in cart request
-        else if(action.equals("/updateCart")) {
+//      post - update books in cart request
+        else if(action.equalsIgnoreCase("/updatecart")) {
         
 //          TODO: implement update cart
         
         }
         
-//      purchase request
-        else if(action.equals("/purchase")) {
+//      post - purchase request
+        else if(action.equalsIgnoreCase("/purchase")) {
         
 //          TODO: implement purchase
             forward = "/confirmation";
         
         }
         
+//        Administration pages
+        else if(action.equalsIgnoreCase("/admin")) {
+            
+//          TODO: implement admin page
+            
+            
+            forward = "/admin";
+        }
+        
+//        Error page
+        else {
+            forward = "/error";
+        }
+        
 //      create view and forward request
         try {
             
-            String url = START_URL + forward + END_URL;
+            String url;
+            
+//                error page
+            
+            if( forward.contains("error") ) {
+                
+                url = forward + END_URL;
+                
+            } else {
+                if( forward.contains("admin") ) {
+                    
+//                    administrative pages
+                    url = START_URL_ADMIN + forward + END_URL;
+                    
+                } else {
+                    
+//                    user pages
+                    url = START_URL + forward + END_URL;
+                    
+                }
+            }
+            
             RequestDispatcher view = request.getRequestDispatcher(url);
             view.forward(request, response);
             
         } catch (Exception ex) {
-            ex.printStackTrace();
+            Logger.getLogger(SerendipityController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
+        try {
+            
+            processRequest(request, response);
+            
+        } catch (ParseException ex) {
+            Logger.getLogger(SerendipityController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try {
+            processRequest(request, response);
+        } catch (ParseException ex) {
+            Logger.getLogger(SerendipityController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
