@@ -39,7 +39,7 @@
                     <a href="#">
                         <img src="assets/images/logo.jpg" id="logo" alt="Serendipity logo">
                     </a>
-                    <img src="#" id="logoText" alt="The Serendipity">
+                    <img src="assets/images/logoText.jpg" id="logoText" alt="The Serendipity">
                 </div>
                 
             </div>

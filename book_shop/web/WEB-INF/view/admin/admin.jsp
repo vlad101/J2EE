@@ -5,6 +5,11 @@
 --%>
 
             <link type="text/css" rel="stylesheet" href="<c:url value="assets/css/cart.css" />" />
+            
+            <!-- include jquery core files -->
+            <script type="text/javascript" src="assets/jquery/js/jquery-1.10.2.js" ></script>
+            
+            <script type="text/javascript" src="<c:url value="assets/js/admin.js" />" ></script>
 
             <div id="centerColumn">
                 
@@ -14,7 +19,7 @@
                 <br>
                 <br>
                 
-                <button type="button" class="btn btn-danger btn-lg">Edit category!</button>
+                <button type="button" class="btn btn-danger btn-lg" id="edit-category-button" >Edit category!</button>
                 <br>
                 <br>
                 
