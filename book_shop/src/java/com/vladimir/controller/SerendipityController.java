@@ -108,12 +108,21 @@ public class SerendipityController extends HttpServlet {
         }
         
 //        Administration pages
-        else if(action.equalsIgnoreCase("/admin")) {
+        else if(action.equalsIgnoreCase("/admin/admin")) {
             
 //          TODO: implement admin page
             
             
             forward = "/admin";
+        }
+        
+//        admin edit category
+        else if(action.equalsIgnoreCase("/admin/editcategory")) {
+            
+//          TODO: implement admin page
+            
+            
+            forward = "/editcategory";
         }
         
 //        Error page
@@ -128,12 +137,12 @@ public class SerendipityController extends HttpServlet {
             
 //                error page
             
-            if( forward.contains("error") ) {
+            if( action.contains("error") ) {
                 
                 url = forward + END_URL;
                 
             } else {
-                if( forward.contains("admin") ) {
+                if( action.contains("admin") ) {
                     
 //                    administrative pages
                     url = START_URL_ADMIN + forward + END_URL;

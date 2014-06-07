@@ -4,40 +4,40 @@
     Author     : Vladimir
 --%>
 
-            <link type="text/css" rel="stylesheet" href="<c:url value="assets/css/checkout.css" />" />
+<link type="text/css" rel="stylesheet" href="<c:url value="assets/css/checkout.css" />" />
 
-            <div id="centerColumn">
+<div id="centerColumn">
 
-                <h2>checkout</h2>
+    <h2>checkout</h2>
 
-                <p>[ text ]</p>
+    <p>[ text ]</p>
 
-                <form action="purchase" method="post">
+    <form action="purchase" method="post">
 
-                    <table id="checkoutTable">
-                        <tr>
-                            <td>[ form containing fields to
-                                <br>capture customer details ]</td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td><input type="submit" value="submit button"></td>
-                        </tr>
+        <table id="checkoutTable">
+            <tr>
+                <td>[ form containing fields to
+                    <br>capture customer details ]</td>
+            </tr>
+            <tr>
+                <td></td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="submit button"></td>
+            </tr>
 
-                    </table>
+        </table>
 
-                </form>
+    </form>
 
-                <div id="infoBox">
+    <div id="infoBox">
 
-                    <div style="border: black solid 1px; height:100px; padding: 10px">
-                        [ purchase conditions ]
-                    </div>
+        <div style="border: black solid 1px; height:100px; padding: 10px">
+            [ purchase conditions ]
+        </div>
 
-                    <div id="priceBox">
-                        [ purchase calculations:<br>subtotal + delivery charge ]
-                    </div>
-                </div>
-            </div>
+        <div id="priceBox">
+            [ purchase calculations:<br>subtotal + delivery charge ]
+        </div>
+    </div>
+</div>

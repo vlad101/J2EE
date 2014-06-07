@@ -5,7 +5,7 @@
 --%>
 
             <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-            <link type="text/css" rel="stylesheet" href="<c:url value="assets/css/footer.css" />" />
+            <link type="text/css" rel="stylesheet" href="<c:url value="/assets/css/footer.css" />" />
       
             <div id="footer">
                 <hr>

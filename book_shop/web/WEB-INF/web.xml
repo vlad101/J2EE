@@ -26,10 +26,11 @@
         <servlet-name>SerendipityController</servlet-name>
         
         <!-- administration page -->
-        <url-pattern>/admin</url-pattern>
+        <url-pattern>/admin/admin</url-pattern>
+        <url-pattern>/admin/editCategory</url-pattern>
+        
         
         <!--
-        <url-pattern>/admin/editCategory</url-pattern>
         <url-pattern>/admin/editBook</url-pattern>
         <url-pattern>/admin/editCategory</url-pattern>
         <url-pattern>/admin/editCustomer</url-pattern>

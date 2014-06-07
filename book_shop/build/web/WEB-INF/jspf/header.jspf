@@ -15,10 +15,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         
         <!-- Bootstrap -->
-        <link type="text/css" rel="stylesheet" href="<c:url value="assets/bootstrap/css/bootstrap.min.css" />" />
+        <link type="text/css" rel="stylesheet" href="<c:url value="/assets/bootstrap/css/bootstrap.min.css" />" />
         
-        <link type="text/css" rel="stylesheet" href="<c:url value="assets/css/style.css" />" />
-        <link type="text/css" rel="stylesheet" href="<c:url value="assets/css/header.css" />" />
+        <link type="text/css" rel="stylesheet" href="<c:url value="/assets/css/style.css" />" />
+        <link type="text/css" rel="stylesheet" href="<c:url value="/assets/css/header.css" />" />
         <title>Serendipity Book Shop</title>
         
     </head>
@@ -37,9 +37,9 @@
                         [ shopping cart widget ]
                     </div>
                     <a href="#">
-                        <img src="assets/images/logo.jpg" id="logo" alt="Serendipity logo">
+                        <img src="/book_shop/assets/images/logo.jpg" id="logo" alt="Serendipity logo">
                     </a>
-                    <img src="assets/images/logoText.jpg" id="logoText" alt="The Serendipity">
+                    <img src="/book_shop/assets/images/logoText.jpg" id="logoText" alt="The Serendipity">
                 </div>
                 
             </div>
