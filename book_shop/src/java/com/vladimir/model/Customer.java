@@ -113,4 +113,13 @@ public class Customer {
     public void setCcNumber(String ccNumber) {
         this.ccNumber = ccNumber;
     }
+
+    @Override
+    public String toString() {
+        return "Customer{" + "customerId=" + customerId + ", firstName=" 
+                + firstName + ", lastName=" + lastName + ", email=" + email 
+                + ", phone=" + phone + ", address=" + address + ", city=" 
+                + city + ", state=" + state + ", zipCode=" + zipCode 
+                + ", ccNumber=" + ccNumber + '}';
+    }
 }

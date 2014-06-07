@@ -11,28 +11,26 @@
 
 <script type="text/javascript" src="<c:url value="/assets/js/admin.js" />" ></script>
 
-<div id="centerColumn">
-                
-    <br>
-    <br>
-    <h1>Hello Administrator</h1>
-    <br>
-    <br>  
-    <button type="button" class="btn btn-success btn-lg" id="edit-category-button" >Edit category!</button>
-    <br>
-    <br>
-    <button type="button" class="btn btn-success btn-lg" id="edit-book-button" >Edit Book!</button>
-    <br>
-    <br>
-    <button type="button" class="btn btn-success btn-lg" id="edit-customer-button" >Edit Customer!</button>
-    <br>
-    <br>
-    <button type="button" class="btn btn-success btn-lg" id="edit-customer-order-button" >Edit Customer Order!</button>
-    <br>
-    <br>
-    <button type="button" class="btn btn-success btn-lg" id="edit-ordered-book-button" >Edit Ordered Book!</button>
-    <br>
-    <br>
+<div id="adminCenterColumn">
+    
+        <br>
+        <h1>Hello Administrator</h1>
+        
+    <div class="button-list">
+        <button type="button" class="btn btn-success btn-lg" id="edit-category-button" >Edit category!</button>
+        <br>
+        <br>
+        <button type="button" class="btn btn-success btn-lg" id="edit-book-button" >Edit Book!</button>
+        <br>
+        <br>
+        <button type="button" class="btn btn-success btn-lg" id="edit-customer-button" >Edit Customer!</button>
+        <br>
+        <br>
+        <button type="button" class="btn btn-success btn-lg" id="edit-customer-order-button" >Edit Customer Order!</button>
+        <br>
+        <br>
+        <button type="button" class="btn btn-success btn-lg" id="edit-ordered-book-button" >Edit Ordered Book!</button>
+    </div>
 </div>
             
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

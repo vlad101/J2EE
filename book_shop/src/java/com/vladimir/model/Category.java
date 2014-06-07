@@ -31,4 +31,9 @@ public class Category {
     public String getCategoryName(){
         return name;
     }
+
+    @Override
+    public String toString() {
+        return "Category{" + "categoryId=" + categoryId + ", name=" + name + '}';
+    }
 }

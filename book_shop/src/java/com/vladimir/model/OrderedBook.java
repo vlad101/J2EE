@@ -39,4 +39,10 @@ public class OrderedBook {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+
+    @Override
+    public String toString() {
+        return "OrderedBook{" + "bookId=" + bookId + ", customerOrderId=" 
+                + customerOrderId + ", quantity=" + quantity + '}';
+    }
 }
