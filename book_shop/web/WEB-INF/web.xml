@@ -28,15 +28,10 @@
         <!-- administration page -->
         <url-pattern>/admin/admin</url-pattern>
         <url-pattern>/admin/editCategory</url-pattern>
-        
-        
-        <!--
         <url-pattern>/admin/editBook</url-pattern>
-        <url-pattern>/admin/editCategory</url-pattern>
         <url-pattern>/admin/editCustomer</url-pattern>
         <url-pattern>/admin/editCustomerOrder</url-pattern>
         <url-pattern>/admin/editOrderedBook</url-pattern>
-                                                        -->
 
         <!-- get request  -->
         <url-pattern>/category</url-pattern>

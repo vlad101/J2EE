@@ -4,7 +4,7 @@
     Author     : Vladimir
 --%>
 
-<link type="text/css" rel="stylesheet" href="<c:url value="/assets/css/cart.css" />" />
+<link type="text/css" rel="stylesheet" href="<c:url value="/assets/css/admin.css" />" />
 
 <!-- include jquery core files -->
 <script type="text/javascript" src="/book_shop/assets/jquery/js/jquery-1.10.2.js" ></script>
@@ -17,12 +17,22 @@
     <br>
     <h1>Hello Administrator</h1>
     <br>
+    <br>  
+    <button type="button" class="btn btn-success btn-lg" id="edit-category-button" >Edit category!</button>
     <br>
-                
-    <button type="button" class="btn btn-danger btn-lg" id="edit-category-button" >Edit category!</button>
+    <br>
+    <button type="button" class="btn btn-success btn-lg" id="edit-book-button" >Edit Book!</button>
     <br>
     <br>
-                
+    <button type="button" class="btn btn-success btn-lg" id="edit-customer-button" >Edit Customer!</button>
+    <br>
+    <br>
+    <button type="button" class="btn btn-success btn-lg" id="edit-customer-order-button" >Edit Customer Order!</button>
+    <br>
+    <br>
+    <button type="button" class="btn btn-success btn-lg" id="edit-ordered-book-button" >Edit Ordered Book!</button>
+    <br>
+    <br>
 </div>
             
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

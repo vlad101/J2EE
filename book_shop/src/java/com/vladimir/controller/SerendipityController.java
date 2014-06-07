@@ -30,8 +30,12 @@ import javax.servlet.http.HttpServletResponse;
                            "/checkout",
                            "/purchase",
                            "/chooseLanguage",
-                           
-                           "/admin"})
+                           "/admin",
+                           "/admin/editCategory",
+                           "/admin/editBook",
+                           "/admin/editCustomer",
+                           "/admin/editCustomerOrder",
+                           "/admin/editOrderedBook"})
 public class SerendipityController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
@@ -119,10 +123,46 @@ public class SerendipityController extends HttpServlet {
 //        admin edit category
         else if(action.equalsIgnoreCase("/admin/editcategory")) {
             
-//          TODO: implement admin page
+//          TODO: implement edit category page
             
             
             forward = "/editcategory";
+        }
+        
+ //        admin edit book
+        else if(action.equalsIgnoreCase("/admin/editbook")) {
+            
+//          TODO: implement edit book page
+            
+            
+            forward = "/editbook";
+        }       
+        
+ //        admin edit customer
+        else if(action.equalsIgnoreCase("/admin/editcustomer")) {
+            
+//          TODO: implement edit customer page
+            
+            
+            forward = "/editcustomer";
+        }
+        
+ //        admin edit customer order
+        else if(action.equalsIgnoreCase("/admin/editcustomerorder")) {
+            
+//          TODO: implement edit customer order page
+            
+            
+            forward = "/editcustomerorder";
+        }
+        
+ //        admin edit ordered book
+        else if(action.equalsIgnoreCase("/admin/editorderedbook")) {
+            
+//          TODO: implement edit ordered book page
+            
+            
+            forward = "/editorderedbook";
         }
         
 //        Error page
