@@ -5,6 +5,11 @@
 	 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	 version="3.0">
     
+    <display-name>book_shop</display-name>
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+    
     <jsp-config>
         <jsp-property-group>
             <description>header and footer settings</description>
@@ -44,6 +49,21 @@
         <url-pattern>/updateCart</url-pattern>
         <url-pattern>/purchase</url-pattern>
                 
+    </servlet-mapping>
+    
+    <!-- REST Web API -->
+    <servlet>
+        <servlet-name>Jersey REST Service</servlet-name>
+        <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+        <init-param>
+            <param-name>com.sun.jersey.config.property.packages</param-name>
+            <param-value>com.vladimir.rest</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Jersey REST Service</servlet-name>
+        <url-pattern>/api/*</url-pattern>
     </servlet-mapping>
     
 </web-app>
