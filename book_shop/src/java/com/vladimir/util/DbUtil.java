@@ -66,28 +66,31 @@ public class DbUtil {
         String returnDateTime = null;
         ResultSet rs;
         
-        try {
-            
-            preparedStatement = connection.prepareStatement("SELECT CURDATE(), CURTIME();");
-            rs = preparedStatement.executeQuery();
-            
-            while(rs.next()) {
-            
-                datetime = rs.getString("CURDATE()") + " " + rs.getString("CURTIME()");
-                returnDateTime = "<p>Database status</p>" 
-                                + "<p>Database Date/Time: " + datetime + " </p>";
-                
+        if (connection != null) {
+            try {
+
+                preparedStatement = connection.prepareStatement("SELECT CURDATE(), CURTIME();");
+                rs = preparedStatement.executeQuery();
+
+                while(rs.next()) {
+
+                    datetime = rs.getString("CURDATE()") + " " + rs.getString("CURTIME()");
+                    returnDateTime = "<p>Database status</p>" 
+                                    + "<p>Database Date/Time: " + datetime + " </p>";
+
+                }
+
+                rs.close();
+                rs = null;
+
+                preparedStatement.close();
+                preparedStatement = null;
+
+            } catch (SQLException ex) {
+                Logger.getLogger(Status.class.getName()).log(Level.SEVERE, "Could not get database time.", ex);
             }
-            
-            rs.close();
-            rs = null;
-            
-            preparedStatement.close();
-            preparedStatement = null;
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(Status.class.getName()).log(Level.SEVERE, "Could not get database time.", ex);
         }
+        
         return returnDateTime;
     }
 }
