@@ -1,9 +1,20 @@
 package com.vladimir.rest;
 
+import com.vladimir.dao.DAOCategory;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import com.vladimir.util.DbUtil;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 /**
  *
@@ -43,12 +54,40 @@ public class Status {
      * 
      * @return String - version number of the api.
      */
-    
     @Path("/version")
     @GET
     @Produces(MediaType.TEXT_HTML)
     public String returnVersion() {
         return "<p>Version: " + api_version + "</p>";
     }
-    
+
+    /**
+     * This method will return the database status of the api.
+     * Note: this is the nested one down from the root. 
+     * You will need to add database into the url path.
+     * Example: http://localhost:8080/book_shop/api/v1/status/database
+     * 
+     * @return String - version number of the api.
+     */
+    @Path("/database")
+    @GET
+    @Produces(MediaType.TEXT_HTML)
+    public static String returnDatabaseStatus() throws Exception {
+        
+        String databaseStatus = null;
+        DbUtil db = null;
+        
+        try {
+            
+            db = new DbUtil();
+            databaseStatus = db.getDatabaseStatus();
+            
+        } catch (Exception ex) {
+            Logger.getLogger(Status.class.getName()).log(Level.SEVERE, "Could not get database time.", ex);
+        } finally {
+            db.closeConnection();
+        }
+        
+        return databaseStatus;
+    }
 }

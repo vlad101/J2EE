@@ -1,8 +1,12 @@
 package com.vladimir.util;
 
+import com.vladimir.rest.Status;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -36,11 +40,13 @@ public class DbUtil {
             Logger.getLogger(DbUtil.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public Connection getConnection() {
-        return connection;
-    }
 
+    public Connection getConnection() {
+        
+        return connection;
+        
+    }
+    
     public void closeConnection() {
         if (connection != null) {
             try {
@@ -51,5 +57,37 @@ public class DbUtil {
                 Logger.getLogger(DbUtil.class.getName()).log(Level.SEVERE, ex.getMessage(), ex);
             }
         }
+    }
+    
+    public String getDatabaseStatus() throws Exception {
+    
+        PreparedStatement preparedStatement;
+        String datetime;
+        String returnDateTime = null;
+        ResultSet rs;
+        
+        try {
+            
+            preparedStatement = connection.prepareStatement("SELECT CURDATE(), CURTIME();");
+            rs = preparedStatement.executeQuery();
+            
+            while(rs.next()) {
+            
+                datetime = rs.getString("CURDATE()") + " " + rs.getString("CURTIME()");
+                returnDateTime = "<p>Database status</p>" 
+                                + "<p>Database Date/Time: " + datetime + " </p>";
+                
+            }
+            
+            rs.close();
+            rs = null;
+            
+            preparedStatement.close();
+            preparedStatement = null;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Status.class.getName()).log(Level.SEVERE, "Could not get database time.", ex);
+        }
+        return returnDateTime;
     }
 }

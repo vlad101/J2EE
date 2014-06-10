@@ -9,6 +9,7 @@ Start creating our Java Rest Service using the Jersey Framework.
 For more information on Jersey, please go to http://jersey.java.net
 This series is using version 1.18
 
-Two test API resources were created in part 1:
-http://localhost:8080/book_shop/api/v1/status/
-http://localhost:8080/book_shop/api/v1/status/version
+API resources:
+Get Web API name: http://localhost:8080/book_shop/api/v1/status/
+Get Web API version: http://localhost:8080/book_shop/api/v1/status/version
+Get Web API database status: http://localhost:8080/book_shop/api/v1/status/database
