@@ -27,14 +27,6 @@ public class DAOBook {
         
         db = new DbUtil();
         
-        try {
-            
-            conn.setAutoCommit(false);
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(DAOBook.class.getName()).log(Level.SEVERE, "Could not set auto commit to false.", ex);
-        }
-        
     }
     
     public boolean addBook(Book book) {
@@ -47,6 +39,7 @@ public class DAOBook {
         try {
         
             conn = db.getConnection();
+            conn.setAutoCommit(false);
             preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setInt(1, book.getBookId());
             preparedStatement.setString(2, book.getTitle());
@@ -90,6 +83,7 @@ public class DAOBook {
         try {
         
             conn = db.getConnection();
+            conn.setAutoCommit(false);
             preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, book.getTitle());
             preparedStatement.setDouble(2, book.getPrice());
@@ -131,6 +125,7 @@ public class DAOBook {
         try {
         
             conn = db.getConnection();
+            conn.setAutoCommit(false);
             preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setInt(1, bookId);
             preparedStatement.executeUpdate();

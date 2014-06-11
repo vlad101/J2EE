@@ -2,14 +2,19 @@ package com.vladimir.dao;
 
 import com.vladimir.model.Category;
 import com.vladimir.util.DbUtil;
+import com.vladimir.util.ToJSON;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import org.codehaus.jettison.json.JSONArray;
 
 /**
  *
@@ -26,14 +31,6 @@ public class DAOCategory {
         
         db = new DbUtil();
         
-        try {
-            
-            conn.setAutoCommit(false);
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(DAOCategory.class.getName()).log(Level.SEVERE, "Could not set auto commit to false.", ex);
-        }
-        
     }
     
     public boolean addCategory(Category category) {
@@ -43,8 +40,9 @@ public class DAOCategory {
         String sql = "INSERT INTO category (category_name) VALUES(?);";
         
         try {
-        
+            
             conn = db.getConnection();
+            conn.setAutoCommit(false);
             preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, category.getCategoryName());
             preparedStatement.executeUpdate();
@@ -82,6 +80,7 @@ public class DAOCategory {
         try {
         
             conn = db.getConnection();
+            conn.setAutoCommit(false);
             preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, category.getCategoryName());
             preparedStatement.setInt(2, category.getCategoryId());
@@ -120,6 +119,7 @@ public class DAOCategory {
         try {
         
             conn = db.getConnection();
+            conn.setAutoCommit(false);
             preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setInt(1, categoryId);
             preparedStatement.executeUpdate();
@@ -186,9 +186,11 @@ public class DAOCategory {
         return category;
     }    
     
-    public List<Category> getCategories(){
-    
-        List<Category> categoryList = new ArrayList<Category>();
+//    public List<Category> getCategories(){
+    public String getCategories() { 
+        
+        String categoryList = null;
+//        List<Category> categoryList = new ArrayList<Category>();
         
         String sql = "SELECT * FROM category;";
         
@@ -197,15 +199,18 @@ public class DAOCategory {
             conn = db.getConnection();
             preparedStatement = conn.prepareStatement(sql);
             rs = preparedStatement.executeQuery();
-            while(rs.next()) {
             
-                int categoryId = rs.getInt("category_id");
-                String categoryName = rs.getString("category_name");
-                Category category = new Category(categoryId, categoryName);
-                categoryList.add(category);
-                   
-                // TODO: build a json object
-            }
+            ToJSON converter = new ToJSON();
+            JSONArray json = converter.toJSONArray(rs);
+            categoryList = json.toString();
+            
+//            creates a list of categories
+//            while(rs.next()) {
+//                int categoryId = rs.getInt("category_id");
+//                String categoryName = rs.getString("category_name");
+//                Category category = new Category(categoryId, categoryName);
+//                categoryList.add(category);
+//            }
             
             rs.close();
             rs = null;
@@ -218,11 +223,12 @@ public class DAOCategory {
             
         } catch (SQLException ex) {
             Logger.getLogger(DAOCategory.class.getName()).log(Level.SEVERE, "Could not select categories.", ex);
+        } catch (Exception e) {
+                Logger.getLogger(DAOCategory.class.getName()).log(Level.SEVERE, "Could not create a JSON object", e);  
         } finally {
             db.closeConnection();
         }
         
         return categoryList;
     }
-    
 }
