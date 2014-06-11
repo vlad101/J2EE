@@ -4,8 +4,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONObject;
+
+import org.owasp.esapi.ESAPI;
 
 
 /**
@@ -27,6 +30,7 @@ public class ToJSON {
     public JSONArray toJSONArray(ResultSet rs) throws Exception {
     
         JSONArray json = new JSONArray();
+        String temp = null;
         
         try {
         
@@ -80,8 +84,13 @@ public class ToJSON {
                         /*Debug*/ System.out.println("ToJSON: NVARCHAR");
                     }
                     else if (rsmd.getColumnType(i)==java.sql.Types.VARCHAR){
-                        obj.put(columnName, rs.getString(columnName));
-                        /*Debug*/ System.out.println("ToJSON: VARCHAR");
+                        
+                        // prevent cross-site scripting
+                        temp = rs.getString(columnName);
+                        temp = ESAPI.encoder().canonicalize(temp);
+                        temp = ESAPI.encoder().encodeForHTML(temp);
+                        obj.put(columnName, temp);
+                        
                     }
                     else if (rsmd.getColumnType(i)==java.sql.Types.TINYINT){
                         obj.put(columnName, rs.getInt(columnName));

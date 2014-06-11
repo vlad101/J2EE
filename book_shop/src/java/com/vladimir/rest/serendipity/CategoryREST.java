@@ -22,7 +22,8 @@ import javax.ws.rs.core.Response;
 public class CategoryREST {
     
     /**
-     * The method creates its own HTTP resonse with the list of categories
+     * The method creates its own HTTP resp
+     * onse with the list of categories
      * 
      * @return - the response with the category list
      * @throws Exception 
