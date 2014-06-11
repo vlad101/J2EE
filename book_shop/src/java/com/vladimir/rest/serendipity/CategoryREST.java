@@ -21,13 +21,22 @@ import javax.ws.rs.core.Response;
 @Path("/v1/category")
 public class CategoryREST {
     
+    /**
+     * The method creates its own HTTP resonse with the list of categories
+     * 
+     * @return - the response with the category list
+     * @throws Exception 
+     */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getCategoryList() throws Exception {
-    
+    public Response getCategoryList() throws Exception {
+        
+        Response response;
         DAOCategory category = new DAOCategory();
         String categoryList = category.getCategories();
-               
-        return categoryList;
+        
+        response = Response.ok(categoryList).build();
+        
+        return response;
     }    
 }
