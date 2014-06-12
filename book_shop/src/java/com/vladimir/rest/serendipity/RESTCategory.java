@@ -1,13 +1,11 @@
 package com.vladimir.rest.serendipity;
 
-import com.vladimir.model.Category;
 import com.vladimir.dao.DAOCategory;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.codehaus.jettison.json.JSONArray;
@@ -44,28 +42,29 @@ public class RESTCategory {
     /**
      * The method creates its own HTTP response with the category based on the
      * id passed by the client
-     * Ex: http://localhost:8080/book_shop/api/v1/category/id?categoryId=2
+     * Ex: http://localhost:8080/book_shop/api/v1/category/id/2
      * 
      * @return - the response with the category name
      * @throws Exception 
      */
     @GET
-    @Path("/id")
+    @Path("/id/{categoryId}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getCategoryById(
-            @QueryParam("categoryId") String categoryId) 
+            @PathParam("categoryId") String categoryId) 
                         throws Exception {
         
+        Response response;
+        int id;
+        
         try {
-            Integer.parseInt(categoryId);
+            id = Integer.parseInt(categoryId);
         } catch (NumberFormatException e) {
             return Response.status(400).entity("Please supply the valid category id for this search").build();
         }
         
-        Response response;
-        
         DAOCategory daoCategory = new DAOCategory();
-        JSONArray category = daoCategory.getCategoryById(Integer.parseInt(categoryId));
+        JSONArray category = daoCategory.getCategoryById(id);
         
         response = Response.ok(category.toString()).build();
         
