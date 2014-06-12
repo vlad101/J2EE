@@ -9,8 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -148,11 +146,11 @@ public class DAOCategory {
         return flag;
     }
 
-    public Category getCategoryById(int categoryId){
+    public JSONArray getCategoryById(int categoryId){
         
-        Category category = null;
+        JSONArray json = new JSONArray();
         
-        String sql = "SELECT * FROM category WHERE category_id=?;";
+        String sql = "SELECT category_name FROM category WHERE category_id=?;";
         
         try {
         
@@ -160,13 +158,16 @@ public class DAOCategory {
             preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setInt(1, categoryId);
             rs = preparedStatement.executeQuery();
-            while(rs.next()) {
+
+            ToJSON converter = new ToJSON();
+            json = converter.toJSONArray(rs);
             
-                String categoryName = rs.getString("category_name");
-                category = new Category(categoryId, categoryName);
-                   
-                // TODO: build a json object
-            }
+//            creates a category object  
+//            method declaration: public Category getCategoryById(int categoryId){
+//            while(rs.next()) {
+//                String categoryName = rs.getString("category_name");
+//                category = new Category(categoryId, categoryName);
+//            }
             
             rs.close();
             rs = null;
@@ -179,20 +180,20 @@ public class DAOCategory {
             
         } catch (SQLException ex) {
             Logger.getLogger(DAOCategory.class.getName()).log(Level.SEVERE, "Could not select category by ID.", ex);
+        } catch (Exception e) {
+                Logger.getLogger(DAOCategory.class.getName()).log(Level.SEVERE, "Could not create a JSON object", e);  
         } finally {
             db.closeConnection();
         }
         
-        return category;
+        return json;
     }    
     
-//    public List<Category> getCategories(){
-    public String getCategories() { 
+    public JSONArray getAllCategories() { 
         
-        String categoryList = null;
-//        List<Category> categoryList = new ArrayList<Category>();
+        JSONArray json = new JSONArray();
         
-        String sql = "SELECT * FROM category;";
+        String sql = "SELECT category_id, category_name FROM category;"; // do not use * for production code
         
         try {
         
@@ -201,10 +202,10 @@ public class DAOCategory {
             rs = preparedStatement.executeQuery();
             
             ToJSON converter = new ToJSON();
-            JSONArray json = converter.toJSONArray(rs);
-            categoryList = json.toString();
+            json = converter.toJSONArray(rs);
             
 //            creates a list of categories
+//            method declaration:public List<Category> getCategories(){
 //            while(rs.next()) {
 //                int categoryId = rs.getInt("category_id");
 //                String categoryName = rs.getString("category_name");
@@ -229,6 +230,6 @@ public class DAOCategory {
             db.closeConnection();
         }
         
-        return categoryList;
+        return json;
     }
 }
