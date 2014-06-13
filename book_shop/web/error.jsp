@@ -3,10 +3,11 @@
     Created on : Jun 5, 2014, 8:23:26 PM
     Author     : Vladimir
 --%>
-            
-            <div>
+<%@ page isErrorPage="true" %>
 
-                <h1>404</h1>
-                <h1>OOPS! PAGE NOT FOUND</h1>
+<div>
+
+    <h1>Error page!</h1>
+    <h1>OOPS! PAGE NOT FOUND</h1>
                 
-            </div>
+</div>

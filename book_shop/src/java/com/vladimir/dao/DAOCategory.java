@@ -31,10 +31,11 @@ public class DAOCategory {
         
     }
     
-    public boolean addCategory(Category category) {
-        
-        boolean flag = false;
-               
+    public int addCategory(String categoryName) {
+                
+        if (categoryName == null || categoryName.length() == 0)
+            return 500;
+            
         String sql = "INSERT INTO category (category_name) VALUES(?);";
         
         try {
@@ -42,7 +43,7 @@ public class DAOCategory {
             conn = db.getConnection();
             conn.setAutoCommit(false);
             preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setString(1, category.getCategoryName());
+            preparedStatement.setString(1, categoryName);
             preparedStatement.executeUpdate();
             conn.commit();
             
@@ -52,21 +53,20 @@ public class DAOCategory {
             conn.close();
             conn = null;
             
-            flag = true;
-            
         } catch (SQLException ex) {
             Logger.getLogger(DAOCategory.class.getName()).log(Level.SEVERE, "Coud not add category.", ex);
             try {
                 conn.rollback();
             } catch (SQLException ex1) {
                 Logger.getLogger(DAOCategory.class.getName()).log(Level.SEVERE, null, ex1);
+                return 500;
             }
-            flag = false;
+            return 500;
+            
         } finally {
             db.closeConnection();
         }
-        
-        return flag;
+        return 200; //success
     }
     
     public boolean updateCategory(Category category) {

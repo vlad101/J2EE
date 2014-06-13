@@ -16,4 +16,4 @@ Get Web API database status: http://localhost:8080/book_shop/api/v1/status/datab
 
 API database resources:
 Get the list of categories from category table: http://localhost:8080/book_shop/api/v1/category
-Get the catagory from category table based on category id: http://localhost:8080/book_shop/api/v1/category/{categoryId}
+Get the catagory from category table based on category id: http://localhost:8080/book_shop/api/v1/category/id/{categoryId}

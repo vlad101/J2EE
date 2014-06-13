@@ -66,4 +66,26 @@
         <url-pattern>/api/*</url-pattern>
     </servlet-mapping>
     
+    
+    <!-- Error rpage -->
+    <error-page>
+        <error-code>500</error-code>
+        <location>/error.jsp</location>
+    </error-page>
+    
+    <error-page>
+        <error-code>java.lang.Throwable</error-code>
+        <location>/error.jsp</location>
+    </error-page>
+     
+    <error-page>
+        <error-code>java.lang.NullPointerException</error-code>
+        <location>/error.jsp</location>
+    </error-page>   
+     
+    <error-page>
+        <error-code>java.lang.Exception</error-code>
+        <location>/error.jsp</location>
+    </error-page>   
+    
 </web-app>
