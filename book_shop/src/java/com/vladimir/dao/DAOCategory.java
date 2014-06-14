@@ -69,10 +69,12 @@ public class DAOCategory {
         return 200; //success
     }
     
-    public boolean updateCategory(Category category) {
+    public int updateCategory(Category category) {
         
-        boolean flag = false;
-               
+        String categoryName = category.getCategoryName();
+        if(categoryName == null || categoryName.length() == 0)
+            return 500;
+        
         String sql = "UPDATE category SET category_name=? WHERE category_id=?;";
         
         try {
@@ -91,21 +93,20 @@ public class DAOCategory {
             conn.close();
             conn = null;
             
-            flag = true;
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(DAOCategory.class.getName()).log(Level.SEVERE, "Coud not update category.", ex);
+        } catch (SQLException e) {
+            Logger.getLogger(DAOCategory.class.getName()).log(Level.SEVERE, "Coud not update category.", e);
             try {
                 conn.rollback();
-            } catch (SQLException ex1) {
-                Logger.getLogger(DAOCategory.class.getName()).log(Level.SEVERE, null, ex1);
+            } catch (SQLException ex) {
+                Logger.getLogger(DAOCategory.class.getName()).log(Level.SEVERE, "Coud not update category.", ex);
+                return 500;
             }
-            flag = false;
+            return 500;
         } finally {
             db.closeConnection();
         }
         
-        return flag;
+        return 200; // success
     }
     
     public boolean deleteCategory(int categoryId) {

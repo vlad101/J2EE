@@ -1,6 +1,6 @@
 package com.vladimir.util;
 
-import com.vladimir.rest.status.Status;
+import com.vladimir.rest.serendipity.Status;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;

@@ -1,4 +1,4 @@
-package com.vladimir.rest.status;
+package com.vladimir.rest.serendipity;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

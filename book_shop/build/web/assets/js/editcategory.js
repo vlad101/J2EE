@@ -66,9 +66,9 @@ function getCategory() {
                 success: function(data) {
                     var html_string = "";
                     
-                    $.each(data, function(id, name){
-                        //console.log(val1);
-                        html_string = html_string + templateGetInventory(name);
+                    $.each(data, function(index, value){
+                        //console.log(index + ": " + value);
+                        html_string = html_string + templateGetCategory(value);
                     });
                     
                     $('#get_category').html("<table border='1'>" + html_string + "</table>");
@@ -82,12 +82,12 @@ function getCategory() {
     return $.ajax(ajaxObj);
 }
 
-function templateGetInventory(category) {
+function templateGetCategory(category) {
     
     return '<tr>' +
                         '<td class="container_category_title">' + category.category_name + '</td>' +
-                        '<td class="container_category_title_button"> <button class="category_update_button" value=" ' + 
-                                                    category.category_id + ' " type="button">Update</button> </td>' +
+                        '<td class="container_category_title_button"> <button class="category_update_button" value="' + 
+                                                    category.category_id + '" type="button">Update</button> </td>' +
             '</tr>';
     
 }
