@@ -100,14 +100,18 @@ public class RESTCategory {
                 jsonObject.put("MSG", "Category has been entered successfully");
                 returnString = jsonArray.put(jsonObject).toString();
                 
-                System.out.println(returnString);
-                
             } else {
-                return Response.status(500).entity("Unable to process add category").build();
+                //return Response.status(500).entity("Unable to process add category").build();
+                jsonObject.put("HTTP_CODE", "500");
+                jsonObject.put("MSG", "Enter a valid category!");
+                returnString = jsonArray.put(jsonObject).toString();
             }
             
         } catch (Exception e) {
-            return Response.status(500).entity("Server unable to process request.").build();
+            //return Response.status(500).entity("Server unable to process request.").build();
+            jsonObject.put("HTTP_CODE", "500");
+            jsonObject.put("MSG", "Server unable to process request!");
+            returnString = jsonArray.put(jsonObject).toString();
         }
         
         return Response.ok(returnString).build();
