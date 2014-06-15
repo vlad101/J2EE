@@ -11,7 +11,8 @@ $( document ).ready(function() {
         
         e.preventDefault(); // cancel form submit
         
-        var jsObj = $post_category_form.serializeObject(), ajaxObj = {};
+        var jsObj = $post_category_form.serializeObject();
+        var ajaxObj = {};
         
         ajaxObj = {
                     type: "POST",
@@ -24,14 +25,14 @@ $( document ).ready(function() {
                     success: function(data) {
                         if(data[0].HTTP_CODE == 200) {
                             console.log("Added category!");
-                            $('#ajax_add_category_response').text( data[0].MSG );
                         } else {
                             console.log("Error adding category!");
-                            $('ajax_add_category_response').text( data[0].MSG );
                         }
+                        $('ajax_add_category_response').text( data[0].MSG );
                     },
                     complete: function(XMLHttpRequest) {
                         //console.log(XMLHttpRequest.getAllResponseHeaders());
+                        getCategory();
                     },
                     dataType: "json" // request json
         };
@@ -45,12 +46,62 @@ $( document ).ready(function() {
      * It will submit a category entry update to a Serendipity database 
      */
     
-    var $put_category = $('#put_category_form'), $set_category_title = $('set_category_title');
+    var $put_category_form = $('#put_category_form');
     
     getCategory();
     
+    $(document.body).on('click', ':button, .category_update_button', function(e) {
+        var $this = $(this);
+        var category_id = $this.val();
+        var $tr = $this.closest('tr');
+        var category_name = $tr.find('.container_category_name').text();
+                    
+        $('#set_category_id').val(category_id);
+        $('#set_category_name').val(category_name);
+        
+        $('#ajax_update_category_response').text('HHHHHEEEEELLLLLOOOOO!');
+    });
+    
+    $put_category_form.submit(function(e) {
+       e.preventDefault(); // cancel form submit
+       var obj = $put_category_form.serializeObject();
+       updateCategory(obj);
+    });
 });
 
+function updateCategory(obj) {
+    
+    ajaxObj = {
+        
+                type: "PUT",
+                url: "http://localhost:8080/book_shop/api/v1/category/",
+                data: JSON.stringify(obj),
+                contentType: "application/json",
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log(jqXHR.responseText);
+                },                    
+                success: function(data) {
+                if(data[0].HTTP_CODE == 200) {
+                        console.log("Updated category!");
+                    } else {
+                        console.log("Error updating category!");
+                    }
+                    $('ajax_update_category_response').text( data[0].MSG );
+                },
+                complete: function(XMLHttpRequest) {
+                    // reload inventory
+                    // console.log( XMLHttpRequest.getAllResponseHeaders() );
+                    getCategory();
+                },
+                dataType: "json"  // request json
+    };
+    
+    return $.ajax(ajaxObj);
+}
+
+/**'
+ * Get category names from the backend using ajax call and json response.
+ */
 function getCategory() {
     
     var d = new Date().getTime();
@@ -82,24 +133,18 @@ function getCategory() {
     return $.ajax(ajaxObj);
 }
 
+/**
+ * Format category names into the table rows and columns.
+ * 
+ * @param {type} category
+ * @returns {String}
+ */
 function templateGetCategory(category) {
     
     return '<tr>' +
-                        '<td class="container_category_title">' + category.category_name + '</td>' +
-                        '<td class="container_category_title_button"> <button class="category_update_button" value="' + 
+                        '<td class="container_category_name">' + category.category_name + '</td>' +
+                        '<td class="container_update_button"> <button class="category_update_button" value="' + 
                                                     category.category_id + '" type="button">Update</button> </td>' +
             '</tr>';
     
-}
-
-function updateCategory(obj, category_name, code) {
-    
-    ajaxObj = {
-        
-                //type: "PUT",
-                //url:
-        
-    };
-    
-    return $.ajax(ajaxObj);
 }

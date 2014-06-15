@@ -23,7 +23,7 @@
         <table border="1">
             <tr>
                 <td>Category title</td>
-                <td><input type="text" id="set_category_title" name="category_title" ></td>
+                <td><input type="text" id="set_category_name" name="category_name" ></td>
             </tr>
             <tr>
                 <td>

@@ -126,7 +126,7 @@ public class RESTCategory {
      * This method will allow you to update data in the category table.
      * In this example we are using both PathParams and the message body (payload).
      */
-    @Path("/id/{categoryId}/name/{categoryName}")
+    //@Path("/id/{categoryId}/name/{categoryName}")
     @PUT
     @Consumes({MediaType.APPLICATION_FORM_URLENCODED,MediaType.APPLICATION_JSON})
     @Produces(MediaType.APPLICATION_JSON)
@@ -145,6 +145,19 @@ public class RESTCategory {
             JSONObject partsData = new JSONObject(categoryInfo);
             categoryId = partsData.optString("category_id");
             categoryName = partsData.optString("category_name");
+            
+            System.out.println("HHHHHEEEEELLLLOOOOOOO");
+            System.out.println("HHHHHEEEEELLLLOOOOOOO");
+            System.out.println("HHHHHEEEEELLLLOOOOOOO");
+            System.out.println("HHHHHEEEEELLLLOOOOOOO");
+            System.out.println("HHHHHEEEEELLLLOOOOOOO");
+            System.out.println("ID: " + categoryId);
+            System.out.println("Name: " + categoryName);
+            System.out.println("HHHHHEEEEELLLLOOOOOOO");
+            System.out.println("HHHHHEEEEELLLLOOOOOOO");
+            System.out.println("HHHHHEEEEELLLLOOOOOOO");
+            System.out.println("HHHHHEEEEELLLLOOOOOOO");
+            System.out.println("HHHHHEEEEELLLLOOOOOOO");
             
             int catId;
             try {
