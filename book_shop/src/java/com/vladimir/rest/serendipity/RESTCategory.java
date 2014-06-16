@@ -39,9 +39,13 @@ public class RESTCategory {
         Response response;
         
         DAOCategory daoCategory = new DAOCategory();
+        
+        JSONObject jsonObject = new JSONObject();
         JSONArray jsonCategoryList = daoCategory.getAllCategories();
         
-        response = Response.ok(jsonCategoryList.toString()).build();
+        jsonObject.put("categories", jsonCategoryList);
+        
+        response = Response.ok(jsonObject.toString()).build();
         
         return response;
     }

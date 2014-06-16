@@ -8,6 +8,12 @@
 <script type="text/javascript" src="<c:url value="/assets/js/polyfill.js" />" ></script>
 <script type="text/javascript" src="<c:url value="/assets/js/editcategory.js" />" ></script>
 
+<!-- Datatable js -->
+<script type="text/javascript" language="javascript" src="//cdn.datatables.net/1.10.0/js/jquery.dataTables.js"></script>
+
+<!-- Datatable css -->
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.0-beta.1/css/jquery.dataTables.css">
+
 <div id="centerColumn">
                 
     <br />
@@ -17,6 +23,29 @@
     <div id="get_category"></div>
     
     <br /><hr />
+    
+    
+    <!-- jQuery datatables -->
+    
+    <div id="category-list">
+        <table id="category-list-table" class="display">
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+
+            <tfoot>
+                <tr>
+                    <th>Category</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
     
     <!-- Update category -->
     <form id="put_category_form" name="put_category_form" action="#">

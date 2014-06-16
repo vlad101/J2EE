@@ -2,6 +2,9 @@ $( document ).ready(function() {
     
     getCategory();
     
+    // decrease width of table search
+    $('#category-list').css({'width' : '80%', 'border': '1px solid', 'padding': '2%', 'margin-left':'auto', 'margin-right':'auto'});
+    
     /**
      * The event handler for submit button - add category.
      * It triggers a ajax POST call to api/v1/category
@@ -172,14 +175,12 @@ function getCategory() {
                     console.log(jqXHR.responseText);
                 },
                 success: function(data) {
-                    var html_string = "";
                     
-                    $.each(data, function(index, value){
-                        //console.log(index + ": " + value);
-                        html_string = html_string + templateGetCategory(value);
-                    });
-                    
-                    $('#get_category').html("<table border='1'>" + html_string + "</table>");
+                    if(data.categories.length > 0) {
+                        onBuildCategoryTable(data.categories);
+                    } else {
+//                        alert("NO!");
+                    }
                 },
                 complete: function(XMLHttpRequest) {
                     //console.log(XMLHttpRequest.getAllResponseHeaders());
@@ -191,19 +192,30 @@ function getCategory() {
 }
 
 /**
- * Format category names into the table rows and columns.
+ * Format category names into the table.
  * 
- * @param {type} category
+ * @param {type} aoCategories
  * @returns {String}
  */
-function templateGetCategory(category) {
+function onBuildCategoryTable(aoCategories) {
     
-    return '<tr>' +
-                        '<td class="container_category_name">' + category.category_name + '</td>' +
-                        '<td class="container_update_button"> <button class="category_update_button" value="' + 
-                                                    category.category_id + '" type="button">Update</button> </td>' +
-                        '<td class="container_delete_button"> <button class="category_delete_button" value="' + 
-                                                    category.category_id + '" type="button">Delete</button> </td>' +
-            '</tr>';
+    for(var i in aoCategories) {
+//        update button
+        aoCategories[i].updatebtncol = '<button class="category_update_button" value="' 
+                                        + aoCategories[i].category_id + '" type="button">Update</button>';
+//        delete button
+        aoCategories[i].deletebtncol = '<button class="category_delete_button" value="' 
+                                        + aoCategories[i].category_id + '" type="button">Delete</button>';
+    }
     
+    $('#category-list-table').dataTable({
+        'destroy': true, // reloads the table after update
+        'data': aoCategories,
+        'aLenghtMenu': [[10, 25, 50, -1], [10, 25, 50, 'All']],
+        "columns": [
+            { "data": "category_name" },
+            { "data": "updatebtncol" },
+            { "data": "deletebtncol" }
+        ]
+    });
 }
