@@ -6,6 +6,7 @@ import com.vladimir.dao.DAOCategory;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -126,7 +127,6 @@ public class RESTCategory {
      * This method will allow you to update data in the category table.
      * In this example we are using both PathParams and the message body (payload).
      */
-    //@Path("/id/{categoryId}/name/{categoryName}")
     @PUT
     @Consumes({MediaType.APPLICATION_FORM_URLENCODED,MediaType.APPLICATION_JSON})
     @Produces(MediaType.APPLICATION_JSON)
@@ -145,19 +145,6 @@ public class RESTCategory {
             JSONObject partsData = new JSONObject(categoryInfo);
             categoryId = partsData.optString("category_id");
             categoryName = partsData.optString("category_name");
-            
-            System.out.println("HHHHHEEEEELLLLOOOOOOO");
-            System.out.println("HHHHHEEEEELLLLOOOOOOO");
-            System.out.println("HHHHHEEEEELLLLOOOOOOO");
-            System.out.println("HHHHHEEEEELLLLOOOOOOO");
-            System.out.println("HHHHHEEEEELLLLOOOOOOO");
-            System.out.println("ID: " + categoryId);
-            System.out.println("Name: " + categoryName);
-            System.out.println("HHHHHEEEEELLLLOOOOOOO");
-            System.out.println("HHHHHEEEEELLLLOOOOOOO");
-            System.out.println("HHHHHEEEEELLLLOOOOOOO");
-            System.out.println("HHHHHEEEEELLLLOOOOOOO");
-            System.out.println("HHHHHEEEEELLLLOOOOOOO");
             
             int catId;
             try {
@@ -188,6 +175,60 @@ public class RESTCategory {
             //return Response.status(500).entity("Server unable to process request.").build();
             jsonObject.put("HTTP_CODE", "500");
             jsonObject.put("MSG", "Server unable to process update request!");
+            returnString = jsonArray.put(jsonObject).toString();
+        }
+                
+        return Response.ok(returnString).build();
+    }
+    
+    /**
+     * This method will allow you to delete data in the category table.
+     * In this example we are using both PathParams and the message body (payload).
+     */
+    @DELETE
+    @Consumes({MediaType.APPLICATION_FORM_URLENCODED,MediaType.APPLICATION_JSON})
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response deleteCategory(String categoryInfo) throws Exception {
+        
+        String categoryId;
+        DAOCategory daoCategory = new DAOCategory();
+        String returnString;
+        JSONArray jsonArray = new JSONArray();
+        JSONObject jsonObject = new JSONObject();
+
+        try {
+            
+            JSONObject partsData = new JSONObject(categoryInfo);
+            categoryId = partsData.optString("category_id");
+            
+            int catId;
+            try {
+                catId = Integer.parseInt(categoryId);
+            } catch (NumberFormatException e) {
+                jsonObject.put("HTTP_CODE", "500");
+                jsonObject.put("MSG", "Category id is not valid");
+                return Response.ok(jsonArray.put(jsonObject).toString()).build();
+            }
+            
+            int http_code = daoCategory.deleteCategory(catId);
+            
+            if(http_code == 200) {
+                
+                jsonObject.put("HTTP_CODE", "200");
+                jsonObject.put("MSG", "Category has been deleted successfully!");
+                returnString = jsonArray.put(jsonObject).toString();
+                
+            } else {
+                //return Response.status(500).entity("Unable to process add category").build();
+                jsonObject.put("HTTP_CODE", "500");
+                jsonObject.put("MSG", "Caategory was not deleted!");
+                returnString = jsonArray.put(jsonObject).toString();
+            }
+            
+        } catch (Exception e) {
+            //return Response.status(500).entity("Server unable to process request.").build();
+            jsonObject.put("HTTP_CODE", "500");
+            jsonObject.put("MSG", "Server unable to process delete request!");
             returnString = jsonArray.put(jsonObject).toString();
         }
                 

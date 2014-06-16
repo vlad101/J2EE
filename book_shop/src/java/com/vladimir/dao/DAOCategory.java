@@ -15,7 +15,8 @@ import java.util.logging.Logger;
 import org.codehaus.jettison.json.JSONArray;
 
 /**
- *
+ * Business logic for the category data - Category table in the database.
+ * 
  * @author Vladimir
  */
 public class DAOCategory {
@@ -31,6 +32,12 @@ public class DAOCategory {
         
     }
     
+    /**
+     * The method will allow you to add category to the database.
+     * 
+     * @param categoryName
+     * @return HTTP status
+     */
     public int addCategory(String categoryName) {
                 
         if (categoryName == null || categoryName.length() == 0)
@@ -69,6 +76,12 @@ public class DAOCategory {
         return 200; //success
     }
     
+    /**
+     * This method will allow you to update category data.
+     * 
+     * @param category
+     * @return HTTP status
+     */
     public int updateCategory(Category category) {
         
         String categoryName = category.getCategoryName();
@@ -109,10 +122,15 @@ public class DAOCategory {
         return 200; // success
     }
     
-    public boolean deleteCategory(int categoryId) {
-        
-        boolean flag = false;
-               
+    /**
+     * This method will allow you to delete data in the category table.
+     * Consider storing data in the temporary table and not to delete completely.
+     * 
+     * @param categoryId
+     * @return HTTP status
+     */
+    public int deleteCategory(int categoryId) {
+         
         String sql = "DELETE FROM category WHERE category_id=?;";
         
         try {
@@ -130,23 +148,28 @@ public class DAOCategory {
             conn.close();
             conn = null;
             
-            flag = true;
-            
         } catch (SQLException ex) {
             Logger.getLogger(DAOCategory.class.getName()).log(Level.SEVERE, "Coud not delete category.", ex);
             try {
                 conn.rollback();
             } catch (SQLException ex1) {
                 Logger.getLogger(DAOCategory.class.getName()).log(Level.SEVERE, null, ex1);
+                return 500;
             }
-            flag = false;
+            return 500;
         } finally {
             db.closeConnection();
         }
         
-        return flag;
+        return 200; // success
     }
 
+    /**
+     * This method will allow you to get category data by id from the database.
+     * 
+     * @param categoryId
+     * @return 
+     */
     public JSONArray getCategoryById(int categoryId){
         
         JSONArray json = new JSONArray();
@@ -190,6 +213,11 @@ public class DAOCategory {
         return json;
     }    
     
+    /**
+     * This method will allow you to get all category data from the category table.
+     * 
+     * @return JSON object with all category data from the table. 
+     */
     public JSONArray getAllCategories() { 
         
         JSONArray json = new JSONArray();

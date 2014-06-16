@@ -48,7 +48,7 @@ $( document ).ready(function() {
      */
     var $put_category_form = $('#put_category_form');
     
-    $(document.body).on('click', ':button, .category_update_button', function(e) {
+    $(document.body).on('click', '.category_update_button', function(e) {
         var $this = $(this);
         var category_id = $this.val();
         var $tr = $this.closest('tr');
@@ -57,7 +57,7 @@ $( document ).ready(function() {
         $('#set_category_id').val(category_id);
         $('#set_category_name').val(category_name);
         
-        $('#ajax_update_category_response').text('Category updated!');
+        $('#ajax_update_category_response').text( 'Category updated!' );
     });
     
     $put_category_form.submit(function(e) {
@@ -74,11 +74,11 @@ $( document ).ready(function() {
      * It will submit a category entry update to a Serendipity database 
      */
     
-    $(document.body).on('click', ':button, .category_delete_button', function(e) {
+    $(document.body).on('click', '.category_delete_button', function(e) {
         var $this = $(this);
         var category_id = $this.val();
         var obj = {category_id : category_id};
-        $('#ajax_update_category_response').text('Category updated!');
+        $('#ajax_delete_category_response').text('Category deleted!');
         
         deleteCategory(obj);
     });
@@ -169,7 +169,7 @@ function getCategory() {
                 data: "ts="+d,
                 contentType: "application/json",
                 error: function(jqXHR, textStatus, errorThrown) {
-                    console.log(jqXHR.responseText());
+                    console.log(jqXHR.responseText);
                 },
                 success: function(data) {
                     var html_string = "";
