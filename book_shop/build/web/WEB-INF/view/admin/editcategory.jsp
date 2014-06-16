@@ -38,6 +38,7 @@
     
     <!-- Delete category -->
     
+    <div id="ajax_delete_category_response"></div>
     
     <!-- Add category -->
     <form id="post_category_form" name="post_category_form" action="#">
@@ -50,9 +51,6 @@
     
                 
 </div>
-            
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> -->
             
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="<c:url value="/assets/bootstrap/js/bootstrap.min.js" />"></script>
