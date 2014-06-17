@@ -1,6 +1,18 @@
 $( document ).ready(function() {
+
+//    set page event handlers
+    function setEventHandlers() {
+        
+        getCategory();
+        
+        $('#update_form_submit').click(function(e){
+            
+            //e.preventDefault();
+            alert($('#myField').val());
+        });
+    }
     
-    getCategory();
+    setEventHandlers();
         
     /**
      * The event handler for submit button - add category.
@@ -48,7 +60,10 @@ $( document ).ready(function() {
      */
     var $update_category_form = $('#update_category_form');
     
-    $(document.body).on('click', '.category_update_button', function(e) {
+    $(document.body).on('click', '#category_update_button', function(e) {
+        
+//        $('#myModal').modal('show');
+        /*
         var $this = $(this);
         var category_id = $this.val();
         var $tr = $this.closest('tr');
@@ -58,6 +73,7 @@ $( document ).ready(function() {
         $('#set_category_name').val(category_name);
         
         $('#ajax_update_category_response').text( 'Category updated!' );
+        */
     });
     
     $update_category_form.submit(function(e) {
@@ -74,7 +90,7 @@ $( document ).ready(function() {
      * It will submit a category entry update to a Serendipity database 
      */
     
-    $(document.body).on('click', '.category_delete_button', function(e) {
+    $(document.body).on('click', '#category_delete_button', function(e) {
         var $this = $(this);
         var category_id = $this.val();
         var obj = {category_id : category_id};
@@ -197,10 +213,12 @@ function onBuildCategoryTable(aoCategories) {
     
     for(var i in aoCategories) {
 //        update button
-        aoCategories[i].updatebtncol = '<button class="category_update_button" value="' 
-                                        + aoCategories[i].category_id + '" type="button">Update</button>';
+//        button trigger modal
+        aoCategories[i].updatebtncol = '<button type="button" class="btn btn-primary btn-small" data-toggle="modal" data-target="#myModal" ' + 
+                                        'id="category_update_button" value="' 
+                                        + aoCategories[i].category_id + '" >Update</button>';
 //        delete button
-        aoCategories[i].deletebtncol = '<button class="category_delete_button" value="' 
+        aoCategories[i].deletebtncol = '<button class="btn btn-danger" id="category_delete_button" value="' 
                                         + aoCategories[i].category_id + '" type="button">Delete</button>';
 //        add category name for updating category
         aoCategories[i].category_name = '<div class="container_category_name" >' 

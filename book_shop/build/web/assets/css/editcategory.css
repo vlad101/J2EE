@@ -16,8 +16,8 @@ table {
 }
 
 #category-list-table td {
-    border-bottom: 0.1% solid black;
-    border-top: 0.1% solid black;
+    border-bottom: 0.5% solid black;
+    border-top: 0.5% solid black;
     border-color: rgb(160,160,255);
 }
 

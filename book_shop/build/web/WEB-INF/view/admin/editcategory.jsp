@@ -71,8 +71,36 @@
     <div id="ajax_update_category_response"></div>
     
     <!-- Delete category -->
-    <div id="ajax_delete_category_response"></div>                
+    <div id="ajax_delete_category_response"></div>
+    
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <form id="myForm" method="post">
+            Category <input type="text" value="hello" id="myField">
+            <button id="update_form_submit" type="submit">Submit</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 </div>
             
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="<c:url value="/assets/bootstrap/js/bootstrap.min.js" />"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="<c:url value="/assets/bootstrap/css/bootstrap.min.css" />"></script>
