@@ -106,7 +106,7 @@ function updateCategory(obj) {
                     } else {
                         console.log("Error updating category!");
                     }
-                    $('ajax_update_category_response').text( data[0].MSG );
+                    $('#ajax_update_category_response').text( data[0].MSG );
                 },
                 complete: function(XMLHttpRequest) {
                     // reload inventory
@@ -211,11 +211,12 @@ function onBuildCategoryTable(aoCategories) {
         'order': [[ 0, "asc" ]],
         'destroy': true, // reloads the table after update
         'data': aoCategories,
-        'aLenghtMenu': [[10, 25, 50, -1], [10, 25, 50, 'All']],
-        "columns": [
-            { "data": "category_name" },
-            { "data": "updatebtncol" },
-            { "data": "deletebtncol" }
+        'aLengthMenu': [[25, 50, 100, -1], [25, 50, 100, 'All']],
+        'iDsisplayLength': 25,
+        'columns': [
+            { 'data': 'category_name' },
+            { 'data': 'updatebtncol' },
+            { 'data': 'deletebtncol' }
         ]
     });
 }
