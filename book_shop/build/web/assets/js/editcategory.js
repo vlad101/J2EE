@@ -49,11 +49,12 @@ $( document ).ready(function() {
      * It triggers a ajax PUT call to api/v1/category
      * It will submit a category entry update to a Serendipity database 
      */
-    var $put_category_form = $('#put_category_form');
+    var $category_form = $('#category_form');
     
     $(document.body).on('click', '.category_update_button', function(e) {
         var $this = $(this);
         var category_id = $this.val();
+        alert("hello");
         var $tr = $this.closest('tr');
         var category_name = $tr.find('.container_category_name').text();
                     
@@ -63,9 +64,9 @@ $( document ).ready(function() {
         $('#ajax_update_category_response').text( 'Category updated!' );
     });
     
-    $put_category_form.submit(function(e) {
+    $category_form.submit(function(e) {
        e.preventDefault(); // cancel form submit
-       var obj = $put_category_form.serializeObject();
+       var obj = $category_form.serializeObject();
        
        updateCategory(obj);
     });
@@ -82,7 +83,7 @@ $( document ).ready(function() {
         var category_id = $this.val();
         var obj = {category_id : category_id};
         $('#ajax_delete_category_response').text('Category deleted!');
-        
+        alert(obj.category_id);
         deleteCategory(obj);
     });
 });
@@ -206,6 +207,9 @@ function onBuildCategoryTable(aoCategories) {
 //        delete button
         aoCategories[i].deletebtncol = '<button class="category_delete_button" value="' 
                                         + aoCategories[i].category_id + '" type="button">Delete</button>';
+//        
+        aoCategories[i].category_name = '<div class="container_category_name" >' 
+                                        + aoCategories[i].category_name + '</div>';
     }
     
     $('#category-list-table').dataTable({

@@ -48,7 +48,7 @@
     </div>
     
     <!-- Update category -->
-    <form id="put_category_form" name="put_category_form" action="#">
+    <form id="category_form" name="category_form" action="#">
         <table border="1">
             <tr>
                 <td>Category title</td>
