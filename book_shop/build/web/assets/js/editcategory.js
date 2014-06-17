@@ -1,21 +1,18 @@
 $( document ).ready(function() {
     
     getCategory();
-    
-    // decrease width of table search
-    $('#category-list').css({'width' : '80%', 'border': '1px solid', 'padding': '2%', 'margin-left':'auto', 'margin-right':'auto'});
-    
+        
     /**
      * The event handler for submit button - add category.
      * It triggers a ajax POST call to api/v1/category
      * It will submit a category entry to a Serendipity database 
      */
-    var $post_category_form = $('#post_category_form');
+    var $add_category_form = $('#add_category_form');
     $('#submit_add_category').click(function(e){
         
         e.preventDefault(); // cancel form submit
         
-        var jsObj = $post_category_form.serializeObject();
+        var jsObj = $add_category_form.serializeObject();
         var ajaxObj = {};
         
         ajaxObj = {
@@ -32,7 +29,7 @@ $( document ).ready(function() {
                         } else {
                             console.log("Error adding category!");
                         }
-                        $('ajax_add_category_response').text( data[0].MSG );
+                        $('#ajax_add_category_response').text( data[0].MSG );
                     },
                     complete: function(XMLHttpRequest) {
                         //console.log(XMLHttpRequest.getAllResponseHeaders());
@@ -49,12 +46,11 @@ $( document ).ready(function() {
      * It triggers a ajax PUT call to api/v1/category
      * It will submit a category entry update to a Serendipity database 
      */
-    var $category_form = $('#category_form');
+    var $update_category_form = $('#update_category_form');
     
     $(document.body).on('click', '.category_update_button', function(e) {
         var $this = $(this);
         var category_id = $this.val();
-        alert("hello");
         var $tr = $this.closest('tr');
         var category_name = $tr.find('.container_category_name').text();
                     
@@ -64,9 +60,9 @@ $( document ).ready(function() {
         $('#ajax_update_category_response').text( 'Category updated!' );
     });
     
-    $category_form.submit(function(e) {
+    $update_category_form.submit(function(e) {
        e.preventDefault(); // cancel form submit
-       var obj = $category_form.serializeObject();
+       var obj = $update_category_form.serializeObject();
        
        updateCategory(obj);
     });
@@ -83,7 +79,6 @@ $( document ).ready(function() {
         var category_id = $this.val();
         var obj = {category_id : category_id};
         $('#ajax_delete_category_response').text('Category deleted!');
-        alert(obj.category_id);
         deleteCategory(obj);
     });
 });
@@ -207,12 +202,13 @@ function onBuildCategoryTable(aoCategories) {
 //        delete button
         aoCategories[i].deletebtncol = '<button class="category_delete_button" value="' 
                                         + aoCategories[i].category_id + '" type="button">Delete</button>';
-//        
+//        add category name for updating category
         aoCategories[i].category_name = '<div class="container_category_name" >' 
                                         + aoCategories[i].category_name + '</div>';
     }
     
     $('#category-list-table').dataTable({
+        'order': [[ 0, "asc" ]],
         'destroy': true, // reloads the table after update
         'data': aoCategories,
         'aLenghtMenu': [[10, 25, 50, -1], [10, 25, 50, 'All']],

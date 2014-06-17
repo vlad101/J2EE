@@ -4,6 +4,11 @@
     Author     : Vladimir
 --%>
 
+<link type="text/css" rel="stylesheet" href="<c:url value="/assets/css/editcategory.css" />" />
+
+<!-- Datatable css -->
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.0-beta.1/css/jquery.dataTables.css">
+
 <script type="text/javascript" src="/book_shop/assets/jquery/js/jquery-1.10.2.js" ></script>
 <script type="text/javascript" src="<c:url value="/assets/js/polyfill.js" />" ></script>
 <script type="text/javascript" src="<c:url value="/assets/js/editcategory.js" />" ></script>
@@ -11,22 +16,22 @@
 <!-- Datatable js -->
 <script type="text/javascript" language="javascript" src="//cdn.datatables.net/1.10.0/js/jquery.dataTables.js"></script>
 
-<!-- Datatable css -->
-<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.0-beta.1/css/jquery.dataTables.css">
-
 <div id="centerColumn">
                 
     <br />
     <h1>Edit Category</h1><br />
     
-    <!-- Get category -->
-    <div id="get_category"></div>
-    
-    <br /><hr />
-    
+    <!-- Add category -->
+    <div id="add-category">
+        <form id="add_category_form" name="post_category_form" action="#">
+            Add Category  <input type="text" name="category_title" id="category_title" maxlength="50" value="">&nbsp;
+                            <input type="button" name="submit_add_category" id="submit_add_category" value="Submit">
+        </form>
+    </div>
+    <div id="ajax_add_category_response"></div>
+    <br />
     
     <!-- jQuery datatables -->
-    
     <div id="category-list">
         <table id="category-list-table" class="display">
             <thead>
@@ -48,7 +53,8 @@
     </div>
     
     <!-- Update category -->
-    <form id="category_form" name="category_form" action="#">
+     <br />
+    <form id="update_category_form" name="update_category_form" action="#">
         <table border="1">
             <tr>
                 <td>Category title</td>
@@ -62,23 +68,10 @@
             </tr>
         </table>
     </form>
-    <br />
     <div id="ajax_update_category_response"></div>
     
     <!-- Delete category -->
-    
-    <div id="ajax_delete_category_response"></div>
-    
-    <!-- Add category -->
-    <form id="post_category_form" name="post_category_form" action="#">
-        Add Category  <input type="text" name="category_title" id="category_title" maxlength="50" value="">&nbsp;
-                        <input type="button" name="submit_add_category" id="submit_add_category" value="Submit">
-    </form>
-    <br />
-    <div id="ajax_add_category_response"></div>
-    
-    
-                
+    <div id="ajax_delete_category_response"></div>                
 </div>
             
 <!-- Include all compiled plugins (below), or include individual files as needed -->

@@ -1,0 +1,30 @@
+/* 
+    Created on : Jun 16, 2014, 10:44:58 PM
+    Author     : Vladimir
+*/
+
+#category-list {
+    width: 80%;
+    border: 1px solid;
+    padding: 2%;
+    margin-left: auto;
+    margin-right: auto;
+}
+    
+table { 
+    border: 1px solid black;   
+}
+
+#category-list-table td {
+    border-bottom: 0.1% solid black;
+    border-top: 0.1% solid black;
+    border-color: rgb(160,160,255);
+}
+
+#category-list-table tr.odd, #category-list-table tr.odd .sorting_1 {
+    background-color: #C6E2FF;
+}
+
+#category-list-table tr.even, #category-list-table tr.even .sorting_1 {
+    background-color: white;
+}
