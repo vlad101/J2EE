@@ -3,13 +3,18 @@ $( document ).ready(function() {
 //    set page event handlers
     function setEventHandlers() {
         
-        getCategory();
+        // hide CRUD respnse
+        $('#ajax_add_category_response_success').hide();
+        $('#ajax_add_category_response_error').hide();
         
-        $('#update_form_submit').click(function(e){
-            
-            //e.preventDefault();
-            alert($('#myField').val());
-        });
+        $('#ajax_update_category_response_success').hide();
+        $('#ajax_update_category_response_error').hide();
+        
+        $('#ajax_delete_category_response_success').hide();
+        $('#ajax_delete_category_response_error').hide();
+        
+        // update category table
+        getCategory();
     }
     
     setEventHandlers();
@@ -37,11 +42,10 @@ $( document ).ready(function() {
                     },
                     success: function(data) {
                         if(data[0].HTTP_CODE == 200) {
-                            console.log("Added category!");
+                            $('#ajax_add_category_response_success').css({ 'width': '50%', 'margin': '0 auto' }).show().html( '<strong>Well Done!</strong> ' + data[0].MSG ).delay(10000).fadeOut();
                         } else {
-                            console.log("Error adding category!");
+                            $('#ajax_add_category_response_error').css({ 'width': '50%', 'margin': '0 auto' }).show().html( '<strong>Oh snap!</strong> ' + data[0].MSG ).delay(10000).fadeOut();
                         }
-                        $('#ajax_add_category_response').text( data[0].MSG );
                     },
                     complete: function(XMLHttpRequest) {
                         //console.log(XMLHttpRequest.getAllResponseHeaders());
@@ -62,25 +66,25 @@ $( document ).ready(function() {
     
     $(document.body).on('click', '#category_update_button', function(e) {
         
-//        $('#myModal').modal('show');
-        /*
         var $this = $(this);
         var category_id = $this.val();
         var $tr = $this.closest('tr');
         var category_name = $tr.find('.container_category_name').text();
-                    
-        $('#set_category_id').val(category_id);
-        $('#set_category_name').val(category_name);
         
-        $('#ajax_update_category_response').text( 'Category updated!' );
-        */
+        $('input[name="category_id"]').val(category_id);
+        $('input[name="category_name"]').val(category_name);
+        
     });
     
-    $update_category_form.submit(function(e) {
-       e.preventDefault(); // cancel form submit
-       var obj = $update_category_form.serializeObject();
+    $('#update_category_form_submit').click(function(e) {
+        e.preventDefault(); // cancel form submit
+        $($update_category_form).submit(); // submit form
        
-       updateCategory(obj);
+        var obj = $update_category_form.serializeObject();
+
+        updateCategory(obj);
+
+        $('#update-category-modal').modal('hide');
     });
     
     
@@ -94,8 +98,16 @@ $( document ).ready(function() {
         var $this = $(this);
         var category_id = $this.val();
         var obj = {category_id : category_id};
-        $('#ajax_delete_category_response').text('Category deleted!');
-        deleteCategory(obj);
+        
+        // get the name for the alert box
+        var $tr = $this.closest('tr');
+        var category_name = $tr.find('.container_category_name').text();
+        bootbox.confirm("Are you sure you want to delete " + '"' + category_name + '"'  + " category?", function(result) {
+            if(result)
+                deleteCategory(obj);
+            else 
+                return;
+        });
     });
 });
 
@@ -117,12 +129,11 @@ function updateCategory(obj) {
                     console.log(jqXHR.responseText);
                 },                    
                 success: function(data) {
-                if(data[0].HTTP_CODE == 200) {
-                        console.log("Updated category!");
+                    if(data[0].HTTP_CODE == 200) {
+                        $('#ajax_update_category_response_success').css({ 'width': '50%', 'margin': '0 auto' }).show().html( '<strong>Well Done!</strong> ' + data[0].MSG ).delay(10000).fadeOut();
                     } else {
-                        console.log("Error updating category!");
+                        $('#ajax_update_category_response_error').css({ 'width': '50%', 'margin': '0 auto' }).show().html( '<strong>Oh snap!</strong> ' + data[0].MSG ).delay(10000).fadeOut();
                     }
-                    $('#ajax_update_category_response').text( data[0].MSG );
                 },
                 complete: function(XMLHttpRequest) {
                     // reload inventory
@@ -153,12 +164,11 @@ function deleteCategory(obj) {
                     console.log(jqXHR.responseText);
                 },                    
                 success: function(data) {
-                if(data[0].HTTP_CODE == 200) {
-                        console.log("Deleted category!");
+                    if(data[0].HTTP_CODE == 200) {
+                        $('#ajax_delete_category_response_success').css({ 'width': '50%', 'margin': '0 auto' }).show().html( '<strong>Well Done!</strong> ' + data[0].MSG ).delay(10000).fadeOut();
                     } else {
-                        console.log("Error deleting category!");
+                        $('#ajax_delete_category_response_error').css({ 'width': '50%', 'margin': '0 auto' }).show().html( '<strong>Oh snap!</strong> ' + data[0].MSG ).delay(10000).fadeOut();
                     }
-                    $('ajax_delete_category_response').text( data[0].MSG );
                 },
                 complete: function(XMLHttpRequest) {
                     // reload inventory
@@ -214,7 +224,7 @@ function onBuildCategoryTable(aoCategories) {
     for(var i in aoCategories) {
 //        update button
 //        button trigger modal
-        aoCategories[i].updatebtncol = '<button type="button" class="btn btn-primary btn-small" data-toggle="modal" data-target="#myModal" ' + 
+        aoCategories[i].updatebtncol = '<button type="button" class="btn btn-primary btn-small" data-toggle="modal" data-target="#update-category-modal" ' + 
                                         'id="category_update_button" value="' 
                                         + aoCategories[i].category_id + '" >Update</button>';
 //        delete button
@@ -229,7 +239,7 @@ function onBuildCategoryTable(aoCategories) {
         'order': [[ 0, "asc" ]],
         'destroy': true, // reloads the table after update
         'data': aoCategories,
-        'aLengthMenu': [[25, 50, 100, -1], [25, 50, 100, 'All']],
+        'aLengthMenu': [[10, 25, 50, -1], [10, 25, 50, 'All']],
         'iDsisplayLength': 25,
         'columns': [
             { 'data': 'category_name' },

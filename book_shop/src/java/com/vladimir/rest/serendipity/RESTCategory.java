@@ -71,7 +71,7 @@ public class RESTCategory {
         try {
             id = Integer.parseInt(categoryId);
         } catch (NumberFormatException e) {
-            return Response.status(400).entity("Please supply the valid category id for this search").build();
+            return Response.status(400).entity("Please supply the valid category id for this search!").build();
         }
         
         DAOCategory daoCategory = new DAOCategory();
@@ -107,7 +107,7 @@ public class RESTCategory {
             if(http_code == 200) {
                 
                 jsonObject.put("HTTP_CODE", "200");
-                jsonObject.put("MSG", "Category has been entered successfully");
+                jsonObject.put("MSG", "Category has been entered successfully!");
                 returnString = jsonArray.put(jsonObject).toString();
                 
             } else {
@@ -155,7 +155,7 @@ public class RESTCategory {
                 catId = Integer.parseInt(categoryId);
             } catch (NumberFormatException e) {
                 jsonObject.put("HTTP_CODE", "500");
-                jsonObject.put("MSG", "Category id is not valid");
+                jsonObject.put("MSG", "Category id is not valid!");
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
             }
             
@@ -171,7 +171,7 @@ public class RESTCategory {
             } else {
                 //return Response.status(500).entity("Unable to process add category").build();
                 jsonObject.put("HTTP_CODE", "500");
-                jsonObject.put("MSG", "Caategory was not updated!");
+                jsonObject.put("MSG", "Category was not updated!");
                 returnString = jsonArray.put(jsonObject).toString();
             }
             
@@ -210,7 +210,7 @@ public class RESTCategory {
                 catId = Integer.parseInt(categoryId);
             } catch (NumberFormatException e) {
                 jsonObject.put("HTTP_CODE", "500");
-                jsonObject.put("MSG", "Category id is not valid");
+                jsonObject.put("MSG", "Category id is not valid!");
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
             }
             
@@ -225,7 +225,7 @@ public class RESTCategory {
             } else {
                 //return Response.status(500).entity("Unable to process add category").build();
                 jsonObject.put("HTTP_CODE", "500");
-                jsonObject.put("MSG", "Caategory was not deleted!");
+                jsonObject.put("MSG", "Category was not deleted!");
                 returnString = jsonArray.put(jsonObject).toString();
             }
             

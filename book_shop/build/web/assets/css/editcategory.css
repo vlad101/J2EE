@@ -28,3 +28,21 @@ table {
 #category-list-table tr.even, #category-list-table tr.even .sorting_1 {
     background-color: white;
 }
+
+#update-category-modal .modal-dialog {
+    border: 1px solid black;
+    border-radius: 2%;
+    width: 30%;
+}
+
+#update-category-modal .modal-header {
+    background-color: #D3D3D3;
+}
+
+#update-category-modal .modal-body h5 {
+    text-align: center;
+}
+
+#update-category-modal .modal-body {
+    border-top: 1px black solid;
+}
