@@ -27,16 +27,15 @@
         <servlet-class>com.vladimir.controller.SerendipityController</servlet-class>
     </servlet>
     
+    <servlet>
+        <display-name>AdminController</display-name>
+        <servlet-name>AdminController</servlet-name>
+        <servlet-class>com.vladimir.controller.AdminController</servlet-class>
+    </servlet>
+    
+    <!-- public controller  -->
     <servlet-mapping>
         <servlet-name>SerendipityController</servlet-name>
-        
-        <!-- administration page -->
-        <url-pattern>/admin/admin</url-pattern>
-        <url-pattern>/admin/editCategory</url-pattern>
-        <url-pattern>/admin/editBook</url-pattern>
-        <url-pattern>/admin/editCustomer</url-pattern>
-        <url-pattern>/admin/editCustomerOrder</url-pattern>
-        <url-pattern>/admin/editOrderedBook</url-pattern>
 
         <!-- get request  -->
         <url-pattern>/category</url-pattern>
@@ -48,7 +47,19 @@
         <url-pattern>/addToCart</url-pattern>
         <url-pattern>/updateCart</url-pattern>
         <url-pattern>/purchase</url-pattern>
-                
+    </servlet-mapping>
+    
+    <!-- administration controller -->
+    <servlet-mapping>
+        <servlet-name>AdminController</servlet-name>
+        
+        <url-pattern>/admin/admin</url-pattern>
+        <url-pattern>/admin/editCategory</url-pattern>
+        <url-pattern>/admin/editBook</url-pattern>
+        <url-pattern>/admin/editCustomer</url-pattern>
+        <url-pattern>/admin/editCustomerOrder</url-pattern>
+        <url-pattern>/admin/editOrderedBook</url-pattern>
+
     </servlet-mapping>
     
     <!-- REST Web API -->

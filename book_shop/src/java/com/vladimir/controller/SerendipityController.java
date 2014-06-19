@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package com.vladimir.controller;
 
 import java.io.IOException;
@@ -29,18 +23,11 @@ import javax.servlet.http.HttpServletResponse;
                            "/updateCart",
                            "/checkout",
                            "/purchase",
-                           "/chooseLanguage",
-                           "/admin",
-                           "/admin/editCategory",
-                           "/admin/editBook",
-                           "/admin/editCustomer",
-                           "/admin/editCustomerOrder",
-                           "/admin/editOrderedBook"})
+                           "/chooseLanguage"})
 public class SerendipityController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
     private static final String START_URL = "/WEB-INF/view";
-    private static final String START_URL_ADMIN = "/WEB-INF/view/admin";
     private static final String END_URL = ".jsp";
     //private UserDao dao;
     
@@ -109,64 +96,7 @@ public class SerendipityController extends HttpServlet {
 //          TODO: implement purchase
             forward = "/confirmation";
         
-        }
-        
-//        Administration pages
-        else if(action.equalsIgnoreCase("/admin/admin")) {
-            
-//          TODO: implement admin page
-            
-            
-            forward = "/admin";
-        }
-        
-//        admin edit category
-        else if(action.equalsIgnoreCase("/admin/editcategory")) {
-            
-//          TODO: implement edit category page
-            
-            
-            forward = "/editcategory";
-        }
-        
- //        admin edit book
-        else if(action.equalsIgnoreCase("/admin/editbook")) {
-            
-//          TODO: implement edit book page
-            
-            
-            forward = "/editbook";
-        }       
-        
- //        admin edit customer
-        else if(action.equalsIgnoreCase("/admin/editcustomer")) {
-            
-//          TODO: implement edit customer page
-            
-            
-            forward = "/editcustomer";
-        }
-        
- //        admin edit customer order
-        else if(action.equalsIgnoreCase("/admin/editcustomerorder")) {
-            
-//          TODO: implement edit customer order page
-            
-            
-            forward = "/editcustomerorder";
-        }
-        
- //        admin edit ordered book
-        else if(action.equalsIgnoreCase("/admin/editorderedbook")) {
-            
-//          TODO: implement edit ordered book page
-            
-            
-            forward = "/editorderedbook";
-        }
-        
-//        Error page
-        else {
+        }  else {
             forward = "/error";
         }
         
@@ -182,17 +112,8 @@ public class SerendipityController extends HttpServlet {
                 url = forward + END_URL;
                 
             } else {
-                if( action.contains("admin") ) {
-                    
-//                    administrative pages
-                    url = START_URL_ADMIN + forward + END_URL;
-                    
-                } else {
-                    
-//                    user pages
-                    url = START_URL + forward + END_URL;
-                    
-                }
+//                user pages
+                url = START_URL + forward + END_URL;
             }
             
             RequestDispatcher view = request.getRequestDispatcher(url);
