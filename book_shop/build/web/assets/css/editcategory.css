@@ -12,11 +12,11 @@
 }
     
 table { 
-    border: 1px solid black;   
+    border: 1px solid black;
 }
 
 #category-list-table td {
-    border-bottom: 0.5% solid black;
+    border-bottom: 0.5% solid red;
     border-top: 0.5% solid black;
     border-color: rgb(160,160,255);
 }

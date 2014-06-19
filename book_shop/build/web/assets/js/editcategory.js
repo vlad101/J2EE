@@ -77,11 +77,12 @@ $( document ).ready(function() {
     });
     
     $('#update_category_form_submit').click(function(e) {
-        e.preventDefault(); // cancel form submit
-        $($update_category_form).submit(); // submit form
+        
+        $($update_category_form).submit(function(){
+            e.preventDefault(); // cancel form submit
+        }); // submit form
        
         var obj = $update_category_form.serializeObject();
-
         updateCategory(obj);
 
         $('#update-category-modal').modal('hide');
