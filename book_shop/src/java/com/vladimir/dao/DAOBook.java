@@ -219,8 +219,6 @@ public class DAOBook {
                 Book book = new Book(bookId, title, price, 
                                         description, lastUpdate, categoryId);
                 bookList.add(book);
-                   
-                // TODO: build a json object
             }
             
             rs.close();
@@ -234,6 +232,43 @@ public class DAOBook {
             
         } catch (SQLException ex) {
             Logger.getLogger(DAOBook.class.getName()).log(Level.SEVERE, "Could not select books.", ex);
+        } finally {
+            db.closeConnection();
+        }
+        
+        return bookList;
+    }
+    
+    public List<String> getBookListByCategoryId(int category_id) {
+        
+        List<String> bookList = new ArrayList<String>();
+        
+        String sql = "SELECT * FROM book WHERE category_id=?;";
+        
+        try {
+            
+            conn = db.getConnection();
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setInt(1, category_id);
+            rs = preparedStatement.executeQuery();
+            while( rs.next() ) {
+                
+                String title = rs.getString("title");
+                bookList.add(title);
+                
+            }
+            
+            rs.close();
+            rs = null;
+            
+            preparedStatement.close();
+            preparedStatement = null;
+            
+            conn.close();
+            conn = null;
+            
+        } catch(SQLException ex) {
+            Logger.getLogger(DAOBook.class.getName()).log(Level.SEVERE, "Could not select book by category id", ex);
         } finally {
             db.closeConnection();
         }

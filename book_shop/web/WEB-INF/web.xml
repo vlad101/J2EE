@@ -53,7 +53,7 @@
     <servlet-mapping>
         <servlet-name>AdminController</servlet-name>
         
-        <url-pattern>/admin/admin</url-pattern>
+        <url-pattern>/admin</url-pattern>
         <url-pattern>/admin/editCategory</url-pattern>
         <url-pattern>/admin/editBook</url-pattern>
         <url-pattern>/admin/editCustomer</url-pattern>

@@ -50,7 +50,7 @@ public class AdminController extends HttpServlet {
         String forward = "";
         String action = request.getServletPath();
         
-        if(action.equalsIgnoreCase("/admin/admin")) {
+        if(action.equalsIgnoreCase("/admin")) {
             
 //          TODO: implement admin page
             
