@@ -52,7 +52,9 @@
         <table id="category-list-table" class="display">
             <thead>
                 <tr>
+                    <th>Expand</th>
                     <th>Category</th>
+                    <th>Book Qty</th>
                     <th>Update</th>
                     <th>Delete</th>
                 </tr>
@@ -60,7 +62,9 @@
 
             <tfoot>
                 <tr>
+                    <th>Expand</th>
                     <th>Category</th>
+                    <th>Book Qty</th>
                     <th>Update</th>
                     <th>Delete</th>
                 </tr>
