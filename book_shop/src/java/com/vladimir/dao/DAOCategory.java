@@ -7,11 +7,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.codehaus.jettison.json.JSONArray;
-import org.codehaus.jettison.json.JSONObject;
 
 /**
  * Business logic for the category data - Category table in the database.
@@ -232,14 +230,14 @@ public class DAOCategory {
             ToJSON converter = new ToJSON();
             jsonArray = converter.toJSONArray(rs);
             
-            // get books belonging to category
-            for(int i = 0; i <jsonArray.length(); i++) {
-                JSONObject obj = jsonArray.getJSONObject(i);
-                DAOBook daoBook = new DAOBook();
-                int categoryId = obj.getInt("category_id");
-                List<String> bookList = daoBook.getBookListByCategoryId(categoryId);
-                obj.put("book_list", bookList);
-            }
+//            // get books belonging to category
+//            for(int i = 0; i <jsonArray.length(); i++) {
+//                JSONObject obj = jsonArray.getJSONObject(i);
+//                DAOBook daoBook = new DAOBook();
+//                int categoryId = obj.getInt("category_id");
+//                List<String> bookList = daoBook.getBookListByCategoryId(categoryId);
+//                obj.put("book_list", bookList);
+//            }
             
 //            creates a list of categories
 //            method declaration:public List<Category> getCategories(){

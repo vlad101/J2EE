@@ -243,7 +243,7 @@ public class DAOBook {
         
         List<String> bookList = new ArrayList<String>();
         
-        String sql = "SELECT * FROM book WHERE category_id=?;";
+        String sql = "SELECT title FROM book WHERE category_id=?;";
         
         try {
             
