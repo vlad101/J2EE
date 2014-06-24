@@ -10,15 +10,17 @@ public class Book {
     
     private int bookId;
     private String title;
+    private String author;
     private double price;
     private String description;
     private Date lastUpdate;
     private int categoryId;
     
-    public Book(int bookId, String title, double price, String description, Date lastUpdate, int categoryId){
+    public Book(int bookId, String title, String author, double price, String description, Date lastUpdate, int categoryId){
         
         this.bookId = bookId;
         this.title = title;
+        this.author = author;
         this.price = price;
         this.description = description;
         this.lastUpdate = lastUpdate;
@@ -41,7 +43,15 @@ public class Book {
     public void setTitle(String title) {
         this.title = title;
     }
+    
+    public String getAuthor() {
+        return author;
+    }
 
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+    
     public double getPrice() {
         return price;
     }
@@ -76,8 +86,9 @@ public class Book {
 
     @Override
     public String toString() {
-        return "Book{" + "bookId=" + bookId + ", title=" + title + ", price=" 
-                + price + ", description=" + description + ", lastUpdate=" 
-                + lastUpdate + ", categoryId=" + categoryId + '}';
+        return "Book{" + "bookId=" + bookId + ", title=" + title  + 
+                ", author=" + author + ", price=" + price + 
+                ", description=" + description + ", lastUpdate=" + lastUpdate + 
+                ", categoryId=" + categoryId + '}';
     }
 }

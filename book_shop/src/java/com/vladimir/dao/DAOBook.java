@@ -33,8 +33,8 @@ public class DAOBook {
         
         boolean flag = false;
                
-        String sql = "INSERT INTO book (title, price, description, category_id) "
-                                                          + "VALUES(?,?,?,?);";
+        String sql = "INSERT INTO book (title, author, price, description, category_id) "
+                                                          + "VALUES(?,?,?,?,?);";
         
         try {
         
@@ -43,6 +43,7 @@ public class DAOBook {
             preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setInt(1, book.getBookId());
             preparedStatement.setString(2, book.getTitle());
+            preparedStatement.setString(2, book.getAuthor());
             preparedStatement.setDouble(3, book.getPrice());
             preparedStatement.setString(4, book.getDescription());
             preparedStatement.setDate(5, new java.sql.Date(book.getLastUpdate().getTime()));
@@ -77,7 +78,7 @@ public class DAOBook {
         
         boolean flag = false;
                
-        String sql = "UPDATE book SET title=?, price=?, description=?, "
+        String sql = "UPDATE book SET title=?, author=?, price=?, description=?, "
                                             + "category_id=? WHERE book_id=?;";
         
         try {
@@ -86,6 +87,7 @@ public class DAOBook {
             conn.setAutoCommit(false);
             preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, book.getTitle());
+            preparedStatement.setString(1, book.getAuthor());
             preparedStatement.setDouble(2, book.getPrice());
             preparedStatement.setString(3, book.getDescription());
             preparedStatement.setInt(4, book.getCategoryId());
@@ -169,11 +171,12 @@ public class DAOBook {
             while(rs.next()) {
             
                 String title = rs.getString("title");
+                String author = rs.getString("author");
                 double price = rs.getDouble("price");
                 String description = rs.getString("description");
                 Date lastUpdate = rs.getDate("last_update");
                 int categoryId = rs.getInt("category_id");
-                book = new Book(bookId, title, price, 
+                book = new Book(bookId, title, author, price, 
                                         description, lastUpdate, categoryId);
                    
                 // TODO: build a json object
@@ -212,11 +215,12 @@ public class DAOBook {
             
                 int bookId = rs.getInt("book_id");
                 String title = rs.getString("title");
+                String author = rs.getString("author");
                 double price = rs.getDouble("price");
                 String description = rs.getString("description");
                 Date lastUpdate = rs.getDate("last_update");
                 int categoryId = rs.getInt("category_id");
-                Book book = new Book(bookId, title, price, 
+                Book book = new Book(bookId, title, author, price, 
                                         description, lastUpdate, categoryId);
                 bookList.add(book);
             }
@@ -243,7 +247,7 @@ public class DAOBook {
         
         List<String> bookList = new ArrayList<String>();
         
-        String sql = "SELECT title FROM book WHERE category_id=?;";
+        String sql = "SELECT title, author FROM book WHERE category_id=?;";
         
         try {
             
@@ -254,7 +258,8 @@ public class DAOBook {
             while( rs.next() ) {
                 
                 String title = rs.getString("title");
-                bookList.add(title);
+                String author = rs.getString("author");
+                bookList.add('"' + title + '"' + " by " + author);
                 
             }
             

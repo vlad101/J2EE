@@ -59,7 +59,7 @@
                     <th>Delete</th>
                 </tr>
             </thead>
-
+            <tbody></tbody>
             <tfoot>
                 <tr>
                     <th>Expand</th>

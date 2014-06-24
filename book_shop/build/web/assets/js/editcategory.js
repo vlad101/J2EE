@@ -111,6 +111,23 @@ $( document ).ready(function() {
                 return;
         });
     });
+    
+//    Initialize the table and child rows
+    $('#category-list-table tbody').on('click', 'td.details-control', function () {
+        var tr = $(this).closest('tr');
+        var row = oTable.row( tr );
+ 
+        if ( row.child.isShown() ) {
+            // This row is already open - close it
+            row.child.hide();
+            tr.removeClass('shown');
+        }
+        else {
+            // Open this row
+            row.child( fnFormatDetails( row.data() ) ).show();
+            tr.addClass('shown');
+        }
+    } );
 });
 
 /**
@@ -262,8 +279,10 @@ function doBuildDataTable(aaData) {
 //        }
 //    }
     
+//    This table loads data by Ajax. The latest data that has been loaded is 
+//    shown below. This data will update automatically as any additional data is loaded
     if($.fn.dataTable) {
-        oTable = $('table#category-list-table').dataTable({
+        oTable = $('#category-list-table').DataTable({
             'order': [[ 0, "asc" ]],
             'destroy': true, // reloads the table after update
             'data': aaData,
@@ -271,8 +290,8 @@ function doBuildDataTable(aaData) {
             'columns': [
                 {
                     'data': null,
-                    'sClass': 'control-center',
-                    'sDefaultContent': '<img src="/book_shop/assets/images/details_open.png">'
+                    'class': 'details-control',
+                    'defaultContent': ''
                 },
                 { 'data': 'category_name' },
                 { 'data': 'qty' },
@@ -281,4 +300,24 @@ function doBuildDataTable(aaData) {
             ]
         });
     }
-}  
+}
+
+function fnFormatDetails( data ) {
+    // `data` is the original data object for the row
+    
+    var retval;
+    
+    if( data.book_list.length === 0 )
+        return '<p>No books added!</p>';
+
+    retval = '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">';
+    for(var i = 0; i < data.book_list.length; i++) {
+        retval +=   '<tr>'+
+                        '<td><ul><li>' + data.book_list[i] +
+                        '</li></ul></td>'+
+                    '</tr>';
+    }
+    retval += '</table>';
+    
+    return retval;
+}
