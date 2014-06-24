@@ -41,13 +41,11 @@ public class DAOBook {
             conn = db.getConnection();
             conn.setAutoCommit(false);
             preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setInt(1, book.getBookId());
-            preparedStatement.setString(2, book.getTitle());
+            preparedStatement.setString(1, book.getTitle());
             preparedStatement.setString(2, book.getAuthor());
             preparedStatement.setDouble(3, book.getPrice());
             preparedStatement.setString(4, book.getDescription());
-            preparedStatement.setDate(5, new java.sql.Date(book.getLastUpdate().getTime()));
-            preparedStatement.setInt(6, book.getCategoryId());
+            preparedStatement.setInt(5, book.getCategoryId());
             preparedStatement.executeUpdate();
             conn.commit();
             
@@ -87,11 +85,11 @@ public class DAOBook {
             conn.setAutoCommit(false);
             preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, book.getTitle());
-            preparedStatement.setString(1, book.getAuthor());
-            preparedStatement.setDouble(2, book.getPrice());
-            preparedStatement.setString(3, book.getDescription());
-            preparedStatement.setInt(4, book.getCategoryId());
-            preparedStatement.setInt(5, book.getBookId());
+            preparedStatement.setString(2, book.getAuthor());
+            preparedStatement.setDouble(3, book.getPrice());
+            preparedStatement.setString(4, book.getDescription());
+            preparedStatement.setInt(5, book.getCategoryId());
+            preparedStatement.setInt(6, book.getBookId());
             preparedStatement.executeUpdate();
             conn.commit();
             
