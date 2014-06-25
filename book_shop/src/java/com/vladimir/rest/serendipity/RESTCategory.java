@@ -76,29 +76,29 @@ public class RESTCategory {
      * @return - the response with the category name
      * @throws Exception 
      */
-    @GET
-    @Path("/id/{categoryId}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getCategoryById(
-            @PathParam("categoryId") String categoryId) 
-                        throws Exception {
-        
-        Response response;
-        int id;
-        
-        try {
-            id = Integer.parseInt(categoryId);
-        } catch (NumberFormatException e) {
-            return Response.status(400).entity("Please supply the valid category id for this search!").build();
-        }
-        
-        DAOCategory daoCategory = new DAOCategory();
-        JSONArray category = daoCategory.getCategoryById(id);
-        
-        response = Response.ok(category.toString()).build();
-        
-        return response;
-    }
+//    @GET
+//    @Path("/id/{categoryId}")
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public Response getCategoryById(
+//            @PathParam("categoryId") String categoryId) 
+//                        throws Exception {
+//        
+//        Response response;
+//        int id;
+//        
+//        try {
+//            id = Integer.parseInt(categoryId);
+//        } catch (NumberFormatException e) {
+//            return Response.status(400).entity("Please supply the valid category id for this search!").build();
+//        }
+//        
+//        DAOCategory daoCategory = new DAOCategory();
+//        JSONArray category = daoCategory.getCategoryById(id);
+//        
+//        response = Response.ok(category.toString()).build();
+//        
+//        return response;
+//    }
     
     /**
      * The method creates its own HTTP response and adds category to the 

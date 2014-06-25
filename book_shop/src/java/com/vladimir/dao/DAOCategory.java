@@ -167,9 +167,9 @@ public class DAOCategory {
      * @param categoryId
      * @return 
      */
-    public JSONArray getCategoryById(int categoryId){
+    public Category getCategoryById(int categoryId){
         
-        JSONArray json = new JSONArray();
+        Category category = null;
         
         String sql = "SELECT category_name FROM category WHERE category_id=?;";
         
@@ -179,16 +179,12 @@ public class DAOCategory {
             preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setInt(1, categoryId);
             rs = preparedStatement.executeQuery();
-
-            ToJSON converter = new ToJSON();
-            json = converter.toJSONArray(rs);
             
-//            creates a category object  
-//            method declaration: public Category getCategoryById(int categoryId){
-//            while(rs.next()) {
-//                String categoryName = rs.getString("category_name");
-//                category = new Category(categoryId, categoryName);
-//            }
+//            creates a category object
+            while(rs.next()) {
+                String categoryName = rs.getString("category_name");
+                category = new Category(categoryId, categoryName);
+            }
             
             rs.close();
             rs = null;
@@ -207,7 +203,7 @@ public class DAOCategory {
             db.closeConnection();
         }
         
-        return json;
+        return category;
     }    
     
     /**
@@ -217,7 +213,7 @@ public class DAOCategory {
      */
     public JSONArray getAllCategories() { 
         
-        JSONArray jsonArray = new JSONArray();
+        JSONArray categoryJsonArray = new JSONArray();
         
         String sql = "SELECT category_id, category_name FROM category;"; // do not use * for production code
         
@@ -228,7 +224,7 @@ public class DAOCategory {
             rs = preparedStatement.executeQuery();
             
             ToJSON converter = new ToJSON();
-            jsonArray = converter.toJSONArray(rs);
+            categoryJsonArray = converter.toJSONArray(rs);
             
 //            // get books belonging to category
 //            for(int i = 0; i <jsonArray.length(); i++) {
@@ -265,6 +261,6 @@ public class DAOCategory {
             db.closeConnection();
         }
         
-        return jsonArray;
+        return categoryJsonArray;
     }
 }

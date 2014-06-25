@@ -2,15 +2,20 @@ package com.vladimir.dao;
 
 import com.vladimir.model.Book;
 import com.vladimir.util.DbUtil;
+import com.vladimir.util.ToJSON;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import org.codehaus.jettison.json.JSONArray;
 
 /**
  *
@@ -29,23 +34,39 @@ public class DAOBook {
         
     }
     
-    public boolean addBook(Book book) {
+    public int addBook(Book book) {
         
-        boolean flag = false;
+        String title = book.getTitle();
+        String author = book.getAuthor();
+        String cost = book.getPrice();
+        String description = book.getDescription();
+        int categoryId = book.getCategoryId();
+        
+        if(title == null || author == null || description == null)
+            return 500;
+        
+        
+        double price;
+        try {
+            price = Double.parseDouble(cost);
+        } catch (NumberFormatException e) {
+            return 500;
+        }
                
         String sql = "INSERT INTO book (title, author, price, description, category_id) "
                                                           + "VALUES(?,?,?,?,?);";
+        
         
         try {
         
             conn = db.getConnection();
             conn.setAutoCommit(false);
             preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setString(1, book.getTitle());
-            preparedStatement.setString(2, book.getAuthor());
-            preparedStatement.setDouble(3, book.getPrice());
-            preparedStatement.setString(4, book.getDescription());
-            preparedStatement.setInt(5, book.getCategoryId());
+            preparedStatement.setString(1, title);
+            preparedStatement.setString(2, author);
+            preparedStatement.setDouble(3, price);
+            preparedStatement.setString(4, description);
+            preparedStatement.setInt(5, categoryId);
             preparedStatement.executeUpdate();
             conn.commit();
             
@@ -198,9 +219,9 @@ public class DAOBook {
         return book;
     }    
     
-    public List<Book> getBooks(){
-    
-        List<Book> bookList = new ArrayList<Book>();
+    public JSONArray getAllBooks(){
+        
+        JSONArray bookJsonArray = new JSONArray();
         
         String sql = "SELECT * FROM book;";
         
@@ -209,19 +230,9 @@ public class DAOBook {
             conn = db.getConnection();
             preparedStatement = conn.prepareStatement(sql);
             rs = preparedStatement.executeQuery();
-            while(rs.next()) {
             
-                int bookId = rs.getInt("book_id");
-                String title = rs.getString("title");
-                String author = rs.getString("author");
-                double price = rs.getDouble("price");
-                String description = rs.getString("description");
-                Date lastUpdate = rs.getDate("last_update");
-                int categoryId = rs.getInt("category_id");
-                Book book = new Book(bookId, title, author, price, 
-                                        description, lastUpdate, categoryId);
-                bookList.add(book);
-            }
+            ToJSON converter = new ToJSON();
+            bookJsonArray = converter.toJSONArray(rs);
             
             rs.close();
             rs = null;
@@ -234,11 +245,13 @@ public class DAOBook {
             
         } catch (SQLException ex) {
             Logger.getLogger(DAOBook.class.getName()).log(Level.SEVERE, "Could not select books.", ex);
+        } catch(Exception e) {
+            Logger.getLogger(DAOBook.class.getName()).log(Level.SEVERE, "Could not create a JSON Object.", e);
         } finally {
             db.closeConnection();
         }
         
-        return bookList;
+        return bookJsonArray;
     }
     
     public List<String> getBookListByCategoryId(int category_id) {

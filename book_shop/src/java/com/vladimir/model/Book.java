@@ -8,7 +8,7 @@ import java.util.Date;
  */
 public class Book {
     
-    private int bookId;
+    private String bookId;
     private String title;
     private String author;
     private double price;
@@ -16,7 +16,7 @@ public class Book {
     private Date lastUpdate;
     private int categoryId;
     
-    public Book(int bookId, String title, String author, double price, String description, Date lastUpdate, int categoryId){
+    public Book(String bookId, String title, String author, double price, String description, Date lastUpdate, int categoryId){
         
         this.bookId = bookId;
         this.title = title;
@@ -28,11 +28,11 @@ public class Book {
     
     }
 
-    public int getBookId() {
+    public String getBookId() {
         return bookId;
     }
 
-    public void setBookId(int bookId) {
+    public void setBookId(String bookId) {
         this.bookId = bookId;
     }
 
