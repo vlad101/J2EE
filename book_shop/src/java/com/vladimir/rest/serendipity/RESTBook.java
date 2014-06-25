@@ -98,7 +98,7 @@ public class RESTBook {
             
             JSONObject partsData = new JSONObject(bookInfo);
             
-            Book book = new Book(   null,     
+            Book book = new Book(   partsData.optInt("book_id"),     
                                     partsData.optString("book_title"),
                                     partsData.optString("book_author"),
                                     partsData.optDouble("book_price"),

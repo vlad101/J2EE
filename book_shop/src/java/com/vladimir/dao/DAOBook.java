@@ -38,24 +38,22 @@ public class DAOBook {
         
         String title = book.getTitle();
         String author = book.getAuthor();
-        String cost = book.getPrice();
+        double price = book.getPrice();
         String description = book.getDescription();
         int categoryId = book.getCategoryId();
         
         if(title == null || author == null || description == null)
             return 500;
         
-        
-        double price;
+        String temp = String.valueOf(price);
         try {
-            price = Double.parseDouble(cost);
+            price = Double.parseDouble(temp);
         } catch (NumberFormatException e) {
             return 500;
         }
                
         String sql = "INSERT INTO book (title, author, price, description, category_id) "
                                                           + "VALUES(?,?,?,?,?);";
-        
         
         try {
         
@@ -76,21 +74,20 @@ public class DAOBook {
             conn.close();
             conn = null;
             
-            flag = true;
-            
         } catch (SQLException ex) {
             Logger.getLogger(DAOBook.class.getName()).log(Level.SEVERE, "Coud not add book.", ex);
             try {
                 conn.rollback();
             } catch (SQLException ex1) {
                 Logger.getLogger(DAOBook.class.getName()).log(Level.SEVERE, null, ex1);
+                return 500;
             }
-            flag = false;
+            return 500;
         } finally {
             db.closeConnection();
         }
         
-        return flag;
+        return 200;
     }
     
     public boolean updateBook(Book book) {
