@@ -3,7 +3,6 @@ package com.vladimir.rest.serendipity;
 import com.vladimir.dao.DAOBook;
 import com.vladimir.dao.DAOCategory;
 import com.vladimir.model.Book;
-import com.vladimir.model.Category;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.ws.rs.Consumes;
@@ -12,7 +11,6 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -81,7 +79,7 @@ public class RESTBook {
     /**
      * The method creates its own HTTP response and adds Book to the database
      * 
-     * @return - the response with the category name
+     * @return - the response with the book name
      * @throws Exception 
      */
     @POST
@@ -98,13 +96,36 @@ public class RESTBook {
             
             JSONObject partsData = new JSONObject(bookInfo);
             
-            Book book = new Book(   partsData.optInt("book_id"),     
-                                    partsData.optString("book_title"),
-                                    partsData.optString("book_author"),
-                                    partsData.optDouble("book_price"),
-                                    partsData.optString("book_description"), 
-                                    null,
-                                    partsData.optInt("book_category_id"));
+            String bookId = partsData.optString("book_id");     
+            String bookTitle = partsData.optString("book_title");
+            String bookAuthor = partsData.optString("book_author");
+            String bookPrice = partsData.optString("book_price");
+            String bookDescription = partsData.optString("book_description");
+            String bookCategoryId = partsData.optString("book_category_id");
+            
+//            validate numbers
+            int addBookId;
+            double addBookPrice;
+            int addBookCategoryId;
+            
+            try {
+                addBookId = Integer.parseInt(bookId);
+                addBookPrice = Double.parseDouble(bookPrice);
+                addBookCategoryId = Integer.parseInt(bookCategoryId);
+            } catch (NumberFormatException e) {
+                jsonObject.put("HTTP_CODE", "500");
+                jsonObject.put("MSG", "Enter a valid number value!");
+                return Response.ok(jsonArray.put(jsonObject).toString()).build();
+            }
+            
+//            validate title and author
+            if (bookTitle == null || bookTitle.length() == 0 || bookAuthor == null || bookAuthor.length() == 0) {
+                jsonObject.put("HTTP_CODE", "500");
+                jsonObject.put("MSG", "Enter a valid author and title!");
+                return Response.ok(jsonArray.put(jsonObject).toString()).build();
+            }            
+            
+            Book book = new Book(addBookId,bookTitle, bookAuthor, addBookPrice,bookDescription, null, addBookCategoryId);
             
             int http_code = daoBook.addBook(book);
             
@@ -117,7 +138,7 @@ public class RESTBook {
             } else {
                 //return Response.status(500).entity("Unable to process add book").build();
                 jsonObject.put("HTTP_CODE", "500");
-                jsonObject.put("MSG", "Enter a valid category!");
+                jsonObject.put("MSG", "Enter a valid book info!");
                 returnString = jsonArray.put(jsonObject).toString();
             }
             
@@ -132,50 +153,67 @@ public class RESTBook {
     }
     
     /**
-     * This method will allow you to update data in the category table.
+     * This method will allow you to update data in the book table.
      * In this example we are using both PathParams and the message body (payload).
      */
     @PUT
     @Consumes({MediaType.APPLICATION_FORM_URLENCODED,MediaType.APPLICATION_JSON})
     @Produces(MediaType.APPLICATION_JSON)
-    public Response updateCategory(String categoryInfo) throws Exception {
+    public Response updateBook(String bookInfo) throws Exception {
         
-        String categoryId;
-        String categoryName;
-        Category category;
-        DAOCategory daoCategory = new DAOCategory();
+        Book book;
+        DAOBook daoBook = new DAOBook();
+        
         String returnString;
+        
         JSONArray jsonArray = new JSONArray();
         JSONObject jsonObject = new JSONObject();
 
         try {
             
-            JSONObject partsData = new JSONObject(categoryInfo);
-            categoryId = partsData.optString("category_id");
-            categoryName = partsData.optString("category_name");
+            JSONObject partsData = new JSONObject(bookInfo);
+            String bookId = partsData.optString("book_id");
+            String bookTitle = partsData.optString("book_title");
+            String bookAuthor = partsData.optString("book_author");
+            String bookPrice = partsData.optString("book_price");
+            String bookDescription = partsData.optString("book_description");
+            String bookCategoryId = partsData.optString("book_category_id");            
             
-            int catId;
+            int updateBookId;
+            double updateBookPrice;
+            int updateBookCategoryId;
+       
+//            validate number values
             try {
-                catId = Integer.parseInt(categoryId);
+                updateBookId = Integer.parseInt(bookId);
+                updateBookPrice = Double.parseDouble(bookPrice);
+                updateBookCategoryId = Integer.parseInt(bookCategoryId);
             } catch (NumberFormatException e) {
                 jsonObject.put("HTTP_CODE", "500");
-                jsonObject.put("MSG", "Category id is not valid!");
+                jsonObject.put("MSG", "Anter a valid number values!");
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
             }
             
-            category = new Category(catId, categoryName);
-            int http_code = daoCategory.updateCategory(category);
+//            validate text values
+            if(bookTitle == null || bookTitle.length() == 0 || bookAuthor == null || bookAuthor.length() == 0) {
+                jsonObject.put("HTTP_CODE", "500");
+                jsonObject.put("MSG", "Enter a valid book info!");
+                return Response.ok(jsonArray.put(jsonObject).toString()).build();
+            }
+            
+            book = new Book(updateBookId, bookTitle, bookAuthor, updateBookPrice, bookDescription, null, updateBookCategoryId);
+            int http_code = daoBook.updateBook(book);
             
             if(http_code == 200) {
                 
                 jsonObject.put("HTTP_CODE", "200");
-                jsonObject.put("MSG", "Category has been updated successfully!");
+                jsonObject.put("MSG", "Book has been updated successfully!");
                 returnString = jsonArray.put(jsonObject).toString();
                 
             } else {
-                //return Response.status(500).entity("Unable to process add category").build();
+                //return Response.status(500).entity("Unable to process add book").build();
                 jsonObject.put("HTTP_CODE", "500");
-                jsonObject.put("MSG", "Category was not updated!");
+                jsonObject.put("MSG", "Book was not updated!");
                 returnString = jsonArray.put(jsonObject).toString();
             }
             
@@ -190,46 +228,46 @@ public class RESTBook {
     }
     
     /**
-     * This method will allow you to delete data in the category table.
+     * This method will allow you to delete data in the book table.
      * In this example we are using both PathParams and the message body (payload).
      */
     @DELETE
     @Consumes({MediaType.APPLICATION_FORM_URLENCODED,MediaType.APPLICATION_JSON})
     @Produces(MediaType.APPLICATION_JSON)
-    public Response deleteCategory(String categoryInfo) throws Exception {
+    public Response deleteBook(String bookInfo) throws Exception {
         
-        String categoryId;
-        DAOCategory daoCategory = new DAOCategory();
+        String bookId;
+        DAOBook daoBook = new DAOBook();
         String returnString;
         JSONArray jsonArray = new JSONArray();
         JSONObject jsonObject = new JSONObject();
 
         try {
             
-            JSONObject partsData = new JSONObject(categoryInfo);
-            categoryId = partsData.optString("category_id");
+            JSONObject partsData = new JSONObject(bookInfo);
+            bookId = partsData.optString("book_id");
             
-            int catId;
+            int deleteBookId;
             try {
-                catId = Integer.parseInt(categoryId);
+                deleteBookId = Integer.parseInt(bookId);
             } catch (NumberFormatException e) {
                 jsonObject.put("HTTP_CODE", "500");
-                jsonObject.put("MSG", "Category id is not valid!");
+                jsonObject.put("MSG", "Book id is not valid!");
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
             }
             
-            int http_code = daoCategory.deleteCategory(catId);
+            int http_code = daoBook.deleteBook(deleteBookId);
             
             if(http_code == 200) {
                 
                 jsonObject.put("HTTP_CODE", "200");
-                jsonObject.put("MSG", "Category has been deleted successfully!");
+                jsonObject.put("MSG", "Book has been deleted successfully!");
                 returnString = jsonArray.put(jsonObject).toString();
                 
             } else {
-                //return Response.status(500).entity("Unable to process add category").build();
+                //return Response.status(500).entity("Unable to process add book").build();
                 jsonObject.put("HTTP_CODE", "500");
-                jsonObject.put("MSG", "Category was not deleted!");
+                jsonObject.put("MSG", "Book was not deleted!");
                 returnString = jsonArray.put(jsonObject).toString();
             }
             

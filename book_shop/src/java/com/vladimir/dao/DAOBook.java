@@ -42,16 +42,6 @@ public class DAOBook {
         String description = book.getDescription();
         int categoryId = book.getCategoryId();
         
-        if(title == null || author == null || description == null)
-            return 500;
-        
-        String temp = String.valueOf(price);
-        try {
-            price = Double.parseDouble(temp);
-        } catch (NumberFormatException e) {
-            return 500;
-        }
-               
         String sql = "INSERT INTO book (title, author, price, description, category_id) "
                                                           + "VALUES(?,?,?,?,?);";
         
@@ -90,10 +80,8 @@ public class DAOBook {
         return 200;
     }
     
-    public boolean updateBook(Book book) {
+    public int updateBook(Book book) {
         
-        boolean flag = false;
-               
         String sql = "UPDATE book SET title=?, author=?, price=?, description=?, "
                                             + "category_id=? WHERE book_id=?;";
         
@@ -117,26 +105,23 @@ public class DAOBook {
             conn.close();
             conn = null;
             
-            flag = true;
-            
         } catch (SQLException ex) {
             Logger.getLogger(DAOBook.class.getName()).log(Level.SEVERE, "Coud not update book.", ex);
             try {
                 conn.rollback();
             } catch (SQLException ex1) {
                 Logger.getLogger(DAOBook.class.getName()).log(Level.SEVERE, null, ex1);
+                return 500;
             }
-            flag = false;
+            return 500;
         } finally {
             db.closeConnection();
         }
         
-        return flag;
+        return 500;
     }
     
-    public boolean deleteBook(int bookId) {
-        
-        boolean flag = false;
+    public int deleteBook(int bookId) {
                
         String sql = "DELETE FROM book WHERE book_id=?;";
         
@@ -155,21 +140,20 @@ public class DAOBook {
             conn.close();
             conn = null;
             
-            flag = true;
-            
         } catch (SQLException ex) {
             Logger.getLogger(DAOBook.class.getName()).log(Level.SEVERE, "Coud not delete book.", ex);
             try {
                 conn.rollback();
             } catch (SQLException ex1) {
                 Logger.getLogger(DAOBook.class.getName()).log(Level.SEVERE, null, ex1);
+                return 500;
             }
-            flag = false;
+            return 500;
         } finally {
             db.closeConnection();
         }
         
-        return flag;
+        return 200;
     }
 
     public Book getBookById(int bookId){

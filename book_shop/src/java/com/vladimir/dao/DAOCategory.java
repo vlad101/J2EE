@@ -36,10 +36,7 @@ public class DAOCategory {
      * @return HTTP status
      */
     public int addCategory(String categoryName) {
-                
-        if (categoryName == null || categoryName.length() == 0)
-            return 500;
-            
+                            
         String sql = "INSERT INTO category (category_name) VALUES(?);";
         
         try {
@@ -80,11 +77,7 @@ public class DAOCategory {
      * @return HTTP status
      */
     public int updateCategory(Category category) {
-        
-        String categoryName = category.getCategoryName();
-        if(categoryName == null || categoryName.length() == 0)
-            return 500;
-        
+                
         String sql = "UPDATE category SET category_name=? WHERE category_id=?;";
         
         try {

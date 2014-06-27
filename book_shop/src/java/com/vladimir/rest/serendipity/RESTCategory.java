@@ -120,7 +120,16 @@ public class RESTCategory {
         try {
             
             JSONObject partsData = new JSONObject(categoryInfo);
-            int http_code = daoCategory.addCategory(partsData.optString("category_title"));
+            
+            String categoryTitle = partsData.optString("category_title");
+            
+            if (categoryTitle == null || categoryTitle.length() == 0) {
+                jsonObject.put("HTTP_CODE", "500");
+                jsonObject.put("MSG", "Enter a valid category name!");
+                return Response.ok(jsonArray.put(jsonObject).toString()).build();
+            }
+            
+            int http_code = daoCategory.addCategory(categoryTitle);
             
             if(http_code == 200) {
                 
@@ -161,19 +170,27 @@ public class RESTCategory {
         String returnString;
         JSONArray jsonArray = new JSONArray();
         JSONObject jsonObject = new JSONObject();
-
+        
         try {
             
             JSONObject partsData = new JSONObject(categoryInfo);
             categoryId = partsData.optString("category_id");
             categoryName = partsData.optString("category_name");
             
+//            validate category id
             int catId;
             try {
                 catId = Integer.parseInt(categoryId);
             } catch (NumberFormatException e) {
                 jsonObject.put("HTTP_CODE", "500");
                 jsonObject.put("MSG", "Category id is not valid!");
+                return Response.ok(jsonArray.put(jsonObject).toString()).build();
+            }
+            
+//            validate category title
+            if(categoryName == null || categoryName.length() == 0) {
+                jsonObject.put("HTTP_CODE", "500");
+                jsonObject.put("MSG", "Enter a valid category name!");
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
             }
             
