@@ -55,6 +55,7 @@ public class RESTBook {
                 obj.put("book_id", obj.getInt("book_id"));
                 obj.put("title", obj.getString("title"));
                 obj.put("author", obj.getString("author"));
+                obj.put("quantity", obj.getInt("quantity"));
                 obj.put("price", obj.getDouble("price"));
                 obj.put("description", obj.getString("description"));
                 
@@ -101,6 +102,7 @@ public class RESTBook {
             String bookId = partsData.optString("book_id");     
             String bookTitle = partsData.optString("book_title");
             String bookAuthor = partsData.optString("book_author");
+            String bookQuantity = partsData.optString("book_quantity");
             String bookPrice = partsData.optString("book_price");
             String bookDescription = partsData.optString("book_description");
             String bookCategoryId = partsData.optString("book_category_id");
@@ -109,11 +111,13 @@ public class RESTBook {
             int addBookId;
             double addBookPrice;
             int addBookCategoryId;
+            int addBookQuantity;
             
             try {
                 addBookId = Integer.parseInt(bookId);
                 addBookPrice = Double.parseDouble(bookPrice);
                 addBookCategoryId = Integer.parseInt(bookCategoryId);
+                addBookQuantity = Integer.parseInt(bookQuantity);
             } catch (NumberFormatException e) {
                 jsonObject.put("HTTP_CODE", "500");
                 jsonObject.put("MSG", "Enter a valid number value!");
@@ -127,7 +131,7 @@ public class RESTBook {
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
             }            
             
-            Book book = new Book(addBookId,bookTitle, bookAuthor, addBookPrice,bookDescription, null, addBookCategoryId);
+            Book book = new Book(addBookId,bookTitle, bookAuthor, addBookQuantity, addBookPrice,bookDescription, null, addBookCategoryId);
             
             int http_code = daoBook.addBook(book);
             
@@ -177,6 +181,7 @@ public class RESTBook {
             String bookId = partsData.optString("book_id");
             String bookTitle = partsData.optString("book_title");
             String bookAuthor = partsData.optString("book_author");
+            String bookQuantity = partsData.optString("book_quantity");
             String bookPrice = partsData.optString("book_price");
             String bookDescription = partsData.optString("book_description");
             String bookCategoryId = partsData.optString("book_category_id");            
@@ -184,12 +189,14 @@ public class RESTBook {
             int updateBookId;
             double updateBookPrice;
             int updateBookCategoryId;
+            int updateBookQuantity;
        
 //            validate number values
             try {
                 updateBookId = Integer.parseInt(bookId);
                 updateBookPrice = Double.parseDouble(bookPrice);
                 updateBookCategoryId = Integer.parseInt(bookCategoryId);
+                updateBookQuantity = Integer.parseInt(bookQuantity);
             } catch (NumberFormatException e) {
                 jsonObject.put("HTTP_CODE", "500");
                 jsonObject.put("MSG", "Anter a valid number values!");
@@ -203,7 +210,7 @@ public class RESTBook {
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
             }
             
-            book = new Book(updateBookId, bookTitle, bookAuthor, updateBookPrice, bookDescription, null, updateBookCategoryId);
+            book = new Book(updateBookId, bookTitle, bookAuthor, updateBookQuantity, updateBookPrice, bookDescription, null, updateBookCategoryId);
             int http_code = daoBook.updateBook(book);
             
             if(http_code == 200) {

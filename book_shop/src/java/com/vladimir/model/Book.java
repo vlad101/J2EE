@@ -11,16 +11,18 @@ public class Book {
     private int bookId;
     private String title;
     private String author;
+    private int quantity;
     private double price;
     private String description;
     private Date lastUpdate;
     private int categoryId;
     
-    public Book(int bookId, String title, String author, double price, String description, Date lastUpdate, int categoryId){
+    public Book(int bookId, String title, String author, int quantity, double price, String description, Date lastUpdate, int categoryId){
         
         this.bookId = bookId;
         this.title = title;
         this.author = author;
+        this.quantity = quantity;
         this.price = price;
         this.description = description;
         this.lastUpdate = lastUpdate;
@@ -50,6 +52,14 @@ public class Book {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+    
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+    
+    public int getQuntity() {
+        return quantity;
     }
     
     public double getPrice() {

@@ -38,12 +38,13 @@ public class DAOBook {
         
         String title = book.getTitle();
         String author = book.getAuthor();
+        int quantity = book.getQuntity();
         double price = book.getPrice();
         String description = book.getDescription();
         int categoryId = book.getCategoryId();
         
-        String sql = "INSERT INTO book (title, author, price, description, category_id) "
-                                                          + "VALUES(?,?,?,?,?);";
+        String sql = "INSERT INTO book (title, author, quantity, price, description, category_id) "
+                                                          + "VALUES(?,?,?,?,?,?);";
         
         try {
         
@@ -52,9 +53,10 @@ public class DAOBook {
             preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, title);
             preparedStatement.setString(2, author);
-            preparedStatement.setDouble(3, price);
-            preparedStatement.setString(4, description);
-            preparedStatement.setInt(5, categoryId);
+            preparedStatement.setInt(3, quantity);
+            preparedStatement.setDouble(4, price);
+            preparedStatement.setString(5, description);
+            preparedStatement.setInt(6, categoryId);
             preparedStatement.executeUpdate();
             conn.commit();
             
@@ -82,7 +84,7 @@ public class DAOBook {
     
     public int updateBook(Book book) {
         
-        String sql = "UPDATE book SET title=?, author=?, price=?, description=?, "
+        String sql = "UPDATE book SET title=?, author=?, quantity=?, price=?, description=?, "
                                             + "category_id=? WHERE book_id=?;";
         
         try {
@@ -92,10 +94,11 @@ public class DAOBook {
             preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, book.getTitle());
             preparedStatement.setString(2, book.getAuthor());
-            preparedStatement.setDouble(3, book.getPrice());
-            preparedStatement.setString(4, book.getDescription());
-            preparedStatement.setInt(5, book.getCategoryId());
-            preparedStatement.setInt(6, book.getBookId());
+            preparedStatement.setInt(3, book.getQuntity());
+            preparedStatement.setDouble(4, book.getPrice());
+            preparedStatement.setString(5, book.getDescription());
+            preparedStatement.setInt(6, book.getCategoryId());
+            preparedStatement.setInt(7, book.getBookId());
             preparedStatement.executeUpdate();
             conn.commit();
             
@@ -172,11 +175,12 @@ public class DAOBook {
             
                 String title = rs.getString("title");
                 String author = rs.getString("author");
+                int quantity = rs.getInt("quantity");
                 double price = rs.getDouble("price");
                 String description = rs.getString("description");
                 Date lastUpdate = rs.getDate("last_update");
                 int categoryId = rs.getInt("category_id");
-                book = new Book(bookId, title, author, price, 
+                book = new Book(bookId, title, author, quantity, price, 
                                         description, lastUpdate, categoryId);
                    
                 // TODO: build a json object
