@@ -52,8 +52,9 @@ public class RESTBook {
                 JSONObject obj = jsonArrayBookList.getJSONObject(i);
                 DAOCategory daoCategory = new DAOCategory();
                                 
-                obj.put("book_id", obj.getString("book_id"));
+                obj.put("book_id", obj.getInt("book_id"));
                 obj.put("title", obj.getString("title"));
+                obj.put("author", obj.getString("author"));
                 obj.put("price", obj.getDouble("price"));
                 obj.put("description", obj.getString("description"));
                 
@@ -63,7 +64,8 @@ public class RESTBook {
                 Date dateUpdate = sdf.parse(lastUpdate);
                 obj.put("last_update", dateUpdate);
                 
-                obj.put("category", daoCategory.getCategoryById(obj.getInt("category_id") ).getCategoryName());
+                obj.put("category_id", obj.getInt("category_id"));
+                obj.put("category_name", daoCategory.getCategoryById(obj.getInt("category_id")).getCategoryName());
                 returnString = jsonObject.put(Integer.toString(obj.getInt("book_id")), obj).toString();
             }
         
