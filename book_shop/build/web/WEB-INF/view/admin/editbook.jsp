@@ -71,8 +71,8 @@
                     <th>Title</th>
                     <th>Author</th>
                     <th>Quantity</th>
-                    <th>Category</th>
                     <th>Price</th>
+                    <th>Category</th>
                     <th>Description</th>
                     <th>Last Update</th>
                     <th>Update</th>
@@ -92,10 +92,17 @@
             <h4 class="modal-title" id="modalLabel">Book Edit</h4>
           </div>
           <div class="modal-body">
-              <h5>Edit book name:</h5><br/>
+              <h5>Edit book information:</h5><br/>
             <form id="update_book_form" method="post" action="#">
-                Book   <input type="text" value="" name="book_name">
-                         <input type="hidden" value="" name="book_id">
+                Title          <input type="text" value="" name="book_title"><br>
+                Author         <input type="text" value="" name="book_author"><br>
+                Quantity       <input type="text" value="" name="book_quantity"><br>
+                Category       <input type="text" value="" name="book_category_name"><br>
+                Price          <input type="text" value="" name="book_price"><br>
+                Description    <input type="text" value="" name="book_description"><br>
+                Last Update    <input type="text" value="" name="book_last_update">
+                               <input type="hidden" value="" name="book_id" readonly>
+                         
             </form>
           </div>
           <div class="modal-footer">

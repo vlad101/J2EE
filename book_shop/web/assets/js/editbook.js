@@ -71,10 +71,23 @@ $( document ).ready(function() {
         var $this = $(this);
         var book_id = $this.val();
         var $tr = $this.closest('tr');
-        var book_name = $tr.find('.container_book_name').text();
+        var book_title = $tr.find('.container_book_title').text();
+        var book_author = $tr.find('.container_book_author').text();
+        var book_quantity = $tr.find('.container_book_quantity').text();
+        var book_category_name = $tr.find('.container_book_category_name').text();
+        var book_price = $tr.find('.container_book_price').text();
+        var book_description = $tr.find('.container_book_description').text();
+        var book_last_update = $tr.find('.container_book_last_update').text();
         
+//        fill in data for modal book update
         $('input[name="book_id"]').val(book_id);
-        $('input[name="book_name"]').val(book_name);
+        $('input[name="book_title"]').val(book_title);
+        $('input[name="book_author"]').val(book_author);
+        $('input[name="book_quantity"]').val(book_quantity);
+        $('input[name="book_category_name"]').val(book_category_name);
+        $('input[name="book_price"]').val(book_price);
+        $('input[name="book_description"]').val(book_description);
+        $('input[name="book_last_update"]').val(book_last_update);
     });
     
     $('#update_book_form_submit').click(function(e) {
@@ -103,8 +116,8 @@ $( document ).ready(function() {
         
         // get the name for the alert box
         var $tr = $this.closest('tr');
-        var book_name = $tr.find('.container_book_name').text();
-        bootbox.confirm("Are you sure you want to delete " + '"' + book_name + '"'  + " book?", function(result) {
+        var book_title = $tr.find('.container_book_title').text();
+        bootbox.confirm("Are you sure you want to delete " + '"' + book_title + '"'  + " book?", function(result) {
             if(result)
                 deleteBook(obj);
             else 
@@ -247,13 +260,13 @@ function doGetBookData(book_list) {
         
         aaData.push({
             'book_id':          book_list[book].book_id,
-            'title':            '<div class="container_title" >' + book_list[book].title + '</div>',
-            'author':           book_list[book].author,
-            'qty':              book_list[book].quantity,
-            'category_name':    book_list[book].category_name,
-            'price':            book_list[book].price,
-            'description':      book_list[book].description,
-            'last_update':      book_list[book].last_update,
+            'title':            '<div class="container_book_title" >' + book_list[book].title + '</div>',
+            'author':           '<div class="container_book_author" >' + book_list[book].author + '</div>',
+            'qty':              '<div class="container_book_quantity" >' + book_list[book].quantity + '</div>',
+            'category_name':    '<div class="container_book_category_name" >' + book_list[book].category_name + '</div>',
+            'price':            '<div class="container_book_price" >' + book_list[book].price + '</div>',
+            'description':      '<div class="container_book_description" >' + book_list[book].description + '</div>',
+            'last_update':      '<div class="container_book_last_update" >' +  book_list[book].last_update + '</div>',
             'updatebtncol':     '<button type="button" class="btn btn-primary btn-small" data-toggle="modal" data-target="#update-book-modal" ' + 'id="book_update_button" value="'  + book_list[book].book_id + '" >Update</button>',
             'deletebtncol':     '<button class="btn btn-danger" id="book_delete_button" value="' + book_list[book].book_id + '" type="button">Delete</button>'
         });
@@ -300,8 +313,8 @@ function doBuildDataTable(aaData) {
                 { 'data': 'title' },
                 { 'data': 'author' },
                 { 'data': 'qty' },
-                { 'data': 'category_name' },
-                { 'data': 'price' },
+                { 'data': 'category_name', },
+                { 'data': 'price', },
                 { 'data': 'description' },
                 { 'data': 'last_update' },
                 { 'data': 'updatebtncol' },
