@@ -246,10 +246,13 @@ function doGetBookData(book_list) {
         book = book_array[i];
         
         aaData.push({
-            'book_id':      book_list[book].book_id,
-            'book_name':    '<div class="container_book_name" >' + book_list[book].book_name + '</div>',
-            'qty':              book_list[book].book_list.length,
-            'book_list':        book_list[book].book_list,
+            'book_id':          book_list[book].book_id,
+            'title':            '<div class="container_title" >' + book_list[book].title + '</div>',
+            'qty':              book_list[book].quantity,
+            'category_name':    book_list[book].category_name,
+            'price':            book_list[book].price,
+            'description':      book_list[book].description,
+            'last_update':      book_list[book].last_update,
             'updatebtncol':     '<button type="button" class="btn btn-primary btn-small" data-toggle="modal" data-target="#update-book-modal" ' + 'id="book_update_button" value="'  + book_list[book].book_id + '" >Update</button>',
             'deletebtncol':     '<button class="btn btn-danger" id="book_delete_button" value="' + book_list[book].book_id + '" type="button">Delete</button>'
         });
@@ -293,8 +296,12 @@ function doBuildDataTable(aaData) {
                     'class': 'details-control',
                     'defaultContent': ''
                 },
-                { 'data': 'book_name' },
+                { 'data': 'title' },
                 { 'data': 'qty' },
+                { 'data': 'category_name' },
+                { 'data': 'price' },
+                { 'data': 'description' },
+                { 'data': 'last_update' },
                 { 'data': 'updatebtncol' },
                 { 'data': 'deletebtncol' }
             ]

@@ -53,8 +53,13 @@
             <thead>
                 <tr>
                     <th>Expand</th>
-                    <th>Book</th>
-                    <th>Book Qty</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Quantity</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Description</th>
+                    <th>Last Update</th>
                     <th>Update</th>
                     <th>Delete</th>
                 </tr>
@@ -63,8 +68,13 @@
             <tfoot>
                 <tr>
                     <th>Expand</th>
-                    <th>Book</th>
-                    <th>Book Qty</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Quantity</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Description</th>
+                    <th>Last Update</th>
                     <th>Update</th>
                     <th>Delete</th>
                 </tr>
