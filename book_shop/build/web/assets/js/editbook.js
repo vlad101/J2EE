@@ -248,6 +248,7 @@ function doGetBookData(book_list) {
         aaData.push({
             'book_id':          book_list[book].book_id,
             'title':            '<div class="container_title" >' + book_list[book].title + '</div>',
+            'author':           book_list[book].author,
             'qty':              book_list[book].quantity,
             'category_name':    book_list[book].category_name,
             'price':            book_list[book].price,
@@ -297,6 +298,7 @@ function doBuildDataTable(aaData) {
                     'defaultContent': ''
                 },
                 { 'data': 'title' },
+                { 'data': 'author' },
                 { 'data': 'qty' },
                 { 'data': 'category_name' },
                 { 'data': 'price' },
