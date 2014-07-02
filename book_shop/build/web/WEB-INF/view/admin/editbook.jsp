@@ -100,8 +100,8 @@
                 Category       <input type="text" value="" name="book_category_name"><br>
                 Price          <input type="text" value="" name="book_price"><br>
                 Description    <input type="text" value="" name="book_description"><br>
-                Last Update    <input type="text" value="" name="book_last_update">
-                               <input type="hidden" value="" name="book_id" readonly>
+                Last Update    <input type="text" value="" name="book_last_update" readonly>
+                               <input type="hidden" value="" name="book_id">
                          
             </form>
           </div>
