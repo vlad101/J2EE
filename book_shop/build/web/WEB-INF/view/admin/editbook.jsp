@@ -120,7 +120,7 @@
 <script src="<c:url value="/assets/bootstrap/js/bootstrap.min.js" />"></script>
 
 <!-- Bootbox alerts plugin plugin -->
-<script src="<c:url value="/assets/bootbox/bootbox.min.js" />"></script>
+<script src="<c:url value="/assets/plugins/bootbox/bootbox.min.js" />"></script>
 
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <link href="<c:url value="/assets/bootstrap/css/bootstrap.min.css" />">
