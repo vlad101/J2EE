@@ -11,7 +11,7 @@
 <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.0-beta.1/css/jquery.dataTables.css">
 
 <!-- jQuery plugin -->
-<script type="text/javascript" src="/book_shop/assets/jquery/js/jquery-1.10.2.js" ></script>
+<script type="text/javascript" src="<c:url value="/assets/jquery/js/jquery-1.10.2.js" />" ></script>
 
 <!-- custom edit book page js -->
 <script type="text/javascript" src="<c:url value="/assets/js/polyfill.js" />" ></script>
@@ -89,19 +89,39 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title" id="modalLabel">Book Edit</h4>
+            <h4 class="modal-title" id="modalLabel">Book Edit Info</h4>
           </div>
           <div class="modal-body">
-              <h5>Edit book information:</h5><br/>
             <form id="update_book_form" method="post" action="#">
-                Title          <input type="text" value="" name="book_title"><br>
-                Author         <input type="text" value="" name="book_author"><br>
-                Quantity       <input type="text" value="" name="book_quantity"><br>
-                Category       <input type="text" value="" name="book_category_name"><br>
-                Price          <input type="text" value="" name="book_price"><br>
-                Description    <input type="text" value="" name="book_description"><br>
-                Last Update    <input type="text" value="" name="book_last_update" readonly>
-                               <input type="hidden" value="" name="book_id">
+                <div id="book_title">
+                    <label>Title</label>
+                    <input type="text" value="" name="book_title">
+                </div><br>
+                <div id="book_author">
+                    <label>Author</label>
+                    <input type="text" value="" name="book_author">
+                </div><br>
+                <div id="book_quantity">
+                    <label>Quantity</label>
+                    <input type="text" value="" name="book_quantity">
+                </div><br>
+                <div id="book_category_name_search">
+                    <label>Category</label>
+                    <input type="text" value="" name="book_category_name" id="book_category_name" >
+                </div><br>
+                <div id="book_price">
+                    <label>Price</label>
+                    <input type="text" value="" name="book_price">
+                </div><br>
+                <div id="book_description">
+                    <label>Description</label>
+                    <input type="text" value="" name="book_description">
+                </div><br>
+                <div id="book_last_update">
+                    <label>Last Update</label>
+                    <input type="text" value="" name="book_last_update" readonly>
+                </div>
+                    <input type="hidden" value="" name="book_id">
                          
             </form>
           </div>
@@ -124,3 +144,6 @@
 
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <link href="<c:url value="/assets/bootstrap/css/bootstrap.min.css" />">
+
+<!-- Typeahead js -->
+<script type="text/javascript" language="javascript" src="<c:url value="/assets/plugins/typeahead/typeahead.js" />" ></script>
