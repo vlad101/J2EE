@@ -1,4 +1,8 @@
+// datatable book list
 var oTable;
+
+// typeahead
+var categories = [];
 
 $( document ).ready(function() {
 
@@ -143,17 +147,6 @@ $( document ).ready(function() {
     } );
     
 //    typeahead
-    var states = ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California',
-      'Colorado', 'Connecticut', 'Delaware', 'Florida', 'Georgia', 'Hawaii',
-      'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky', 'Louisiana',
-      'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota',
-      'Mississippi', 'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire',
-      'New Jersey', 'New Mexico', 'New York', 'North Carolina', 'North Dakota',
-      'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island',
-      'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
-      'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
-    ];
-    
     
     $('#book_category_name').typeahead({
       hint: true,
@@ -161,11 +154,17 @@ $( document ).ready(function() {
       minLength: 1
     },
     {
-      name: 'states',
+      name: 'categories',
       displayKey: 'value',
-      source: substringMatcher(states)
+      source: substringMatcher(categories),
+      templates: {
+        empty: [
+            '<div class="empty-message">',
+            'Unable to find any categories that match the current query. <strong>A new category will be created.</strong>',
+             '</div>'
+        ].join('\n')
+      }
     });
-
 });
 
 /**
@@ -242,6 +241,9 @@ function deleteBook(obj) {
  */
 function getBook() {
     
+    categories = [];
+    getCategoriesTypeAhead();
+    
     var d = new Date().getTime();
     
     ajaxObj = {
@@ -295,7 +297,7 @@ function doGetBookData(book_list) {
             'updatebtncol':     '<button type="button" class="btn btn-primary btn-small" data-toggle="modal" data-target="#update-book-modal" ' + 'id="book_update_button" value="'  + book_list[book].book_id + '" >Update</button>',
             'deletebtncol':     '<button class="btn btn-danger" id="book_delete_button" value="' + book_list[book].book_id + '" type="button">Delete</button>'
         });
-        
+
         doBuildDataTable(aaData);
     }
 }
@@ -369,7 +371,35 @@ function fnFormatDetails( data ) {
     return retval;
 }
 
-// typeahead
+// typeahead substring match
+function getCategoriesTypeAhead() {
+    
+    var d = new Date().getTime();
+    ajaxObj = {
+                type: "GET",
+                url: "http://localhost:8080/book_shop/api/v1/category/",
+                data: "ts="+d,
+                contentType: "application/json",
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log(jqXHR.responseText);
+                },
+                success: function(category_list) {
+                    var category_array = [];
+                    for(var category in category_list) {
+                        category_array.push(category);
+                    }
+                    
+                    for(var i in category_array) {
+                        category = category_array[i];
+                        categories.push(category_list[category].category_name);
+                    }
+                },
+                dataType: "json" // request json
+    };
+    
+    return $.ajax(ajaxObj);
+}
+
 var substringMatcher = function(strs) {
   return function findMatches(q, cb) {
     var matches, substringRegex;
