@@ -153,6 +153,55 @@ public class DAOCategory {
         
         return 200; // success
     }
+    
+    /**
+     * This method will allow you to get category id by name from the database.
+     * 
+     * @param categoryId
+     * @return 
+     */
+    public int getCategoryIdByName(String categoryName){
+        
+        Category category = null;
+        int categoryId = -1;
+        
+        String sql = "SELECT category_id FROM category WHERE category_name=?;";
+        
+        try {
+        
+            conn = db.getConnection();
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, categoryName);
+            rs = preparedStatement.executeQuery();
+            
+            if(!rs.next())
+                categoryId = -1;
+            else {
+                while(rs.next()) {
+                    categoryId = rs.getInt("category_id");
+                    category = new Category(categoryId, categoryName);
+                }
+            }
+            
+            rs.close();
+            rs = null;
+            
+            preparedStatement.close();
+            preparedStatement = null;
+            
+            conn.close();
+            conn = null;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOCategory.class.getName()).log(Level.SEVERE, "Could not select category by ID.", ex);
+        } catch (Exception e) {
+                Logger.getLogger(DAOCategory.class.getName()).log(Level.SEVERE, "Could not create a JSON object", e);  
+        } finally {
+            db.closeConnection();
+        }
+        
+        return categoryId == -1 ? categoryId : category.getCategoryId();
+    }   
 
     /**
      * This method will allow you to get category data by id from the database.
