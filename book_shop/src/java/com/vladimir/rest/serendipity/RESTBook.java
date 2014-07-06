@@ -216,8 +216,12 @@ public class RESTBook {
                 updateBookPrice = Double.parseDouble(bookPrice);
                 
                 if( daoCategory.getCategoryIdByName(bookCategoryName) == -1) {
+                    System.out.println("CATEGORY ID: " + daoCategory.getCategoryIdByName(bookCategoryName));
+                    System.out.println("CATEGORY IS NOT FOUND!!!");
                     daoCategory.addCategory(bookCategoryName);
                 }
+                System.out.println("CATEGORY ID: " + daoCategory.getCategoryIdByName(bookCategoryName));
+                System.out.println("CATEGORY IS FOUND!!!");
                 updateBookCategoryId = daoCategory.getCategoryIdByName(bookCategoryName);
                 updateBookQuantity = Integer.parseInt(bookQuantity);
             } catch (NumberFormatException e) {

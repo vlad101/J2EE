@@ -174,6 +174,18 @@ public class DAOCategory {
             preparedStatement.setString(1, categoryName);
             rs = preparedStatement.executeQuery();
             
+            int i = 0;
+            while(rs.next()) {
+                categoryId = rs.getInt("category_id");
+                category = new Category(categoryId, categoryName);
+                i++;
+            }
+            
+            if(i == 0) {
+                categoryId = -1;
+            }
+            
+            /*
             if(!rs.next())
                 categoryId = -1;
             else {
@@ -182,6 +194,7 @@ public class DAOCategory {
                     category = new Category(categoryId, categoryName);
                 }
             }
+            */
             
             rs.close();
             rs = null;
