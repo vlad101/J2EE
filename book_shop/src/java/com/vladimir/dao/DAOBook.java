@@ -106,6 +106,18 @@ public class DAOBook {
         }
             preparedStatement.setInt(6, book.getCategoryId());
             preparedStatement.setInt(7, book.getBookId());
+            
+            System.out.println("-----------------------------------------------");
+            System.out.println(sql);
+            System.out.println("1" + book.getTitle());
+            System.out.println("2" + book.getAuthor());
+            System.out.println("3" + book.getQuntity());
+            System.out.println("4" + book.getPrice());
+            System.out.println("5" + book.getDescription());
+            System.out.println("6" + book.getCategoryId());
+            System.out.println("7" + book.getBookId());
+            System.out.println("-----------------------------------------------");
+            
             preparedStatement.executeUpdate();
             conn.commit();
             

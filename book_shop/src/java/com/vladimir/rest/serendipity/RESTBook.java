@@ -204,6 +204,7 @@ public class RESTBook {
 //            validate text values
             if(bookTitle == null || bookTitle.length() == 0 || 
                     bookAuthor == null || bookAuthor.length() == 0 || 
+                    bookCategoryName.length() == 0 || bookCategoryName == null || 
                     bookCategoryName.length() == 0 || bookCategoryName == null ) {
                 jsonObject.put("HTTP_CODE", "500");
                 jsonObject.put("MSG", "Enter a valid book info!");
@@ -225,8 +226,10 @@ public class RESTBook {
                 System.out.println("CATEGORY IS FOUND!!!");
                 updateBookCategoryId = daoCategory.getCategoryIdByName(bookCategoryName);
                 */
-                updateBookCategoryId =0; //Integer.parseInt(bookCategoryName);
+                
+                updateBookCategoryId = daoCategory.getCategoryIdByName(bookCategoryName);
                 updateBookQuantity = Integer.parseInt(bookQuantity);
+                
             } catch (NumberFormatException e) {
                 jsonObject.put("HTTP_CODE", "500");
                 jsonObject.put("MSG", "Anter a valid number values!");

@@ -174,8 +174,6 @@ public class DAOCategory {
             preparedStatement.setString(1, categoryName);
             rs = preparedStatement.executeQuery();
             
-            int i = 0;
-            
             // read the first row - replaced while with if
             if(rs.next()) {
                 categoryId = rs.getInt("category_id");
