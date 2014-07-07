@@ -69,6 +69,42 @@ tr.shown td.details-control {
     width: 90%;
 }
 
+// hide quantity column
+#book-list-table tbody tr td.hide_qty_column {
+    display: none;
+}
+
+#book-list-table tr *:nth-child(4) {
+    display: none;
+}
+
+// hide category name column
+#book-list-table tbody tr td.hide_category_name_column {
+    display: none;
+}
+
+#book-list-table tr *:nth-child(5) {
+    display: none;
+}
+
+// hide description column
+#book-list-table tbody tr td.hide_description_column {
+    display: none;
+}
+
+#book-list-table tr *:nth-child(7) {
+    display: none;
+}
+
+// hide last update column
+#book-list-table tbody tr td.hide_last_update_column {
+    display: none;
+}
+
+#book-list-table tr *:nth-child(8) {
+    display: none;
+}
+
 // typeahead styling
 
 .tt-query {

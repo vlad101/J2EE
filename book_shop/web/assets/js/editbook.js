@@ -146,6 +146,10 @@ $( document ).ready(function() {
         }
     } );
     
+//    hide the first column of the table
+//    $('#book-list-table tr *:nth-child(4)').css('display','none');
+//    $('#book-list-table tbody tr td.hide_qty_column').css('display','none');
+    
 //    typeahead
     
     $('#book_category_name').typeahead({
@@ -310,19 +314,6 @@ function doGetBookData(book_list) {
  */
 function doBuildDataTable(aaData) {
     
-    
-//    check for book quantity
-//    var check_books;
-//    for (var i in aaData) {
-//        if(aaData[i].book_list.length == 0) {
-//            alert("Yes");
-//            check_books = '<img src="/book_shop/assets/images/details_open.png">';
-//        } else {
-//            alert("No");
-//            check_books = 'No';
-//        }
-//    }
-    
 //    This table loads data by Ajax. The latest data that has been loaded is 
 //    shown below. This data will update automatically as any additional data is loaded
     if($.fn.dataTable) {
@@ -339,33 +330,48 @@ function doBuildDataTable(aaData) {
                 },
                 { 'data': 'title' },
                 { 'data': 'author' },
-                { 'data': 'qty' },
-                { 'data': 'category_name', },
-                { 'data': 'price', },
-                { 'data': 'description' },
-                { 'data': 'last_update' },
+                { 
+                    'data': 'qty', 
+                    'class': 'hide_qty_column' 
+                },
+                { 
+                    'data': 'category_name', 
+                    'class': 'hide_category_name_column' 
+                },
+                { 'data': 'price'},
+                { 
+                    'data': 'description',
+                    'class': 'hide_description_column' 
+                },
+                {
+                    'data': 'last_update',
+                    'class': 'hide_last_update_column' 
+                },
                 { 'data': 'updatebtncol' },
                 { 'data': 'deletebtncol' }
             ]
+            /*
+            ,
+            "fnDrawCallback": function() {
+                $("#book-list-table tbody tr").click(function() {
+                    var position = oTable.fnGetPosition(this); // getting the clicked row position
+                    var temp = oTable.fnGetData(position)[3]; 
+                    alert(temp);
+                });
+            }
+            */
         });
     }
 }
 
 function fnFormatDetails( data ) {
-    // `data` is the original data object for the row
+    // data is the original data object for the row
     
     var retval;
-    
-    if( data.book_list.length === 0 )
-        return '<p>No books added!</p>';
-
     retval = '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">';
-    for(var i = 0; i < data.book_list.length; i++) {
-        retval +=   '<tr>'+
-                        '<td><ul><li>' + data.book_list[i] +
-                        '</li></ul></td>'+
-                    '</tr>';
-    }
+    retval +=   '<tr><td><strong>Category: </strong>' + data.category_name + '</td></tr>';
+    retval +=   '<tr><td><strong>Description: </strong>' + data.description + '</td></tr>';
+    retval +=   '<tr><td><strong>Last Update: </strong>' + data.last_update + '</td></tr>';
     retval += '</table>';
     
     return retval;
