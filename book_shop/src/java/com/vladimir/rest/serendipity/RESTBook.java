@@ -186,15 +186,7 @@ public class RESTBook {
             String bookQuantity = partsData.optString("book_quantity");
             String bookPrice = partsData.optString("book_price");
             String bookDescription = partsData.optString("book_description");
-            String bookCategoryName = partsData.optString("book_category_name");            
-            
-            System.out.println(bookId);
-            System.out.println(bookTitle);
-            System.out.println(bookAuthor);
-            System.out.println(bookQuantity);
-            System.out.println(bookPrice);
-            System.out.println(bookDescription);
-            System.out.println(bookCategoryName);
+            String bookCategoryName = partsData.optString("book_category_name"); 
             
             int updateBookId;
             double updateBookPrice;
@@ -214,25 +206,18 @@ public class RESTBook {
 //            validate number values
             try {
                 updateBookId = Integer.parseInt(bookId);
-                updateBookPrice = Double.parseDouble(bookPrice);
+                updateBookPrice = Double.parseDouble(bookPrice);                
+                updateBookCategoryId = daoCategory.getCategoryIdByName(bookCategoryName);
                 
-                /*
-                if( daoCategory.getCategoryIdByName(bookCategoryName) == -1) {
-                    System.out.println("CATEGORY ID: " + daoCategory.getCategoryIdByName(bookCategoryName));
-                    System.out.println("CATEGORY IS NOT FOUND!!!");
+                System.out.println(updateBookCategoryId);
+                if(updateBookCategoryId == -1)
                     daoCategory.addCategory(bookCategoryName);
-                }
-                System.out.println("CATEGORY ID: " + daoCategory.getCategoryIdByName(bookCategoryName));
-                System.out.println("CATEGORY IS FOUND!!!");
-                updateBookCategoryId = daoCategory.getCategoryIdByName(bookCategoryName);
-                */
-                
-                updateBookCategoryId = daoCategory.getCategoryIdByName(bookCategoryName);
+                    
                 updateBookQuantity = Integer.parseInt(bookQuantity);
                 
             } catch (NumberFormatException e) {
                 jsonObject.put("HTTP_CODE", "500");
-                jsonObject.put("MSG", "Anter a valid number values!");
+                jsonObject.put("MSG", "Enter a valid number values!");
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
             }
                         

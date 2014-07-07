@@ -160,9 +160,9 @@ public class DAOCategory {
      * @param categoryId
      * @return 
      */
+    @SuppressWarnings("static-access")
     public int getCategoryIdByName(String categoryName){
         
-        Category category = null;
         int categoryId = -1;
         
         String sql = "SELECT category_id FROM category WHERE category_name=?;";
@@ -177,12 +177,40 @@ public class DAOCategory {
             // read the first row - replaced while with if
             if(rs.next()) {
                 categoryId = rs.getInt("category_id");
-                category = new Category(categoryId, categoryName);
             }
             else {
-//                 category does not exist
-                categoryId = -1;
-                
+//                 category does not exist, add a new category
+                ResultSet generatedKeys = null;
+                String sql2 = "INSERT INTO category (category_name) VALUES(?);";
+
+                try {
+                    conn.setAutoCommit(false);
+                    preparedStatement = conn.prepareStatement(sql2, preparedStatement.RETURN_GENERATED_KEYS);
+                    preparedStatement.setString(1, categoryName);
+                    int affectedRows = preparedStatement.executeUpdate();
+                    
+                    if (affectedRows == 0) {
+                        throw new SQLException("Insert category failed, no rows affected.");
+                    }
+                    
+//                    get the generated id after an insert success
+                    generatedKeys = preparedStatement.getGeneratedKeys();
+                    if (generatedKeys.next()) {
+                        categoryId = generatedKeys.getInt(1);
+                    } else {
+                        throw new SQLException("Creating category failed, no generated key obtained.");
+                    }
+                    conn.commit();
+                } catch (SQLException ex) {
+                    Logger.getLogger(DAOCategory.class.getName()).log(Level.SEVERE, "Coud not add category.", ex);
+                    try {
+                        conn.rollback();
+                    } catch (SQLException ex1) {
+                        Logger.getLogger(DAOCategory.class.getName()).log(Level.SEVERE, null, ex1);
+                    } finally {
+                        if (generatedKeys != null) try { generatedKeys.close(); } catch (SQLException logOrIgnore) {}
+                    }
+                } 
             }
             
             rs.close();
@@ -200,7 +228,7 @@ public class DAOCategory {
             db.closeConnection();
         }
         
-        return categoryId == -1 ? categoryId : category.getCategoryId();
+        return categoryId;
     }   
 
     /**
