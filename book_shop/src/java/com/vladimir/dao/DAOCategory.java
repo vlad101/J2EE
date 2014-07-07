@@ -175,26 +175,17 @@ public class DAOCategory {
             rs = preparedStatement.executeQuery();
             
             int i = 0;
-            while(rs.next()) {
+            
+            // read the first row - replaced while with if
+            if(rs.next()) {
                 categoryId = rs.getInt("category_id");
                 category = new Category(categoryId, categoryName);
-                i++;
             }
-            
-            if(i == 0) {
-                categoryId = -1;
-            }
-            
-            /*
-            if(!rs.next())
-                categoryId = -1;
             else {
-                while(rs.next()) {
-                    categoryId = rs.getInt("category_id");
-                    category = new Category(categoryId, categoryName);
-                }
+//                 category does not exist
+                categoryId = -1;
+                
             }
-            */
             
             rs.close();
             rs = null;
@@ -207,8 +198,6 @@ public class DAOCategory {
             
         } catch (SQLException ex) {
             Logger.getLogger(DAOCategory.class.getName()).log(Level.SEVERE, "Could not select category by ID.", ex);
-        } catch (Exception e) {
-                Logger.getLogger(DAOCategory.class.getName()).log(Level.SEVERE, "Could not create a JSON object", e);  
         } finally {
             db.closeConnection();
         }
@@ -252,8 +241,6 @@ public class DAOCategory {
             
         } catch (SQLException ex) {
             Logger.getLogger(DAOCategory.class.getName()).log(Level.SEVERE, "Could not select category by ID.", ex);
-        } catch (Exception e) {
-                Logger.getLogger(DAOCategory.class.getName()).log(Level.SEVERE, "Could not create a JSON object", e);  
         } finally {
             db.closeConnection();
         }

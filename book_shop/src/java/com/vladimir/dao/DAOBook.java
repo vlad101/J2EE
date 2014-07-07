@@ -97,6 +97,13 @@ public class DAOBook {
             preparedStatement.setInt(3, book.getQuntity());
             preparedStatement.setDouble(4, book.getPrice());
             preparedStatement.setString(5, book.getDescription());
+            
+//            check if category exists
+            if(book.getCategoryId() == -1){
+                System.out.println("-----------------------------------------------");
+                System.out.println("DAOBook file" + book.getCategoryId());
+                System.out.println("-----------------------------------------------");
+        }
             preparedStatement.setInt(6, book.getCategoryId());
             preparedStatement.setInt(7, book.getBookId());
             preparedStatement.executeUpdate();

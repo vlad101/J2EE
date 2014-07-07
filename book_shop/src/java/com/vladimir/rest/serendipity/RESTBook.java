@@ -215,6 +215,7 @@ public class RESTBook {
                 updateBookId = Integer.parseInt(bookId);
                 updateBookPrice = Double.parseDouble(bookPrice);
                 
+                /*
                 if( daoCategory.getCategoryIdByName(bookCategoryName) == -1) {
                     System.out.println("CATEGORY ID: " + daoCategory.getCategoryIdByName(bookCategoryName));
                     System.out.println("CATEGORY IS NOT FOUND!!!");
@@ -223,13 +224,15 @@ public class RESTBook {
                 System.out.println("CATEGORY ID: " + daoCategory.getCategoryIdByName(bookCategoryName));
                 System.out.println("CATEGORY IS FOUND!!!");
                 updateBookCategoryId = daoCategory.getCategoryIdByName(bookCategoryName);
+                */
+                updateBookCategoryId =0; //Integer.parseInt(bookCategoryName);
                 updateBookQuantity = Integer.parseInt(bookQuantity);
             } catch (NumberFormatException e) {
                 jsonObject.put("HTTP_CODE", "500");
                 jsonObject.put("MSG", "Anter a valid number values!");
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
             }
-            
+                        
             book = new Book(updateBookId, bookTitle, bookAuthor, updateBookQuantity, updateBookPrice, bookDescription, null, updateBookCategoryId);
             int http_code = daoBook.updateBook(book);
             
