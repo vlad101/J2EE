@@ -8,13 +8,13 @@
 *.so
 
 # NetBeans specific #
-nbproject/private/
-build/
-nbbuild/
-dist/
-nbdist/
-nbactions.xml
-nb-configuration.xml
+book_shop/nbproject/private/
+book_shop/build/
+book_shop/nbbuild/
+book_shop/dist/
+book_shop/nbdist/
+book_shop/nbactions.xml
+book_shop/nb-configuration.xml
 
 # Class Files #
 *.class

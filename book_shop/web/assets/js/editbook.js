@@ -350,16 +350,6 @@ function doBuildDataTable(aaData) {
                 { 'data': 'updatebtncol' },
                 { 'data': 'deletebtncol' }
             ]
-            /*
-            ,
-            "fnDrawCallback": function() {
-                $("#book-list-table tbody tr").click(function() {
-                    var position = oTable.fnGetPosition(this); // getting the clicked row position
-                    var temp = oTable.fnGetData(position)[3]; 
-                    alert(temp);
-                });
-            }
-            */
         });
     }
 }
