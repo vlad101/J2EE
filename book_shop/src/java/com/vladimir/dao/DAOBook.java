@@ -57,6 +57,17 @@ public class DAOBook {
             preparedStatement.setDouble(4, price);
             preparedStatement.setString(5, description);
             preparedStatement.setInt(6, categoryId);
+            
+            System.out.println("------------addbook - daobook---------------");
+            System.out.println("sql - " + sql);
+            System.out.println("title - " + title);
+            System.out.println("author - " + author);
+            System.out.println("quantity - " + quantity);
+            System.out.println("price - " + price);
+            System.out.println("description - " + description);
+            System.out.println("category name - " + categoryId);
+            System.out.println("---------------------------");
+            
             preparedStatement.executeUpdate();
             conn.commit();
             

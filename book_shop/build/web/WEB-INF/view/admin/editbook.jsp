@@ -28,8 +28,13 @@
     <!-- Add book -->
     <div id="add-book">
         <form id="add_book_form" name="post_book_form" action="#">
-            Add Book  <input type="text" name="book_title" id="book_title" maxlength="50" value="">&nbsp;
-                            <input type="button" name="submit_add_book" id="submit_add_book" value="Submit">
+            Title       <input type="text" name="book_title" id="book_title" maxlength="50" value=""><br><br>
+            Author      <input type="text" name="book_author" id="book_author" maxlength="50" value=""><br><br>
+            Quantity    <input type="text" name="book_quantity" id="book_quantity" maxlength="50" value=""><br><br>
+            Price       <input type="text" name="book_price" id="book_price" maxlength="50" value=""><br><br>
+            Description <input type="text" name="book_description" id="book_description" maxlength="50" value=""><br><br>
+            Category    <input type="text" name="book_category_name" id="book_category_name" maxlength="50" value=""><br><br>
+                        <input type="button" name="submit_add_book" id="submit_add_book" value="Submit">
         </form>
     </div>
     <br />

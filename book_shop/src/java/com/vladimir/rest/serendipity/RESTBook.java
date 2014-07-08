@@ -98,36 +98,52 @@ public class RESTBook {
         try {
             
             JSONObject partsData = new JSONObject(bookInfo);
+            int addBookId = 0;
             
-            String bookId = partsData.optString("book_id");     
             String bookTitle = partsData.optString("book_title");
             String bookAuthor = partsData.optString("book_author");
             String bookQuantity = partsData.optString("book_quantity");
             String bookPrice = partsData.optString("book_price");
             String bookDescription = partsData.optString("book_description");
-            String bookCategoryId = partsData.optString("book_category_id");
+            String bookCategoryName = partsData.optString("book_category_name");
+            
+            System.out.println("-------------addbook - restbook--------------");
+            System.out.println("title - " + bookTitle);
+            System.out.println("author - " + bookAuthor);
+            System.out.println("quantity - " + bookQuantity);
+            System.out.println("price - " + bookPrice);
+            System.out.println("description - " + bookDescription);
+            System.out.println("category name - " + bookCategoryName);
+            System.out.println("---------------------------");
             
 //            validate numbers
-            int addBookId;
             double addBookPrice;
             int addBookCategoryId;
             int addBookQuantity;
             
+//            validate number values
+            DAOCategory daoCategory = null;
+            
             try {
-                addBookId = Integer.parseInt(bookId);
                 addBookPrice = Double.parseDouble(bookPrice);
-                addBookCategoryId = Integer.parseInt(bookCategoryId);
+                addBookCategoryId = daoCategory.getCategoryIdByName(bookCategoryName);
+                if(addBookCategoryId == -1)
+                    daoCategory.addCategory(bookCategoryName);
+                    
                 addBookQuantity = Integer.parseInt(bookQuantity);
+                
             } catch (NumberFormatException e) {
                 jsonObject.put("HTTP_CODE", "500");
-                jsonObject.put("MSG", "Enter a valid number value!");
+                jsonObject.put("MSG", "Enter valid number values!");
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
             }
-            
-//            validate title and author
-            if (bookTitle == null || bookTitle.length() == 0 || bookAuthor == null || bookAuthor.length() == 0) {
+
+//            validate title, author, and category name
+            if (bookTitle == null || bookTitle.length() == 0 || 
+                    bookAuthor == null || bookAuthor.length() == 0 ||
+                    bookCategoryName.length() == 0 || bookCategoryName == null ) {
                 jsonObject.put("HTTP_CODE", "500");
-                jsonObject.put("MSG", "Enter a valid author and title!");
+                jsonObject.put("MSG", "Enter a valid author, title, and category!");
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
             }            
             
@@ -151,7 +167,7 @@ public class RESTBook {
         } catch (Exception e) {
             //return Response.status(500).entity("Server unable to process request.").build();
             jsonObject.put("HTTP_CODE", "500");
-            jsonObject.put("MSG", "Server unable to process request!");
+            jsonObject.put("MSG", "Server unable to process request - add a book");
             returnString = jsonArray.put(jsonObject).toString();
         }
         
@@ -196,8 +212,7 @@ public class RESTBook {
 //            validate text values
             if(bookTitle == null || bookTitle.length() == 0 || 
                     bookAuthor == null || bookAuthor.length() == 0 || 
-                    bookCategoryName.length() == 0 || bookCategoryName == null || 
-                    bookCategoryName.length() == 0 || bookCategoryName == null ) {
+                    bookCategoryName.length() == 0 || bookCategoryName == null) {
                 jsonObject.put("HTTP_CODE", "500");
                 jsonObject.put("MSG", "Enter a valid book info!");
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
