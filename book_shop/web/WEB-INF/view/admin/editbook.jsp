@@ -26,6 +26,8 @@
     <h1>Edit Book</h1><br />
     
     <!-- Add book -->
+    
+    <!--TODO: Create a modal-->
     <div id="add-book">
         <form id="add_book_form" name="post_book_form" action="#">
             Title       <input type="text" name="book_title" id="book_title" maxlength="50" value=""><br><br>

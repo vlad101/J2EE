@@ -58,6 +58,7 @@ public class DAOBook {
             preparedStatement.setString(5, description);
             preparedStatement.setInt(6, categoryId);
             
+            //            TODO debug
             System.out.println("------------addbook - daobook---------------");
             System.out.println("sql - " + sql);
             System.out.println("title - " + title);
