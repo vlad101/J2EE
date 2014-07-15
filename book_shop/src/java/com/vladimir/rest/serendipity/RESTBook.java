@@ -106,24 +106,14 @@ public class RESTBook {
             String bookPrice = partsData.optString("book_price");
             String bookDescription = partsData.optString("book_description");
             String bookCategoryName = partsData.optString("book_category_name");
-            
-//            TODO debug
-            System.out.println("-------------addbook - restbook--------------");
-            System.out.println("title - " + bookTitle);
-            System.out.println("author - " + bookAuthor);
-            System.out.println("quantity - " + bookQuantity);
-            System.out.println("price - " + bookPrice);
-            System.out.println("description - " + bookDescription);
-            System.out.println("category name - " + bookCategoryName);
-            System.out.println("---------------------------");
-            
+                        
 //            validate numbers
             double addBookPrice;
             int addBookCategoryId;
             int addBookQuantity;
             
 //            validate number values
-            DAOCategory daoCategory = null;
+            DAOCategory daoCategory = new DAOCategory();
             
             try {
                 addBookPrice = Double.parseDouble(bookPrice);
@@ -225,7 +215,6 @@ public class RESTBook {
                 updateBookPrice = Double.parseDouble(bookPrice);                
                 updateBookCategoryId = daoCategory.getCategoryIdByName(bookCategoryName);
                 
-                System.out.println(updateBookCategoryId);
                 if(updateBookCategoryId == -1)
                     daoCategory.addCategory(bookCategoryName);
                     
