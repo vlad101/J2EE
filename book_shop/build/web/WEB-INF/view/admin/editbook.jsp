@@ -40,6 +40,7 @@
         </form>
     </div>
     <br />
+    <button type="button" class="btn btn-primary btn-small" data-toggle="modal" data-target="#update-book-modal" >Update</button>
     
     <!-- adding new book -->
     <div id="ajax_add_book_response_success" class="alert alert-success"></div>
@@ -135,6 +136,52 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             <button type="button" class="btn btn-primary" id="update_book_form_submit">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Add Book Modal -->
+    <div class="modal fade" id="add-book-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="modalLabel">Book Edit Info</h4>
+          </div>
+          <div class="modal-body">
+            <form id="add_book_form" method="post" action="#">
+                <div id="book_title">
+                    <label>Title</label>
+                    <input type="text" value="" name="book_title">
+                </div><br>
+                <div id="book_author">
+                    <label>Author</label>
+                    <input type="text" value="" name="book_author">
+                </div><br>
+                <div id="book_quantity">
+                    <label>Quantity</label>
+                    <input type="text" value="" name="book_quantity">
+                </div><br>
+                <div id="book_category_name_search">
+                    <label>Category</label>
+                    <input type="text" value="" name="book_category_name" id="book_category_name" >
+                </div><br>
+                <div id="book_price">
+                    <label>Price</label>
+                    <input type="text" value="" name="book_price">
+                </div><br>
+                <div id="book_description">
+                    <label>Description</label>
+                    <input type="text" value="" name="book_description">
+                </div><br>
+                    <input type="hidden" value="" name="book_id">
+                         
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="add_book_form_submit">Save changes</button>
           </div>
         </div>
       </div>

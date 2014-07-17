@@ -49,7 +49,14 @@ $( document ).ready(function() {
                     success: function(data) {
                         if(data[0].HTTP_CODE == 200) {
                             $('#ajax_add_book_response_success').css({ 'width': '50%', 'margin': '0 auto' }).show().html( '<strong>Well Done!</strong> ' + data[0].MSG ).delay(10000).fadeOut();
-                            $('input#book_title').val('');  // clear the text field, after book is added
+                            
+//                      clear the text field, after book is added
+                            $('input#book_title').val('');
+                            $('input#book_author').val('');
+                            $('input#book_quantity').val('');
+                            $('input#book_price').val('');
+                            $('input#book_description').val('');
+                            $('input#book_category').val('');
                         } else {
                             $('#ajax_add_book_response_error').css({ 'width': '50%', 'margin': '0 auto' }).show().html( '<strong>Oh snap!</strong> ' + data[0].MSG ).delay(10000).fadeOut();
                         }
