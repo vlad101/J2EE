@@ -100,12 +100,12 @@ public class RESTBook {
             JSONObject partsData = new JSONObject(bookInfo);
             int addBookId = 0;
             
-            String bookTitle = partsData.optString("book_title");
-            String bookAuthor = partsData.optString("book_author");
-            String bookQuantity = partsData.optString("book_quantity");
-            String bookPrice = partsData.optString("book_price");
-            String bookDescription = partsData.optString("book_description");
-            String bookCategoryName = partsData.optString("book_category_name");
+            String bookTitle = partsData.optString("book_title_add");
+            String bookAuthor = partsData.optString("book_author_add");
+            String bookQuantity = partsData.optString("book_quantity_add");
+            String bookPrice = partsData.optString("book_price_add");
+            String bookDescription = partsData.optString("book_description_add");
+            String bookCategoryName = partsData.optString("book_category_name_add");
                         
 //            validate numbers
             double addBookPrice;
@@ -187,13 +187,13 @@ public class RESTBook {
         try {
             
             JSONObject partsData = new JSONObject(bookInfo);
-            String bookId = partsData.optString("book_id");
-            String bookTitle = partsData.optString("book_title");
-            String bookAuthor = partsData.optString("book_author");
-            String bookQuantity = partsData.optString("book_quantity");
-            String bookPrice = partsData.optString("book_price");
-            String bookDescription = partsData.optString("book_description");
-            String bookCategoryName = partsData.optString("book_category_name"); 
+            String bookId = partsData.optString("book_id_update");
+            String bookTitle = partsData.optString("book_title_update");
+            String bookAuthor = partsData.optString("book_author_update");
+            String bookQuantity = partsData.optString("book_quantity_update");
+            String bookPrice = partsData.optString("book_price_update");
+            String bookDescription = partsData.optString("book_description_update");
+            String bookCategoryName = partsData.optString("book_category_name_update"); 
             
             int updateBookId;
             double updateBookPrice;

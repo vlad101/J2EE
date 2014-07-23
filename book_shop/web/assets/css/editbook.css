@@ -35,7 +35,7 @@ table {
     width: 30%;
 }
 
-#update-book-modal .modal-header {
+#update-book-modal .modal-header, #add-book-modal .modal-header {
     background-color: #D3D3D3;
 }
 

@@ -31,7 +31,7 @@ $( document ).ready(function() {
      * It will submit a book entry to a Serendipity database 
      */
     var $add_book_form = $('#add_book_form');
-    $('#submit_add_book').click(function(e){
+    $('#add_book_form_submit').click(function(e){
         
         e.preventDefault(); // cancel form submit
         
@@ -51,14 +51,15 @@ $( document ).ready(function() {
                             $('#ajax_add_book_response_success').css({ 'width': '50%', 'margin': '0 auto' }).show().html( '<strong>Well Done!</strong> ' + data[0].MSG ).delay(10000).fadeOut();
                             
 //                      clear the text field, after book is added
-                            $('input#book_title').val('');
-                            $('input#book_author').val('');
-                            $('input#book_quantity').val('');
-                            $('input#book_price').val('');
-                            $('input#book_description').val('');
-                            $('input#book_category').val('');
+                            $('#add-book-modal').modal('hide');
+                            $('input#book_title_add').val('');
+                            $('input#book_author_add').val('');
+                            $('input#book_quantity_add').val('');
+                            $('input#book_price_add').val('');
+                            $('input#book_description_add').val('');
+                            $('input#book_category_add').val('');
                         } else {
-                            $('#ajax_add_book_response_error').css({ 'width': '50%', 'margin': '0 auto' }).show().html( '<strong>Oh snap!</strong> ' + data[0].MSG ).delay(10000).fadeOut();
+                            $('#ajax_add_book_response_error').css({ 'width': '100%', 'margin': '0 auto' }).show().html( '<strong>Oh snap!</strong> ' + data[0].MSG ).delay(10000).fadeOut();
                         }
                     },
                     complete: function(XMLHttpRequest) {
@@ -68,7 +69,7 @@ $( document ).ready(function() {
                     dataType: "json" // request json
         };
         
-        $.ajax(ajaxObj);        
+        $.ajax(ajaxObj);
     });
      
      /**
@@ -82,23 +83,34 @@ $( document ).ready(function() {
         var $this = $(this);
         var book_id = $this.val();
         var $tr = $this.closest('tr');
-        var book_title = $tr.find('.container_book_title').text();
-        var book_author = $tr.find('.container_book_author').text();
-        var book_quantity = $tr.find('.container_book_quantity').text();
-        var book_category_name = $tr.find('.container_book_category_name').text();
-        var book_price = $tr.find('.container_book_price').text();
-        var book_description = $tr.find('.container_book_description').text();
+        var book_title = $tr.find('.container_book_title_update').text();
+        var book_author = $tr.find('.container_book_author_update').text();
+        var book_quantity = $tr.find('.container_book_quantity_update').text();
+        var book_category_name = $tr.find('.container_book_category_name_update').text();
+        var book_price = $tr.find('.container_book_price_update').text();
+        var book_description = $tr.find('.container_book_description_update').text();
         var book_last_update = $tr.find('.container_book_last_update').text();
         
 //        fill in data for modal book update
-        $('input[name="book_id"]').val(book_id);
-        $('input[name="book_title"]').val(book_title);
-        $('input[name="book_author"]').val(book_author);
-        $('input[name="book_quantity"]').val(book_quantity);
-        $('input[name="book_category_name"]').val(book_category_name);
-        $('input[name="book_price"]').val(book_price);
-        $('input[name="book_description"]').val(book_description);
-        $('input[name="book_last_update"]').val(book_last_update);
+        $('#update-book-modal input[name="book_id_update"]').val(book_id);
+        $('#update-book-modal input[name="book_title_update"]').val(book_title);
+        $('#update-book-modal input[name="book_author_update"]').val(book_author);
+        $('#update-book-modal input[name="book_quantity_update"]').val(book_quantity);
+        $('#update-book-modal input[name="book_category_name_update"]').val(book_category_name);
+        $('#update-book-modal input[name="book_price_update"]').val(book_price);
+        $('#update-book-modal input[name="book_description_update"]').val(book_description);
+        $('#update-book-modal input[name="book_last_update"]').val(book_last_update);
+    });
+    
+    $(document.body).on('click', '#book_add_button', function() {
+//        clear all text fields
+        $('#add-book-modal input[name="book_id_add"]').val('');
+        $('#add-book-modal input[name="book_title_add"]').val('');
+        $('#add-book-modal input[name="book_author_add"]').val('');
+        $('#add-book-modal input[name="book_quantity_add"]').val('');
+        $('#add-book-modal input[name="book_category_name_add"]').val('');
+        $('#add-book-modal input[name="book_price_add"]').val('');
+        $('#add-book-modal input[name="book_description_add"]').val('');
     });
     
     $('#update_book_form_submit').click(function(e) {
@@ -109,8 +121,6 @@ $( document ).ready(function() {
        
         var obj = $update_book_form.serializeObject();
         updateBook(obj);
-
-        $('#update-book-modal').modal('hide');
     });
     
     
@@ -127,7 +137,7 @@ $( document ).ready(function() {
         
         // get the name for the alert box
         var $tr = $this.closest('tr');
-        var book_title = $tr.find('.container_book_title').text();
+        var book_title = $tr.find('.container_book_title_update').text();
         bootbox.confirm("Are you sure you want to delete " + '"' + book_title + '"'  + " book?", function(result) {
             if(result)
                 deleteBook(obj);
@@ -159,7 +169,7 @@ $( document ).ready(function() {
     
 //    typeahead
     
-    $('#book_category_name').typeahead({
+    $('#book_category_name_add, #book_category_name_update').typeahead({
       hint: true,
       highlight: true,
       minLength: 1
@@ -197,9 +207,10 @@ function updateBook(obj) {
                 },                    
                 success: function(data) {
                     if(data[0].HTTP_CODE == 200) {
+                        $('#update-book-modal').modal('hide');
                         $('#ajax_update_book_response_success').css({ 'width': '50%', 'margin': '0 auto' }).show().html( '<strong>Well Done!</strong> ' + data[0].MSG ).delay(5000).fadeOut();
                     } else {
-                        $('#ajax_update_book_response_error').css({ 'width': '50%', 'margin': '0 auto' }).show().html( '<strong>Oh snap!</strong> ' + data[0].MSG ).delay(5000).fadeOut();
+                        $('#ajax_update_book_response_error').css({ 'width': '100%', 'margin': '0 auto' }).show().html( '<strong>Oh snap!</strong> ' + data[0].MSG ).delay(5000).fadeOut();
                     }
                 },
                 complete: function(XMLHttpRequest) {
@@ -298,12 +309,12 @@ function doGetBookData(book_list) {
         
         aaData.push({
             'book_id':          book_list[book].book_id,
-            'title':            '<div class="container_book_title" >' + book_list[book].title + '</div>',
-            'author':           '<div class="container_book_author" >' + book_list[book].author + '</div>',
-            'qty':              '<div class="container_book_quantity" >' + book_list[book].quantity + '</div>',
-            'category_name':    '<div class="container_book_category_name" >' + book_list[book].category_name + '</div>',
-            'price':            '<div class="container_book_price" >' + book_list[book].price + '</div>',
-            'description':      '<div class="container_book_description" >' + book_list[book].description + '</div>',
+            'title':            '<div class="container_book_title_update" >' + book_list[book].title + '</div>',
+            'author':           '<div class="container_book_author_update" >' + book_list[book].author + '</div>',
+            'qty':              '<div class="container_book_quantity_update" >' + book_list[book].quantity + '</div>',
+            'category_name':    '<div class="container_book_category_name_update" >' + book_list[book].category_name + '</div>',
+            'price':            '<div class="container_book_price_update" >' + book_list[book].price + '</div>',
+            'description':      '<div class="container_book_description_update" >' + book_list[book].description + '</div>',
             'last_update':      '<div class="container_book_last_update" >' +  book_list[book].last_update + '</div>',
             'updatebtncol':     '<button type="button" class="btn btn-primary btn-small" data-toggle="modal" data-target="#update-book-modal" ' + 'id="book_update_button" value="'  + book_list[book].book_id + '" >Update</button>',
             'deletebtncol':     '<button class="btn btn-danger" id="book_delete_button" value="' + book_list[book].book_id + '" type="button">Delete</button>'

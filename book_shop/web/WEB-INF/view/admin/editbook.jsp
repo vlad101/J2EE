@@ -26,29 +26,14 @@
     <h1>Edit Book</h1><br />
     
     <!-- Add book -->
+    <button type="button" id="book_add_button" class="btn btn-primary btn-small" data-toggle="modal" data-target="#add-book-modal" >Add Book</button>
+    <br/>
     
-    <!--TODO: Create a modal-->
-    <div id="add-book">
-        <form id="add_book_form" name="post_book_form" action="#">
-            Title       <input type="text" name="book_title" id="book_title" maxlength="50" value=""><br><br>
-            Author      <input type="text" name="book_author" id="book_author" maxlength="50" value=""><br><br>
-            Quantity    <input type="text" name="book_quantity" id="book_quantity" maxlength="50" value=""><br><br>
-            Price       <input type="text" name="book_price" id="book_price" maxlength="50" value=""><br><br>
-            Description <input type="text" name="book_description" id="book_description" maxlength="50" value=""><br><br>
-            Category    <input type="text" name="book_category_name" id="book_category_name" maxlength="50" value=""><br><br>
-                        <input type="button" name="submit_add_book" id="submit_add_book" value="Submit">
-        </form>
-    </div>
-    <br />
-    <button type="button" class="btn btn-primary btn-small" data-toggle="modal" data-target="#update-book-modal" >Update</button>
-    
-    <!-- adding new book -->
+    <!-- adding new book success -->
     <div id="ajax_add_book_response_success" class="alert alert-success"></div>
-    <div id="ajax_add_book_response_error" class="alert alert-danger"></div>
     
-    <!-- Update book -->
+    <!-- Update book success -->
     <div id="ajax_update_book_response_success" class="alert alert-success"></div>
-    <div id="ajax_update_book_response_error" class="alert alert-danger"></div>
     
     <!-- Delete book -->
     <div id="ajax_delete_book_response_success" class="alert alert-success"></div>
@@ -100,36 +85,40 @@
             <h4 class="modal-title" id="modalLabel">Book Edit Info</h4>
           </div>
           <div class="modal-body">
+              
+            <!-- update book error -->
+            <div id="ajax_update_book_response_error" class="alert alert-danger"></div>
+              
             <form id="update_book_form" method="post" action="#">
-                <div id="book_title">
+                <div id="book_title_update">
                     <label>Title</label>
-                    <input type="text" value="" name="book_title">
+                    <input type="text" value="" name="book_title_update">
                 </div><br>
-                <div id="book_author">
+                <div id="book_author_update">
                     <label>Author</label>
-                    <input type="text" value="" name="book_author">
+                    <input type="text" value="" name="book_author_update">
                 </div><br>
-                <div id="book_quantity">
+                <div id="book_quantity_update">
                     <label>Quantity</label>
-                    <input type="text" value="" name="book_quantity">
+                    <input type="text" value="" name="book_quantity_update">
                 </div><br>
-                <div id="book_category_name_search">
+                <div id="book_category_name_modal_update">
                     <label>Category</label>
-                    <input type="text" value="" name="book_category_name" id="book_category_name" >
+                    <input type="text" value="" name="book_category_name_update" id="book_category_name_update" >
                 </div><br>
-                <div id="book_price">
+                <div id="book_price_update">
                     <label>Price</label>
-                    <input type="text" value="" name="book_price">
+                    <input type="text" value="" name="book_price_update">
                 </div><br>
-                <div id="book_description">
+                <div id="book_description_update">
                     <label>Description</label>
-                    <input type="text" value="" name="book_description">
+                    <input type="text" value="" name="book_description_update">
                 </div><br>
-                <div id="book_last_update">
+                <div id="book_last_update_update">
                     <label>Last Update</label>
                     <input type="text" value="" name="book_last_update" readonly>
                 </div>
-                    <input type="hidden" value="" name="book_id">
+                    <input type="hidden" value="" name="book_id_update">
                          
             </form>
           </div>
@@ -147,35 +136,39 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title" id="modalLabel">Book Edit Info</h4>
+            <h4 class="modal-title" id="modalLabel">Add Book</h4>
           </div>
           <div class="modal-body">
+              
+            <!-- add new book -->
+            <div id="ajax_add_book_response_error" class="alert alert-danger"></div>
+              
             <form id="add_book_form" method="post" action="#">
-                <div id="book_title">
+                <div id="book_title_add">
                     <label>Title</label>
-                    <input type="text" value="" name="book_title">
+                    <input type="text" value="" name="book_title_add">
                 </div><br>
-                <div id="book_author">
+                <div id="book_author_add">
                     <label>Author</label>
-                    <input type="text" value="" name="book_author">
+                    <input type="text" value="" name="book_author_add">
                 </div><br>
-                <div id="book_quantity">
+                <div id="book_quantity_add">
                     <label>Quantity</label>
-                    <input type="text" value="" name="book_quantity">
+                    <input type="text" value="" name="book_quantity_add">
                 </div><br>
-                <div id="book_category_name_search">
+                <div id="book_category_name_modal_add">
                     <label>Category</label>
-                    <input type="text" value="" name="book_category_name" id="book_category_name" >
+                    <input type="text" value="" name="book_category_name_add" id="book_category_name_add" >
                 </div><br>
-                <div id="book_price">
+                <div id="book_price_add">
                     <label>Price</label>
-                    <input type="text" value="" name="book_price">
+                    <input type="text" value="" name="book_price_add">
                 </div><br>
-                <div id="book_description">
+                <div id="book_description_add">
                     <label>Description</label>
-                    <input type="text" value="" name="book_description">
+                    <input type="text" value="" name="book_description_add">
                 </div><br>
-                    <input type="hidden" value="" name="book_id">
+                    <input type="hidden" value="" name="book_id_add">
                          
             </form>
           </div>
