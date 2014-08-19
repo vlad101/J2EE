@@ -97,7 +97,7 @@ public class DAOCustomer {
             conn = null;
             
         } catch (SQLException e) {
-            Logger.getLogger(DAOCategory.class.getName()).log(Level.SEVERE, "Coud not update category.", e);
+            Logger.getLogger(DAOCategory.class.getName()).log(Level.SEVERE, "Could not update category.", e);
             try {
                 conn.rollback();
             } catch (SQLException ex) {
