@@ -275,15 +275,15 @@ public class DAOCustomer {
     }    
     
     /**
-     * This method will allow you to get all category data from the category table.
+     * This method will allow you to get all customer data from the customer table.
      * 
-     * @return JSON object with all category data from the table. 
+     * @return JSON object with all customer data from the table. 
      */
-    public JSONArray getAllCategories() { 
+    public JSONArray getAllCustomers() { 
         
-        JSONArray categoryJsonArray = new JSONArray();
+        JSONArray customerJsonArray = new JSONArray();
         
-        String sql = "SELECT category_id, category_name FROM category;"; // do not use * for production code
+        String sql = "SELECT customer_id, first_name, last_name, email, phone, address, city, state, zipcode, cc_number FROM customer;"; // do not use * for production code
         
         try {
         
@@ -292,25 +292,7 @@ public class DAOCustomer {
             rs = preparedStatement.executeQuery();
             
             ToJSON converter = new ToJSON();
-            categoryJsonArray = converter.toJSONArray(rs);
-            
-//            // get books belonging to category
-//            for(int i = 0; i <jsonArray.length(); i++) {
-//                JSONObject obj = jsonArray.getJSONObject(i);
-//                DAOBook daoBook = new DAOBook();
-//                int categoryId = obj.getInt("category_id");
-//                List<String> bookList = daoBook.getBookListByCategoryId(categoryId);
-//                obj.put("book_list", bookList);
-//            }
-            
-//            creates a list of categories
-//            method declaration:public List<Category> getCategories(){
-//            while(rs.next()) {
-//                int categoryId = rs.getInt("category_id");
-//                String categoryName = rs.getString("category_name");
-//                Category category = new Category(categoryId, categoryName);
-//                categoryList.add(category);
-//            }
+            customerJsonArray = converter.toJSONArray(rs);
             
             rs.close();
             rs = null;
@@ -322,13 +304,13 @@ public class DAOCustomer {
             conn = null;
             
         } catch (SQLException ex) {
-            Logger.getLogger(DAOCategory.class.getName()).log(Level.SEVERE, "Could not select categories.", ex);
+            Logger.getLogger(DAOCategory.class.getName()).log(Level.SEVERE, "Could not select customers.", ex);
         } catch (Exception e) {
                 Logger.getLogger(DAOCategory.class.getName()).log(Level.SEVERE, "Could not create a JSON object", e);  
         } finally {
             db.closeConnection();
         }
         
-        return categoryJsonArray;
+        return customerJsonArray;
     }
 }

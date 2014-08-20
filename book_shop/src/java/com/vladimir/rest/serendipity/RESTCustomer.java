@@ -270,36 +270,41 @@ public class RESTCustomer {
         
         try {
             
-            jsonArrayBookList = daoBook.getAllBooks();
+            jsonArrayCustomerList = daoCustomer.getAllCustomers();
         
             // get books belonging to category
-            for(int i = 0; i < jsonArrayBookList.length(); i++) {
+            for(int i = 0; i < jsonArrayCustomerList.length(); i++) {
                 
-                JSONObject obj = jsonArrayBookList.getJSONObject(i);
-                DAOCategory daoCategory = new DAOCategory();
+                JSONObject obj = jsonArrayCustomerList.getJSONObject(i);
+//                DAOCategory daoCategory = new DAOCategory();
                                 
-                obj.put("book_id", obj.getInt("book_id"));
-                obj.put("title", obj.getString("title"));
-                obj.put("author", obj.getString("author"));
-                obj.put("quantity", obj.getInt("quantity"));
-                obj.put("price", obj.getDouble("price"));
-                obj.put("description", obj.getString("description"));
+                obj.put("customer_id", obj.getInt("customer_id"));
+                obj.put("firstname", obj.getString("first_name"));
+                obj.put("lastname", obj.getString("lastname"));
+                obj.put("email", obj.getString("email"));
+                obj.put("phone", obj.getString("phone"));
+                obj.put("address", obj.getString("address"));
+                obj.put("city", obj.getString("city"));
+                obj.put("state", obj.getString("state"));
+                obj.put("zipcode", obj.getString("zipcode"));
+                obj.put("cc_number", obj.getString("cc_number"));
                 
 //                Date Update
-                String lastUpdate = obj.getString("last_update");
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                Date dateUpdate = sdf.parse(lastUpdate);
-                obj.put("last_update", dateUpdate);
-                
-                obj.put("category_id", obj.getInt("category_id"));
-                obj.put("category_name", daoCategory.getCategoryById(obj.getInt("category_id")).getCategoryName());
-                returnString = jsonObject.put(Integer.toString(obj.getInt("book_id")), obj).toString();
+//                String lastUpdate = obj.getString("last_update");
+//                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//                Date dateUpdate = sdf.parse(lastUpdate);
+//                obj.put("last_update", dateUpdate);
+//                
+//                obj.put("category_id", obj.getInt("category_id"));
+//                obj.put("category_name", daoCategory.getCategoryById(obj.getInt("category_id")).getCategoryName());
+//                returnString = jsonObject.put(Integer.toString(obj.getInt("book_id")), obj).toString();
+                returnString = jsonObject.put("customer_id", obj).toString();
             }
         
         } catch (Exception e) {
             jsonObject.put("HTTP_CODE", "500");
             jsonObject.put("MSG", "Server unable to process get book request!");
-            return Response.ok(jsonArrayBookList.put(jsonObject).toString()).build();
+            return Response.ok(jsonArrayCustomerList.put(jsonObject).toString()).build();
         }
                 
         return Response.ok(returnString).build();
