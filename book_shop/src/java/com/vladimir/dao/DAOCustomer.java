@@ -304,9 +304,9 @@ public class DAOCustomer {
             conn = null;
             
         } catch (SQLException ex) {
-            Logger.getLogger(DAOCategory.class.getName()).log(Level.SEVERE, "Could not select customers.", ex);
+            Logger.getLogger(DAOCustomer.class.getName()).log(Level.SEVERE, "Could not select customers.", ex);
         } catch (Exception e) {
-                Logger.getLogger(DAOCategory.class.getName()).log(Level.SEVERE, "Could not create a JSON object", e);  
+                Logger.getLogger(DAOCustomer.class.getName()).log(Level.SEVERE, "Could not create a JSON object", e);  
         } finally {
             db.closeConnection();
         }

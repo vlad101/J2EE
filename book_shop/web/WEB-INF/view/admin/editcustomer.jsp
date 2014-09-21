@@ -4,7 +4,7 @@
     Author     : Vladimir
 --%>
 
-<!-- custom edit category css -->
+<!-- custom edit customer css -->
 <link type="text/css" rel="stylesheet" href="<c:url value="/assets/css/editcustomer.css" />" />
 
 <!-- Datatable css -->
@@ -13,7 +13,7 @@
 <!-- jQuery plugin -->
 <script type="text/javascript" src="/book_shop/assets/jquery/js/jquery-1.10.2.js" ></script>
 
-<!-- custom edit category page js -->
+<!-- custom edit customer page js -->
 <script type="text/javascript" src="<c:url value="/assets/js/polyfill.js" />" ></script>
 <script type="text/javascript" src="<c:url value="/assets/js/editcustomer.js" />" ></script>
 
@@ -25,36 +25,35 @@
     <br />
     <h1>Edit Customer</h1><br />
     
-    <!-- Add category -->
-    <div id="add-category">
-        <form id="add_category_form" name="post_category_form" action="#">
-            Add Category  <input type="text" name="category_title" id="category_title" maxlength="50" value="">&nbsp;
-                            <input type="button" name="submit_add_category" id="submit_add_category" value="Submit">
+    <!-- Add customer -->
+    <div id="add-customer">
+        <form id="add_customer_form" name="post_customer_form" action="#">
+            Add Customer  <input type="text" name="category_title" id="category_title" maxlength="50" value="">&nbsp;
+                            <input type="button" name="submit_add_customer" id="submit_add_customer" value="Submit">
         </form>
     </div>
     <br />
     
-    <!-- adding new category -->
-    <div id="ajax_add_category_response_success" class="alert alert-success"></div>
-    <div id="ajax_add_category_response_error" class="alert alert-danger"></div>
+    <!-- adding new customer -->
+    <div id="ajax_add_customer_response_success" class="alert alert-success"></div>
+    <div id="ajax_add_customer_response_error" class="alert alert-danger"></div>
     
-    <!-- Update category -->
-    <div id="ajax_update_category_response_success" class="alert alert-success"></div>
-    <div id="ajax_update_category_response_error" class="alert alert-danger"></div>
+    <!-- Update customer -->
+    <div id="ajax_update_customer_response_success" class="alert alert-success"></div>
+    <div id="ajax_update_customer_response_error" class="alert alert-danger"></div>
     
-    <!-- Delete category -->
-    <div id="ajax_delete_category_response_success" class="alert alert-success"></div>
-    <div id="ajax_delete_category_response_error" class="alert alert-danger"></div>
+    <!-- Delete customer -->
+    <div id="ajax_delete_customer_response_success" class="alert alert-success"></div>
+    <div id="ajax_delete_customer_response_error" class="alert alert-danger"></div>
     <br />
     
     <!-- jQuery datatables -->
-    <div id="category-list">
-        <table id="category-list-table" class="display">
+    <div id="customer-list">
+        <table id="customer-list-table" class="display">
             <thead>
                 <tr>
                     <th>Expand</th>
-                    <th>Category</th>
-                    <th>Book Qty</th>
+                    <th>Customer Name</th>
                     <th>Update</th>
                     <th>Delete</th>
                 </tr>
@@ -63,8 +62,7 @@
             <tfoot>
                 <tr>
                     <th>Expand</th>
-                    <th>Category</th>
-                    <th>Book Qty</th>
+                    <th>Customer Name</th>
                     <th>Update</th>
                     <th>Delete</th>
                 </tr>
@@ -73,24 +71,24 @@
     </div>
        
 
-    <!-- Update Category Modal -->
-    <div class="modal fade" id="update-category-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <!-- Update Customer Modal -->
+    <div class="modal fade" id="update-customer-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title" id="modalLabel">Category Edit</h4>
+            <h4 class="modal-title" id="modalLabel">Customer Edit</h4>
           </div>
           <div class="modal-body">
-              <h5>Edit category name:</h5><br/>
-            <form id="update_category_form" method="post" action="#">
+              <h5>Edit customer:</h5><br/>
+            <form id="update_customer_form" method="post" action="#">
                 Category   <input type="text" value="" name="category_name">
                          <input type="hidden" value="" name="category_id">
             </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" id="update_category_form_submit">Save changes</button>
+            <button type="button" class="btn btn-primary" id="update_customer_form_submit">Save changes</button>
           </div>
         </div>
       </div>
