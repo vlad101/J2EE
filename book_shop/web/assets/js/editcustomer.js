@@ -248,8 +248,14 @@ function doGetCustomerData(customer_list) {
         aaData.push({
             'customer_id':      customer_list[customer].customer_id,
             'first_name':    '<div class="container_first_name" >' + customer_list[customer].first_name + '</div>',
-//            'qty':              customer_list[customer].book_list.length,
-//            'book_list':        customer_list[customer].book_list,
+            'last_name':    '<div class="container_last_name" >' + customer_list[customer].last_name + '</div>',
+            'email':    '<div class="container_last_name" >' + customer_list[customer].email + '</div>',
+            'phone':    '<div class="container_last_name" >' + customer_list[customer].phone + '</div>',
+            'address':    '<div class="container_last_name" >' + customer_list[customer].address + '</div>',
+            'city':    '<div class="container_last_name" >' + customer_list[customer].city + '</div>',
+            'state':    '<div class="container_last_name" >' + customer_list[customer].state + '</div>',
+            'zipcode':    '<div class="container_last_name" >' + customer_list[customer].zipcode + '</div>',
+            'cc_number':    '<div class="container_last_name" >' + customer_list[customer].cc_number + '</div>',
             'updatebtncol':     '<button type="button" class="btn btn-primary btn-small" data-toggle="modal" data-target="#update-customer-modal" ' + 'id="customer_update_button" value="'  + customer_list[customer].customer_id + '" >Update</button>',
             'deletebtncol':     '<button class="btn btn-danger" id="customer_delete_button" value="' + customer_list[customer].customer_id + '" type="button">Delete</button>'
         });
@@ -281,7 +287,7 @@ function doBuildDataTable(aaData) {
                     'defaultContent': ''
                 },
                 { 'data': 'first_name' },
-//                { 'data': 'qty' },
+                { 'data': 'last_name' },
                 { 'data': 'updatebtncol' },
                 { 'data': 'deletebtncol' }
             ]
@@ -293,18 +299,14 @@ function fnFormatDetails( data ) {
     // `data` is the original data object for the row
     
     var retval;
-    
-//    if( data.book_list.length === 0 )
-//        return '<p>No books added!</p>';
-//
-//    retval = '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">';
-//    for(var i = 0; i < data.book_list.length; i++) {
-//        retval +=   '<tr>'+
-//                        '<td><ul><li>' + data.book_list[i] +
-//                        '</li></ul></td>'+
-//                    '</tr>';
-//    }
-//    retval += '</table>';
-    
+    retval = '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">';
+    retval += '<tr><td align="left" width="20%"><em>Credit Card:   </em></td><td align="left">' + data.cc_number + '</td></tr>';
+    retval += '<tr><td align="left" width="20%"><em>Email:   </em></td><td align="left">' + data.email + '</td></tr>';
+    retval += '<tr><td align="left" width="20%"><em>Phone:   </em></td><td align="left">' + data.phone + '</td></tr>';
+    retval += '<tr><td align="left" width="20%"><em>Address:   </em></td><td align="left">' + data.address + '</td></tr>';
+    retval += '<tr><td align="left" width="20%"><em>City:   </em></td><td align="left">' + data.city + '</td></tr>';
+    retval += '<tr><td align="left" width="20%"><em>State:   </em></td><td align="left">' + data.state + '</td></tr>';
+    retval += '<tr><td align="left" width="20%"><em>Zipcode:   </em></td><td align="left">' + data.zipcode + '</td></tr>';
+    retval += '</table>';
     return retval;
 }

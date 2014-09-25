@@ -54,6 +54,7 @@
                 <tr>
                     <th>Expand</th>
                     <th>First Name</th>
+                    <th>Last Name</th>
                     <th>Update</th>
                     <th>Delete</th>
                 </tr>
@@ -63,6 +64,7 @@
                 <tr>
                     <th>Expand</th>
                     <th>First Name</th>
+                    <th>Last Name</th>
                     <th>Update</th>
                     <th>Delete</th>
                 </tr>
