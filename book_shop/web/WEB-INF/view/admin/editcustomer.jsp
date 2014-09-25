@@ -53,7 +53,7 @@
             <thead>
                 <tr>
                     <th>Expand</th>
-                    <th>Customer Name</th>
+                    <th>First Name</th>
                     <th>Update</th>
                     <th>Delete</th>
                 </tr>
@@ -62,7 +62,7 @@
             <tfoot>
                 <tr>
                     <th>Expand</th>
-                    <th>Customer Name</th>
+                    <th>First Name</th>
                     <th>Update</th>
                     <th>Delete</th>
                 </tr>

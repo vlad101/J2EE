@@ -157,7 +157,7 @@ function updateCategory(obj) {
                 complete: function(XMLHttpRequest) {
                     // reload inventory
                     // console.log( XMLHttpRequest.getAllResponseHeaders() );
-                    getCategory();
+                    getCustomer();
                 },
                 dataType: "json"  // request json
     };
@@ -191,7 +191,7 @@ function deleteCategory(obj) {
                 complete: function(XMLHttpRequest) {
                     // reload inventory
                     // console.log( XMLHttpRequest.getAllResponseHeaders() );
-                    getCategory();
+                    getCustomer();
                 },
                 dataType: "json"  // request json
     };
@@ -202,13 +202,13 @@ function deleteCategory(obj) {
 /**
  * Get category names from the backend using ajax call and json response.
  */
-function getCategory() {
+function getCustomer() {
     
     var d = new Date().getTime();
     
     ajaxObj = {
                 type: "GET",
-                url: "http://localhost:8080/book_shop/api/v1/category/",
+                url: "http://localhost:8080/book_shop/api/v1/customer/",
                 data: "ts="+d,
                 contentType: "application/json",
                 error: function(jqXHR, textStatus, errorThrown) {
@@ -218,7 +218,7 @@ function getCategory() {
 //                    onBuildCategoryTable(data.categories);
 
 //                  check for HTTP_CODE status from bac-kend
-                    doGetCategoryData(data);
+                    doGetCustomerData(data);
                 },
                 complete: function(XMLHttpRequest) {
                     //console.log(XMLHttpRequest.getAllResponseHeaders());
@@ -230,28 +230,28 @@ function getCategory() {
 }
 
 /**
- * This function gets category data from back-end.
+ * This function gets customer data from back-end.
  * 
- * @param {type} category_list
+ * @param {type} customer_list
  * @returns {undefined}
  */
-function doGetCategoryData(category_list) {
+function doGetCustomerData(customer_list) {
     var aaData = [];
-    var category_array = [];
-    for(var category in category_list) {
-        category_array.push(category);
+    var customer_array = [];
+    for(var customer in customer_list) {
+        customer_array.push(customer);
     }
-    category_array.sort();
-    for(var i in category_array) {
-        category = category_array[i];
+    customer_array.sort();
+    for(var i in customer_array) {
+        customer = customer_array[i];
         
         aaData.push({
-            'category_id':      category_list[category].category_id,
-            'category_name':    '<div class="container_category_name" >' + category_list[category].category_name + '</div>',
-            'qty':              category_list[category].book_list.length,
-            'book_list':        category_list[category].book_list,
-            'updatebtncol':     '<button type="button" class="btn btn-primary btn-small" data-toggle="modal" data-target="#update-category-modal" ' + 'id="category_update_button" value="'  + category_list[category].category_id + '" >Update</button>',
-            'deletebtncol':     '<button class="btn btn-danger" id="category_delete_button" value="' + category_list[category].category_id + '" type="button">Delete</button>'
+            'customer_id':      customer_list[customer].customer_id,
+            'first_name':    '<div class="container_first_name" >' + customer_list[customer].first_name + '</div>',
+//            'qty':              customer_list[customer].book_list.length,
+//            'book_list':        customer_list[customer].book_list,
+            'updatebtncol':     '<button type="button" class="btn btn-primary btn-small" data-toggle="modal" data-target="#update-customer-modal" ' + 'id="customer_update_button" value="'  + customer_list[customer].customer_id + '" >Update</button>',
+            'deletebtncol':     '<button class="btn btn-danger" id="customer_delete_button" value="' + customer_list[customer].customer_id + '" type="button">Delete</button>'
         });
         
         doBuildDataTable(aaData);
@@ -266,23 +266,10 @@ function doGetCategoryData(category_list) {
  */
 function doBuildDataTable(aaData) {
     
-    
-//    check for book quantity
-//    var check_books;
-//    for (var i in aaData) {
-//        if(aaData[i].book_list.length == 0) {
-//            alert("Yes");
-//            check_books = '<img src="/book_shop/assets/images/details_open.png">';
-//        } else {
-//            alert("No");
-//            check_books = 'No';
-//        }
-//    }
-    
 //    This table loads data by Ajax. The latest data that has been loaded is 
 //    shown below. This data will update automatically as any additional data is loaded
     if($.fn.dataTable) {
-        oTable = $('#category-list-table').DataTable({
+        oTable = $('#customer-list-table').DataTable({
             'order': [[ 0, "asc" ]],
             'destroy': true, // reloads the table after update
             'data': aaData,
@@ -293,8 +280,8 @@ function doBuildDataTable(aaData) {
                     'class': 'details-control',
                     'defaultContent': ''
                 },
-                { 'data': 'category_name' },
-                { 'data': 'qty' },
+                { 'data': 'first_name' },
+//                { 'data': 'qty' },
                 { 'data': 'updatebtncol' },
                 { 'data': 'deletebtncol' }
             ]
@@ -307,17 +294,17 @@ function fnFormatDetails( data ) {
     
     var retval;
     
-    if( data.book_list.length === 0 )
-        return '<p>No books added!</p>';
-
-    retval = '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">';
-    for(var i = 0; i < data.book_list.length; i++) {
-        retval +=   '<tr>'+
-                        '<td><ul><li>' + data.book_list[i] +
-                        '</li></ul></td>'+
-                    '</tr>';
-    }
-    retval += '</table>';
+//    if( data.book_list.length === 0 )
+//        return '<p>No books added!</p>';
+//
+//    retval = '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">';
+//    for(var i = 0; i < data.book_list.length; i++) {
+//        retval +=   '<tr>'+
+//                        '<td><ul><li>' + data.book_list[i] +
+//                        '</li></ul></td>'+
+//                    '</tr>';
+//    }
+//    retval += '</table>';
     
     return retval;
 }
