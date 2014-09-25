@@ -6,37 +6,37 @@ $( document ).ready(function() {
     function setEventHandlers() {
         
         // hide CRUD respnse
-        $('#ajax_add_category_response_success').hide();
-        $('#ajax_add_category_response_error').hide();
+        $('#ajax_add_customer_response_success').hide();
+        $('#ajax_add_customer_response_error').hide();
         
-        $('#ajax_update_category_response_success').hide();
-        $('#ajax_update_category_response_error').hide();
+        $('#ajax_update_customer_response_success').hide();
+        $('#ajax_update_customer_response_error').hide();
         
-        $('#ajax_delete_category_response_success').hide();
-        $('#ajax_delete_category_response_error').hide();
+        $('#ajax_delete_customer_response_success').hide();
+        $('#ajax_delete_customer_response_error').hide();
         
-        // update category table
-        getCategory();
+        // update customer table
+        getCustomer();
     }
     
     setEventHandlers();
         
     /**
-     * The event handler for submit button - add category.
-     * It triggers a ajax POST call to api/v1/category
-     * It will submit a category entry to a Serendipity database 
+     * The event handler for submit button - add customer.
+     * It triggers a ajax POST call to api/v1/customer
+     * It will submit a customer entry to a Serendipity database 
      */
-    var $add_category_form = $('#add_category_form');
-    $('#submit_add_category').click(function(e){
+    var $add_customer_form = $('#add_customer_form');
+    $('#submit_add_customer').click(function(e){
         
         e.preventDefault(); // cancel form submit
         
-        var jsObj = $add_category_form.serializeObject();
+        var jsObj = $add_customer_form.serializeObject();
         var ajaxObj = {};
         
         ajaxObj = {
                     type: "POST",
-                    url: "http://localhost:8080/book_shop/api/v1/category/",
+                    url: "http://localhost:8080/book_shop/api/v1/customer/",
                     data: JSON.stringify(jsObj),
                     contentType: "application/json",
                     error: function(jqXHR, textStatus, errorThrown) {
@@ -44,15 +44,15 @@ $( document ).ready(function() {
                     },
                     success: function(data) {
                         if(data[0].HTTP_CODE == 200) {
-                            $('#ajax_add_category_response_success').css({ 'width': '50%', 'margin': '0 auto' }).show().html( '<strong>Well Done!</strong> ' + data[0].MSG ).delay(5000).fadeOut();
-                            $('input#category_title').val('');  // clear the text field, after category is added
+                            $('#ajax_add_customer_response_success').css({ 'width': '50%', 'margin': '0 auto' }).show().html( '<strong>Well Done!</strong> ' + data[0].MSG ).delay(5000).fadeOut();
+                            $('input#customer_title').val('');  // clear the text field, after customer is added
                         } else {
-                            $('#ajax_add_category_response_error').css({ 'width': '50%', 'margin': '0 auto' }).show().html( '<strong>Oh snap!</strong> ' + data[0].MSG ).delay(5000).fadeOut();
+                            $('#ajax_add_customer_response_error').css({ 'width': '50%', 'margin': '0 auto' }).show().html( '<strong>Oh snap!</strong> ' + data[0].MSG ).delay(5000).fadeOut();
                         }
                     },
                     complete: function(XMLHttpRequest) {
                         //console.log(XMLHttpRequest.getAllResponseHeaders());
-                        getCategory();
+                        getCustomer();
                     },
                     dataType: "json" // request json
         };
@@ -61,9 +61,9 @@ $( document ).ready(function() {
     });
      
      /**
-     * The event handler for submit button - update category.
-     * It triggers a ajax PUT call to api/v1/category
-     * It will submit a category entry update to a Serendipity database 
+     * The event handler for submit button - update customer.
+     * It triggers a ajax PUT call to api/v1/customer
+     * It will submit a customer entry update to a Serendipity database 
      */
     var $update_category_form = $('#update_category_form');
     
@@ -113,7 +113,7 @@ $( document ).ready(function() {
     });
     
 //    Initialize the table and child rows
-    $('#category-list-table tbody').on('click', 'td.details-control', function () {
+    $('#customer-list-table tbody').on('click', 'td.details-control', function () {
         var tr = $(this).closest('tr');
         var row = oTable.row( tr );
  
@@ -131,7 +131,7 @@ $( document ).ready(function() {
 });
 
 /**
- * Update category names from the backend using ajax call and json response.
+ * Update customer names from the backend using ajax call and json response.
  * 
  * @param {type} obj
  * @returns {jqXHR}
