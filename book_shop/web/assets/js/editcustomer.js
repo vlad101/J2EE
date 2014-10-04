@@ -96,17 +96,18 @@ $( document ).ready(function() {
      * It will submit a category entry update to a Serendipity database 
      */
     
-    $(document.body).on('click', '#category_delete_button', function(e) {
+    $(document.body).on('click', '#customer_delete_button', function(e) {
         var $this = $(this);
-        var category_id = $this.val();
-        var obj = {category_id : category_id};
+        var customer_id = $this.val();
+        var obj = {customer_id : customer_id};
         
         // get the name for the alert box
         var $tr = $this.closest('tr');
-        var category_name = $tr.find('.container_category_name').text();
-        bootbox.confirm("Are you sure you want to delete " + '"' + category_name + '"'  + " category?", function(result) {
+        var customer_name = $tr.find('.container_first_name').text();
+        customer_name += " " + $tr.find('.container_last_name').text();
+        bootbox.confirm("Are you sure you want to delete customer " + customer_name, function(result) {
             if(result)
-                deleteCategory(obj);
+                deleteCustomer(obj);
             else 
                 return;
         });
@@ -171,11 +172,11 @@ function updateCategory(obj) {
  * @param {type} obj
  * @returns {jqXHR}
  */
-function deleteCategory(obj) {
+function deleteCustomer(obj) {
     
     ajaxObj = {
                 type: "DELETE",
-                url: "http://localhost:8080/book_shop/api/v1/category/",
+                url: "http://localhost:8080/book_shop/api/v1/customer/",
                 data: JSON.stringify(obj),
                 contentType: "application/json",
                 error: function(jqXHR, textStatus, errorThrown) {
@@ -183,9 +184,9 @@ function deleteCategory(obj) {
                 },                    
                 success: function(data) {
                     if(data[0].HTTP_CODE == 200) {
-                        $('#ajax_delete_category_response_success').css({ 'width': '50%', 'margin': '0 auto' }).show().html( '<strong>Well Done!</strong> ' + data[0].MSG ).delay(5000).fadeOut();
+                        $('#ajax_delete_customer_response_success').css({ 'width': '50%', 'margin': '0 auto' }).show().html( '<strong>Well Done!</strong> ' + data[0].MSG ).delay(5000).fadeOut();
                     } else {
-                        $('#ajax_delete_category_response_error').css({ 'width': '50%', 'margin': '0 auto' }).show().html( '<strong>Oh snap!</strong> ' + data[0].MSG ).delay(5000).fadeOut();
+                        $('#ajax_delete_customer_response_error').css({ 'width': '50%', 'margin': '0 auto' }).show().html( '<strong>Oh snap!</strong> ' + data[0].MSG ).delay(5000).fadeOut();
                     }
                 },
                 complete: function(XMLHttpRequest) {

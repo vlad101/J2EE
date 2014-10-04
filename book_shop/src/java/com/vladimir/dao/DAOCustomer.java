@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 import org.codehaus.jettison.json.JSONArray;
 
 /**
- * Business logic for the category data - Category table in the database.
+ * Business logic for the customer data - Customer table in the database.
  * 
  * @author Vladimir
  */
@@ -30,7 +30,7 @@ public class DAOCustomer {
     }
     
     /**
-     * The method will allow you to add category to the database.
+     * The method will allow you to add customer to the database.
      * 
      * @param categoryName
      * @return HTTP status
@@ -113,22 +113,22 @@ public class DAOCustomer {
     }
     
     /**
-     * This method will allow you to delete data in the category table.
+     * This method will allow you to delete data in the customer table.
      * Consider storing data in the temporary table and not to delete completely.
      * 
-     * @param categoryId
+     * @param customerId
      * @return HTTP status
      */
-    public int deleteCategory(int categoryId) {
+    public int deleteCustomer(int customerId) {
          
-        String sql = "DELETE FROM category WHERE category_id=?;";
+        String sql = "DELETE FROM customer WHERE customer_id=?;";
         
         try {
         
             conn = db.getConnection();
             conn.setAutoCommit(false);
             preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setInt(1, categoryId);
+            preparedStatement.setInt(1, customerId);
             preparedStatement.executeUpdate();
             conn.commit();
             
@@ -139,11 +139,11 @@ public class DAOCustomer {
             conn = null;
             
         } catch (SQLException ex) {
-            Logger.getLogger(DAOCategory.class.getName()).log(Level.SEVERE, "Coud not delete category.", ex);
+            Logger.getLogger(DAOCustomer.class.getName()).log(Level.SEVERE, "Coud not delete customer.", ex);
             try {
                 conn.rollback();
             } catch (SQLException ex1) {
-                Logger.getLogger(DAOCategory.class.getName()).log(Level.SEVERE, null, ex1);
+                Logger.getLogger(DAOCustomer.class.getName()).log(Level.SEVERE, null, ex1);
                 return 500;
             }
             return 500;
@@ -283,7 +283,7 @@ public class DAOCustomer {
         
         JSONArray customerJsonArray = new JSONArray();
         
-        String sql = "SELECT customer_id, first_name, last_name, email, phone, address, city, state, zipcode, cc_number FROM customer;"; // do not use * for production code
+        String sql = "SELECT * FROM customer;"; // do not use * for production code
         
         try {
         

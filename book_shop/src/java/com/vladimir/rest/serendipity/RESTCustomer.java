@@ -469,46 +469,46 @@ public class RESTCustomer {
     }
     
     /**
-     * This method will allow you to delete data in the book table.
+     * This method will allow you to delete data in the customer table.
      * In this example we are using both PathParams and the message body (payload).
      */
     @DELETE
     @Consumes({MediaType.APPLICATION_FORM_URLENCODED,MediaType.APPLICATION_JSON})
     @Produces(MediaType.APPLICATION_JSON)
-    public Response deleteBook(String bookInfo) throws Exception {
+    public Response deleteCustomer(String customerInfo) throws Exception {
         
-        String bookId;
-        DAOBook daoBook = new DAOBook();
+        String customerId;
+        DAOCustomer daoCustomer = new DAOCustomer();
         String returnString;
         JSONArray jsonArray = new JSONArray();
         JSONObject jsonObject = new JSONObject();
 
         try {
             
-            JSONObject partsData = new JSONObject(bookInfo);
-            bookId = partsData.optString("book_id");
+            JSONObject partsData = new JSONObject(customerInfo);
+            customerId = partsData.optString("customer_id");
             
-            int deleteBookId;
+            int deleteCustomerId;
             try {
-                deleteBookId = Integer.parseInt(bookId);
+                deleteCustomerId = Integer.parseInt(customerId);
             } catch (NumberFormatException e) {
                 jsonObject.put("HTTP_CODE", "500");
-                jsonObject.put("MSG", "Book id is not valid!");
+                jsonObject.put("MSG", "Customer id is not valid!");
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
             }
             
-            int http_code = daoBook.deleteBook(deleteBookId);
+            int http_code = daoCustomer.deleteCustomer(deleteCustomerId);
             
             if(http_code == 200) {
                 
                 jsonObject.put("HTTP_CODE", "200");
-                jsonObject.put("MSG", "Book has been deleted successfully!");
+                jsonObject.put("MSG", "Customer has been deleted successfully!");
                 returnString = jsonArray.put(jsonObject).toString();
                 
             } else {
                 //return Response.status(500).entity("Unable to process add book").build();
                 jsonObject.put("HTTP_CODE", "500");
-                jsonObject.put("MSG", "Book was not deleted!");
+                jsonObject.put("MSG", "Customer was not deleted!");
                 returnString = jsonArray.put(jsonObject).toString();
             }
             
