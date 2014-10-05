@@ -79,23 +79,53 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title" id="modalLabel">Customer Edit</h4>
+            <h4 class="modal-title" id="modalLabel">Customer Edit Info</h4>
           </div>
           <div class="modal-body">
-              <h5>Edit customer:</h5><br/>
+              
+            <!-- update customer error -->
+            <div id="ajax_update_customer_response_error" class="alert alert-danger"></div>
+              
             <form id="update_customer_form" method="post" action="#">
-                Category   <input type="text" value="" name="category_name">
-                         <input type="hidden" value="" name="category_id">
+                <div id="customer_first_name_update">
+                    <label>First Name</label>
+                    <input type="text" value="" name="customer_first_name_update">
+                </div><br>
+                <div id="customer_last_name_update">
+                    <label>Last Name</label>
+                    <input type="text" value="" name="customer_last_name_update">
+                </div><br>
+                <div id="customer_email_update">
+                    <label>Email</label>
+                    <input type="text" value="" name="customer_email_update">
+                </div><br>
+                <div id="book_category_name_modal_update">
+                    <label>Category</label>
+                    <input type="text" value="" name="book_category_name_update" id="book_category_name_update" >
+                </div><br>
+                <div id="book_price_update">
+                    <label>Price</label>
+                    <input type="text" value="" name="book_price_update">
+                </div><br>
+                <div id="book_description_update">
+                    <label>Description</label>
+                    <input type="text" value="" name="book_description_update">
+                </div><br>
+                <div id="book_last_update_update">
+                    <label>Last Update</label>
+                    <input type="text" value="" name="book_last_update" readonly>
+                </div>
+                    <input type="hidden" value="" name="book_id_update">
+                         
             </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" id="update_customer_form_submit">Save changes</button>
+            <button type="button" class="btn btn-primary" id="update_book_form_submit">Save changes</button>
           </div>
         </div>
       </div>
     </div>
-
 
 </div>
             
