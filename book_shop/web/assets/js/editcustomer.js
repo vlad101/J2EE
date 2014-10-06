@@ -65,16 +65,34 @@ $( document ).ready(function() {
      * It triggers a ajax PUT call to api/v1/customer
      * It will submit a customer entry update to a Serendipity database 
      */
-    var $update_category_form = $('#update_category_form');
+    var $update_category_form = $('#update_customer_form');
     
-    $(document.body).on('click', '#category_update_button', function(e) {
+    $(document.body).on('click', '#customer_update_button', function(e) {
         var $this = $(this);
-        var category_id = $this.val();
         var $tr = $this.closest('tr');
-        var category_name = $tr.find('.container_category_name').text();
+        var row = oTable.row( $tr );
         
-        $('input[name="category_id"]').val(category_id);
-        $('input[name="category_name"]').val(category_name);
+        var customer_id = row.data().customer_id;
+        var customer_first_name = row.data().first_name;
+        var customer_last_name = row.data().last_name;
+        var customer_email = row.data().email;
+        var customer_phone = row.data().phone;
+        var customer_address = row.data().address;
+        var customer_city = row.data().city;
+        var customer_state = row.data().state;
+        var customer_zipcode = row.data().zipcode;
+        var customer_cc_number = row.data().cc_number;
+                
+        $('#update-customer-modal input[name="customer_id_update"]').val(customer_id);
+        $('#update-customer-modal input[name="customer_first_name_update"]').val(customer_first_name);
+        $('#update-customer-modal input[name="customer_last_name_update"]').val(customer_last_name);
+        $('#update-customer-modal input[name="customer_email_update"]').val(customer_email);
+        $('#update-customer-modal input[name="customer_phone_update"]').val(customer_phone);
+        $('#update-customer-modal input[name="customer_address_update"]').val(customer_address);
+        $('#update-customer-modal input[name="customer_city_update"]').val(customer_city);
+        $('#update-customer-modal input[name="customer_state_update"]').val(customer_state);
+        $('#update-customer-modal input[name="customer_zipcode_update"]').val(customer_zipcode);
+        $('#update-customer-modal input[name="customer_cc_number_update"]').val(customer_cc_number);
     });
     
     $('#update_category_form_submit').click(function(e) {
@@ -98,13 +116,15 @@ $( document ).ready(function() {
     
     $(document.body).on('click', '#customer_delete_button', function(e) {
         var $this = $(this);
-        var customer_id = $this.val();
+        var $tr = $this.closest('tr');
+        var row = oTable.row( $tr );
+        var customer_id = row.data().customer_id;
+        
         var obj = {customer_id : customer_id};
         
         // get the name for the alert box
-        var $tr = $this.closest('tr');
-        var customer_name = $tr.find('.container_first_name').text();
-        customer_name += " " + $tr.find('.container_last_name').text();
+        var customer_name = row.data().first_name;
+        customer_name += " " + row.data().last_name;
         bootbox.confirm("Are you sure you want to delete customer " + customer_name, function(result) {
             if(result)
                 deleteCustomer(obj);
@@ -248,15 +268,15 @@ function doGetCustomerData(customer_list) {
         
         aaData.push({
             'customer_id':      customer_list[customer].customer_id,
-            'first_name':    '<div class="container_first_name" >' + customer_list[customer].first_name + '</div>',
-            'last_name':    '<div class="container_last_name" >' + customer_list[customer].last_name + '</div>',
-            'email':    '<div class="container_last_name" >' + customer_list[customer].email + '</div>',
-            'phone':    '<div class="container_last_name" >' + customer_list[customer].phone + '</div>',
-            'address':    '<div class="container_last_name" >' + customer_list[customer].address + '</div>',
-            'city':    '<div class="container_last_name" >' + customer_list[customer].city + '</div>',
-            'state':    '<div class="container_last_name" >' + customer_list[customer].state + '</div>',
-            'zipcode':    '<div class="container_last_name" >' + customer_list[customer].zipcode + '</div>',
-            'cc_number':    '<div class="container_last_name" >' + customer_list[customer].cc_number + '</div>',
+            'first_name':       customer_list[customer].first_name,
+            'last_name':        customer_list[customer].last_name,
+            'email':            customer_list[customer].email,
+            'phone':            customer_list[customer].phone,
+            'address':          customer_list[customer].address,
+            'city':             customer_list[customer].city,
+            'state':            customer_list[customer].state,
+            'zipcode':          customer_list[customer].zipcode,
+            'cc_number':        customer_list[customer].cc_number,
             'updatebtncol':     '<button type="button" class="btn btn-primary btn-small" data-toggle="modal" data-target="#update-customer-modal" ' + 'id="customer_update_button" value="'  + customer_list[customer].customer_id + '" >Update</button>',
             'deletebtncol':     '<button class="btn btn-danger" id="customer_delete_button" value="' + customer_list[customer].customer_id + '" type="button">Delete</button>'
         });
@@ -300,14 +320,17 @@ function fnFormatDetails( data ) {
     // `data` is the original data object for the row
     
     var retval;
+    
+    retval +=   '<tr><td><strong>Category: </strong>' + data.category_name + '</td></tr>';
+    
     retval = '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">';
-    retval += '<tr><td align="left" width="20%"><em>Credit Card:   </em></td><td align="left">' + data.cc_number + '</td></tr>';
-    retval += '<tr><td align="left" width="20%"><em>Email:   </em></td><td align="left">' + data.email + '</td></tr>';
-    retval += '<tr><td align="left" width="20%"><em>Phone:   </em></td><td align="left">' + data.phone + '</td></tr>';
-    retval += '<tr><td align="left" width="20%"><em>Address:   </em></td><td align="left">' + data.address + '</td></tr>';
-    retval += '<tr><td align="left" width="20%"><em>City:   </em></td><td align="left">' + data.city + '</td></tr>';
-    retval += '<tr><td align="left" width="20%"><em>State:   </em></td><td align="left">' + data.state + '</td></tr>';
-    retval += '<tr><td align="left" width="20%"><em>Zipcode:   </em></td><td align="left">' + data.zipcode + '</td></tr>';
+    retval += '<tr><td><strong>Credit Card: </strong>' + data.cc_number + '</td></tr>';
+    retval += '<tr><td><strong>Email: </strong>' + data.email + '</td></tr>';
+    retval += '<tr><td><strong>Phone: </strong>' + data.phone + '</td></tr>';
+    retval += '<tr><td><strong>Address: </strong>' + data.address + '</td></tr>';
+    retval += '<tr><td><strong>City: </strong>' + data.city + '</td></tr>';
+    retval += '<tr><td><strong>State: </strong>' + data.state + '</td></tr>';
+    retval += '<tr><td><strong>Zipcode: </strong>' + data.zipcode + '</td></tr>';
     retval += '</table>';
     return retval;
 }

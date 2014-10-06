@@ -95,27 +95,35 @@
                     <label>Last Name</label>
                     <input type="text" value="" name="customer_last_name_update">
                 </div><br>
+                <div id="customer_cc_number_update">
+                    <label>Credit Card Number</label>
+                    <input type="text" value="" name="customer_cc_number_update">
+                </div><br>
                 <div id="customer_email_update">
                     <label>Email</label>
                     <input type="text" value="" name="customer_email_update">
                 </div><br>
-                <div id="book_category_name_modal_update">
-                    <label>Category</label>
-                    <input type="text" value="" name="book_category_name_update" id="book_category_name_update" >
+                <div id="customer_phone_update">
+                    <label>Phone</label>
+                    <input type="text" value="" name="customer_phone_update">
                 </div><br>
-                <div id="book_price_update">
-                    <label>Price</label>
-                    <input type="text" value="" name="book_price_update">
+                <div id="customer_address_update">
+                    <label>Address</label>
+                    <input type="text" value="" name="customer_address_update">
                 </div><br>
-                <div id="book_description_update">
-                    <label>Description</label>
-                    <input type="text" value="" name="book_description_update">
+                <div id="customer_city_update">
+                    <label>City</label>
+                    <input type="text" value="" name="customer_city_update">
                 </div><br>
-                <div id="book_last_update_update">
-                    <label>Last Update</label>
-                    <input type="text" value="" name="book_last_update" readonly>
+                <div id="customer_state_update">
+                    <label>State</label>
+                    <input type="text" value="" name="customer_state_update" readonly>
+                </div><br>
+                <div id="customer_zipcode_update">
+                    <label>Zip Code</label>
+                    <input type="text" value="" name="customer_zipcode_update">
                 </div>
-                    <input type="hidden" value="" name="book_id_update">
+                    <input type="hidden" value="" name="customer_id_update">
                          
             </form>
           </div>
