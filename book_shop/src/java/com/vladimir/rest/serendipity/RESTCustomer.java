@@ -390,6 +390,11 @@ public class RESTCustomer {
     @Produces(MediaType.APPLICATION_JSON)
     public Response updateBook(String bookInfo) throws Exception {
         
+        
+        System.out.println("!!!!!!!!!! From updateCustomer !!!!!!!!!!");
+        System.out.println("!!!!!!!!!! From updateCustomer !!!!!!!!!!");
+        System.out.println("!!!!!!!!!! From updateCustomer !!!!!!!!!!");
+        
         Book book;
         DAOBook daoBook = new DAOBook();
         

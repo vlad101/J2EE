@@ -65,7 +65,7 @@ $( document ).ready(function() {
      * It triggers a ajax PUT call to api/v1/customer
      * It will submit a customer entry update to a Serendipity database 
      */
-    var $update_category_form = $('#update_customer_form');
+    var $update_customer_form = $('#update_customer_form');
     
     $(document.body).on('click', '#customer_update_button', function(e) {
         var $this = $(this);
@@ -95,16 +95,16 @@ $( document ).ready(function() {
         $('#update-customer-modal input[name="customer_cc_number_update"]').val(customer_cc_number);
     });
     
-    $('#update_category_form_submit').click(function(e) {
+    $('#update_customer_form_submit').click(function(e) {
         
-        $($update_category_form).submit(function(){
+        $($update_customer_form).submit(function(){
             e.preventDefault(); // cancel form submit
         }); // submit form
        
-        var obj = $update_category_form.serializeObject();
-        updateCategory(obj);
+        var obj = $update_customer_form.serializeObject();
+        updateCustomer(obj);
 
-        $('#update-category-modal').modal('hide');
+        $('#update-customer-modal').modal('hide');
     });
     
     
@@ -157,12 +157,12 @@ $( document ).ready(function() {
  * @param {type} obj
  * @returns {jqXHR}
  */
-function updateCategory(obj) {
+function updateCustomer(obj) {
     
     ajaxObj = {
         
                 type: "PUT",
-                url: "http://localhost:8080/book_shop/api/v1/category/",
+                url: "http://localhost:8080/book_shop/api/v1/customer/",
                 data: JSON.stringify(obj),
                 contentType: "application/json",
                 error: function(jqXHR, textStatus, errorThrown) {
@@ -170,9 +170,9 @@ function updateCategory(obj) {
                 },                    
                 success: function(data) {
                     if(data[0].HTTP_CODE == 200) {
-                        $('#ajax_update_category_response_success').css({ 'width': '50%', 'margin': '0 auto' }).show().html( '<strong>Well Done!</strong> ' + data[0].MSG ).delay(5000).fadeOut();
+                        $('#ajax_update_customer_response_success').css({ 'width': '50%', 'margin': '0 auto' }).show().html( '<strong>Well Done!</strong> ' + data[0].MSG ).delay(5000).fadeOut();
                     } else {
-                        $('#ajax_update_category_response_error').css({ 'width': '50%', 'margin': '0 auto' }).show().html( '<strong>Oh snap!</strong> ' + data[0].MSG ).delay(5000).fadeOut();
+                        $('#ajax_update_customer_response_error').css({ 'width': '50%', 'margin': '0 auto' }).show().html( '<strong>Oh snap!</strong> ' + data[0].MSG ).delay(5000).fadeOut();
                     }
                 },
                 complete: function(XMLHttpRequest) {
