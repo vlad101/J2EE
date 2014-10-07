@@ -14,12 +14,12 @@ public class Customer {
     private String address;
     private String city;
     private String state;
-    private String zipCode;
-    private String ccNumber;
+    private long zipCode;
+    private long ccNumber;
     
     public Customer(int customerId, String firstName, String lastName,
                         String email, String phone, String address, String city,
-                        String state, String zipCode, String ccNumber) {
+                        String state, long zipCode, long ccNumber) {
     
         this.customerId = customerId;
         this.firstName = firstName;
@@ -98,19 +98,19 @@ public class Customer {
         this.state = state;
     }
 
-    public String getZipCode() {
+    public long getZipCode() {
         return zipCode;
     }
 
-    public void setZipCode(String zipCode) {
+    public void setZipCode(long zipCode) {
         this.zipCode = zipCode;
     }
 
-    public String getCcNumber() {
+    public long getCcNumber() {
         return ccNumber;
     }
 
-    public void setCcNumber(String ccNumber) {
+    public void setCcNumber(long ccNumber) {
         this.ccNumber = ccNumber;
     }
 

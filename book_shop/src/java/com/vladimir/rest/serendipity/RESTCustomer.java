@@ -4,6 +4,7 @@ import com.vladimir.dao.DAOBook;
 import com.vladimir.dao.DAOCategory;
 import com.vladimir.dao.DAOCustomer;
 import com.vladimir.model.Book;
+import com.vladimir.model.Customer;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -188,62 +189,7 @@ import org.codehaus.jettison.json.JSONObject;
 //                
 //        return Response.ok(returnString).build();
 //    }
-//    
-//    /**
-//     * This method will allow you to delete data in the category table.
-//     * In this example we are using both PathParams and the message body (payload).
-//     */
-//    @DELETE
-//    @Consumes({MediaType.APPLICATION_FORM_URLENCODED,MediaType.APPLICATION_JSON})
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public Response deleteCategory(String categoryInfo) throws Exception {
-//        
-//        String categoryId;
-//        DAOCategory daoCategory = new DAOCategory();
-//        String returnString;
-//        JSONArray jsonArray = new JSONArray();
-//        JSONObject jsonObject = new JSONObject();
-//
-//        try {
-//            
-//            JSONObject partsData = new JSONObject(categoryInfo);
-//            categoryId = partsData.optString("category_id");
-//            
-//            int catId;
-//            try {
-//                catId = Integer.parseInt(categoryId);
-//            } catch (NumberFormatException e) {
-//                jsonObject.put("HTTP_CODE", "500");
-//                jsonObject.put("MSG", "Category id is not valid!");
-//                return Response.ok(jsonArray.put(jsonObject).toString()).build();
-//            }
-//            
-//            int http_code = daoCategory.deleteCategory(catId);
-//            
-//            if(http_code == 200) {
-//                
-//                jsonObject.put("HTTP_CODE", "200");
-//                jsonObject.put("MSG", "Category has been deleted successfully!");
-//                returnString = jsonArray.put(jsonObject).toString();
-//                
-//            } else {
-//                //return Response.status(500).entity("Unable to process add category").build();
-//                jsonObject.put("HTTP_CODE", "500");
-//                jsonObject.put("MSG", "Category was not deleted!");
-//                returnString = jsonArray.put(jsonObject).toString();
-//            }
-//            
-//        } catch (Exception e) {
-//            //return Response.status(500).entity("Server unable to process request.").build();
-//            jsonObject.put("HTTP_CODE", "500");
-//            jsonObject.put("MSG", "Server unable to process delete request!");
-//            returnString = jsonArray.put(jsonObject).toString();
-//        }
-//                
-//        return Response.ok(returnString).build();
-//    }  
-//}
-//
+
 
 @Path("/v1/customer")
 public class RESTCustomer {
@@ -382,23 +328,16 @@ public class RESTCustomer {
     }
     
     /**
-     * This method will allow you to update data in the book table.
+     * This method will allow you to update data in the customer table.
      * In this example we are using both PathParams and the message body (payload).
      */
     @PUT
     @Consumes({MediaType.APPLICATION_FORM_URLENCODED,MediaType.APPLICATION_JSON})
     @Produces(MediaType.APPLICATION_JSON)
-    public Response updateBook(String bookInfo) throws Exception {
+    public Response updateCustomer(String customerInfo) throws Exception {
         
-        
-        System.out.println("!!!!!!!!!! From updateCustomer !!!!!!!!!!");
-        System.out.println("!!!!!!!!!! From updateCustomer !!!!!!!!!!");
-        System.out.println("!!!!!!!!!! From updateCustomer !!!!!!!!!!");
-        
-        Book book;
-        DAOBook daoBook = new DAOBook();
-        
-        DAOCategory daoCategory = new DAOCategory();
+        Customer customer;
+        DAOCustomer daoCustomer = new DAOCustomer();
         
         String returnString;
         
@@ -407,59 +346,93 @@ public class RESTCustomer {
 
         try {
             
-            JSONObject partsData = new JSONObject(bookInfo);
-            String bookId = partsData.optString("book_id_update");
-            String bookTitle = partsData.optString("book_title_update");
-            String bookAuthor = partsData.optString("book_author_update");
-            String bookQuantity = partsData.optString("book_quantity_update");
-            String bookPrice = partsData.optString("book_price_update");
-            String bookDescription = partsData.optString("book_description_update");
-            String bookCategoryName = partsData.optString("book_category_name_update"); 
-            
-            int updateBookId;
-            double updateBookPrice;
-            int updateBookCategoryId;
-            int updateBookQuantity;
+            JSONObject partsData = new JSONObject(customerInfo);
+            String customerId = partsData.optString("customer_id_update");
+            String customerFirstName = partsData.optString("customer_first_name_update");
+            String customerLastName = partsData.optString("customer_last_name_update");
+            String customerEmail = partsData.optString("customer_email_update");
+            String customerPhone = partsData.optString("customer_phone_update");
+            String customerAddress = partsData.optString("customer_address_update");
+            String customerCity = partsData.optString("customer_city_update");
+            String customerState = partsData.optString("customer_state_update");
+            String customerZipcode = partsData.optString("customer_zipcode_update");
+            String customerCcNumber = partsData.optString("customer_cc_number_update");
 
 //            validate text values
-            if(bookTitle == null || bookTitle.length() == 0 || 
-                    bookAuthor == null || bookAuthor.length() == 0 || 
-                    bookCategoryName.length() == 0 || bookCategoryName == null) {
+            if(customerFirstName == null || customerFirstName.length() == 0) {
                 jsonObject.put("HTTP_CODE", "500");
-                jsonObject.put("MSG", "Enter a valid book info!");
+                jsonObject.put("MSG", "Enter a valid customer first name!");
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
             }
             
+            if(customerLastName == null || customerLastName.length() == 0) {
+                jsonObject.put("HTTP_CODE", "500");
+                jsonObject.put("MSG", "Enter a valid customer last name!");
+                return Response.ok(jsonArray.put(jsonObject).toString()).build();
+            }
+             
+            if(customerEmail == null || customerEmail.length() == 0) {
+                jsonObject.put("HTTP_CODE", "500");
+                jsonObject.put("MSG", "Enter a valid customer email!");
+                return Response.ok(jsonArray.put(jsonObject).toString()).build();
+            }
+ 
+            if(customerPhone == null || customerPhone.length() == 0) {
+                jsonObject.put("HTTP_CODE", "500");
+                jsonObject.put("MSG", "Enter a valid customer phone!");
+                return Response.ok(jsonArray.put(jsonObject).toString()).build();
+            } 
+             
+            if(customerAddress == null || customerAddress.length() == 0) {
+                jsonObject.put("HTTP_CODE", "500");
+                jsonObject.put("MSG", "Enter a valid customer address!");
+                return Response.ok(jsonArray.put(jsonObject).toString()).build();
+            } 
+            
+            if(customerCity == null || customerCity.length() == 0) {
+                jsonObject.put("HTTP_CODE", "500");
+                jsonObject.put("MSG", "Enter a valid customer city!");
+                return Response.ok(jsonArray.put(jsonObject).toString()).build();
+            } 
+            
+            if(customerState == null || customerState.length() == 0) {
+                jsonObject.put("HTTP_CODE", "500");
+                jsonObject.put("MSG", "Enter a valid customer state!");
+                return Response.ok(jsonArray.put(jsonObject).toString()).build();
+            }
+//            System.out.println(customerZipcode);
+             
+             
 //            validate number values
+            int updateCustomerId;
+            long updateCustomerCcNumber;
+            long updateCustomerZipcode;
+            
             try {
-                updateBookId = Integer.parseInt(bookId);
-                updateBookPrice = Double.parseDouble(bookPrice);                
-                updateBookCategoryId = daoCategory.getCategoryIdByName(bookCategoryName);
-                
-                if(updateBookCategoryId == -1)
-                    daoCategory.addCategory(bookCategoryName);
-                    
-                updateBookQuantity = Integer.parseInt(bookQuantity);
-                
+                updateCustomerId = Integer.parseInt(customerId);
+                updateCustomerCcNumber = Long.parseLong(customerCcNumber);
+                updateCustomerZipcode = Long.parseLong(customerZipcode);
             } catch (NumberFormatException e) {
                 jsonObject.put("HTTP_CODE", "500");
                 jsonObject.put("MSG", "Enter a valid number values!");
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
             }
-                        
-            book = new Book(updateBookId, bookTitle, bookAuthor, updateBookQuantity, updateBookPrice, bookDescription, null, updateBookCategoryId);
-            int http_code = daoBook.updateBook(book);
+   
+            customer = new Customer(updateCustomerId,customerFirstName,
+                    customerLastName,customerEmail,customerPhone,customerAddress,
+                    customerCity,customerState,updateCustomerZipcode,updateCustomerCcNumber);
+            int http_code = daoCustomer.updateCustomer(customer);
             
             if(http_code == 200) {
                 
                 jsonObject.put("HTTP_CODE", "200");
-                jsonObject.put("MSG", "Book has been updated successfully!");
+                jsonObject.put("MSG", "Customer has been updated successfully!");
                 returnString = jsonArray.put(jsonObject).toString();
                 
             } else {
-                //return Response.status(500).entity("Unable to process add book").build();
+                //return Response.status(500).entity("Unable to process add customer").build();
                 jsonObject.put("HTTP_CODE", "500");
-                jsonObject.put("MSG", "Book was not updated!");
+                jsonObject.put("MSG", "Customer was not updated!");
                 returnString = jsonArray.put(jsonObject).toString();
             }
             

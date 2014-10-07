@@ -1,6 +1,7 @@
 package com.vladimir.dao;
 
 import com.vladimir.model.Category;
+import com.vladimir.model.Customer;
 import com.vladimir.util.DbUtil;
 import com.vladimir.util.ToJSON;
 import java.sql.Connection;
@@ -71,22 +72,29 @@ public class DAOCustomer {
     }
     
     /**
-     * This method will allow you to update category data.
+     * This method will allow you to update customer data.
      * 
-     * @param category
+     * @param customer
      * @return HTTP status
      */
-    public int updateCategory(Category category) {
-                
-        String sql = "UPDATE category SET category_name=? WHERE category_id=?;";
+    public int updateCustomer(Customer customer) {
+
+        String sql = "UPDATE customer SET first_name=?,last_name=?,email=?,phone=?,address=?,city=?,state=?,zipcode=?,cc_number=? WHERE customer_id=?;";
         
         try {
-        
             conn = db.getConnection();
             conn.setAutoCommit(false);
             preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setString(1, category.getCategoryName());
-            preparedStatement.setInt(2, category.getCategoryId());
+            preparedStatement.setString(1, customer.getFirstName());
+            preparedStatement.setString(2, customer.getLastName());
+            preparedStatement.setString(3, customer.getEmail());
+            preparedStatement.setString(4, customer.getPhone());
+            preparedStatement.setString(5, customer.getAddress());
+            preparedStatement.setString(6, customer.getCity());
+            preparedStatement.setString(7, customer.getState());
+            preparedStatement.setLong(8, customer.getZipCode());
+            preparedStatement.setLong(9, customer.getCcNumber());
+            preparedStatement.setInt(10, customer.getCustomerId());
             preparedStatement.executeUpdate();
             conn.commit();
             
@@ -97,11 +105,11 @@ public class DAOCustomer {
             conn = null;
             
         } catch (SQLException e) {
-            Logger.getLogger(DAOCategory.class.getName()).log(Level.SEVERE, "Could not update category.", e);
+            Logger.getLogger(DAOCategory.class.getName()).log(Level.SEVERE, "Could not update customer.", e);
             try {
                 conn.rollback();
             } catch (SQLException ex) {
-                Logger.getLogger(DAOCategory.class.getName()).log(Level.SEVERE, "Coud not update category.", ex);
+                Logger.getLogger(DAOCategory.class.getName()).log(Level.SEVERE, "Coud not update customer.", ex);
                 return 500;
             }
             return 500;
