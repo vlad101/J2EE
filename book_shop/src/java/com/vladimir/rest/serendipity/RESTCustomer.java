@@ -414,7 +414,7 @@ public class RESTCustomer {
                 updateCustomerZipcode = Long.parseLong(customerZipcode);
             } catch (NumberFormatException e) {
                 jsonObject.put("HTTP_CODE", "500");
-                jsonObject.put("MSG", "Enter a valid number values!");
+                jsonObject.put("MSG", "Enter valid number values!");
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
             }
    

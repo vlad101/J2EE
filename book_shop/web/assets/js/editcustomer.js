@@ -103,8 +103,6 @@ $( document ).ready(function() {
        
         var obj = $update_customer_form.serializeObject();
         updateCustomer(obj);
-
-        $('#update-customer-modal').modal('hide');
     });
     
     
@@ -170,6 +168,7 @@ function updateCustomer(obj) {
                 },                    
                 success: function(data) {
                     if(data[0].HTTP_CODE == 200) {
+                        $('#update-customer-modal').modal('hide');
                         $('#ajax_update_customer_response_success').css({ 'width': '50%', 'margin': '0 auto' }).show().html( '<strong>Well Done!</strong> ' + data[0].MSG ).delay(5000).fadeOut();
                     } else {
                         $('#ajax_update_customer_response_error').css({ 'width': '50%', 'margin': '0 auto' }).show().html( '<strong>Oh snap!</strong> ' + data[0].MSG ).delay(5000).fadeOut();

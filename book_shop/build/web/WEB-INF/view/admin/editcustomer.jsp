@@ -40,7 +40,6 @@
     
     <!-- Update customer -->
     <div id="ajax_update_customer_response_success" class="alert alert-success"></div>
-    <div id="ajax_update_customer_response_error" class="alert alert-danger"></div>
     
     <!-- Delete customer -->
     <div id="ajax_delete_customer_response_success" class="alert alert-success"></div>
@@ -84,7 +83,7 @@
           <div class="modal-body">
               
             <!-- update customer error -->
-            <div id="ajax_update_customer_response_error" class="alert alert-danger"></div>
+            <div id="ajax_update_customer_response_error" class="alert alert-danger"></div><br>
               
             <form id="update_customer_form" method="post" action="#">
                 <div id="customer_first_name_update">
