@@ -29,21 +29,21 @@ table {
     background-color: white;
 }
 
-#update-customer-modal .modal-dialog {
+#update-customer-modal .modal-dialog, #add-customer-modal .modal-dialog {
     border: 1px solid black;
     border-radius: 2%;
     width: 40%;
 }
 
-#update-customer-modal .modal-header {
+#update-customer-modal .modal-header, #add-customer-modal .modal-header {
     background-color: #D3D3D3;
 }
 
-#update-customer-modal .modal-body h5 {
+#update-customer-modal .modal-body h5, #add-customer-modal .modal-body h5 {
     text-align: center;
 }
 
-#update-customer-modal .modal-body {
+#update-customer-modal .modal-body, #add-customer-modal .modal-body {
     border-top: 1px black solid;
 }
 
