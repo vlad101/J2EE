@@ -27,7 +27,7 @@ $( document ).ready(function() {
      * It will submit a customer entry to a Serendipity database 
      */
     var $add_customer_form = $('#add_customer_form');
-    $('#submit_add_customer').click(function(e){
+    $('#add_customer_form_submit').click(function(e){
         
         e.preventDefault(); // cancel form submit
         
@@ -44,10 +44,21 @@ $( document ).ready(function() {
                     },
                     success: function(data) {
                         if(data[0].HTTP_CODE == 200) {
-                            $('#ajax_add_customer_response_success').css({ 'width': '50%', 'margin': '0 auto' }).show().html( '<strong>Well Done!</strong> ' + data[0].MSG ).delay(5000).fadeOut();
-                            $('input#customer_title').val('');  // clear the text field, after customer is added
+                            $('#ajax_add_customer_response_success').css({ 'width': '50%', 'margin': '0 auto' }).show().html( '<strong>Well Done!</strong> ' + data[0].MSG ).delay(10000).fadeOut();
+                            
+//                      clear the text field, after customer is added
+                            $('#add-customer-modal').modal('hide');
+                            $('input#customer_first_name_add').val('');
+                            $('input#customer_last_name_add').val('');
+                            $('input#customer_email_add').val('');
+                            $('input#customer_phone_add').val('');
+                            $('input#customer_address_add').val('');
+                            $('input#customer_city_add').val('');
+                            $('input#customer_state_add').val('');
+                            $('input#customer_zipcode_add').val('');
+                            $('input#customer_cc_number_add').val('');
                         } else {
-                            $('#ajax_add_customer_response_error').css({ 'width': '50%', 'margin': '0 auto' }).show().html( '<strong>Oh snap!</strong> ' + data[0].MSG ).delay(5000).fadeOut();
+                            $('#ajax_add_customer_response_error').css({ 'width': '100%', 'margin': '0 auto' }).show().html( '<strong>Oh snap!</strong> ' + data[0].MSG ).delay(10000).fadeOut();
                         }
                     },
                     complete: function(XMLHttpRequest) {
@@ -57,9 +68,9 @@ $( document ).ready(function() {
                     dataType: "json" // request json
         };
         
-        $.ajax(ajaxObj);        
+        $.ajax(ajaxObj);
     });
-     
+
      /**
      * The event handler for submit button - update customer.
      * It triggers a ajax PUT call to api/v1/customer
@@ -147,6 +158,20 @@ $( document ).ready(function() {
             tr.addClass('shown');
         }
     } );
+    
+    $(document.body).on('click', '#customer_add_button', function() {
+//        clear all text fields        
+        $('#add-customer-modal input[name="customer_id_add"]').val('');
+        $('#add-customer-modal input[name="customer_first_name_add').val('');
+        $('#add-customer-modal input[name="customer_last_name_add').val('');
+        $('#add-customer-modal input[name="customer_email_add').val('');
+        $('#add-customer-modal input[name="customer_phone_add').val('');
+        $('#add-customer-modal input[name="customer_address_add').val('');
+        $('#add-customer-modal input[name="customer_city_add').val('');
+        $('#add-customer-modal input[name="customer_state_add').val('');
+        $('#add-customer-modal input[name="customer_zipcode_add').val('');
+        $('#add-customer-modal input[name="customer_cc_number_add').val('');
+    });
 });
 
 /**
