@@ -31,7 +31,6 @@
     
     <!-- adding new customer -->
     <div id="ajax_add_customer_response_success" class="alert alert-success"></div>
-    <div id="ajax_add_customer_response_error" class="alert alert-danger"></div>
     
     <!-- Update customer -->
     <div id="ajax_update_customer_response_success" class="alert alert-success"></div>

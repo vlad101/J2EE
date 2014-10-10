@@ -162,15 +162,15 @@ $( document ).ready(function() {
     $(document.body).on('click', '#customer_add_button', function() {
 //        clear all text fields        
         $('#add-customer-modal input[name="customer_id_add"]').val('');
-        $('#add-customer-modal input[name="customer_first_name_add').val('');
-        $('#add-customer-modal input[name="customer_last_name_add').val('');
-        $('#add-customer-modal input[name="customer_email_add').val('');
-        $('#add-customer-modal input[name="customer_phone_add').val('');
-        $('#add-customer-modal input[name="customer_address_add').val('');
-        $('#add-customer-modal input[name="customer_city_add').val('');
-        $('#add-customer-modal input[name="customer_state_add').val('');
-        $('#add-customer-modal input[name="customer_zipcode_add').val('');
-        $('#add-customer-modal input[name="customer_cc_number_add').val('');
+        $('#add-customer-modal input[name="customer_first_name_add"]').val('');
+        $('#add-customer-modal input[name="customer_last_name_add"]').val('');
+        $('#add-customer-modal input[name="customer_email_add"]').val('');
+        $('#add-customer-modal input[name="customer_phone_add"]').val('');
+        $('#add-customer-modal input[name="customer_address_add"]').val('');
+        $('#add-customer-modal input[name="customer_city_add"]').val('');
+        $('#add-customer-modal input[name="customer_state_add"]').val('');
+        $('#add-customer-modal input[name="customer_zipcode_add"]').val('');
+        $('#add-customer-modal input[name="customer_cc_number_add"]').val('');
     });
 });
 

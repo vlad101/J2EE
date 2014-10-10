@@ -242,7 +242,7 @@ public class RESTCustomer {
     }
     
     /**
-     * The method creates its own HTTP response and adds Book to the database
+     * The method creates its own HTTP response and adds Customer to the database
      * 
      * @return - the response with the book name
      * @throws Exception 
@@ -250,59 +250,71 @@ public class RESTCustomer {
     @POST
     @Consumes({MediaType.APPLICATION_FORM_URLENCODED,MediaType.APPLICATION_JSON}) // access both form and json data
     @Produces(MediaType.APPLICATION_JSON)
-    public Response addBook(String bookInfo) throws Exception {
+    public Response addCustomer(String customerInfo) throws Exception {
         
         String returnString;
         JSONArray jsonArray = new JSONArray();
         JSONObject jsonObject = new JSONObject();
-        DAOBook daoBook = new DAOBook();
+        DAOCustomer daoCustomer = new DAOCustomer();
          
         try {
             
-            JSONObject partsData = new JSONObject(bookInfo);
-            int addBookId = 0;
+            JSONObject partsData = new JSONObject(customerInfo);
             
-            String bookTitle = partsData.optString("book_title_add");
-            String bookAuthor = partsData.optString("book_author_add");
-            String bookQuantity = partsData.optString("book_quantity_add");
-            String bookPrice = partsData.optString("book_price_add");
-            String bookDescription = partsData.optString("book_description_add");
-            String bookCategoryName = partsData.optString("book_category_name_add");
-                        
+            String customerFirstName = partsData.optString("customer_first_name_add");
+            String customerLastName = partsData.optString("customer_last_name_add");
+            String customerEmail = partsData.optString("customer_email_add");
+            String customerPhone = partsData.optString("customer_phone_add");
+            String customerAddress = partsData.optString("customer_address_add");
+            String customerCity = partsData.optString("customer_city_add");
+            String customerState = partsData.optString("customer_state_add");
+            String customerZipCode = partsData.optString("customer_zipcode_add");            
+            String customerCcNumber = partsData.optString("customer_cc_number_add");
+            
+            System.out.println(customerFirstName);
+            System.out.println(customerLastName);
+            System.out.println(customerEmail);
+            System.out.println(customerPhone);
+            System.out.println(customerAddress);
+            System.out.println(customerCity);
+            System.out.println(customerState);
+            System.out.println(customerZipCode);
+            System.out.println(customerCcNumber);
+            
 //            validate numbers
             double addBookPrice;
             int addBookCategoryId;
             int addBookQuantity;
             
 //            validate number values
-            DAOCategory daoCategory = new DAOCategory();
             
-            try {
-                addBookPrice = Double.parseDouble(bookPrice);
-                addBookCategoryId = daoCategory.getCategoryIdByName(bookCategoryName);
-                if(addBookCategoryId == -1)
-                    daoCategory.addCategory(bookCategoryName);
-                    
-                addBookQuantity = Integer.parseInt(bookQuantity);
-                
-            } catch (NumberFormatException e) {
-                jsonObject.put("HTTP_CODE", "500");
-                jsonObject.put("MSG", "Enter valid number values!");
-                return Response.ok(jsonArray.put(jsonObject).toString()).build();
-            }
-
-//            validate title, author, and category name
-            if (bookTitle == null || bookTitle.length() == 0 || 
-                    bookAuthor == null || bookAuthor.length() == 0 ||
-                    bookCategoryName.length() == 0 || bookCategoryName == null ) {
-                jsonObject.put("HTTP_CODE", "500");
-                jsonObject.put("MSG", "Enter a valid author, title, and category!");
-                return Response.ok(jsonArray.put(jsonObject).toString()).build();
-            }            
+//            try {
+//                addBookPrice = Double.parseDouble(bookPrice);
+//                addBookCategoryId = daoCategory.getCategoryIdByName(bookCategoryName);
+//                if(addBookCategoryId == -1)
+//                    daoCategory.addCategory(bookCategoryName);
+//                    
+//                addBookQuantity = Integer.parseInt(bookQuantity);
+//                
+//            } catch (NumberFormatException e) {
+//                jsonObject.put("HTTP_CODE", "500");
+//                jsonObject.put("MSG", "Enter valid number values!");
+//                return Response.ok(jsonArray.put(jsonObject).toString()).build();
+//            }
+//
+////            validate title, author, and category name
+//            if (bookTitle == null || bookTitle.length() == 0 || 
+//                    bookAuthor == null || bookAuthor.length() == 0 ||
+//                    bookCategoryName.length() == 0 || bookCategoryName == null ) {
+//                jsonObject.put("HTTP_CODE", "500");
+//                jsonObject.put("MSG", "Enter a valid author, title, and category!");
+//                return Response.ok(jsonArray.put(jsonObject).toString()).build();
+//            }            
+//            
+//            Book book = new Book(addBookId,bookTitle, bookAuthor, addBookQuantity, addBookPrice,bookDescription, null, addBookCategoryId);
             
-            Book book = new Book(addBookId,bookTitle, bookAuthor, addBookQuantity, addBookPrice,bookDescription, null, addBookCategoryId);
-            
-            int http_code = daoBook.addBook(book);
+//            int http_code = daoCustomer.addCustomer(customer);
+            int http_code = 0;
             
             if(http_code == 200) {
                 
