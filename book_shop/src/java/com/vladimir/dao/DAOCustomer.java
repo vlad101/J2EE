@@ -36,16 +36,35 @@ public class DAOCustomer {
      * @param categoryName
      * @return HTTP status
      */
-    public int addCategory(String categoryName) {
-                            
-        String sql = "INSERT INTO category (category_name) VALUES(?);";
+    public int addCustomer(Customer customer) {
+        
+        String customerFirstName = customer.getFirstName();
+        String customerLastName = customer.getLastName();
+        String customerEmail = customer.getEmail();
+        String customerPhone = customer.getPhone();
+        String customerAddress = customer.getAddress();
+        String customerCity = customer.getCity();
+        String customerState = customer.getState();
+        long customerZipcode = customer.getZipCode();
+        long customerCcNumber = customer.getCcNumber();
+        
+        String sql = "INSERT INTO customer VALUES(null,?,?,?,?,?,?,?,?,?);";
         
         try {
-            
+        
             conn = db.getConnection();
             conn.setAutoCommit(false);
             preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setString(1, categoryName);
+            preparedStatement.setString(1, customerFirstName);
+            preparedStatement.setString(2, customerLastName);
+            preparedStatement.setString(3, customerEmail);
+            preparedStatement.setString(4, customerPhone);
+            preparedStatement.setString(5, customerAddress);
+            preparedStatement.setString(6, customerCity);
+            preparedStatement.setString(7, customerState);
+            preparedStatement.setLong(8, customerZipcode);
+            preparedStatement.setLong(9, customerCcNumber);
+                        
             preparedStatement.executeUpdate();
             conn.commit();
             
@@ -56,19 +75,19 @@ public class DAOCustomer {
             conn = null;
             
         } catch (SQLException ex) {
-            Logger.getLogger(DAOCategory.class.getName()).log(Level.SEVERE, "Coud not add category.", ex);
+            Logger.getLogger(DAOBook.class.getName()).log(Level.SEVERE, "Coud not add customer.", ex);
             try {
                 conn.rollback();
             } catch (SQLException ex1) {
-                Logger.getLogger(DAOCategory.class.getName()).log(Level.SEVERE, null, ex1);
+                Logger.getLogger(DAOBook.class.getName()).log(Level.SEVERE, null, ex1);
                 return 500;
             }
             return 500;
-            
         } finally {
             db.closeConnection();
         }
-        return 200; //success
+        
+        return 200;
     }
     
     /**

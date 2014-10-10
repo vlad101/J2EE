@@ -110,7 +110,7 @@
                 </div><br>
                 <div id="customer_state_update">
                     <label>State</label>
-                    <input type="text" value="" name="customer_state_update" readonly>
+                    <input type="text" value="" name="customer_state_update">
                 </div><br>
                 <div id="customer_zipcode_update">
                     <label>Zip Code</label>
