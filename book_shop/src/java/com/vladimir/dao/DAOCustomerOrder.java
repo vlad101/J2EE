@@ -301,15 +301,15 @@ public class DAOCustomerOrder {
     }    
     
     /**
-     * This method will allow you to get all customer data from the customer table.
+     * This method will allow you to get all customer order data from the customer table.
      * 
-     * @return JSON object with all customer data from the table. 
+     * @return JSON object with all customer order data from the table. 
      */
-    public JSONArray getAllCustomers() { 
+    public JSONArray getAllCustomerOrders() { 
         
-        JSONArray customerJsonArray = new JSONArray();
+        JSONArray customerOrderJsonArray = new JSONArray();
         
-        String sql = "SELECT * FROM customer;"; // do not use * for production code
+        String sql = "SELECT * FROM customer_order;"; // do not use * for production code
         
         try {
         
@@ -318,7 +318,7 @@ public class DAOCustomerOrder {
             rs = preparedStatement.executeQuery();
             
             ToJSON converter = new ToJSON();
-            customerJsonArray = converter.toJSONArray(rs);
+            customerOrderJsonArray = converter.toJSONArray(rs);
             
             rs.close();
             rs = null;
@@ -330,13 +330,13 @@ public class DAOCustomerOrder {
             conn = null;
             
         } catch (SQLException ex) {
-            Logger.getLogger(DAOCustomer.class.getName()).log(Level.SEVERE, "Could not select customers.", ex);
+            Logger.getLogger(DAOCustomerOrder.class.getName()).log(Level.SEVERE, "Could not select customer orders.", ex);
         } catch (Exception e) {
-                Logger.getLogger(DAOCustomer.class.getName()).log(Level.SEVERE, "Could not create a JSON object", e);  
+                Logger.getLogger(DAOCustomerOrder.class.getName()).log(Level.SEVERE, "Could not create a JSON object", e);  
         } finally {
             db.closeConnection();
         }
         
-        return customerJsonArray;
+        return customerOrderJsonArray;
     }
 }

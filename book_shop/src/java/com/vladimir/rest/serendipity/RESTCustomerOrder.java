@@ -1,6 +1,7 @@
 package com.vladimir.rest.serendipity;
 
 import com.vladimir.dao.DAOCustomer;
+import com.vladimir.dao.DAOCustomerOrder;
 import com.vladimir.model.Customer;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -23,47 +24,48 @@ import org.codehaus.jettison.json.JSONObject;
 public class RESTCustomerOrder {
    
     /**
-     * The method creates its own HTTP response with the list of customers
-     * Ex: http://localhost:8080/book_shop/api/v1/customer
+     * The method creates its own HTTP response with the list of customer orders
+     * Ex: http://localhost:8080/book_shop/api/v1/customerOrder
      * 
-     * @return - the response with the customer list
+     * @return - the response with the customer order list
      * @throws Exception 
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getCustomerList() throws Exception {
+    public Response getCustomerOrderList() throws Exception {
         
         String returnString = null;
-        JSONArray jsonArrayCustomerList = new JSONArray();
+        JSONArray jsonArrayCustomerOrderList = new JSONArray();
         
-        DAOCustomer daoCustomer = new DAOCustomer();
+        DAOCustomerOrder daoCustomerOrder = new DAOCustomerOrder();
         JSONObject jsonObject = new JSONObject();
         
         try {
             
-            jsonArrayCustomerList = daoCustomer.getAllCustomers();
+            jsonArrayCustomerOrderList = daoCustomerOrder.getAllCustomerOrders();
         
             // get all customers
-            for(int i = 0; i < jsonArrayCustomerList.length(); i++) {
+            for(int i = 0; i < jsonArrayCustomerOrderList.length(); i++) {
                 
-                JSONObject obj = jsonArrayCustomerList.getJSONObject(i);
+                JSONObject obj = jsonArrayCustomerOrderList.getJSONObject(i);
+                obj.put("customer_order_id", obj.getInt("customer_order_id"));
+                obj.put("amount", obj.getString("amount"));
+                obj.put("date_created", obj.getString("date_created"));
+                obj.put("confirmation_number", obj.getInt("confirmation_number"));
                 obj.put("customer_id", obj.getInt("customer_id"));
-                obj.put("first_name", obj.getString("first_name"));
-                obj.put("last_name", obj.getString("last_name"));
-                obj.put("email", obj.getString("email"));
-                obj.put("phone", obj.getString("phone"));
-                obj.put("address", obj.getString("address"));
-                obj.put("city", obj.getString("city"));
-                obj.put("state", obj.getString("state"));
-                obj.put("zipcode", obj.getString("zipcode"));
-                obj.put("cc_number", obj.getString("cc_number"));
-                returnString = jsonObject.put(Integer.toString(obj.getInt("customer_id")), obj).toString();
+                
+//                Get customer first and last name
+                DAOCustomer daoCustomer = new DAOCustomer();
+                Customer customer = daoCustomer.getCustomerById(obj.getInt("customer_id"));
+                obj.put("customer_name", customer.getFirstName() + " " + customer.getLastName());
+                
+                returnString = jsonObject.put(Integer.toString(obj.getInt("customer_order_id")), obj).toString();
             }
         
         } catch (Exception e) {
             jsonObject.put("HTTP_CODE", "500");
-            jsonObject.put("MSG", "Server unable to process get customer request!");
-            return Response.ok(jsonArrayCustomerList.put(jsonObject).toString()).build();
+            jsonObject.put("MSG", "Server unable to process get customer order request!");
+            return Response.ok(jsonArrayCustomerOrderList.put(jsonObject).toString()).build();
         }
                 
         return Response.ok(returnString).build();

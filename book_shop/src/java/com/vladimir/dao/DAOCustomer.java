@@ -33,7 +33,7 @@ public class DAOCustomer {
     /**
      * The method will allow you to add customer to the database.
      * 
-     * @param categoryName
+     * @param customer
      * @return HTTP status
      */
     public int addCustomer(Customer customer) {
@@ -182,126 +182,6 @@ public class DAOCustomer {
     }
     
     /**
-     * This method will allow you to get category id by name from the database.
-     * 
-     * @param categoryId
-     * @return 
-     */
-    @SuppressWarnings("static-access")
-    public int getCategoryIdByName(String categoryName){
-        
-        int categoryId = -1;
-        
-        String sql = "SELECT category_id FROM category WHERE category_name=?;";
-        
-        try {
-        
-            conn = db.getConnection();
-            preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setString(1, categoryName);
-            rs = preparedStatement.executeQuery();
-            
-            // read the first row - replaced while with if
-            if(rs.next()) {
-                categoryId = rs.getInt("category_id");
-            }
-            else {
-//                 category does not exist, add a new category
-                ResultSet generatedKeys = null;
-                String sql2 = "INSERT INTO category (category_name) VALUES(?);";
-
-                try {
-                    conn.setAutoCommit(false);
-                    preparedStatement = conn.prepareStatement(sql2, preparedStatement.RETURN_GENERATED_KEYS);
-                    preparedStatement.setString(1, categoryName);
-                    int affectedRows = preparedStatement.executeUpdate();
-                    
-                    if (affectedRows == 0) {
-                        throw new SQLException("Insert category failed, no rows affected.");
-                    }
-                    
-//                    get the generated id after an insert success
-                    generatedKeys = preparedStatement.getGeneratedKeys();
-                    if (generatedKeys.next()) {
-                        categoryId = generatedKeys.getInt(1);
-                    } else {
-                        throw new SQLException("Creating category failed, no generated key obtained.");
-                    }
-                    conn.commit();
-                } catch (SQLException ex) {
-                    Logger.getLogger(DAOCategory.class.getName()).log(Level.SEVERE, "Coud not add category.", ex);
-                    try {
-                        conn.rollback();
-                    } catch (SQLException ex1) {
-                        Logger.getLogger(DAOCategory.class.getName()).log(Level.SEVERE, null, ex1);
-                    } finally {
-                        if (generatedKeys != null) try { generatedKeys.close(); } catch (SQLException logOrIgnore) {}
-                    }
-                } 
-            }
-            
-            rs.close();
-            rs = null;
-            
-            preparedStatement.close();
-            preparedStatement = null;
-            
-            conn.close();
-            conn = null;
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(DAOCategory.class.getName()).log(Level.SEVERE, "Could not select category by ID.", ex);
-        } finally {
-            db.closeConnection();
-        }
-        
-        return categoryId;
-    }   
-
-    /**
-     * This method will allow you to get category data by id from the database.
-     * 
-     * @param categoryId
-     * @return 
-     */
-    public Category getCategoryById(int categoryId){
-        
-        Category category = null;
-        
-        String sql = "SELECT category_name FROM category WHERE category_id=?;";
-        
-        try {
-        
-            conn = db.getConnection();
-            preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setInt(1, categoryId);
-            rs = preparedStatement.executeQuery();
-            
-//            creates a category object
-            while(rs.next()) {
-                String categoryName = rs.getString("category_name");
-                category = new Category(categoryId, categoryName);
-            }
-            
-            rs.close();
-            rs = null;
-            
-            preparedStatement.close();
-            preparedStatement = null;
-            
-            conn.close();
-            conn = null;
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(DAOCategory.class.getName()).log(Level.SEVERE, "Could not select category by ID.", ex);
-        } finally {
-            db.closeConnection();
-        }
-        
-        return category;
-    }    
-    
-    /**
      * This method will allow you to get all customer data from the customer table.
      * 
      * @return JSON object with all customer data from the table. 
@@ -340,4 +220,58 @@ public class DAOCustomer {
         
         return customerJsonArray;
     }
+    
+    /**
+     * This method will allow you to get all customer data from the customer table.
+     * 
+     * @return JSON object with all customer data from the table. 
+     */
+    public Customer getCustomerById(int customerId){
+        
+        Customer customer = null;
+        
+        String sql = "SELECT * FROM customer WHERE customer_id=? LIMIT 1;";
+        
+        try {
+        
+            conn = db.getConnection();
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setInt(1, customerId);
+            rs = preparedStatement.executeQuery();
+            while(rs.next()) {
+                
+                String customerFirstName = rs.getString("first_name");
+                String customerLastName = rs.getString("last_name");
+                String customerEmail = rs.getString("email");
+                String customerPhone = rs.getString("phone");
+                String customerAddress = rs.getString("address");
+                String customerCity = rs.getString("city");
+                String customerState = rs.getString("state");
+                long customerZipcode = rs.getLong("zipcode");
+                long customerCcNumber = rs.getLong("cc_number");
+                
+                customer = new Customer(customerId,customerFirstName,
+                    customerLastName,customerEmail,customerPhone,customerAddress,
+                    customerCity,customerState,customerZipcode,customerCcNumber);
+                   
+                // TODO: build a json object
+            }
+            
+            rs.close();
+            rs = null;
+            
+            preparedStatement.close();
+            preparedStatement = null;
+            
+            conn.close();
+            conn = null;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOBook.class.getName()).log(Level.SEVERE, "Could not select customer by ID.", ex);
+        } finally {
+            db.closeConnection();
+        }
+        
+        return customer;
+    } 
 }
