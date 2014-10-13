@@ -304,46 +304,46 @@ public class RESTCustomerOrder {
     }
     
     /**
-     * This method will allow you to delete data in the customer table.
+     * This method will allow you to delete data in the customer_order table.
      * In this example we are using both PathParams and the message body (payload).
      */
     @DELETE
     @Consumes({MediaType.APPLICATION_FORM_URLENCODED,MediaType.APPLICATION_JSON})
     @Produces(MediaType.APPLICATION_JSON)
-    public Response deleteCustomer(String customerInfo) throws Exception {
+    public Response deleteCustomerOrder(String customerOrderInfo) throws Exception {
         
-        String customerId;
-        DAOCustomer daoCustomer = new DAOCustomer();
+        String customerOrderId;
+        DAOCustomerOrder daoCustomerOrder = new DAOCustomerOrder();
         String returnString;
         JSONArray jsonArray = new JSONArray();
         JSONObject jsonObject = new JSONObject();
 
         try {
             
-            JSONObject partsData = new JSONObject(customerInfo);
-            customerId = partsData.optString("customer_id");
+            JSONObject partsData = new JSONObject(customerOrderInfo);
+            customerOrderId = partsData.optString("customer_order_id");
             
-            int deleteCustomerId;
+            int deleteCustomerOrderId;
             try {
-                deleteCustomerId = Integer.parseInt(customerId);
+                deleteCustomerOrderId = Integer.parseInt(customerOrderId);
             } catch (NumberFormatException e) {
                 jsonObject.put("HTTP_CODE", "500");
-                jsonObject.put("MSG", "Customer id is not valid!");
+                jsonObject.put("MSG", "Customer order id is not valid!");
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
             }
             
-            int http_code = daoCustomer.deleteCustomer(deleteCustomerId);
+            int http_code = daoCustomerOrder.deleteCustomerOrder(deleteCustomerOrderId);
             
             if(http_code == 200) {
                 
                 jsonObject.put("HTTP_CODE", "200");
-                jsonObject.put("MSG", "Customer has been deleted successfully!");
+                jsonObject.put("MSG", "Customer order has been deleted successfully!");
                 returnString = jsonArray.put(jsonObject).toString();
                 
             } else {
                 //return Response.status(500).entity("Unable to process add book").build();
                 jsonObject.put("HTTP_CODE", "500");
-                jsonObject.put("MSG", "Customer was not deleted!");
+                jsonObject.put("MSG", "Customer order was not deleted!");
                 returnString = jsonArray.put(jsonObject).toString();
             }
             

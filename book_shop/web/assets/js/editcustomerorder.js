@@ -132,9 +132,9 @@ $( document ).ready(function() {
         var obj = {customer_order_id : customer_order_id};
         
         // get the name for the alert box
-        var customer_order_name = row.data().first_name;
-        customer_order_name += " " + row.data().last_name;
-        bootbox.confirm("Are you sure you want to delete customer order " + customer_order_name, function(result) {
+        var customer_order_confirmation_number = row.data().confirmation_number;
+        
+        bootbox.confirm("Are you sure you want to delete customer order " + customer_order_confirmation_number + "?", function(result) {
             if(result)
                 deleteCustomerOrder(obj);
             else 

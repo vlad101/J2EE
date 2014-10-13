@@ -139,22 +139,22 @@ public class DAOCustomerOrder {
     }
     
     /**
-     * This method will allow you to delete data in the customer table.
+     * This method will allow you to delete data in the customer_order table.
      * Consider storing data in the temporary table and not to delete completely.
      * 
-     * @param customerId
+     * @param customerOrderId
      * @return HTTP status
      */
-    public int deleteCustomer(int customerId) {
+    public int deleteCustomerOrder(int customerOrderId) {
          
-        String sql = "DELETE FROM customer WHERE customer_id=?;";
+        String sql = "DELETE FROM customer_order WHERE customer_order_id=?;";
         
         try {
         
             conn = db.getConnection();
             conn.setAutoCommit(false);
             preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setInt(1, customerId);
+            preparedStatement.setInt(1, customerOrderId);
             preparedStatement.executeUpdate();
             conn.commit();
             
@@ -165,11 +165,11 @@ public class DAOCustomerOrder {
             conn = null;
             
         } catch (SQLException ex) {
-            Logger.getLogger(DAOCustomer.class.getName()).log(Level.SEVERE, "Coud not delete customer.", ex);
+            Logger.getLogger(DAOCustomer.class.getName()).log(Level.SEVERE, "Coud not delete customer order.", ex);
             try {
                 conn.rollback();
             } catch (SQLException ex1) {
-                Logger.getLogger(DAOCustomer.class.getName()).log(Level.SEVERE, null, ex1);
+                Logger.getLogger(DAOCustomerOrder.class.getName()).log(Level.SEVERE, null, ex1);
                 return 500;
             }
             return 500;
