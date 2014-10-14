@@ -2,6 +2,7 @@ package com.vladimir.dao;
 
 import com.vladimir.model.Category;
 import com.vladimir.model.Customer;
+import com.vladimir.model.CustomerOrder;
 import com.vladimir.util.DbUtil;
 import com.vladimir.util.ToJSON;
 import java.sql.Connection;
@@ -90,29 +91,22 @@ public class DAOCustomerOrder {
     }
     
     /**
-     * This method will allow you to update customer data.
+     * This method will allow you to update customer order data.
      * 
-     * @param customer
+     * @param customerOrder
      * @return HTTP status
      */
-    public int updateCustomer(Customer customer) {
+    public int updateCustomerOrder(CustomerOrder customerOrder) {
 
-        String sql = "UPDATE customer SET first_name=?,last_name=?,email=?,phone=?,address=?,city=?,state=?,zipcode=?,cc_number=? WHERE customer_id=?;";
+        String sql = "UPDATE customer_order SET amount=?,confirmation_number=? WHERE customer_order_id=?;";
         
         try {
             conn = db.getConnection();
             conn.setAutoCommit(false);
             preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setString(1, customer.getFirstName());
-            preparedStatement.setString(2, customer.getLastName());
-            preparedStatement.setString(3, customer.getEmail());
-            preparedStatement.setString(4, customer.getPhone());
-            preparedStatement.setString(5, customer.getAddress());
-            preparedStatement.setString(6, customer.getCity());
-            preparedStatement.setString(7, customer.getState());
-            preparedStatement.setLong(8, customer.getZipCode());
-            preparedStatement.setLong(9, customer.getCcNumber());
-            preparedStatement.setInt(10, customer.getCustomerId());
+            preparedStatement.setDouble(1, customerOrder.getAmount());
+            preparedStatement.setLong(2, customerOrder.getConfirmationNumber());
+            preparedStatement.setInt(3, customerOrder.getCustomerOrderId());
             preparedStatement.executeUpdate();
             conn.commit();
             

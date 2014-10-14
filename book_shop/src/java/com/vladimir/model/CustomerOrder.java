@@ -11,11 +11,11 @@ public class CustomerOrder {
     private int customerOrderId;
     private double amount;
     private Date dateCreated;
-    private String confirmationNumber;
+    private long confirmationNumber;
     private int customerId;
 
     public CustomerOrder(int customerOrderId, double amount, Date dateCreated, 
-                                    String confirmationNumber, int customerId) {
+                                    long confirmationNumber, int customerId) {
         this.customerOrderId = customerOrderId;
         this.amount = amount;
         this.dateCreated = dateCreated;
@@ -47,11 +47,11 @@ public class CustomerOrder {
         this.dateCreated = dateCreated;
     }
 
-    public String getConfirmationNumber() {
+    public long getConfirmationNumber() {
         return confirmationNumber;
     }
 
-    public void setConfirmationNumber(String confirmationNumber) {
+    public void setConfirmationNumber(long confirmationNumber) {
         this.confirmationNumber = confirmationNumber;
     }
 

@@ -25,13 +25,6 @@
     <br />
     <h1>Edit Customer Order</h1><br />
     
-    <!-- Add customer order -->
-    <button type="button" id="customer_order_add_button" class="btn btn-primary btn-small" data-toggle="modal" data-target="#add-customer_order-modal" >Add Customer Order</button>
-    <br/>
-    
-    <!-- adding new customer order -->
-    <div id="ajax_add_customer_order_response_success" class="alert alert-success"></div>
-    
     <!-- Update customer order -->
     <div id="ajax_update_customer_order_response_success" class="alert alert-success"></div>
     
@@ -111,69 +104,6 @@
         </div>
       </div>
     </div>
-
-    <!-- Add Customer Order Modal -->
-    <div class="modal fade" id="add-customer_order-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title" id="modalLabel">Add Customer Order</h4>
-          </div>
-          <div class="modal-body">
-              
-            <!-- add new customer order -->
-            <div id="ajax_add_customer_order_response_error" class="alert alert-danger"></div>
-              
-            <form id="add_customer_order_form" method="post" action="#">
-                <div id="customer_order_first_name_add">
-                    <label>First Name</label>
-                    <input type="text" value="" name="customer_order_first_name_add">
-                </div><br>
-                <div id="customer_order_last_name_add">
-                    <label>Last Name</label>
-                    <input type="text" value="" name="customer_order_last_name_add">
-                </div><br>
-                <div id="customer_order_cc_number_add">
-                    <label>Credit Card Number</label>
-                    <input type="text" value="" name="customer_order_cc_number_add">
-                </div><br>
-                <div id="customer_order_email_add">
-                    <label>Email</label>
-                    <input type="text" value="" name="customer_order_email_add">
-                </div><br>
-                <div id="customer_order_phone_add">
-                    <label>Phone</label>
-                    <input type="text" value="" name="customer_order_phone_add">
-                </div><br>
-                <div id="customer_order_address_add">
-                    <label>Address</label>
-                    <input type="text" value="" name="customer_order_address_add">
-                </div><br>
-                <div id="customer_order_city_add">
-                    <label>City</label>
-                    <input type="text" value="" name="customer_order_city_add">
-                </div><br>
-                <div id="customer_order_state_add">
-                    <label>State</label>
-                    <input type="text" value="" name="customer_order_state_add">
-                </div><br>
-                <div id="customer_order_zipcode_add">
-                    <label>Zip Code</label>
-                    <input type="text" value="" name="customer_order_zipcode_add">
-                </div><br>
-                    <input type="hidden" value="" name="customer_order_id_add">
-                         
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" id="add_customer_order_form_submit">Save changes</button>
-          </div>
-        </div>
-      </div>
-    </div>    
-    
 </div>
             
 <!-- Include all compiled plugins (below), or include individual files as needed -->

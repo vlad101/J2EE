@@ -6,9 +6,6 @@ $( document ).ready(function() {
     function setEventHandlers() {
         
         // hide CRUD respnse
-        $('#ajax_add_customer_order_response_success').hide();
-        $('#ajax_add_customer_order_response_error').hide();
-        
         $('#ajax_update_customer_order_response_success').hide();
         $('#ajax_update_customer_order_response_error').hide();
         
@@ -20,57 +17,7 @@ $( document ).ready(function() {
     }
     
     setEventHandlers();
-        
-    /**
-     * The event handler for submit button - add customer order.
-     * It triggers a ajax POST call to api/v1/customer
-     * It will submit a customer order entry to a Serendipity database 
-     */
-    var $add_customer_order_form = $('#add_customer_order_form');
-    $('#add_customer_order_form_submit').click(function(e){
-        
-        e.preventDefault(); // cancel form submit
-        
-        var jsObj = $add_customer_order_form.serializeObject();
-        var ajaxObj = {};
-        
-        ajaxObj = {
-                    type: "POST",
-                    url: "http://localhost:8080/book_shop/api/v1/customerOrder/",
-                    data: JSON.stringify(jsObj),
-                    contentType: "application/json",
-                    error: function(jqXHR, textStatus, errorThrown) {
-                        console.log("Error " + jqXHR.getAllResponseHeaders() + " " + errorThrown);
-                    },
-                    success: function(data) {
-                        if(data[0].HTTP_CODE == 200) {
-                            $('#ajax_add_customer_order_response_success').css({ 'width': '50%', 'margin': '0 auto' }).show().html( '<strong>Well Done!</strong> ' + data[0].MSG ).delay(10000).fadeOut();
-                            
-//                      clear the text field, after customer order is added
-                            $('#add-customer_order-modal').modal('hide');
-                            $('input#customer_order_first_name_add').val('');
-                            $('input#customer_order_last_name_add').val('');
-                            $('input#customer_order_email_add').val('');
-                            $('input#customer_order_phone_add').val('');
-                            $('input#customer_order_address_add').val('');
-                            $('input#customer_order_city_add').val('');
-                            $('input#customer_order_state_add').val('');
-                            $('input#customer_order_zipcode_add').val('');
-                            $('input#customer_order_cc_number_add').val('');
-                        } else {
-                            $('#ajax_add_customer_order_response_error').css({ 'width': '100%', 'margin': '0 auto' }).show().html( '<strong>Oh snap!</strong> ' + data[0].MSG ).delay(10000).fadeOut();
-                        }
-                    },
-                    complete: function(XMLHttpRequest) {
-                        //console.log(XMLHttpRequest.getAllResponseHeaders());
-                        getCustomerOrder();
-                    },
-                    dataType: "json" // request json
-        };
-        
-        $.ajax(ajaxObj);
-    });
-
+    
      /**
      * The event handler for submit button - update customer order.
      * It triggers a ajax PUT call to api/v1/customerOrder
@@ -148,20 +95,6 @@ $( document ).ready(function() {
             tr.addClass('shown');
         }
     } );
-    
-    $(document.body).on('click', '#customer_order_add_button', function() {
-//        clear all text fields        
-        $('#add-customer_order-modal input[name="custome_order_id_add"]').val('');
-        $('#add-customer_order-modal input[name="customer_order_first_name_add"]').val('');
-        $('#add-customer_order-modal input[name="customer_order_last_name_add"]').val('');
-        $('#add-customer_order-modal input[name="customer_order_email_add"]').val('');
-        $('#add-customer_order-modal input[name="customer_order_phone_add"]').val('');
-        $('#add-customer_order-modal input[name="customer_order_address_add"]').val('');
-        $('#add-customer_order-modal input[name="customer_order_city_add"]').val('');
-        $('#add-customer_order-modal input[name="customer_order_state_add"]').val('');
-        $('#add-customer_order-modal input[name="customer_order_zipcode_add"]').val('');
-        $('#add-customer_order-modal input[name="customer_order_cc_number_add"]').val('');
-    });
 });
 
 /**
@@ -336,13 +269,7 @@ function fnFormatDetails( data ) {
     retval +=   '<tr><td><strong>Category: </strong>' + data.category_name + '</td></tr>';
     
     retval = '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">';
-    retval += '<tr><td><strong>Credit Card: </strong>' + data.cc_number + '</td></tr>';
-    retval += '<tr><td><strong>Email: </strong>' + data.email + '</td></tr>';
-    retval += '<tr><td><strong>Phone: </strong>' + data.phone + '</td></tr>';
-    retval += '<tr><td><strong>Address: </strong>' + data.address + '</td></tr>';
-    retval += '<tr><td><strong>City: </strong>' + data.city + '</td></tr>';
     retval += '<tr><td><strong>State: </strong>' + data.state + '</td></tr>';
-    retval += '<tr><td><strong>Zipcode: </strong>' + data.zipcode + '</td></tr>';
     retval += '</table>';
     return retval;
 }

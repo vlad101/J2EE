@@ -3,6 +3,7 @@ package com.vladimir.rest.serendipity;
 import com.vladimir.dao.DAOCustomer;
 import com.vladimir.dao.DAOCustomerOrder;
 import com.vladimir.model.Customer;
+import com.vladimir.model.CustomerOrder;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -144,7 +145,7 @@ public class RESTCustomerOrder {
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
             }
              
-//            validate number values\
+//            validate number values
             long updateCustomerCcNumber;
             long updateCustomerZipcode;
             
@@ -187,16 +188,16 @@ public class RESTCustomerOrder {
     }
     
     /**
-     * This method will allow you to update data in the customer table.
+     * This method will allow you to update data in the customer order table.
      * In this example we are using both PathParams and the message body (payload).
      */
     @PUT
     @Consumes({MediaType.APPLICATION_FORM_URLENCODED,MediaType.APPLICATION_JSON})
     @Produces(MediaType.APPLICATION_JSON)
-    public Response updateCustomer(String customerInfo) throws Exception {
+    public Response updateCustomerOrder(String customerOrderInfo) throws Exception {
         
-        Customer customer;
-        DAOCustomer daoCustomer = new DAOCustomer();
+        CustomerOrder customerOrder;
+        DAOCustomerOrder daoCustomerOrder = new DAOCustomerOrder();
         
         String returnString;
         
@@ -205,80 +206,31 @@ public class RESTCustomerOrder {
 
         try {
             
-            JSONObject partsData = new JSONObject(customerInfo);
-            String customerId = partsData.optString("customer_id_update");
-            String customerFirstName = partsData.optString("customer_first_name_update");
-            String customerLastName = partsData.optString("customer_last_name_update");
-            String customerEmail = partsData.optString("customer_email_update");
-            String customerPhone = partsData.optString("customer_phone_update");
-            String customerAddress = partsData.optString("customer_address_update");
-            String customerCity = partsData.optString("customer_city_update");
-            String customerState = partsData.optString("customer_state_update");
-            String customerZipcode = partsData.optString("customer_zipcode_update");
-            String customerCcNumber = partsData.optString("customer_cc_number_update");
-
-//            validate text values
-            if(customerFirstName == null || customerFirstName.length() == 0) {
-                jsonObject.put("HTTP_CODE", "500");
-                jsonObject.put("MSG", "Enter a valid customer first name!");
-                return Response.ok(jsonArray.put(jsonObject).toString()).build();
-            }
-            
-            if(customerLastName == null || customerLastName.length() == 0) {
-                jsonObject.put("HTTP_CODE", "500");
-                jsonObject.put("MSG", "Enter a valid customer last name!");
-                return Response.ok(jsonArray.put(jsonObject).toString()).build();
-            }
-             
-            if(customerEmail == null || customerEmail.length() == 0) {
-                jsonObject.put("HTTP_CODE", "500");
-                jsonObject.put("MSG", "Enter a valid customer email!");
-                return Response.ok(jsonArray.put(jsonObject).toString()).build();
-            }
- 
-            if(customerPhone == null || customerPhone.length() == 0) {
-                jsonObject.put("HTTP_CODE", "500");
-                jsonObject.put("MSG", "Enter a valid customer phone!");
-                return Response.ok(jsonArray.put(jsonObject).toString()).build();
-            } 
-             
-            if(customerAddress == null || customerAddress.length() == 0) {
-                jsonObject.put("HTTP_CODE", "500");
-                jsonObject.put("MSG", "Enter a valid customer address!");
-                return Response.ok(jsonArray.put(jsonObject).toString()).build();
-            } 
-            
-            if(customerCity == null || customerCity.length() == 0) {
-                jsonObject.put("HTTP_CODE", "500");
-                jsonObject.put("MSG", "Enter a valid customer city!");
-                return Response.ok(jsonArray.put(jsonObject).toString()).build();
-            } 
-            
-            if(customerState == null || customerState.length() == 0) {
-                jsonObject.put("HTTP_CODE", "500");
-                jsonObject.put("MSG", "Enter a valid customer state!");
-                return Response.ok(jsonArray.put(jsonObject).toString()).build();
-            }
+            JSONObject partsData = new JSONObject(customerOrderInfo);
+            String customerOrderId = partsData.optString("customer_order_id_update");
+            String customerOrderConfirmationNumber = partsData.optString("customer_order_confirmation_number_update");
+            String customerOrderAmount = partsData.optString("customer_order_amount_update");
             
 //            validate number values
-            int updateCustomerId;
-            long updateCustomerCcNumber;
-            long updateCustomerZipcode;
+            int updateCustomerOrderId;
+            long updateCustomerOrderConfirmationNumber;
+            double updateCustomerOrderAmount;
             
             try {
-                updateCustomerId = Integer.parseInt(customerId);
-                updateCustomerCcNumber = Long.parseLong(customerCcNumber);
-                updateCustomerZipcode = Long.parseLong(customerZipcode);
+                updateCustomerOrderId = Integer.parseInt(customerOrderId);
+                updateCustomerOrderConfirmationNumber = Long.parseLong(customerOrderConfirmationNumber);
+                updateCustomerOrderAmount = Double.parseDouble(customerOrderAmount);
             } catch (NumberFormatException e) {
                 jsonObject.put("HTTP_CODE", "500");
                 jsonObject.put("MSG", "Enter valid number values!");
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
             }
    
-            customer = new Customer(updateCustomerId,customerFirstName,
-                    customerLastName,customerEmail,customerPhone,customerAddress,
-                    customerCity,customerState,updateCustomerZipcode,updateCustomerCcNumber);
-            int http_code = daoCustomer.updateCustomer(customer);
+//            customer = new Customer(updateCustomerId,customerFirstName,
+//                    customerLastName,customerEmail,customerPhone,customerAddress,
+//                    customerCity,customerState,updateCustomerZipcode,updateCustomerCcNumber);
+            customerOrder = new CustomerOrder(updateCustomerOrderId, updateCustomerOrderAmount, null,updateCustomerOrderConfirmationNumber, 0);
+            int http_code = daoCustomerOrder.updateCustomerOrder(customerOrder);
             
             if(http_code == 200) {
                 
