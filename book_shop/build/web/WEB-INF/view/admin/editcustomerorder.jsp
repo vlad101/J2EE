@@ -82,43 +82,23 @@
               
             <!-- update customer order error -->
             <div id="ajax_update_customer_order_response_error" class="alert alert-danger"></div><br />
-              
+        
             <form id="update_customer_order_form" method="post" action="#">
-                <div id="customer_order_first_name_update">
-                    <label>First Name</label>
-                    <input type="text" value="" name="customer_order_first_name_update">
+                <div id="customer_order_name_update">
+                    <label>Customer Name</label>
+                    <input type="text" value="" name="customer_order_name_update" readonly>
                 </div><br>
-                <div id="customer_order_last_name_update">
-                    <label>Last Name</label>
-                    <input type="text" value="" name="customer_order_last_name_update">
+                <div id="customer_order_confirmation_number_update">
+                    <label>Confirmation Number</label>
+                    <input type="text" value="" name="customer_order_confirmation_number_update">
                 </div><br>
-                <div id="customer_order_cc_number_update">
-                    <label>Credit Card Number</label>
-                    <input type="text" value="" name="customer_order_cc_number_update">
+                <div id="customer_order_amount_update">
+                    <label>Amount</label>
+                    <input type="text" value="" name="customer_order_amount_update">
                 </div><br>
-                <div id="customer_order_email_update">
-                    <label>Email</label>
-                    <input type="text" value="" name="customer_order_email_update">
-                </div><br>
-                <div id="customer_order_phone_update">
-                    <label>Phone</label>
-                    <input type="text" value="" name="customer_order_phone_update">
-                </div><br>
-                <div id="customer_order_address_update">
-                    <label>Address</label>
-                    <input type="text" value="" name="customer_order_address_update">
-                </div><br>
-                <div id="customer_order_city_update">
-                    <label>City</label>
-                    <input type="text" value="" name="customer_order_city_update">
-                </div><br>
-                <div id="customer_order_state_update">
-                    <label>State</label>
-                    <input type="text" value="" name="customer_order_state_update">
-                </div><br>
-                <div id="customer_order_zipcode_update">
-                    <label>Zip Code</label>
-                    <input type="text" value="" name="customer_order_zipcode_update">
+                <div id="customer_order_date_created_update">
+                    <label>Date Created</label>
+                    <input type="text" value="" name="customer_order_date_created_update" readonly>
                 </div>
                     <input type="hidden" value="" name="customer_order_id_update">
                          

@@ -82,28 +82,18 @@ $( document ).ready(function() {
         var $this = $(this);
         var $tr = $this.closest('tr');
         var row = oTable.row( $tr );
-        
+               
         var customer_order_id = row.data().customer_order_id;
-        var customer_order_first_name = row.data().first_name;
-        var customer_order_last_name = row.data().last_name;
-        var customer_order_email = row.data().email;
-        var customer_order_phone = row.data().phone;
-        var customer_order_address = row.data().address;
-        var customer_order_city = row.data().city;
-        var customer_order_state = row.data().state;
-        var customer_order_zipcode = row.data().zipcode;
-        var customer_order_cc_number = row.data().cc_number;
+        var customer_order_name = row.data().customer_name;
+        var customer_order_confirmation_number = row.data().confirmation_number;
+        var customer_order_date_created = row.data().date_created;
+        var customer_order_amount = row.data().amount;
                 
         $('#update-customer_order-modal input[name="customer_order_id_update"]').val(customer_order_id);
-        $('#update-customer_order-modal input[name="customer_order_first_name_update"]').val(customer_order_first_name);
-        $('#update-customer_order-modal input[name="customer_order_last_name_update"]').val(customer_order_last_name);
-        $('#update-customer_order-modal input[name="customer_order_email_update"]').val(customer_order_email);
-        $('#update-customer_order-modal input[name="customer_order_phone_update"]').val(customer_order_phone);
-        $('#update-customer_order-modal input[name="customer_order_address_update"]').val(customer_order_address);
-        $('#update-customer_order-modal input[name="customer_order_city_update"]').val(customer_order_city);
-        $('#update-customer_order-modal input[name="customer_order_state_update"]').val(customer_order_state);
-        $('#update-customer_order-modal input[name="customer_order_zipcode_update"]').val(customer_order_zipcode);
-        $('#update-customer_order-modal input[name="customer_order_cc_number_update"]').val(customer_order_cc_number);
+        $('#update-customer_order-modal input[name="customer_order_name_update"]').val(customer_order_name);
+        $('#update-customer_order-modal input[name="customer_order_confirmation_number_update"]').val(customer_order_confirmation_number);
+        $('#update-customer_order-modal input[name="customer_order_date_created_update"]').val(customer_order_date_created);
+        $('#update-customer_order-modal input[name="customer_order_amount_update"]').val(customer_order_amount);
     });
     
     $('#update_customer_order_form_submit').click(function(e) {
