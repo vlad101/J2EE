@@ -28,8 +28,6 @@
         <br>
         <button type="button" class="btn btn-success btn-lg" id="edit-customer-order-button" >Edit Customer Order!</button>
         <br>
-        <br>
-        <button type="button" class="btn btn-success btn-lg" id="edit-ordered-book-button" >Edit Ordered Book!</button>
     </div>
 </div>
             

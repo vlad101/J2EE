@@ -241,7 +241,7 @@ public class DAOBook {
         return bookJsonArray;
     }
     
-    public List<String> getBookListByCategoryId(int category_id) {
+    public List<String> getBookListByCategoryId(int categoryId) {
         
         List<String> bookList = new ArrayList<String>();
         
@@ -251,7 +251,50 @@ public class DAOBook {
             
             conn = db.getConnection();
             preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setInt(1, category_id);
+            preparedStatement.setInt(1, categoryId);
+            rs = preparedStatement.executeQuery();
+            while( rs.next() ) {
+                
+                String title = rs.getString("title");
+                String author = rs.getString("author");
+                bookList.add('"' + title + '"' + " by " + author);
+                
+            }
+            
+            rs.close();
+            rs = null;
+            
+            preparedStatement.close();
+            preparedStatement = null;
+            
+            conn.close();
+            conn = null;
+            
+        } catch(SQLException ex) {
+            Logger.getLogger(DAOBook.class.getName()).log(Level.SEVERE, "Could not select book by category id", ex);
+        } finally {
+            db.closeConnection();
+        }
+        
+        return bookList;
+    }
+    
+    public List<String> getBookListByCustomerOrderId(int customerOrderId) {
+        
+        List<String> bookList = new ArrayList<String>();
+        
+        String sql = "SELECT book.book_id, ordered_book.customer_order_id, " + 
+            "book.title, book.author, ordered_book.quantity " + 
+            "FROM book LEFT JOIN ordered_book ON book.book_id = ordered_book.book_id " + 
+            "LEFT JOIN customer_order ON " + 
+            "ordered_book.customer_order_id = customer_order.customer_order_id " +
+            "WHERE customer_order.customer_order_id = ?;";
+        
+        try {
+            
+            conn = db.getConnection();
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setInt(1, customerOrderId);
             rs = preparedStatement.executeQuery();
             while( rs.next() ) {
                 

@@ -21,11 +21,6 @@ $( document ).ready(function() {
             window.location.href = '/book_shop/admin/editCustomerOrder';
             return false;
         });
-
-        $('#edit-ordered-book-button').click(function(){
-            window.location.href = '/book_shop/admin/editOrderedBook';
-            return false;
-        });
     }
     
     setEventHandlers();
