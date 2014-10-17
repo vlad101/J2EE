@@ -283,12 +283,18 @@ public class DAOBook {
         
         List<String> bookList = new ArrayList<String>();
         
-        String sql = "SELECT book.book_id, ordered_book.customer_order_id, " + 
+        String sql = "SELECT book.book_id, ordered_book.customer_order_id, ordered_book.quantity, " + 
             "book.title, book.author, ordered_book.quantity " + 
             "FROM book LEFT JOIN ordered_book ON book.book_id = ordered_book.book_id " + 
             "LEFT JOIN customer_order ON " + 
             "ordered_book.customer_order_id = customer_order.customer_order_id " +
             "WHERE customer_order.customer_order_id = ?;";
+        
+//        SELECT book.book_id, ordered_book.customer_order_id, ordered_book.quantity, 
+//        book.title, book.author, ordered_book.quantity FROM book LEFT JOIN ordered_book ON 
+//        book.book_id = ordered_book.book_id LEFT JOIN customer_order ON 
+//        ordered_book.customer_order_id = customer_order.customer_order_id WHERE 
+//        customer_order.customer_order_id = ?
         
         try {
             
@@ -300,7 +306,8 @@ public class DAOBook {
                 
                 String title = rs.getString("title");
                 String author = rs.getString("author");
-                bookList.add('"' + title + '"' + " by " + author);
+                String quantity = rs.getString("quantity");
+                bookList.add('"' + title + '"' + " by " + author + "  [" + quantity + "]");
                 
             }
             
@@ -314,7 +321,7 @@ public class DAOBook {
             conn = null;
             
         } catch(SQLException ex) {
-            Logger.getLogger(DAOBook.class.getName()).log(Level.SEVERE, "Could not select book by category id", ex);
+            Logger.getLogger(DAOBook.class.getName()).log(Level.SEVERE, "Could not select book by customer order id", ex);
         } finally {
             db.closeConnection();
         }

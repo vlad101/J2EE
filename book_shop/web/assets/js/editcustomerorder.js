@@ -217,9 +217,10 @@ function doGetCustomerOrderData(customer_order_list) {
             'customer_order_id':    customer_order_list[customer_order].customer_order_id,
             'amount':               customer_order_list[customer_order].amount,
             'date_created':         customer_order_list[customer_order].date_created,
-            'confirmation_number':   customer_order_list[customer_order].confirmation_number,
+            'confirmation_number':  customer_order_list[customer_order].confirmation_number,
             'customer_id':          customer_order_list[customer_order].customer_id,
             'customer_name':        customer_order_list[customer_order].customer_name,
+            'book_list':            customer_order_list[customer_order].book_list,
             'updatebtncol':         '<button type="button" class="btn btn-primary btn-small" data-toggle="modal" data-target="#update-customer_order-modal" ' + 'id="customer_order_update_button" value="'  + customer_order_list[customer_order].customer_order_id + '" >Update</button>',
             'deletebtncol':         '<button class="btn btn-danger" id="customer_order_delete_button" value="' + customer_order_list[customer_order].customer_order_id + '" type="button">Delete</button>'
         });
@@ -266,10 +267,17 @@ function fnFormatDetails( data ) {
     
     var retval;
     
-    retval +=   '<tr><td><strong>Category: </strong>' + data.category_name + '</td></tr>';
-    
+    if( data.book_list.length === 0 )
+        return '<p>No books added!</p>';
+
     retval = '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">';
-    retval += '<tr><td><strong>State: </strong>' + data.state + '</td></tr>';
+    for(var i = 0; i < data.book_list.length; i++) {
+        retval +=   '<tr>'+
+                        '<td><ul><li>' + data.book_list[i] +
+                        '</li></ul></td>'+
+                    '</tr>';
+    }
     retval += '</table>';
+    
     return retval;
 }

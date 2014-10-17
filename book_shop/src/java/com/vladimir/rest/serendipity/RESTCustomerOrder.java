@@ -1,5 +1,6 @@
 package com.vladimir.rest.serendipity;
 
+import com.vladimir.dao.DAOBook;
 import com.vladimir.dao.DAOCustomer;
 import com.vladimir.dao.DAOCustomerOrder;
 import com.vladimir.model.Customer;
@@ -54,6 +55,10 @@ public class RESTCustomerOrder {
                 obj.put("date_created", obj.getString("date_created"));
                 obj.put("confirmation_number", obj.getInt("confirmation_number"));
                 obj.put("customer_id", obj.getInt("customer_id"));
+
+//                Get book list by customer order id (title and author)
+                DAOBook daoBook = new DAOBook();
+                obj.put("book_list", daoBook.getBookListByCustomerOrderId( obj.getInt("customer_order_id") ));
                 
 //                Get customer first and last name
                 DAOCustomer daoCustomer = new DAOCustomer();
