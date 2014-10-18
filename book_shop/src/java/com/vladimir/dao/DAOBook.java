@@ -307,7 +307,7 @@ public class DAOBook {
                 String title = rs.getString("title");
                 String author = rs.getString("author");
                 String quantity = rs.getString("quantity");
-                bookList.add('"' + title + '"' + " by " + author + "  [" + quantity + "]");
+                bookList.add('"' + title + '"' + " by " + author + "  [Qty: " + quantity + "]");
                 
             }
             
