@@ -58,7 +58,7 @@ public class Book {
         this.quantity = quantity;
     }
     
-    public int getQuntity() {
+    public int getQuantity() {
         return quantity;
     }
     

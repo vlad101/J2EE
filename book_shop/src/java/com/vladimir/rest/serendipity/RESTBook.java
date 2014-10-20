@@ -11,10 +11,12 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.codehaus.jettison.json.JSONArray;
+import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
 
@@ -24,6 +26,78 @@ import org.codehaus.jettison.json.JSONObject;
  */
 @Path("/v1/book")
 public class RESTBook {
+
+    @GET
+    @Path("/{id}")
+    public Response getBookById(@PathParam("id") String bookId) throws JSONException {
+
+        DAOBook daoBook = new DAOBook();
+        Book book;
+        String returnString;
+        JSONArray jsonArray = new JSONArray();
+        JSONObject jsonObject = new JSONObject();
+        JSONObject obj = new JSONObject();
+
+        try {
+            
+            int getBookId;
+            try {
+                getBookId = Integer.parseInt(bookId);
+            } catch (NumberFormatException e) {
+                jsonObject.put("HTTP_CODE", "500");
+                jsonObject.put("MSG", "Book id is not valid!");
+                return Response.ok(jsonArray.put(jsonObject).toString()).build();
+            }
+
+            try {
+                
+                book = daoBook.getBookById(getBookId);
+            
+                DAOCategory daoCategory = new DAOCategory();
+
+                obj.put("book_id", book.getBookId());
+                obj.put("title", book.getTitle());
+                obj.put("author", book.getAuthor());
+                obj.put("quantity", book.getQuantity());
+                obj.put("price", book.getPrice());
+                obj.put("description", book.getDescription());
+                obj.put("category_id", book.getCategoryId());
+                obj.put("category_name", daoCategory.getCategoryById(book.getCategoryId()).getCategoryName());
+                
+//                Set a Date format
+                String updateDateFormat = "yyyy-MM-dd"; // yyyy-MM-dd HH:mm:ss
+                SimpleDateFormat customFormat = new SimpleDateFormat(updateDateFormat );
+                customFormat.setLenient(false);
+                obj.put("last_update", customFormat.format(book.getLastUpdate()));
+            
+            } catch (Exception e) {
+                jsonObject.put("HTTP_CODE", "500");
+                jsonObject.put("MSG", "Server unable to process get book request!");
+                return Response.ok(jsonArray.put(jsonObject).toString()).build();
+            }
+            
+            if(book != null) {
+                
+                jsonObject.put("HTTP_CODE", "200");
+                jsonObject.put("MSG", "Book was retrieved successfully!");
+                returnString = jsonObject.put(Integer.toString(book.getBookId()), obj).toString();
+                
+            } else {
+                //return Response.status(500).entity("Unable to process add book").build();
+                jsonObject.put("HTTP_CODE", "500");
+                jsonObject.put("MSG", "Book was not retrieved successfully!");
+                returnString = jsonArray.put(jsonObject).toString();
+            }
+            
+        } catch (Exception e) {
+            //return Response.status(500).entity("Server unable to process request.").build();
+            jsonObject.put("HTTP_CODE", "500");
+            jsonObject.put("MSG", "Server unable to process get book request!");
+            returnString = jsonArray.put(jsonObject).toString();
+        }
+                
+        return Response.ok(returnString).build();
+    }
     
     /**
      * The method creates its own HTTP response with the list of books

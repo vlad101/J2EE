@@ -309,7 +309,7 @@ function doGetBookData(book_list) {
         
         aaData.push({
             'book_id':          book_list[book].book_id,
-            'title':            '<div class="container_book_title_update" >' + book_list[book].title + '</div>',
+            'title':            '<div class="container_book_title_update" ><a href="#" onclick="return viewBook(' + book_list[book].book_id + ');">' + book_list[book].title + '</a></div>',
             'author':           '<div class="container_book_author_update" >' + book_list[book].author + '</div>',
             'qty':              '<div class="container_book_quantity_update" >' + book_list[book].quantity + '</div>',
             'category_name':    '<div class="container_book_category_name_update" >' + book_list[book].category_name + '</div>',
@@ -437,3 +437,29 @@ var substringMatcher = function(strs) {
     cb(matches);
   };
 };
+
+function viewBook(book_id) {
+  
+    alert("Book ID: " + book_id);
+  
+    var d = new Date().getTime();
+    
+    ajaxObj = {
+                type: "GET",
+                url: "http://localhost:8080/book_shop/api/v1/book/" + book_id,
+                data: "ts="+d,
+                contentType: "application/json",
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log(jqXHR.responseText);
+                },
+                success: function(data) {
+                    alert("Success!");
+                },
+                complete: function(XMLHttpRequest) {
+                    //console.log(XMLHttpRequest.getAllResponseHeaders());
+                },
+                dataType: "json" // request json
+    };
+    
+    return $.ajax(ajaxObj);
+}

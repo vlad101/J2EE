@@ -38,7 +38,7 @@ public class DAOBook {
         
         String title = book.getTitle();
         String author = book.getAuthor();
-        int quantity = book.getQuntity();
+        int quantity = book.getQuantity();
         double price = book.getPrice();
         String description = book.getDescription();
         int categoryId = book.getCategoryId();

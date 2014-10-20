@@ -17,7 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name="SerendipityController",
             loadOnStartup = 1,
-            urlPatterns = {"/category",
+            urlPatterns = {"/book/",
+                           "/category",
                            "/addToCart",
                            "/cart",
                            "/updateCart",
@@ -45,8 +46,16 @@ public class SerendipityController extends HttpServlet {
         String forward = "";
         String action = request.getServletPath();
         
+//      get - book page request
+        if(action.equalsIgnoreCase("/book/")) {
+            
+//          TODO: book
+            forward = "/book";
+            
+        }
+        
 //      get - category page request
-        if(action.equalsIgnoreCase("/category")) {
+        else if(action.equalsIgnoreCase("/category")) {
             
 //          TODO: category
             forward = "/category";
