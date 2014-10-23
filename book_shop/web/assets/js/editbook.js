@@ -439,9 +439,7 @@ var substringMatcher = function(strs) {
 };
 
 function viewBook(book_id) {
-  
-    alert("Book ID: " + book_id);
-  
+    
     var d = new Date().getTime();
     
     ajaxObj = {
@@ -453,7 +451,11 @@ function viewBook(book_id) {
                     console.log(jqXHR.responseText);
                 },
                 success: function(data) {
-                    alert("Success!");
+                        if(data.HTTP_CODE == 200) {
+                            window.location.href = "/book_shop/book?id=" + book_id;
+                        } else {
+                            alert("Invalid book ID!");
+                        }
                 },
                 complete: function(XMLHttpRequest) {
                     //console.log(XMLHttpRequest.getAllResponseHeaders());

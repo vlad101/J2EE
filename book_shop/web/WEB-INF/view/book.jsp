@@ -9,9 +9,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Book Info</title>
     </head>
     <body>
         <h1>Book Hello World!</h1>
+        <p>BOOK ID: <%= request.getAttribute("id") %> </p>
     </body>
 </html>

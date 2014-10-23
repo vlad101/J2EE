@@ -38,7 +38,7 @@
         <servlet-name>SerendipityController</servlet-name>
 
         <!-- get request  -->
-        <url-pattern>/book/</url-pattern>
+        <url-pattern>/book</url-pattern>
         <url-pattern>/category</url-pattern>
         <url-pattern>/cart</url-pattern>
         <url-pattern>/checkout</url-pattern>

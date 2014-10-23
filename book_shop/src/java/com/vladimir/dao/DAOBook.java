@@ -95,7 +95,7 @@ public class DAOBook {
             preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, book.getTitle());
             preparedStatement.setString(2, book.getAuthor());
-            preparedStatement.setInt(3, book.getQuntity());
+            preparedStatement.setInt(3, book.getQuantity());
             preparedStatement.setDouble(4, book.getPrice());
             preparedStatement.setString(5, book.getDescription());
             preparedStatement.setInt(6, book.getCategoryId());

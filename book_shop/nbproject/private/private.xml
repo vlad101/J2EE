@@ -3,29 +3,32 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Vladimir/Documents/Local%20Projects/J2EE/book_shop/src/java/com/vladimir/model/Book.java</file>
-            <file>file:/C:/Users/Vladimir/Documents/Local%20Projects/J2EE/book_shop/web/WEB-INF/view/admin/editbook.jsp</file>
-            <file>file:/C:/Users/Vladimir/Documents/Local%20Projects/J2EE/book_shop/src/java/com/vladimir/dao/DAOCustomerOrder.java</file>
             <file>file:/C:/Users/Vladimir/Documents/Local%20Projects/J2EE/book_shop/src/java/com/vladimir/rest/serendipity/RESTCategory.java</file>
             <file>file:/C:/Users/Vladimir/Documents/Local%20Projects/J2EE/book_shop/src/java/com/vladimir/dao/DAOBook.java</file>
             <file>file:/C:/Users/Vladimir/Documents/Local%20Projects/J2EE/book_shop/web/assets/css/editcustomer.css</file>
-            <file>file:/C:/Users/Vladimir/Documents/Local%20Projects/J2EE/book_shop/web/assets/css/editcategory.css</file>
-            <file>file:/C:/Users/Vladimir/Documents/Local%20Projects/J2EE/book_shop/src/java/com/vladimir/dao/DAOCategory.java</file>
+            <file>file:/C:/Users/Vladimir/Documents/Local%20Projects/J2EE/book_shop/web/WEB-INF/web.xml</file>
             <file>file:/C:/Users/Vladimir/Documents/Local%20Projects/J2EE/book_shop/src/java/com/vladimir/rest/serendipity/RESTBook.java</file>
-            <file>file:/C:/Users/Vladimir/Documents/Local%20Projects/J2EE/book_shop/web/assets/js/editcustomerorder.js</file>
             <file>file:/C:/Users/Vladimir/Documents/Local%20Projects/J2EE/book_shop/web/assets/js/editcategory.js</file>
-            <file>file:/C:/Users/Vladimir/Documents/Local%20Projects/J2EE/book_shop/src/java/com/vladimir/model/Customer.java</file>
             <file>file:/C:/Users/Vladimir/Documents/Local%20Projects/J2EE/book_shop/web/assets/css/editcustomerorder.css</file>
             <file>file:/C:/Users/Vladimir/Documents/Local%20Projects/J2EE/book_shop/web/WEB-INF/view/admin/editcustomer.jsp</file>
             <file>file:/C:/Users/Vladimir/Documents/Local%20Projects/J2EE/book_shop/src/java/com/vladimir/model/CustomerOrder.java</file>
-            <file>file:/C:/Users/Vladimir/Documents/Local%20Projects/J2EE/book_shop/web/WEB-INF/view/admin/editcategory.jsp</file>
             <file>file:/C:/Users/Vladimir/Documents/Local%20Projects/J2EE/book_shop/web/assets/js/editbook.js</file>
-            <file>file:/C:/Users/Vladimir/Documents/Local%20Projects/J2EE/book_shop/src/java/com/vladimir/dao/DAOCustomer.java</file>
-            <file>file:/C:/Users/Vladimir/Documents/Local%20Projects/J2EE/book_shop/web/assets/js/editcustomer.js</file>
+            <file>file:/C:/Users/Vladimir/Documents/Local%20Projects/J2EE/book_shop/web/WEB-INF/view/book.jsp</file>
             <file>file:/C:/Users/Vladimir/Documents/Local%20Projects/J2EE/book_shop/web/WEB-INF/view/admin/editcustomerorder.jsp</file>
-            <file>file:/C:/Users/Vladimir/Documents/Local%20Projects/J2EE/book_shop/web/assets/css/editbook.css</file>
+            <file>file:/C:/Users/Vladimir/Documents/Local%20Projects/J2EE/book_shop/src/java/com/vladimir/controller/SerendipityController.java</file>
             <file>file:/C:/Users/Vladimir/Documents/Local%20Projects/J2EE/book_shop/src/java/com/vladimir/rest/serendipity/RESTCustomer.java</file>
             <file>file:/C:/Users/Vladimir/Documents/Local%20Projects/J2EE/book_shop/src/java/com/vladimir/rest/serendipity/RESTCustomerOrder.java</file>
+            <file>file:/C:/Users/Vladimir/Documents/Local%20Projects/J2EE/book_shop/src/java/com/vladimir/model/Book.java</file>
+            <file>file:/C:/Users/Vladimir/Documents/Local%20Projects/J2EE/book_shop/web/WEB-INF/view/admin/editbook.jsp</file>
+            <file>file:/C:/Users/Vladimir/Documents/Local%20Projects/J2EE/book_shop/src/java/com/vladimir/dao/DAOCustomerOrder.java</file>
+            <file>file:/C:/Users/Vladimir/Documents/Local%20Projects/J2EE/book_shop/web/assets/css/editcategory.css</file>
+            <file>file:/C:/Users/Vladimir/Documents/Local%20Projects/J2EE/book_shop/src/java/com/vladimir/dao/DAOCategory.java</file>
+            <file>file:/C:/Users/Vladimir/Documents/Local%20Projects/J2EE/book_shop/web/assets/js/editcustomerorder.js</file>
+            <file>file:/C:/Users/Vladimir/Documents/Local%20Projects/J2EE/book_shop/src/java/com/vladimir/model/Customer.java</file>
+            <file>file:/C:/Users/Vladimir/Documents/Local%20Projects/J2EE/book_shop/web/WEB-INF/view/admin/editcategory.jsp</file>
+            <file>file:/C:/Users/Vladimir/Documents/Local%20Projects/J2EE/book_shop/src/java/com/vladimir/dao/DAOCustomer.java</file>
+            <file>file:/C:/Users/Vladimir/Documents/Local%20Projects/J2EE/book_shop/web/assets/js/editcustomer.js</file>
+            <file>file:/C:/Users/Vladimir/Documents/Local%20Projects/J2EE/book_shop/web/assets/css/editbook.css</file>
         </group>
     </open-files>
 </project-private>
