@@ -19,6 +19,8 @@ $( document ).ready(function() {
         $('#ajax_delete_book_response_success').hide();
         $('#ajax_delete_book_response_error').hide();
         
+        $('#ajax_redirect_book_response_error').hide();
+        
         // update book table
         getBook();
     }
@@ -454,7 +456,7 @@ function viewBook(book_id) {
                         if(data.HTTP_CODE == 200) {
                             window.location.href = "/book_shop/book?id=" + book_id;
                         } else {
-                            alert("Invalid book ID!");
+                            $('#ajax_redirect_book_response_error').css({ 'width': '50%', 'margin': '0 auto' }).show().html( '<strong>Oh snap!</strong> ' + data[0].MSG ).delay(5000).fadeOut();
                         }
                 },
                 complete: function(XMLHttpRequest) {

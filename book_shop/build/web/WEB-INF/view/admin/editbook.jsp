@@ -38,6 +38,9 @@
     <!-- Delete book -->
     <div id="ajax_delete_book_response_success" class="alert alert-success"></div>
     <div id="ajax_delete_book_response_error" class="alert alert-danger"></div>
+    
+    <!--Redirect to the book error-->
+    <div id="ajax_redirect_book_response_error" class="alert alert-danger"></div>
     <br />
     
     <!-- jQuery datatables -->
