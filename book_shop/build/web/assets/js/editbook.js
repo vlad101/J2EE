@@ -61,7 +61,7 @@ $( document ).ready(function() {
                             $('input#book_description_add').val('');
                             $('input#book_category_add').val('');
                         } else {
-                            $('#ajax_add_book_response_error').css({ 'width': '100%', 'margin': '0 auto' }).show().html( '<strong>Oh snap!</strong> ' + data[0].MSG ).delay(10000).fadeOut();
+                            $('#ajax_add_book_response_error').css({ 'width': '50%', 'margin': '0 auto' }).show().html( '<strong>Oh snap!</strong> ' + data[0].MSG ).delay(10000).fadeOut();
                         }
                     },
                     complete: function(XMLHttpRequest) {
@@ -212,7 +212,7 @@ function updateBook(obj) {
                         $('#update-book-modal').modal('hide');
                         $('#ajax_update_book_response_success').css({ 'width': '50%', 'margin': '0 auto' }).show().html( '<strong>Well Done!</strong> ' + data[0].MSG ).delay(5000).fadeOut();
                     } else {
-                        $('#ajax_update_book_response_error').css({ 'width': '100%', 'margin': '0 auto' }).show().html( '<strong>Oh snap!</strong> ' + data[0].MSG ).delay(5000).fadeOut();
+                        $('#ajax_update_book_response_error').css({ 'width': '50%', 'margin': '0 auto' }).show().html( '<strong>Oh snap!</strong> ' + data[0].MSG ).delay(5000).fadeOut();
                     }
                 },
                 complete: function(XMLHttpRequest) {
@@ -311,7 +311,7 @@ function doGetBookData(book_list) {
         
         aaData.push({
             'book_id':          book_list[book].book_id,
-            'title':            '<div class="container_book_title_update" ><a href="#" onclick="return viewBook(' + book_list[book].book_id + ');">' + book_list[book].title + '</a></div>',
+            'title':            '<div class="container_book_title_update" ><a style="cursor:pointer;" onclick="return viewBook(' + book_list[book].book_id + ');">' + book_list[book].title + '</a></div>',
             'author':           '<div class="container_book_author_update" >' + book_list[book].author + '</div>',
             'qty':              '<div class="container_book_quantity_update" >' + book_list[book].quantity + '</div>',
             'category_name':    '<div class="container_book_category_name_update" >' + book_list[book].category_name + '</div>',
