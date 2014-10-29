@@ -50,13 +50,9 @@ public class SerendipityController extends HttpServlet {
         if(action.equalsIgnoreCase("/book")) {
             
 //          TODO: book
-            String id = request.getParameter("id");
-            request.setAttribute("id", request.getParameter("id"));
-            
-            System.out.println("************");
-            System.out.println(id);
-            System.out.println("************");
-            
+            String bookId = request.getParameter("id");
+            request.setAttribute("id", bookId);
+                        
             forward = "/book";
             
         }

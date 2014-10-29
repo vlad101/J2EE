@@ -5,7 +5,7 @@
 --%>
 
 <!-- custom edit book css -->
-<link type="text/css" rel="stylesheet" href="<c:url value="/assets/css/editbook.css" />" />
+<link type="text/css" rel="stylesheet" href="<c:url value="/assets/css/book.css" />" />
 
 <!-- jQuery plugin -->
 <script type="text/javascript" src="<c:url value="/assets/jquery/js/jquery-1.10.2.js" />" ></script>
@@ -17,47 +17,23 @@
 <div id="centerColumn">
                 
     <br />
-    <h1>Book Details!</h1>
+    <h1 id="page_title"></h1>
     <div id="book_id"><%= request.getAttribute("id") %></div>
     
     <!--Redirect to the book error-->
     <div id="ajax_book_response_error" class="alert alert-danger"></div>
     <br />
-    
-    <!-- jQuery datatables -->
-    <div id="book-list">
-        <table id="book-list-table" class="display">
-            <thead>
-                <tr>
-                    <th>Expand</th>
-                    <th>Title</th>
-                    <th>Author</th>
-                    <th>Quantity</th>
-                    <th>Category</th>
-                    <th>Price</th>
-                    <th>Description</th>
-                    <th>Last Update</th>
-                    <th>Update</th>
-                    <th>Delete</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-            <tfoot>
-                <tr>
-                    <th>Expand</th>
-                    <th>Title</th>
-                    <th>Author</th>
-                    <th>Quantity</th>
-                    <th>Category</th>
-                    <th>Price</th>
-                    <th>Description</th>
-                    <th>Last Update</th>
-                    <th>Update</th>
-                    <th>Delete</th>
-                </tr>
-            </tfoot>
-        </table>
-    </div>
+</div>
+
+    <!-- Get book details -->
+<div id="leftColumn">
+    <div id="book_title" ></div>
+    <div id="book_author"></div>
+    <div id="book_quantity"></div>
+    <div id="book_category"></div>
+    <div id="book_price"></div>
+    <div id="book_description"></div>
+    <div id="book_last_update"></div>
 </div>
             
 <!-- Include all compiled plugins (below), or include individual files as needed -->

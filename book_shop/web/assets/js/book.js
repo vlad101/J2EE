@@ -87,24 +87,15 @@ function doGetBookData(book_list) {
     book_array.sort();
 
     book = book_array[0];
-
-    alert(book_list[book].book_id);
-    alert(book_list[book].title);
-    alert(book_list[book].author);
-    alert(book_list[book].quantity);
-    alert(book_list[book].category_name);
-    alert(book_list[book].price);    
-    alert(book_list[book].description);
-    alert(book_list[book].last_update);  
-
-    aaData.push({
-        'book_id':          book_list[book].book_id,
-        'title':            '<div class="container_book_title_update" ><a href="#" onclick="return viewBook(' + book_list[book].book_id + ');">' + book_list[book].title + '</a></div>',
-        'author':           '<div class="container_book_author_update" >' + book_list[book].author + '</div>',
-        'qty':              '<div class="container_book_quantity_update" >' + book_list[book].quantity + '</div>',
-        'category_name':    '<div class="container_book_category_name_update" >' + book_list[book].category_name + '</div>',
-        'price':            '<div class="container_book_price_update" >' + book_list[book].price + '</div>',
-        'description':      '<div class="container_book_description_update" >' + book_list[book].description + '</div>',
-        'last_update':      '<div class="container_book_last_update" >' +  book_list[book].last_update + '</div>'
-    });
+    
+//  get and display book data details
+    //alert(book_list[book].book_id);
+    $('#page_title').html('Edit ' + book_list[book].title + ' by ' + book_list[book].author);
+    $('#book_title').html('<p><strong>Title</strong>: ' + book_list[book].title + '</p>');
+    $('#book_author').html('<p><strong>Author</strong>: ' + book_list[book].author + '</p>');
+    $('#book_quantity').html('<p><strong>Quantity</strong>: ' + book_list[book].quantity + '</p>');
+    $('#book_category').html('<p><strong>Category</strong>: ' + book_list[book].category_name + '</p>');
+    $('#book_price').html('<p><strong>Price</strong>: $' + book_list[book].price + '</p>');
+    $('#book_description').html('<p><strong>Description</strong>: ' + book_list[book].description + '</p>');
+    $('#book_last_update').html('<p><strong>Last Update</strong>: ' + book_list[book].last_update + '</p>');
 };
