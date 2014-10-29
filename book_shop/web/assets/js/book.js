@@ -40,6 +40,11 @@ function getBook() {
         
     var d = new Date().getTime();
     
+    if($("#book_id").text() === "" || $("#book_id").text() % 1 !== 0) {
+        $('#ajax_book_response_error').css({ 'width': '60%', 'margin': '0 auto' }).show().html( '<strong>Oh snap! Invalid book ID! Try again! </strong>' );
+        return;
+    }
+    
     ajaxObj = {
                 type: "GET",
                 url: "http://localhost:8080/book_shop/api/v1/book/" + $("#book_id").text(),
