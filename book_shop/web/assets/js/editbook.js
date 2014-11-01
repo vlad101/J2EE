@@ -1,6 +1,9 @@
 // datatable book list
 var oTable;
 
+// Encoding images to base64 string
+var encodedImage;
+
 // typeahead
 var categories = [];
 
@@ -38,6 +41,8 @@ $( document ).ready(function() {
         e.preventDefault(); // cancel form submit
         
         var jsObj = $add_book_form.serializeObject();
+        jsObj["book_image_add"] = encodedImage;
+        console.info(jsObj);
         var ajaxObj = {};
         
         ajaxObj = {
@@ -60,6 +65,7 @@ $( document ).ready(function() {
                             $('input#book_price_add').val('');
                             $('input#book_description_add').val('');
                             $('input#book_category_add').val('');
+                            $('input#book_image_add').val('');
                         } else {
                             $('#ajax_add_book_response_error').css({ 'width': '50%', 'margin': '0 auto' }).show().html( '<strong>Oh snap!</strong> ' + data[0].MSG ).delay(10000).fadeOut();
                         }
@@ -113,6 +119,7 @@ $( document ).ready(function() {
         $('#add-book-modal input[name="book_category_name_add"]').val('');
         $('#add-book-modal input[name="book_price_add"]').val('');
         $('#add-book-modal input[name="book_description_add"]').val('');
+        $('#add-book-modal input[name="book_image_add"]').val('');
     });
     
     $('#update_book_form_submit').click(function(e) {
@@ -466,4 +473,21 @@ function viewBook(book_id) {
     };
     
     return $.ajax(ajaxObj);
+}
+
+function loadImageFileAsURL(imageId){
+
+    var filesSelected = document.getElementById(imageId).files;
+    if (filesSelected.length > 0){
+        var fileToLoad = filesSelected[0];
+
+        var fileReader = new FileReader();
+
+        fileReader.onload = function(fileLoadedEvent) {
+            var srcData = fileLoadedEvent.target.result; // <--- data: base64
+            encodedImage = srcData;
+        };
+
+        fileReader.readAsDataURL(fileToLoad);
+    }
 }

@@ -52,7 +52,7 @@ public class SerendipityController extends HttpServlet {
 //          TODO: book
             String bookId = request.getParameter("id");
             request.setAttribute("id", bookId);
-                        
+            
             forward = "/book";
             
         }

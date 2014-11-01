@@ -34,6 +34,7 @@
     
     <!-- Update book success -->
     <div id="ajax_update_book_response_success" class="alert alert-success"></div>
+    <div id="imgTest"></div>
     
     <!-- Delete book -->
     <div id="ajax_delete_book_response_success" class="alert alert-success"></div>
@@ -146,7 +147,7 @@
             <!-- add new book -->
             <div id="ajax_add_book_response_error" class="alert alert-danger"></div>
               
-            <form id="add_book_form" method="post" action="#">
+            <form id="add_book_form" method="post" action="#" enctype="multipart/form-data">
                 <div id="book_title_add">
                     <label>Title</label>
                     <input type="text" value="" name="book_title_add">
@@ -170,7 +171,11 @@
                 <div id="book_description_add">
                     <label>Description</label>
                     <input type="text" value="" name="book_description_add">
-                </div><br>
+                </div>
+                <!--<div id="book_image_add">-->
+                    <input id="book_image_add" type="file" onchange="loadImageFileAsURL('book_image_add');">
+                <!--</div>--->
+                <br>
                     <input type="hidden" value="" name="book_id_add">
                          
             </form>

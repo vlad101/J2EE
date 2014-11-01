@@ -3,8 +3,12 @@ package com.vladimir.rest.serendipity;
 import com.vladimir.dao.DAOBook;
 import com.vladimir.dao.DAOCategory;
 import com.vladimir.model.Book;
+import com.vladimir.util.ImageFileUtil;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+import java.io.File;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -18,6 +22,9 @@ import javax.ws.rs.core.Response;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.*;
 
 
 /**
@@ -156,6 +163,7 @@ public class RESTBook {
     /**
      * The method creates its own HTTP response and adds Book to the database
      * 
+     * @param bookInfo
      * @return - the response with the book name
      * @throws Exception 
      */
@@ -180,6 +188,86 @@ public class RESTBook {
             String bookPrice = partsData.optString("book_price_add");
             String bookDescription = partsData.optString("book_description_add");
             String bookCategoryName = partsData.optString("book_category_name_add");
+            String bookImage = partsData.optString("book_image_add");
+            
+            
+            System.out.println("**********Add book details start*************");
+            System.out.println("title! -> " + bookTitle);
+            System.out.println("author! -> " + bookAuthor);
+            System.out.println("quantity! -> " + bookQuantity);
+            System.out.println("price! -> " + bookPrice);
+            System.out.println("description! -> " + bookDescription);
+            System.out.println("category! -> " + bookCategoryName);
+            System.out.println("image! -> ");
+            
+            ImageFileUtil imageUtil = new com.vladimir.util.ImageFileUtil(); 
+            imageUtil.decodeImage(bookImage, "2");
+                    
+            System.out.println("***********Add book details end**************");
+//            try
+//            {
+//            String ImageFile="";
+//            String itemName = "";
+//            boolean isMultipart = ServletFileUpload.isMultipartContent(request);
+//            if (!isMultipart)
+//            {
+//            }
+//            else
+//            {
+//            FileItemFactory factory = new DiskFileItemFactory();
+//            ServletFileUpload upload = new ServletFileUpload(factory);
+//            List items = null;
+//            try
+//            {
+//            items = upload.parseRequest(request);
+//            }
+//            catch (FileUploadException e)
+//            {
+//            e.getMessage();
+//            }
+//
+//            Iterator itr = items.iterator();
+//            while (itr.hasNext())
+//            {
+//            FileItem item = (FileItem) itr.next();
+//            if (item.isFormField())
+//            {
+//            String name = item.getFieldName();
+//            String value = item.getString();
+//            if(name.equals("ImageFile"))
+//            {
+//            ImageFile=value;
+//            }
+//
+//            }
+//            else
+//            {
+//            try
+//            {
+//            itemName = item.getName();
+//            File savedFile = new File("config.getServletContext().getRealPath("/")+"Example\\image-folder\\"+itemName);
+//            item.write(savedFile);
+//            }
+//            catch (Exception e)
+//            {
+//            out.println("Error"+e.getMessage());
+//            }
+//            }
+//            }
+//            try
+//            {
+//            st.executeUpdate("insert into test(image) values ('"+itemName+"')");
+//
+//            }
+//            catch(Exception el)
+//            {
+//            out.println("Inserting error"+el.getMessage());
+//            }
+//            }
+//            }
+//            catch (Exception e){
+//            out.println(e.getMessage());
+//            }
                         
 //            validate numbers
             double addBookPrice;
