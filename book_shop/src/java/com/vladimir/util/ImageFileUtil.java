@@ -41,14 +41,13 @@ public class ImageFileUtil {
                             System.out.println("Failed to create directory!");
                     }
             }
-            
-            
+                        
             File outputfile = new File(imagePath + "/" + fileName + ".jpg");
 
             if (outputfile.createNewFile()){
-                System.out.println("File is created!");
+                System.out.println("Book image file is created!");
             }else{
-                System.out.println("File already exists.");
+                System.out.println("Book image file already exists.");
             }
             ImageIO.write(bfi , "jpg", outputfile);
 

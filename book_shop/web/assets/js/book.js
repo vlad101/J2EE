@@ -78,7 +78,6 @@ function getBook() {
  * @returns {undefined}
  */
 function doGetBookData(book_list) {
-    var aaData = [];
     var book_array = [];
     for(var book in book_list) {
         book_array.push(book);
@@ -91,6 +90,10 @@ function doGetBookData(book_list) {
 //  get and display book data details
     //alert(book_list[book].book_id);
     $('#page_title').html('Edit ' + book_list[book].title + ' by ' + book_list[book].author);
+    if (book_list[book].image_path === null)
+        $('#book_image').html('<img src="/book_shop/assets/images/book/' + book_list[book].image_path + '" width="40" height="60" alt="Book cover">');
+    else
+        $('#book_image').html('<img src="/book_shop/assets/images/book/' + 'no_image.jpg' + '" width="150" height="260" alt="Book cover">');
     $('#book_title').html('<p><strong>Title</strong>: ' + book_list[book].title + '</p>');
     $('#book_author').html('<p><strong>Author</strong>: ' + book_list[book].author + '</p>');
     $('#book_quantity').html('<p><strong>Quantity</strong>: ' + book_list[book].quantity + '</p>');

@@ -53,35 +53,35 @@ public class ToJSON {
                     
                     if (rsmd.getColumnType(i) == java.sql.Types.ARRAY) {
                         obj.put(columnName, rs.getArray(columnName));
-                        /*Debug*/ System.out.println("ToJSON: ARRAY");
+                        /*Debug*/ //System.out.println("ToJSON: ARRAY");
                     }
                     else if (rsmd.getColumnType(i) == java.sql.Types.BIGINT) {
                         obj.put(columnName, rs.getInt(columnName));
-                        /*Debug*/ System.out.println("ToJSON: BIGINT");
+                        /*Debug*/ //System.out.println("ToJSON: BIGINT");
                     }
                     else if (rsmd.getColumnType(i) == java.sql.Types.BOOLEAN) {
                         obj.put(columnName, rs.getBoolean(columnName));
-                        /*Debug*/ System.out.println("ToJSON: BOOLEAN");
+                        /*Debug*/ //System.out.println("ToJSON: BOOLEAN");
                     }
                     else if (rsmd.getColumnType(i) == java.sql.Types.BLOB) {
                         obj.put(columnName, rs.getBlob(columnName));
-                        /*Debug*/ System.out.println("ToJSON: BLOB");
+                        /*Debug*/ //System.out.println("ToJSON: BLOB");
                     }
                     else if (rsmd.getColumnType(i) == java.sql.Types.DOUBLE) {
                         obj.put(columnName, rs.getDouble(columnName));
-                        /*Debug*/ System.out.println("ToJSON: DOUBLE");
+                        /*Debug*/ //System.out.println("ToJSON: DOUBLE");
                     }
                     else if (rsmd.getColumnType(i) == java.sql.Types.FLOAT) {
                         obj.put(columnName, rs.getFloat(columnName));
-                        /*Debug*/ System.out.println("ToJSON: FLOAT");
+                        /*Debug*/ //System.out.println("ToJSON: FLOAT");
                     }
                     else if (rsmd.getColumnType(i)==java.sql.Types.INTEGER){
                         obj.put(columnName, rs.getInt(columnName));
-                        /*Debug*/ System.out.println("ToJSON: INTEGER");
+                        /*Debug*/ //System.out.println("ToJSON: INTEGER");
                     }
                     else if (rsmd.getColumnType(i)==java.sql.Types.NVARCHAR){
                         obj.put(columnName, rs.getNString(columnName));
-                        /*Debug*/ System.out.println("ToJSON: NVARCHAR");
+                        /*Debug*/ //System.out.println("ToJSON: NVARCHAR");
                     }
                     else if (rsmd.getColumnType(i)==java.sql.Types.VARCHAR){
                         
@@ -94,23 +94,23 @@ public class ToJSON {
                     }
                     else if (rsmd.getColumnType(i)==java.sql.Types.TINYINT){
                         obj.put(columnName, rs.getInt(columnName));
-                        /*Debug*/ System.out.println("ToJSON: TINYINT");
+                        /*Debug*/ //System.out.println("ToJSON: TINYINT");
                     }
                     else if (rsmd.getColumnType(i)==java.sql.Types.SMALLINT){
                         obj.put(columnName, rs.getInt(columnName));
-                        /*Debug*/ System.out.println("ToJSON: SMALLINT");
+                        /*Debug*/ //System.out.println("ToJSON: SMALLINT");
                     }
                     else if (rsmd.getColumnType(i)==java.sql.Types.DATE){
                         obj.put(columnName, rs.getDate(columnName));
-                        /*Debug*/ System.out.println("ToJSON: DATE");
+                        /*Debug*/ //System.out.println("ToJSON: DATE");
                     }
                     else if (rsmd.getColumnType(i)==java.sql.Types.TIMESTAMP){
                         obj.put(columnName, rs.getTimestamp(columnName));
-                        /*Debug*/ System.out.println("ToJSON: TIMESTAMP");
+                        /*Debug*/ //System.out.println("ToJSON: TIMESTAMP");
                     }
                     else {
                         obj.put(columnName, rs.getObject(columnName));
-                        /*Debug*/ System.out.println("ToJSON: Object: " + columnName);
+                        /*Debug*/ //System.out.println("ToJSON: Object: " + columnName);
                     }
                 } // end for
                 

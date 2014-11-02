@@ -2,7 +2,9 @@ package com.vladimir.rest.serendipity;
 
 import com.vladimir.dao.DAOBook;
 import com.vladimir.dao.DAOCategory;
+import com.vladimir.dao.DAOImage;
 import com.vladimir.model.Book;
+import com.vladimir.model.Image;
 import com.vladimir.util.ImageFileUtil;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -172,7 +174,8 @@ public class RESTBook {
     @Produces(MediaType.APPLICATION_JSON)
     public Response addBook(String bookInfo) throws Exception {
         
-        String returnString;
+        String returnString = null;
+        String bookImage = null;
         JSONArray jsonArray = new JSONArray();
         JSONObject jsonObject = new JSONObject();
         DAOBook daoBook = new DAOBook();
@@ -188,87 +191,8 @@ public class RESTBook {
             String bookPrice = partsData.optString("book_price_add");
             String bookDescription = partsData.optString("book_description_add");
             String bookCategoryName = partsData.optString("book_category_name_add");
-            String bookImage = partsData.optString("book_image_add");
-            
-            
-            System.out.println("**********Add book details start*************");
-            System.out.println("title! -> " + bookTitle);
-            System.out.println("author! -> " + bookAuthor);
-            System.out.println("quantity! -> " + bookQuantity);
-            System.out.println("price! -> " + bookPrice);
-            System.out.println("description! -> " + bookDescription);
-            System.out.println("category! -> " + bookCategoryName);
-            System.out.println("image! -> ");
-            
-            ImageFileUtil imageUtil = new com.vladimir.util.ImageFileUtil(); 
-            imageUtil.decodeImage(bookImage, "2");
-                    
-            System.out.println("***********Add book details end**************");
-//            try
-//            {
-//            String ImageFile="";
-//            String itemName = "";
-//            boolean isMultipart = ServletFileUpload.isMultipartContent(request);
-//            if (!isMultipart)
-//            {
-//            }
-//            else
-//            {
-//            FileItemFactory factory = new DiskFileItemFactory();
-//            ServletFileUpload upload = new ServletFileUpload(factory);
-//            List items = null;
-//            try
-//            {
-//            items = upload.parseRequest(request);
-//            }
-//            catch (FileUploadException e)
-//            {
-//            e.getMessage();
-//            }
-//
-//            Iterator itr = items.iterator();
-//            while (itr.hasNext())
-//            {
-//            FileItem item = (FileItem) itr.next();
-//            if (item.isFormField())
-//            {
-//            String name = item.getFieldName();
-//            String value = item.getString();
-//            if(name.equals("ImageFile"))
-//            {
-//            ImageFile=value;
-//            }
-//
-//            }
-//            else
-//            {
-//            try
-//            {
-//            itemName = item.getName();
-//            File savedFile = new File("config.getServletContext().getRealPath("/")+"Example\\image-folder\\"+itemName);
-//            item.write(savedFile);
-//            }
-//            catch (Exception e)
-//            {
-//            out.println("Error"+e.getMessage());
-//            }
-//            }
-//            }
-//            try
-//            {
-//            st.executeUpdate("insert into test(image) values ('"+itemName+"')");
-//
-//            }
-//            catch(Exception el)
-//            {
-//            out.println("Inserting error"+el.getMessage());
-//            }
-//            }
-//            }
-//            catch (Exception e){
-//            out.println(e.getMessage());
-//            }
-                        
+            bookImage = partsData.optString("book_image_add");
+   
 //            validate numbers
             double addBookPrice;
             int addBookCategoryId;
@@ -294,17 +218,31 @@ public class RESTBook {
 //            validate title, author, and category name
             if (bookTitle == null || bookTitle.length() == 0 || 
                     bookAuthor == null || bookAuthor.length() == 0 ||
-                    bookCategoryName.length() == 0 || bookCategoryName == null ) {
+                    bookCategoryName == null || bookCategoryName.length() == 0 ) {
                 jsonObject.put("HTTP_CODE", "500");
                 jsonObject.put("MSG", "Enter a valid author, title, and category!");
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
             }            
             
             Book book = new Book(addBookId,bookTitle, bookAuthor, addBookQuantity, addBookPrice,bookDescription, null, addBookCategoryId);
-            
+
+//            return id of the added book for the image path purpose instead of 200
             int http_code = daoBook.addBook(book);
             
-            if(http_code == 200) {
+//            add an image to the book
+//            the file name consists of the book id and unique date
+            if(bookImage.contains("data")) {
+                Date date = new Date();
+                String fileName = Integer.toString(http_code) + " " + date.toString();
+                ImageFileUtil imageUtil = new com.vladimir.util.ImageFileUtil(); 
+                imageUtil.decodeImage(bookImage, fileName);
+                
+                Image image = new Image(0, fileName + ".jpg", http_code);
+                DAOImage daoImage = new DAOImage();
+                http_code = daoImage.addImage(image);
+            }
+            
+            if(http_code != 500) {
                 
                 jsonObject.put("HTTP_CODE", "200");
                 jsonObject.put("MSG", "Book has been entered successfully!");

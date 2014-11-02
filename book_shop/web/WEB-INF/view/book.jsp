@@ -34,6 +34,7 @@
     <div id="book_price"></div>
     <div id="book_description"></div>
     <div id="book_last_update"></div>
+    <div id="book_image"></div>
 </div>
             
 <!-- Include all compiled plugins (below), or include individual files as needed -->

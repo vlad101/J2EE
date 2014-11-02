@@ -36,6 +36,7 @@ public class DAOBook {
     
     public int addBook(Book book) {
         
+        int bookId = 500;
         String title = book.getTitle();
         String author = book.getAuthor();
         int quantity = book.getQuantity();
@@ -43,6 +44,7 @@ public class DAOBook {
         String description = book.getDescription();
         int categoryId = book.getCategoryId();
         
+        ResultSet generatedKeys = null;
         String sql = "INSERT INTO book (title, author, quantity, price, description, category_id) "
                                                           + "VALUES(?,?,?,?,?,?);";
         
@@ -50,7 +52,7 @@ public class DAOBook {
         
             conn = db.getConnection();
             conn.setAutoCommit(false);
-            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement = conn.prepareStatement(sql, preparedStatement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, title);
             preparedStatement.setString(2, author);
             preparedStatement.setInt(3, quantity);
@@ -58,8 +60,25 @@ public class DAOBook {
             preparedStatement.setString(5, description);
             preparedStatement.setInt(6, categoryId);
                         
-            preparedStatement.executeUpdate();
+            int affectedRows = preparedStatement.executeUpdate();
+            
+            if(affectedRows == 0) {
+                throw new SQLException("Insert book failed, no rows affected");
+            }
+            
+//            get generated id after an insert success
+            generatedKeys = preparedStatement.getGeneratedKeys();
+            if(generatedKeys.next()) {
+                bookId = generatedKeys.getInt(1);
+            } else {
+                throw new SQLException("Creating book failed, no generated key obtained.");
+            }
+            
             conn.commit();
+                        
+//            rs.close();
+//            rs = null;
+//            System.out.println(bookId);
             
             preparedStatement.close();
             preparedStatement = null;
@@ -74,13 +93,15 @@ public class DAOBook {
             } catch (SQLException ex1) {
                 Logger.getLogger(DAOBook.class.getName()).log(Level.SEVERE, null, ex1);
                 return 500;
+            } finally {
+                if (generatedKeys != null) try { generatedKeys.close(); } catch (SQLException logOrIException) { }
             }
             return 500;
         } finally {
             db.closeConnection();
         }
         
-        return 200;
+        return bookId; //200;
     }
     
     public int updateBook(Book book) {
