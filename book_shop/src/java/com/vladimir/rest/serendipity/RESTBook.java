@@ -8,9 +8,8 @@ import com.vladimir.model.Image;
 import com.vladimir.util.ImageFileUtil;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
-import java.io.File;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -24,9 +23,6 @@ import javax.ws.rs.core.Response;
 import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.*;
 
 
 /**
@@ -78,7 +74,12 @@ public class RESTBook {
                 SimpleDateFormat customFormat = new SimpleDateFormat(updateDateFormat );
                 customFormat.setLenient(false);
                 obj.put("last_update", customFormat.format(book.getLastUpdate()));
-            
+                
+//                get image path for book
+                DAOImage daoImage = new DAOImage();
+                List<String> listImage = daoImage.getImageByBookId(book.getBookId());
+                if(!listImage.isEmpty())
+                    obj.put("image_path", listImage);
             } catch (Exception e) {
                 jsonObject.put("HTTP_CODE", "500");
                 jsonObject.put("MSG", "Server unable to process get book request!");
@@ -232,12 +233,21 @@ public class RESTBook {
 //            add an image to the book
 //            the file name consists of the book id and unique date
             if(bookImage.contains("data")) {
+                
+                String ext;
+                if(bookImage.contains("data:image/jpg"))
+                    ext = ".jpg";
+                else if(bookImage.contains("data:image/jpeg"))
+                    ext = ".jpeg";
+                else
+                    ext = ".png";
+                
                 Date date = new Date();
                 String fileName = Integer.toString(http_code) + " " + date.toString();
                 ImageFileUtil imageUtil = new com.vladimir.util.ImageFileUtil(); 
                 imageUtil.decodeImage(bookImage, fileName);
                 
-                Image image = new Image(0, fileName + ".jpg", http_code);
+                Image image = new Image(0, fileName.replaceAll(" ", "").replaceAll(":", "") + ext, http_code);
                 DAOImage daoImage = new DAOImage();
                 http_code = daoImage.addImage(image);
             }
