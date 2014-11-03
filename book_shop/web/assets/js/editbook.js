@@ -12,6 +12,8 @@ $( document ).ready(function() {
 //    set page event handlers
     function setEventHandlers() {
         
+        $('#book-list').hide();
+        
         // hide CRUD respnse
         $('#ajax_add_book_response_success').hide();
         $('#ajax_add_book_response_error').hide();
@@ -307,6 +309,9 @@ function getBook() {
  * @returns {undefined}
  */
 function doGetBookData(book_list) {
+    $('#preloader').show();
+    $('#preloader-text').show();
+    $('#book-list').hide();
     var aaData = [];
     var book_array = [];
     for(var book in book_list) {
@@ -331,6 +336,9 @@ function doGetBookData(book_list) {
 
         doBuildDataTable(aaData);
     }
+    $('#preloader').hide();
+    $('#preloader-text').hide();
+    $('#book-list').show();
 }
 
 /**

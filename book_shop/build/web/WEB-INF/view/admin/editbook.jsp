@@ -45,8 +45,10 @@
     <br />
     
     <!-- jQuery datatables -->
-    <div id="book-list">
-        <table id="book-list-table" class="display">
+    <div id="preloader"><img src="/book_shop/assets/images/loader/loader.gif" alt="Get book preloader" ></div>
+    <div id="preloader-text">Loading...</div>
+    <div id="book-list" >
+        <table id="book-list-table" class="display" >
             <thead>
                 <tr>
                     <th>Expand</th>
