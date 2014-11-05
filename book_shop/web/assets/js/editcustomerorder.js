@@ -5,6 +5,8 @@ $( document ).ready(function() {
 //    set page event handlers
     function setEventHandlers() {
         
+        $('#customer_order-list').hide();
+        
         // hide CRUD respnse
         $('#ajax_update_customer_order_response_success').hide();
         $('#ajax_update_customer_order_response_error').hide();
@@ -204,6 +206,9 @@ function getCustomerOrder() {
  * @returns {undefined}
  */
 function doGetCustomerOrderData(customer_order_list) {
+    $('#customer_order-list').hide();
+    $('#preloader').show();
+    $('#preloader-text').show();
     var aaData = [];
     var customer_order_array = [];
     for(var customer_order in customer_order_list) {
@@ -227,6 +232,9 @@ function doGetCustomerOrderData(customer_order_list) {
         
         doBuildDataTable(aaData);
     }
+    $('#preloader').hide();
+    $('#preloader-text').hide();
+    $('#customer_order-list').show();
 }
 
 /**

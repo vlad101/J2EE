@@ -41,6 +41,8 @@
     <br />
     
     <!-- jQuery datatables -->
+    <div id="preloader"><img src="/book_shop/assets/images/loader/loader.gif" alt="Get customer preloader" ></div>
+    <div id="preloader-text">Loading...</div>
     <div id="customer-list">
         <table id="customer-list-table" class="display">
             <thead>

@@ -5,6 +5,8 @@ $( document ).ready(function() {
 //    set page event handlers
     function setEventHandlers() {
         
+        $('#customer-list').hide();
+        
         // hide CRUD respnse
         $('#ajax_add_customer_response_success').hide();
         $('#ajax_add_customer_response_error').hide();
@@ -281,6 +283,9 @@ function getCustomer() {
  * @returns {undefined}
  */
 function doGetCustomerData(customer_list) {
+    $('#preloader').hide();
+    $('#preloader-text').hide();
+    $('#customer-list').show();
     var aaData = [];
     var customer_array = [];
     for(var customer in customer_list) {
@@ -307,6 +312,9 @@ function doGetCustomerData(customer_list) {
         
         doBuildDataTable(aaData);
     }
+    $('#preloader').hide();
+    $('#preloader-text').hide();
+    $('#customer-list').show();
 }
 
 /**

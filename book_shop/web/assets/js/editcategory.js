@@ -5,6 +5,8 @@ $( document ).ready(function() {
 //    set page event handlers
     function setEventHandlers() {
         
+        $('#category-list').hide();
+        
         // hide CRUD respnse
         $('#ajax_add_category_response_success').hide();
         $('#ajax_add_category_response_error').hide();
@@ -236,6 +238,9 @@ function getCategory() {
  * @returns {undefined}
  */
 function doGetCategoryData(category_list) {
+    $('#preloader').show();
+    $('#preloader-text').show();
+    $('#category-list').hide();
     var aaData = [];
     var category_array = [];
     for(var category in category_list) {
@@ -256,6 +261,9 @@ function doGetCategoryData(category_list) {
         
         doBuildDataTable(aaData);
     }
+    $('#preloader').hide();
+    $('#preloader-text').hide();
+    $('#category-list').show();
 }
 
 /**

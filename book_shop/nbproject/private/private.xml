@@ -3,19 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/src/java/com/vladimir/model/OrderedBook.java</file>
+            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/src/java/com/vladimir/controller/SerendipityController.java</file>
+            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/src/java/com/vladimir/model/Image.java</file>
+            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/src/java/com/vladimir/util/ImageFileUtil.java</file>
+            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/src/java/com/vladimir/dao/DAOBook.java</file>
             <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/assets/js/book.js</file>
             <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/WEB-INF/view/book.jsp</file>
-            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/assets/js/editbook.js</file>
-            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/src/java/com/vladimir/rest/serendipity/RESTBook.java</file>
-            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/src/java/com/vladimir/controller/SerendipityController.java</file>
-            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/src/java/com/vladimir/util/ImageFileUtil.java</file>
-            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/src/java/com/vladimir/model/Image.java</file>
-            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/src/java/com/vladimir/dao/DAOBook.java</file>
-            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/src/java/com/vladimir/util/ToJSON.java</file>
-            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/WEB-INF/jspf/header.jspf</file>
             <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/src/java/com/vladimir/dao/DAOImage.java</file>
+            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/assets/js/editcustomerorder.js</file>
+            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/assets/js/editbook.js</file>
             <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/WEB-INF/view/admin/editbook.jsp</file>
+            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/src/java/com/vladimir/rest/serendipity/RESTBook.java</file>
         </group>
     </open-files>
 </project-private>
