@@ -59,6 +59,7 @@
                     <th>Price</th>
                     <th>Description</th>
                     <th>Last Update</th>
+                    <th>Image</th>
                     <th>Update</th>
                     <th>Delete</th>
                 </tr>
@@ -74,6 +75,7 @@
                     <th>Price</th>
                     <th>Description</th>
                     <th>Last Update</th>
+                    <th>Image</th>
                     <th>Update</th>
                     <th>Delete</th>
                 </tr>
@@ -124,7 +126,9 @@
                     <label>Last Update</label>
                     <input type="text" value="" name="book_last_update" readonly>
                 </div>
-                    <input type="hidden" value="" name="book_id_update">
+                <input id="book_image_update" type="file" onchange="loadImageFileAsURL('book_image_update');" >
+                <br>
+                <input type="hidden" value="" name="book_id_update">
                          
             </form>
           </div>

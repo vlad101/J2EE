@@ -321,6 +321,15 @@ function doGetBookData(book_list) {
     for(var i in book_array) {
         book = book_array[i];
         
+        var images = '';
+        if (book_list[book].hasOwnProperty("image_path")) {
+            for(var i in book_list[book].image_path) {
+                images = images + '<img src="/book_shop/assets/images/book' + book_list[book].image_path[i] + '" width="25" height="25" alt="Book cover">&nbsp&nbsp';
+            }
+        } else {
+            images = '<img src="/book_shop/assets/images/book/no_image.jpg" width="25" height="25" alt="Book cover">';
+        }
+        
         aaData.push({
             'book_id':          book_list[book].book_id,
             'title':            '<div class="container_book_title_update" ><a style="cursor:pointer;" onclick="return viewBook(' + book_list[book].book_id + ');">' + book_list[book].title + '</a></div>',
@@ -330,6 +339,7 @@ function doGetBookData(book_list) {
             'price':            '<div class="container_book_price_update" >' + book_list[book].price + '</div>',
             'description':      '<div class="container_book_description_update" >' + book_list[book].description + '</div>',
             'last_update':      '<div class="container_book_last_update" >' +  book_list[book].last_update + '</div>',
+            'image':            '<div class="container_book_image" >' +  images + '</div>',
             'updatebtncol':     '<button type="button" class="btn btn-primary btn-small" data-toggle="modal" data-target="#update-book-modal" ' + 'id="book_update_button" value="'  + book_list[book].book_id + '" >Update</button>',
             'deletebtncol':     '<button class="btn btn-danger" id="book_delete_button" value="' + book_list[book].book_id + '" type="button">Delete</button>'
         });
@@ -382,6 +392,10 @@ function doBuildDataTable(aaData) {
                     'data': 'last_update',
                     'class': 'hide_last_update_column' 
                 },
+                {
+                    'data': 'image',
+                    'class': 'hide_image_column' 
+                },
                 { 'data': 'updatebtncol' },
                 { 'data': 'deletebtncol' }
             ]
@@ -397,8 +411,8 @@ function fnFormatDetails( data ) {
     retval +=   '<tr><td><strong>Category: </strong>' + data.category_name + '</td></tr>';
     retval +=   '<tr><td><strong>Description: </strong>' + data.description + '</td></tr>';
     retval +=   '<tr><td><strong>Last Update: </strong>' + data.last_update + '</td></tr>';
+    retval +=   '<tr><td><strong>Image: </strong>' + data.image + '</td></tr>';
     retval += '</table>';
-    
     return retval;
 }
 
