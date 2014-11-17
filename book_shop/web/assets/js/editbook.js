@@ -31,6 +31,22 @@ $( document ).ready(function() {
     }
     
     setEventHandlers();
+    
+    $('.fancybox').fancybox({
+        "fitToView": false
+    });
+
+    $(".fancybox-effects-a").fancybox({
+        
+        helpers: {
+                title : {
+                    type : 'outside'
+                },
+                overlay : {
+                    speedOut : 0
+                }
+        }
+    });
         
     /**
      * The event handler for submit button - add book.
@@ -322,12 +338,15 @@ function doGetBookData(book_list) {
         book = book_array[i];
         
         var images = '';
+        var image_source = '';
         if (book_list[book].hasOwnProperty("image_path")) {
             for(var i in book_list[book].image_path) {
-                images = images + '<img src="/book_shop/assets/images/book' + book_list[book].image_path[i] + '" width="25" height="25" alt="Book cover">&nbsp&nbsp';
+                image_source = "/book_shop/assets/images/book" + book_list[book].image_path[i];
+                images = images + '<a class="fancybox" href="' + image_source + '" data-fancybox-group="gallery" ><img src=' + image_source + ' width="100" height="100" alt="Book cover"></a>&nbsp&nbsp';
             }
         } else {
-            images = '<img src="/book_shop/assets/images/book/no_image.jpg" width="25" height="25" alt="Book cover">';
+            image_source = "/book_shop/assets/images/book/no_image.jpg";
+            images = '<a class="fancybox" href="' + image_source + '" data-fancybox-group="gallery" ><img src=' + image_source + ' width="100" height="100" alt="Book cover"></a>';
         }
         
         aaData.push({
@@ -394,7 +413,8 @@ function doBuildDataTable(aaData) {
                 },
                 {
                     'data': 'image',
-                    'class': 'hide_image_column' 
+                    'class': 'hide_image_column',
+                    'visible': false
                 },
                 { 'data': 'updatebtncol' },
                 { 'data': 'deletebtncol' }

@@ -74,9 +74,9 @@ tr.shown td.details-control {
     display: none;
 }
 
-#book-list-table tr *:nth-child(4) {
+/*#book-list-table tr *:nth-child(4) {
     display: none;
-}
+}*/
 
 // hide category name column
 #book-list-table tbody tr td.hide_category_name_column {

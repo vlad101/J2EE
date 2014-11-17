@@ -45,3 +45,9 @@
 
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <link href="<c:url value="/assets/bootstrap/css/bootstrap.min.css" />">
+
+<!--FancyBox Plugin css-->
+<link rel="stylesheet" href="/book_shop/assets/plugins/fancybox/source/jquery.fancybox.css" type="text/css" media="screen" />
+
+<!--FancyBox Plugin js-->
+<script type="text/javascript" src="/book_shop/assets/plugins/fancybox/source/jquery.fancybox.pack.js"></script>

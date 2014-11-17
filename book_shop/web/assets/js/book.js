@@ -15,6 +15,22 @@ $( document ).ready(function() {
     
     setEventHandlers();
     
+    $('.fancybox').fancybox({
+        "fitToView": false
+    });
+
+    $(".fancybox-effects-a").fancybox({
+        
+        helpers: {
+                title : {
+                    type : 'outside'
+                },
+                overlay : {
+                    speedOut : 0
+                }
+        }
+    });
+    
 //    Initialize the table and child rows
     $('#book-list-table tbody').on('click', 'td.details-control', function () {
         var tr = $(this).closest('tr');
@@ -93,12 +109,15 @@ function doGetBookData(book_list) {
     
     if (book_list[book].hasOwnProperty("image_path")) {
         var images = '';
+        var image_source = '';
         for(var i in book_list[book].image_path) {
-            images = images + '<img src="/book_shop/assets/images/book/' + book_list[book].image_path[i] + '" width="150" height="260" alt="Book cover">&nbsp&nbsp';
+            image_source = "/book_shop/assets/images/book/" + book_list[book].image_path[i];
+            images = images + '<a class="fancybox" href="' + image_source + '" data-fancybox-group="gallery" ><img src=' + image_source + ' width="150" height="260" alt="Book cover"></a>&nbsp&nbsp';
         }
         $('#book_image').html(images);
     } else {
-        $('#book_image').html('<img src="/book_shop/assets/images/book/no_image.jpg" width="150" height="260" alt="Book cover">');
+        image_source = "/book_shop/assets/images/book/no_image.jpg";
+        $('#book_image').html('<a class="fancybox" href="' + image_source + '" data-fancybox-group="gallery" ><img src=' + image_source + ' width="150" height="260" alt="Book cover"></a>');
     }
     
     $('#book_title').html('<p><strong>Title</strong>: ' + book_list[book].title + '</p>');

@@ -208,3 +208,9 @@
 
 <!-- Typeahead js -->
 <script type="text/javascript" language="javascript" src="<c:url value="/assets/plugins/typeahead/typeahead.js" />" ></script>
+
+<!--FancyBox Plugin css-->
+<link rel="stylesheet" href="/book_shop/assets/plugins/fancybox/source/jquery.fancybox.css" type="text/css" media="screen" />
+
+<!--FancyBox Plugin js-->
+<script type="text/javascript" src="/book_shop/assets/plugins/fancybox/source/jquery.fancybox.pack.js"></script>
