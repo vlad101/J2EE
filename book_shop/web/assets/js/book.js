@@ -16,7 +16,18 @@ $( document ).ready(function() {
     setEventHandlers();
     
     $('.fancybox').fancybox({
-        "fitToView": false
+        "fitToView": false,
+        beforeShow: function() {
+            $(".fancybox-inner img").css({
+                width  : 500,
+                height : 500
+            }); 
+            $(".fancybox-wrap fancybox-desktop fancybox-type-image fancybox-opened").css({
+                width  : "auto",
+                height : "auto"
+            });             
+            // apply new size to img
+        }
     });
 
     $(".fancybox-effects-a").fancybox({
