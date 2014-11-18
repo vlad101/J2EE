@@ -17,17 +17,8 @@ $( document ).ready(function() {
     
     $('.fancybox').fancybox({
         "fitToView": false,
-        beforeShow: function() {
-            $(".fancybox-inner img").css({
-                width  : 500,
-                height : 500
-            }); 
-            $(".fancybox-wrap fancybox-desktop fancybox-type-image fancybox-opened").css({
-                width  : "auto",
-                height : "auto"
-            });             
-            // apply new size to img
-        }
+        maxWidth    : 500,
+        minHeight   : 500
     });
 
     $(".fancybox-effects-a").fancybox({

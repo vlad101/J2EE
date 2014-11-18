@@ -33,7 +33,9 @@ $( document ).ready(function() {
     setEventHandlers();
     
     $('.fancybox').fancybox({
-        "fitToView": false
+        "fitToView": false,
+        maxWidth    : 500,
+        minHeight   : 500
     });
 
     $(".fancybox-effects-a").fancybox({
@@ -342,11 +344,11 @@ function doGetBookData(book_list) {
         if (book_list[book].hasOwnProperty("image_path")) {
             for(var i in book_list[book].image_path) {
                 image_source = "/book_shop/assets/images/book" + book_list[book].image_path[i];
-                images = images + '<a class="fancybox" href="' + image_source + '" data-fancybox-group="gallery" ><img src=' + image_source + ' width="100" height="100" alt="Book cover"></a>&nbsp&nbsp';
+                images = images + '<a class="fancybox" href="' + image_source + '" data-fancybox-group="gallery" ><img src=' + image_source + ' width="200" height="200" alt="Book cover"></a>&nbsp&nbsp';
             }
         } else {
             image_source = "/book_shop/assets/images/book/no_image.jpg";
-            images = '<a class="fancybox" href="' + image_source + '" data-fancybox-group="gallery" ><img src=' + image_source + ' width="100" height="100" alt="Book cover"></a>';
+            images = '<a class="fancybox" href="' + image_source + '" data-fancybox-group="gallery" ><img src=' + image_source + ' width="200" height="200" alt="Book cover"></a>';
         }
         
         aaData.push({
