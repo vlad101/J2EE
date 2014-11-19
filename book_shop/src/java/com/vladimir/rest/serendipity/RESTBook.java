@@ -150,6 +150,13 @@ public class RESTBook {
                 
                 obj.put("category_id", obj.getInt("category_id"));
                 obj.put("category_name", daoCategory.getCategoryById(obj.getInt("category_id")).getCategoryName());
+                
+//                get image path for book
+                DAOImage daoImage = new DAOImage();
+                List<String> listImage = daoImage.getImageByBookId(obj.getInt("book_id"));
+                if(!listImage.isEmpty())
+                    obj.put("image_path", listImage);
+                
                 returnString = jsonObject.put(Integer.toString(obj.getInt("book_id")), obj).toString();
             }
         

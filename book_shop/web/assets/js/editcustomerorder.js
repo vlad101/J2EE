@@ -182,7 +182,10 @@ function getCustomerOrder() {
                 data: "ts="+d,
                 contentType: "application/json",
                 error: function(jqXHR, textStatus, errorThrown) {
-                    console.log(jqXHR.responseText);
+                    //console.log(jqXHR.responseText);
+                    $('#ajax_delete_customer_order_response_error').css({ 'width': '50%', 'margin': '0 auto' }).show().html( '<strong>Oh snap! </strong> There are no customer orders!');
+                    $('#preloader').hide();
+                    $('#preloader-text').hide();
                 },
                 success: function(data) {
 //                    onBuildCategoryTable(data.categories);

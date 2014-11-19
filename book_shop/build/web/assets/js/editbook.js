@@ -343,7 +343,7 @@ function doGetBookData(book_list) {
         var image_source = '';
         if (book_list[book].hasOwnProperty("image_path")) {
             for(var i in book_list[book].image_path) {
-                image_source = "/book_shop/assets/images/book" + book_list[book].image_path[i];
+                image_source = "/book_shop/assets/images/book/" + book_list[book].image_path[i];
                 images = images + '<a class="fancybox" href="' + image_source + '" data-fancybox-group="gallery" ><img src=' + image_source + ' width="200" height="200" alt="Book cover"></a>&nbsp&nbsp';
             }
         } else {
