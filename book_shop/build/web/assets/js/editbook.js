@@ -37,18 +37,6 @@ $( document ).ready(function() {
         maxWidth    : 500,
         minHeight   : 500
     });
-
-    $(".fancybox-effects-a").fancybox({
-        
-        helpers: {
-                title : {
-                    type : 'outside'
-                },
-                overlay : {
-                    speedOut : 0
-                }
-        }
-    });
         
     /**
      * The event handler for submit button - add book.
@@ -118,6 +106,7 @@ $( document ).ready(function() {
         var book_price = $tr.find('.container_book_price_update').text();
         var book_description = $tr.find('.container_book_description_update').text();
         var book_last_update = $tr.find('.container_book_last_update').text();
+        var book_image = $tr.find('.container_book_image_update').text();
         
 //        fill in data for modal book update
         $('#update-book-modal input[name="book_id_update"]').val(book_id);
@@ -128,6 +117,7 @@ $( document ).ready(function() {
         $('#update-book-modal input[name="book_price_update"]').val(book_price);
         $('#update-book-modal input[name="book_description_update"]').val(book_description);
         $('#update-book-modal input[name="book_last_update"]').val(book_last_update);
+        $('#book_image').val(book_image);
     });
     
     $(document.body).on('click', '#book_add_button', function() {
@@ -344,11 +334,11 @@ function doGetBookData(book_list) {
         if (book_list[book].hasOwnProperty("image_path")) {
             for(var i in book_list[book].image_path) {
                 image_source = "/book_shop/assets/images/book/" + book_list[book].image_path[i];
-                images = images + '<a class="fancybox" href="' + image_source + '" data-fancybox-group="gallery" ><img src=' + image_source + ' width="200" height="200" alt="Book cover"></a>&nbsp&nbsp';
+                images = images + '<a class="fancybox" href="' + image_source + '" ><img src=' + image_source + ' width="200" height="200" alt="Book cover"></a>&nbsp&nbsp';
             }
         } else {
             image_source = "/book_shop/assets/images/book/no_image.jpg";
-            images = '<a class="fancybox" href="' + image_source + '" data-fancybox-group="gallery" ><img src=' + image_source + ' width="200" height="200" alt="Book cover"></a>';
+            images = '<a class="fancybox" href="' + image_source + '" ><img src=' + image_source + ' width="200" height="200" alt="Book cover"></a>';
         }
         
         aaData.push({
@@ -360,7 +350,7 @@ function doGetBookData(book_list) {
             'price':            '<div class="container_book_price_update" >' + book_list[book].price + '</div>',
             'description':      '<div class="container_book_description_update" >' + book_list[book].description + '</div>',
             'last_update':      '<div class="container_book_last_update" >' +  book_list[book].last_update + '</div>',
-            'image':            '<div class="container_book_image" >' +  images + '</div>',
+            'image':            '<div class="container_book_image_update" >' +  images + '</div>',
             'updatebtncol':     '<button type="button" class="btn btn-primary btn-small" data-toggle="modal" data-target="#update-book-modal" ' + 'id="book_update_button" value="'  + book_list[book].book_id + '" >Update</button>',
             'deletebtncol':     '<button class="btn btn-danger" id="book_delete_button" value="' + book_list[book].book_id + '" type="button">Delete</button>'
         });

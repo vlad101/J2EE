@@ -126,7 +126,11 @@
                     <label>Last Update</label>
                     <input type="text" value="" name="book_last_update" readonly>
                 </div>
-                <input id="book_image_update" type="file" onchange="loadImageFileAsURL('book_image_update');" >
+                 <div id="book_image_update">
+                    <label>Image</label>
+                    <div id="book_image"></div>
+                </div>               
+                <!--<input id="book_image_update" type="file" onchange="loadImageFileAsURL('book_image_update');" >-->
                 <br>
                 <input type="hidden" value="" name="book_id_update">
                          
