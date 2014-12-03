@@ -106,7 +106,7 @@ $( document ).ready(function() {
         var book_price = $tr.find('.container_book_price_update').text();
         var book_description = $tr.find('.container_book_description_update').text();
         var book_last_update = $tr.find('.container_book_last_update').text();
-        var book_image = $tr.find('.container_book_image_update').text();
+        var book_image = $tr.find('.container_book_image_update > .fancybox-images').html();
         
 //        fill in data for modal book update
         $('#update-book-modal input[name="book_id_update"]').val(book_id);
@@ -117,7 +117,24 @@ $( document ).ready(function() {
         $('#update-book-modal input[name="book_price_update"]').val(book_price);
         $('#update-book-modal input[name="book_description_update"]').val(book_description);
         $('#update-book-modal input[name="book_last_update"]').val(book_last_update);
-        $('#book_image').val(book_image);
+        
+        // create radio buttons from the images
+        $('#book_image, #book_image_selection').empty();
+        $('#book_image').append(book_image);
+        var image_update = '';
+        
+        var i = 0;
+        $('#book_image').find('a').each(function() {
+            //alert($(this).attr('href'));
+            image_update = image_update + '<label id="image-block" class="image-block" ><input id="image-' + i + '" type="radio" name="fb" value="small" style="display:none" />' +
+                '<img src="' + $(this).attr('href') + '"  width="150" height="150" alt="Book cover" ></label>';
+            i++;
+        });
+        
+//        jQuery('#image-block').buttonset();
+            
+        $('#book_image_selection').append(image_update).show();
+        jQuery('#image-1').attr('checked', 'checked');
     });
     
     $(document.body).on('click', '#book_add_button', function() {
@@ -329,17 +346,19 @@ function doGetBookData(book_list) {
     for(var i in book_array) {
         book = book_array[i];
         
-        var images = '';
+        var images = '<div class="fancybox-images">';
         var image_source = '';
         if (book_list[book].hasOwnProperty("image_path")) {
             for(var i in book_list[book].image_path) {
                 image_source = "/book_shop/assets/images/book/" + book_list[book].image_path[i];
-                images = images + '<a class="fancybox" href="' + image_source + '" ><img src=' + image_source + ' width="200" height="200" alt="Book cover"></a>&nbsp&nbsp';
+                images = images + '<a class="fancybox" href="' + image_source + '" ><img src=' + image_source + ' width="150" height="150" alt="Book cover"></a>&nbsp&nbsp';
+                images = images + '<a class="fancybox" href="' + image_source + '" ><img src=' + image_source + ' width="150" height="150" alt="Book cover"></a>&nbsp&nbsp';
             }
         } else {
             image_source = "/book_shop/assets/images/book/no_image.jpg";
-            images = '<a class="fancybox" href="' + image_source + '" ><img src=' + image_source + ' width="200" height="200" alt="Book cover"></a>';
+            images = images + '<a class="fancybox" href="' + image_source + '" ><img src=' + image_source + ' width="150" height="150" alt="Book cover"></a>';
         }
+        images = images + '</div>';
         
         aaData.push({
             'book_id':          book_list[book].book_id,
@@ -405,8 +424,7 @@ function doBuildDataTable(aaData) {
                 },
                 {
                     'data': 'image',
-                    'class': 'hide_image_column',
-                    'visible': false
+                    'class': 'hide_image_column'
                 },
                 { 'data': 'updatebtncol' },
                 { 'data': 'deletebtncol' }

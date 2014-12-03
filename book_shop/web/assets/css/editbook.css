@@ -70,38 +70,26 @@ tr.shown td.details-control {
 }
 
 // hide quantity column
-#book-list-table tbody tr td.hide_qty_column {
-    display: none;
-}
-
-/*#book-list-table tr *:nth-child(4) {
+/*#book-list-table tbody tr td.hide_qty_column {
     display: none;
 }*/
 
-// hide category name column
-#book-list-table tbody tr td.hide_category_name_column {
+#book-list-table tr *:nth-child(4) {
     display: none;
 }
 
 #book-list-table tr *:nth-child(5) {
     display: none;
 }
-
-// hide description column
-#book-list-table tbody tr td.hide_description_column {
-    display: none;
-}
-
 #book-list-table tr *:nth-child(7) {
     display: none;
 }
 
-// hide last update column
-#book-list-table tbody tr td.hide_last_update_column {
+#book-list-table tr *:nth-child(8) {
     display: none;
 }
 
-#book-list-table tr *:nth-child(8) {
+#book-list-table tr *:nth-child(9) {
     display: none;
 }
 
@@ -157,4 +145,19 @@ tr.shown td.details-control {
 .empty-message {
     padding: 5px 10px;
     text-align: center;
+}
+
+// image update book selection
+label.image-block > input { /* HIDE RADIO */
+  visibility: hidden;
+  position: absolute;
+}
+
+label.image-block > input + img { /* IMAGE STYLES */
+  cursor:pointer;
+  border:2px solid transparent;
+}
+
+label.image-block > input:checked + img { /* (RADIO CHECKED) IMAGE STYLES */
+  border:2px solid #f00;
 }

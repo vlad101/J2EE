@@ -127,8 +127,9 @@
                     <input type="text" value="" name="book_last_update" readonly>
                 </div>
                  <div id="book_image_update">
-                    <label>Image</label>
-                    <div id="book_image"></div>
+                    <label><br />Select Image Thumbnail</label>
+                    <div id="book_image" style="display:none"></div>
+                    <div id="book_image_selection" style="display:none"></div>
                 </div>               
                 <!--<input id="book_image_update" type="file" onchange="loadImageFileAsURL('book_image_update');" >-->
                 <br>
