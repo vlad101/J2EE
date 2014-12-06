@@ -135,7 +135,9 @@ $( document ).ready(function() {
 //        jQuery('#image-block').buttonset();
             
         $('#book_image_selection').append(image_update).show();
-        jQuery('#image-1').attr('checked', 'checked');
+//        
+//        radio button image check
+//        jQuery('#image-1').attr('checked', 'checked');
     });
     
     $(document.body).on('click', '#book_add_button', function() {
@@ -356,7 +358,6 @@ function doGetBookData(book_list) {
         if (book_list[book].hasOwnProperty("image_path")) {
             for(var i in book_list[book].image_path) {
                 image_source = "/book_shop/assets/images/book/" + book_list[book].image_path[i];
-                images = images + '<a class="fancybox" href="' + image_source + '" ><img src=' + image_source + ' width="150" height="150" alt="Book cover"></a>&nbsp&nbsp';
                 images = images + '<a class="fancybox" href="' + image_source + '" ><img src=' + image_source + ' width="150" height="150" alt="Book cover"></a>&nbsp&nbsp';
             }
         } else {
