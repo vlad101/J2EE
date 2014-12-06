@@ -127,17 +127,22 @@ $( document ).ready(function() {
         var i = 0;
         $('#book_image').find('a').each(function() {
             //alert($(this).attr('href'));
+            if($(this).attr('href').indexOf('no_image.jpg') === -1)
+                image_update = image_update + '<input type="checkbox" >';
             image_update = image_update + '<label id="image-block" class="image-block" ><input id="image-' + i + '" type="radio" name="fb" value="small" style="display:none" />' +
-                '<img src="' + $(this).attr('href') + '"  width="150" height="150" alt="Book cover" ></label>';
+                '<img src="' + $(this).attr('href') + '"  width="100" height="100" alt="Book cover" ></label><br />';
             i++;
         });
-        
-//        jQuery('#image-block').buttonset();
             
         $('#book_image_selection').append(image_update).show();
-//        
+        
+//        add the message if the book has images
+        if($('#book_image_selection').html().indexOf('no_image.jpg') === -1)
+            $('#book_image_selection').append("<br />Check image to delete.<br />Select image for default");
+
 //        radio button image check
-//        jQuery('#image-1').attr('checked', 'checked');
+        if(i == 1)
+            jQuery('#image-0').attr('checked', 'checked');
     });
     
     $(document.body).on('click', '#book_add_button', function() {
