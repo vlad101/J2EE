@@ -126,12 +126,12 @@
                     <label>Last Update</label>
                     <input type="text" value="" name="book_last_update" readonly>
                 </div>
-                 <div id="book_image_update">
+                 <div id="book_image_list_update">
                     <label><br />Select Image Thumbnail</label>
                     <div id="book_image" style="display:none"></div>
                     <div id="book_image_selection" style="display:none"></div>
                 </div>               
-                <!--<input id="book_image_update" type="file" onchange="loadImageFileAsURL('book_image_update');" >-->
+                <input id="book_image_update" type="file" onchange="loadImageFileAsURL('book_image_update');">
                 <br>
                 <input type="hidden" value="" name="book_id_update">
                          
@@ -183,9 +183,7 @@
                     <label>Description</label>
                     <input type="text" value="" name="book_description_add">
                 </div>
-                <!--<div id="book_image_add">-->
                     <input id="book_image_add" type="file" onchange="loadImageFileAsURL('book_image_add');">
-                <!--</div>--->
                 <br>
                     <input type="hidden" value="" name="book_id_add">
                          

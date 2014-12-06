@@ -50,7 +50,7 @@ $( document ).ready(function() {
         
         var jsObj = $add_book_form.serializeObject();
         jsObj["book_image_add"] = encodedImage;
-        console.info(jsObj);
+        //console.info(jsObj);
         var ajaxObj = {};
         
         ajaxObj = {
@@ -106,7 +106,7 @@ $( document ).ready(function() {
         var book_price = $tr.find('.container_book_price_update').text();
         var book_description = $tr.find('.container_book_description_update').text();
         var book_last_update = $tr.find('.container_book_last_update').text();
-        var book_image = $tr.find('.container_book_image_update > .fancybox-images').html();
+        var book_image = $tr.find('.container_book_image_list_update > .fancybox-images').html();
         
 //        fill in data for modal book update
         $('#update-book-modal input[name="book_id_update"]').val(book_id);
@@ -117,6 +117,7 @@ $( document ).ready(function() {
         $('#update-book-modal input[name="book_price_update"]').val(book_price);
         $('#update-book-modal input[name="book_description_update"]').val(book_description);
         $('#update-book-modal input[name="book_last_update"]').val(book_last_update);
+        $('#book_image_update').val('');
         
         // create radio buttons from the images
         $('#book_image, #book_image_selection').empty();
@@ -146,7 +147,7 @@ $( document ).ready(function() {
         $('#add-book-modal input[name="book_category_name_add"]').val('');
         $('#add-book-modal input[name="book_price_add"]').val('');
         $('#add-book-modal input[name="book_description_add"]').val('');
-        $('#add-book-modal input[name="book_image_add"]').val('');
+        $('#book_image_add').val('');
     });
     
     $('#update_book_form_submit').click(function(e) {
@@ -155,7 +156,11 @@ $( document ).ready(function() {
             e.preventDefault(); // cancel form submit
         }); // submit form
        
+//       add image update
         var obj = $update_book_form.serializeObject();
+        obj["book_image_update"] = encodedImage;
+        console.info(obj);
+        
         updateBook(obj);
     });
     
@@ -369,7 +374,7 @@ function doGetBookData(book_list) {
             'price':            '<div class="container_book_price_update" >' + book_list[book].price + '</div>',
             'description':      '<div class="container_book_description_update" >' + book_list[book].description + '</div>',
             'last_update':      '<div class="container_book_last_update" >' +  book_list[book].last_update + '</div>',
-            'image':            '<div class="container_book_image_update" >' +  images + '</div>',
+            'image':            '<div class="container_book_image_list_update" >' +  images + '</div>',
             'updatebtncol':     '<button type="button" class="btn btn-primary btn-small" data-toggle="modal" data-target="#update-book-modal" ' + 'id="book_update_button" value="'  + book_list[book].book_id + '" >Update</button>',
             'deletebtncol':     '<button class="btn btn-danger" id="book_delete_button" value="' + book_list[book].book_id + '" type="button">Delete</button>'
         });
