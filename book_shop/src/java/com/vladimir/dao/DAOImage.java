@@ -187,8 +187,19 @@ public class DAOImage {
                 int imageId = rs.getInt("image_id");
                 String imagePath = rs.getString("path");
                 int imageBookId = rs.getInt("book_id");
+                int imageDefault = rs.getInt("default_image");
                 image = new Image(imageId, imagePath, imageBookId);
-                imagePathList.add(image.getPath());
+                
+//                if image is default, add 1_ flag
+                if(imageDefault == 1)
+                    imagePathList.add("1_" + image.getPath());
+                else
+                    imagePathList.add(image.getPath());
+            }
+            
+//                if there is only one image, make it default
+            if(imagePathList.size() == 1) {
+                imagePathList.set(0, "1_" + imagePathList.get(0));                  
             }
             
             rs.close();

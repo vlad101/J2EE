@@ -4,10 +4,12 @@ package com.vladimir.model;
  *
  * @author Vladimir
  */
+
 public class Image {
     
     private int imageId;
     private String path;
+    private int imageIsDefault;
     private int bookId;
 
     public Image(int imageId, String path, int bookId) {
@@ -39,10 +41,18 @@ public class Image {
     public void setBookId(int bookId) {
         this.bookId = bookId;
     }
+    
+    public int getImageIsDefault() {
+        return imageIsDefault;
+    }
+
+    public void setImageIsDefault(int imageIsDefault) {
+        this.imageIsDefault = imageIsDefault;
+    }
 
     @Override
     public String toString() {
         return "Image{" + "imageId=" + imageId
-                + ", path=" + path + ", bookId=" + bookId + '}';
+                + ", path=" + path + ", bookId=" + bookId + ", imageIsDefault=" + imageIsDefault + '}';
     }
 }

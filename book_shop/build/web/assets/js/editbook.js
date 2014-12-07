@@ -7,6 +7,9 @@ var encodedImage;
 // typeahead
 var categories = [];
 
+//default image list
+var defaultImageList = [];
+
 $( document ).ready(function() {
 
 //    set page event handlers
@@ -126,19 +129,15 @@ $( document ).ready(function() {
         
         var i = 0;
         $('#book_image').find('a').each(function() {
-            //alert($(this).attr('href'));
             if($(this).attr('href').indexOf('no_image.jpg') === -1) {
                 //  keep image path that follows afer the substring /book_shop/assets/images/book/
                 var image_path_delete = $(this).attr('href').substring(30);
                 image_update = image_update + '<input type="checkbox" name="' + image_path_delete + '" >';
             }
-            image_update = image_update + '<label id="image-block" class="image-block" ><input id="image-' + i + '" type="radio" name="fb" value="small" style="display:none" />' +
-                '<img src="' + $(this).attr('href') + '"  width="100" height="100" alt="Book cover" ></label><br />';
+            image_update = image_update + '<label id="image-block" class="image-block" ><input id="' + $(this).attr('href').substring(30).replace(/\..*/,'') + '" type="radio" name="' + $(this).attr('href').substring(30).replace(/\..*/,'') + '" value="small" style="display:none" />';
+            image_update = image_update + '<img src="' + $(this).attr('href') + '"  width="100" height="100" alt="Book cover" ></label><br />';
             i++;
         });
-        
-//        if($('#book_image_selection').html().indexOf('no_image.jpg') === -1)
-//            image_update = '<div id="checkboxes-delete">' + image_update + '</div>';
             
         $('#book_image_selection').append(image_update).show();
         
@@ -148,10 +147,15 @@ $( document ).ready(function() {
             if(i > 1)
                 $('#book_image_selection').append("<br />Select image for default.");
         }
+        
+//        if there is no image, make it default
+        jQuery("#no_image").attr('checked', 'checked');
 
-//       if there is only one image, check it and make it default
-        if(i === 1)
-            jQuery('#image-0').attr('checked', 'checked');
+//        select all default images
+        for(var default_image in defaultImageList) {
+            var image_delete = ("#" + defaultImageList[default_image]).replace(/\..*/,'');
+            jQuery(image_delete).attr('checked', 'checked');
+        }
     });
     
     $(document.body).on('click', '#book_add_button', function() {
@@ -369,6 +373,7 @@ function doGetBookData(book_list) {
     $('#preloader').show();
     $('#preloader-text').show();
     $('#book-list').hide();
+    defaultImageList = [];
     var aaData = [];
     var book_array = [];
     for(var book in book_list) {
@@ -382,7 +387,15 @@ function doGetBookData(book_list) {
         var image_source = '';
         if (book_list[book].hasOwnProperty("image_path")) {
             for(var i in book_list[book].image_path) {
-                image_source = "/book_shop/assets/images/book/" + book_list[book].image_path[i];
+                
+//                if image path contains "1_", add it to a default image list and remove a flag
+                if(book_list[book].image_path[i].indexOf('1_') !== -1) {
+                    defaultImageList.push(book_list[book].image_path[i].substring(2));
+                    image_source = "/book_shop/assets/images/book/" + book_list[book].image_path[i].substring(2);
+                } else {
+                    image_source = "/book_shop/assets/images/book/" + book_list[book].image_path[i];
+                }
+                    
                 images = images + '<a class="fancybox" href="' + image_source + '" ><img src=' + image_source + ' width="150" height="150" alt="Book cover"></a>&nbsp&nbsp';
             }
         } else {
