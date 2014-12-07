@@ -169,13 +169,12 @@ $( document ).ready(function() {
     $('#update_book_form_submit').click(function(e) {
         
 //        get selected images to delete
-        var selected = [];
-        $('#book_image_selection input:checked').each(function() {
-            if($(this).attr('name').indexOf('fb') === -1) {
-                selected.push($(this).attr('name'));
+        var selected_delete_image = [];
+        $('#book_image_selection input:checkbox').each(function() {
+            if($(this).is(":checked")) {
+                selected_delete_image.push($(this).attr('name'));
             }
         });
-        alert(selected);
         
         $($update_book_form).submit(function(){
             e.preventDefault(); // cancel form submit
@@ -184,7 +183,10 @@ $( document ).ready(function() {
 //       add image update
         var obj = $update_book_form.serializeObject();
         obj["book_image_update"] = encodedImage;
-        console.info(obj);
+//        console.info(obj);
+//        
+        // add list deleted images
+        obj["book_image_list_delete_update"] = String(selected_delete_image);
         
         updateBook(obj);
     });

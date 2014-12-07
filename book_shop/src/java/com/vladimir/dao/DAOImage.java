@@ -123,19 +123,20 @@ public class DAOImage {
      * This method will allow you to delete data in the book image table.
      * Consider storing data in the temporary table and not to delete completely.
      * 
-     * @param imageId
+     * @param image
      * @return HTTP status
      */
-    public int deleteCustomerOrder(int imageId) {
+    public int deleteImage(Image image) {
          
-        String sql = "DELETE FROM image WHERE image_id=?;";
+        String sql = "DELETE FROM image WHERE path=? and book_id=?;";
         
         try {
         
             conn = db.getConnection();
             conn.setAutoCommit(false);
             preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setInt(1, imageId);
+            preparedStatement.setString(1, image.getPath());
+            preparedStatement.setInt(2, image.getBookId());
             preparedStatement.executeUpdate();
             conn.commit();
             

@@ -7,7 +7,9 @@ import com.vladimir.model.Book;
 import com.vladimir.model.Image;
 import com.vladimir.util.ImageFileUtil;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -300,6 +302,7 @@ public class RESTBook {
         
         String returnString;
         String bookImage = null;
+        String deleteImageList = null;
         
         JSONArray jsonArray = new JSONArray();
         JSONObject jsonObject = new JSONObject();
@@ -315,7 +318,8 @@ public class RESTBook {
             String bookDescription = partsData.optString("book_description_update");
             String bookCategoryName = partsData.optString("book_category_name_update");
             bookImage = partsData.optString("book_image_update");
-            
+            deleteImageList = partsData.optString("book_image_list_delete_update");
+                        
             int updateBookId;
             double updateBookPrice;
             int updateBookCategoryId;
@@ -346,9 +350,7 @@ public class RESTBook {
                 jsonObject.put("MSG", "Enter a valid number values!");
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
             }
-            
-            
-                        
+                    
             book = new Book(updateBookId, bookTitle, bookAuthor, updateBookQuantity, updateBookPrice, bookDescription, null, updateBookCategoryId);
             int http_code = daoBook.updateBook(book);
             
@@ -372,6 +374,15 @@ public class RESTBook {
                 Image image = new Image(0, fileName.replaceAll(" ", "").replaceAll(":", "") + ext, updateBookId);
                 DAOImage daoImage = new DAOImage();
                 http_code = daoImage.addImage(image);
+            }
+            
+            if(deleteImageList != null && deleteImageList.length() != 0) {
+                List<String> imageList = Arrays.asList(deleteImageList.split("\\s*,\\s*"));
+                for(String imageName : imageList) {
+                    Image image = new Image(0, imageName, updateBookId);
+                    DAOImage daoImage = new DAOImage();
+                    http_code = daoImage.deleteImage(image);
+                }
             }
             
             if(http_code == 200) {
