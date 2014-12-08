@@ -113,7 +113,12 @@ function doGetBookData(book_list) {
         var images = '';
         var image_source = '';
         for(var i in book_list[book].image_path) {
-            image_source = "/book_shop/assets/images/book/" + book_list[book].image_path[i];
+//                if image path contains "1_", add it to a default image list and remove a flag
+            if(book_list[book].image_path[i].indexOf('1_') !== -1) {
+                image_source = "/book_shop/assets/images/book/" + book_list[book].image_path[i].substring(2);
+            } else {
+                image_source = "/book_shop/assets/images/book/" + book_list[book].image_path[i];
+            }
             images = images + '<a class="fancybox" href="' + image_source + '" data-fancybox-group="gallery" ><img src=' + image_source + ' width="150" height="260" alt="Book cover"></a>&nbsp&nbsp';
         }
         $('#book_image').html(images);

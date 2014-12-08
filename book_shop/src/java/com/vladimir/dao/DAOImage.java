@@ -42,17 +42,23 @@ public class DAOImage {
         String imagePath = image.getPath();
         int bookId = image.getBookId();
         
-        String sql = "INSERT INTO image VALUES(null,?,?);";
+        String sql1 = "UPDATE image SET default_image=0 where book_id=?;";
+        String sql2 = "INSERT INTO image VALUES(null,?,?,1);";
         
         try {
         
             conn = db.getConnection();
             conn.setAutoCommit(false);
-            preparedStatement = conn.prepareStatement(sql);
+            
+            preparedStatement = conn.prepareStatement(sql1);
+            preparedStatement.setInt(1, bookId);
+            preparedStatement.executeUpdate();
+            
+            preparedStatement = conn.prepareStatement(sql2);
             preparedStatement.setString(1, imagePath);
             preparedStatement.setInt(2, bookId);
-                        
             preparedStatement.executeUpdate();
+            
             conn.commit();
             
             preparedStatement.close();
@@ -198,7 +204,7 @@ public class DAOImage {
             }
             
 //                if there is only one image, make it default
-            if(imagePathList.size() == 1) {
+            if(imagePathList.size() == 1 && !imagePathList.get(0).contains("1_")) {
                 imagePathList.set(0, "1_" + imagePathList.get(0));                  
             }
             
@@ -218,7 +224,55 @@ public class DAOImage {
         }
         
         return imagePathList;
-    }    
+    }
+    
+    /**
+     * This method will allow you to update book image data.
+     * 
+     * @param bookId
+     * @param defaultImage
+     * @return HTTP status
+     */
+    public int setDefaultImage(String defaultImage, int bookId) {
+
+        String sql1 = "UPDATE image SET default_image=0 where book_id=?;";
+        String sql2 = "UPDATE image SET default_image=1 WHERE path LIKE ? AND book_id=?;";
+        
+        try {
+            conn = db.getConnection();
+            conn.setAutoCommit(false);
+            
+            preparedStatement = conn.prepareStatement(sql1);
+            preparedStatement.setInt(1, bookId);
+            preparedStatement.executeUpdate();            
+            
+            preparedStatement = conn.prepareStatement(sql2);
+            preparedStatement.setString(1, "%" + defaultImage + "%");
+            preparedStatement.setInt(2, bookId);
+            preparedStatement.executeUpdate();
+            conn.commit();
+            
+            preparedStatement.close();
+            preparedStatement = null;
+            
+            conn.close();
+            conn = null;
+            
+        } catch (SQLException e) {
+            Logger.getLogger(DAOImage.class.getName()).log(Level.SEVERE, "Could not update image.", e);
+            try {
+                conn.rollback();
+            } catch (SQLException ex) {
+                Logger.getLogger(DAOImage.class.getName()).log(Level.SEVERE, "Coud not update image.", ex);
+                return 500;
+            }
+            return 500;
+        } finally {
+            db.closeConnection();
+        }
+        
+        return 200; // success
+    }
     
     /**
      * This method will allow you to get all image data from image table.

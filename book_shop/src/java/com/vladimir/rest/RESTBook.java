@@ -300,8 +300,9 @@ public class RESTBook {
         DAOCategory daoCategory = new DAOCategory();
         
         String returnString;
-        String bookImage = null;
-        String deleteImageList = null;
+        String bookImage;
+        String deleteImageList;
+        String defaultImage;
         
         JSONArray jsonArray = new JSONArray();
         JSONObject jsonObject = new JSONObject();
@@ -318,6 +319,7 @@ public class RESTBook {
             String bookCategoryName = partsData.optString("book_category_name_update");
             bookImage = partsData.optString("book_image_update");
             deleteImageList = partsData.optString("book_image_list_delete_update");
+            defaultImage = partsData.optString("book_image_default_update");
                         
             int updateBookId;
             double updateBookPrice;
@@ -382,6 +384,20 @@ public class RESTBook {
                     DAOImage daoImage = new DAOImage();
                     http_code = daoImage.deleteImage(image);
                 }
+            }
+            
+            if(deleteImageList != null && deleteImageList.length() != 0) {
+                List<String> imageList = Arrays.asList(deleteImageList.split("\\s*,\\s*"));
+                for(String imageName : imageList) {
+                    Image image = new Image(0, imageName, updateBookId);
+                    DAOImage daoImage = new DAOImage();
+                    http_code = daoImage.deleteImage(image);
+                }
+            }
+            
+            if(defaultImage != null && defaultImage.length() != 0) {
+                DAOImage daoImage = new DAOImage();
+                http_code = daoImage.setDefaultImage(defaultImage, updateBookId);
             }
             
             if(http_code == 200) {

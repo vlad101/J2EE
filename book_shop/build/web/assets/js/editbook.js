@@ -11,10 +11,10 @@ var categories = [];
 var defaultImageList = [];
 
 $( document ).ready(function() {
-
+    
 //    set page event handlers
     function setEventHandlers() {
-        
+    
         $('#book-list').hide();
         
         // hide CRUD respnse
@@ -53,6 +53,7 @@ $( document ).ready(function() {
         
         var jsObj = $add_book_form.serializeObject();
         jsObj["book_image_add"] = encodedImage;
+        encodedImage = '';
         //console.info(jsObj);
         var ajaxObj = {};
         
@@ -134,7 +135,7 @@ $( document ).ready(function() {
                 var image_path_delete = $(this).attr('href').substring(30);
                 image_update = image_update + '<input type="checkbox" name="' + image_path_delete + '" >';
             }
-            image_update = image_update + '<label id="image-block" class="image-block" ><input id="' + $(this).attr('href').substring(30).replace(/\..*/,'') + '" type="radio" name="' + $(this).attr('href').substring(30).replace(/\..*/,'') + '" value="small" style="display:none" />';
+            image_update = image_update + '<label id="image-block" class="image-block" ><input id="' + $(this).attr('href').substring(30).replace(/\..*/,'') + '" type="radio" name="fb" value="small" style="display:none" />';
             image_update = image_update + '<img src="' + $(this).attr('href') + '"  width="100" height="100" alt="Book cover" ></label><br />';
             i++;
         });
@@ -171,15 +172,7 @@ $( document ).ready(function() {
     });
     
     $('#update_book_form_submit').click(function(e) {
-        
-//        get selected images to delete
-        var selected_delete_image = [];
-        $('#book_image_selection input:checkbox').each(function() {
-            if($(this).is(":checked")) {
-                selected_delete_image.push($(this).attr('name'));
-            }
-        });
-        
+                
         $($update_book_form).submit(function(){
             e.preventDefault(); // cancel form submit
         }); // submit form
@@ -187,10 +180,31 @@ $( document ).ready(function() {
 //       add image update
         var obj = $update_book_form.serializeObject();
         obj["book_image_update"] = encodedImage;
+        encodedImage = '';
 //        console.info(obj);
-//        
+        
+//       get selected images to delete
+        var selected_delete_image = [];
+        $('#book_image_selection input:checkbox').each(function() {
+            if($(this).is(":checked")) {
+                selected_delete_image.push($(this).attr('name'));
+            }
+        });
+        
         // add list deleted images
         obj["book_image_list_delete_update"] = String(selected_delete_image);
+        
+//        get selected images to delete
+        var selected_default_image = '';
+        $('#book_image_selection input:radio').each(function() {
+            if($(this).is(":checked")) {
+                selected_default_image = String($(this).attr('id'));
+            }
+        });
+//       if there a default image, update it
+        if(selected_default_image.indexOf('no_image') === -1) {
+            obj["book_image_default_update"] = selected_default_image;
+        }
         
         updateBook(obj);
     });
