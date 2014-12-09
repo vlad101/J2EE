@@ -1,0 +1,20 @@
+/* 
+    Created on : Jun 3, 2014, 6:41:00 PM
+    Author     : Vladimir
+*/
+
+/* footer styles */
+#footer {
+    height: 60px;
+    width: 100%; //350px;
+    clear: left;
+    background: #aaa;
+}
+
+#footer hr {
+    border: 0;
+    background-color: #333;
+    height: 1px;
+    margin: 1%;//0 25px;
+    width: 98%;//300px;
+}

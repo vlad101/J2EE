@@ -1,0 +1,25 @@
+/* 
+    Created on : Jun 1, 2014, 5:42:20 PM
+    Author     : Vladimir
+*/
+
+/* checkout page styles */
+#checkoutTable {
+    width: 360px;
+    background-color: #f5eabe;
+    float: left;
+    height: 280px;
+}
+
+#infoBox {
+    width: 300px;
+    padding-left: 30px;
+    float: left;
+}
+
+#priceBox {
+    padding: 10px;
+    margin: 10px 0;
+    height: 128px;
+    background-color: #c3e3e0;
+}

@@ -1,0 +1,16 @@
+<%-- 
+    Document   : cart
+    Created on : May 31, 2014, 8:33:14 PM
+    Author     : Vladimir
+--%>
+
+            <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+            <link type="text/css" rel="stylesheet" href="<c:url value="/assets/css/footer.css" />" />
+      
+            <div id="footer">
+                <hr>
+                <p id="footerText">Copyright &#169; 2013-2014</p>
+            </div>
+        </div>
+    </body>
+</html>
