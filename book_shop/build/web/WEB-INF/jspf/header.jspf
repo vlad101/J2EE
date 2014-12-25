@@ -13,9 +13,14 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-        <link rel="stylesheet" href="/assets/css/normalize.css">
-        <script src="/assets/js/vendor/modernizr-2.6.2.min.js"></script>
+        <!-- jQuery plugin -->
+        <script type="text/javascript" src="<c:url value="/assets/jquery/js/jquery-1.10.2.js" />" ></script>
+
+        <!-- Global variable plugin -->
+        <script type="text/javascript" src="<c:url value="/assets/jquery/js/jquery-1.10.2.js" />" ></script>
+        
+        <link rel="stylesheet" href="<c:url value="/assets/css/normalize.css" />">
+        <script src="<c:url value="/assets/js/vendor/modernizr-2.6.2.min.js" />"></script>
         
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -35,7 +40,8 @@
         <![endif]-->
         
         <!-- jQuery custom plugin -->
-        <script type="text/javascript" src="<c:url value="/assets/js/polyfill.js" />" ></script>
+        <script type="text/javascript" src="<c:url value="/assets/js/global/polyfill.js" />" ></script>
+        <script type="text/javascript" src="<c:url value="/assets/js/global/global.js" />" ></script>
         
         <div id="main">
             <div id="header">
@@ -51,9 +57,9 @@
                         [ shopping cart widget ]
                     </div>
                     <a href="#">
-                        <img src="/book_shop/assets/images/logo/logo.jpg" id="logo" alt="Serendipity logo">
+                        <img src="<c:url value="/assets/images/logo/logo.jpg" />" id="logo" alt="Serendipity logo">
                     </a>
-                    <img src="/book_shop/assets/images/logo/logoText.jpg" id="logoText" alt="The Serendipity">
+                    <img src="<c:url value="/assets/images/logo/logoText.jpg" />" id="logoText" alt="The Serendipity">
                 </div>
                 
             </div>

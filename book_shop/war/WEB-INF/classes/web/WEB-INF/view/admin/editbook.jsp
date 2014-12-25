@@ -10,9 +10,6 @@
 <!-- Datatable css -->
 <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.0-beta.1/css/jquery.dataTables.css">
 
-<!-- jQuery plugin -->
-<script type="text/javascript" src="<c:url value="/assets/jquery/js/jquery-1.10.2.js" />" ></script>
-
 <!-- custom edit book page js -->
 <script type="text/javascript" src="<c:url value="/assets/js/editbook.js" />" ></script>
 
@@ -44,7 +41,7 @@
     <br />
     
     <!-- jQuery datatables -->
-    <div id="preloader"><img src="/book_shop/assets/images/loader/loader.gif" alt="Get book preloader" ></div>
+    <div id="preloader"><img src="<c:url value="/assets/images/loader/loader.gif" />" alt="Get book preloader" ></div>
     <div id="preloader-text">Loading...</div>
     <div id="book-list" >
         <table id="book-list-table" class="display" >
@@ -212,7 +209,7 @@
 <script type="text/javascript" language="javascript" src="<c:url value="/assets/plugins/typeahead/typeahead.js" />" ></script>
 
 <!--FancyBox Plugin css-->
-<link rel="stylesheet" href="/book_shop/assets/plugins/fancybox/source/jquery.fancybox.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="<c:url value="/assets/plugins/fancybox/source/jquery.fancybox.css" />" type="text/css" media="screen" />
 
 <!--FancyBox Plugin js-->
-<script type="text/javascript" src="/book_shop/assets/plugins/fancybox/source/jquery.fancybox.pack.js"></script>
+<script type="text/javascript" src="<c:url value="/assets/plugins/fancybox/source/jquery.fancybox.pack.js" />" ></script>

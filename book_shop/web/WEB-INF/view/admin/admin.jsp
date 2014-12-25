@@ -7,8 +7,6 @@
 <link type="text/css" rel="stylesheet" href="<c:url value="/assets/css/admin.css" />" />
 
 <!-- include jquery core files -->
-<script type="text/javascript" src="/book_shop/assets/jquery/js/jquery-1.10.2.js" ></script>
-
 <script type="text/javascript" src="<c:url value="/assets/js/admin.js" />" ></script>
 
 <div id="adminCenterColumn">

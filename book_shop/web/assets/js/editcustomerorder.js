@@ -110,7 +110,7 @@ function updateCustomerOrder(obj) {
     ajaxObj = {
         
                 type: "PUT",
-                url: "http://localhost:8080/book_shop/api/v1/customerOrder/",
+                url: base_url + "/book_shop/api/v1/customerOrder/",
                 data: JSON.stringify(obj),
                 contentType: "application/json",
                 error: function(jqXHR, textStatus, errorThrown) {
@@ -145,7 +145,7 @@ function deleteCustomerOrder(obj) {
     
     ajaxObj = {
                 type: "DELETE",
-                url: "http://localhost:8080/book_shop/api/v1/customerOrder/",
+                url: base_url + "/book_shop/api/v1/customerOrder/",
                 data: JSON.stringify(obj),
                 contentType: "application/json",
                 error: function(jqXHR, textStatus, errorThrown) {
@@ -178,7 +178,7 @@ function getCustomerOrder() {
     
     ajaxObj = {
                 type: "GET",
-                url: "http://localhost:8080/book_shop/api/v1/customerOrder/",
+                url: base_url + "/book_shop/api/v1/customerOrder/",
                 data: "ts="+d,
                 contentType: "application/json",
                 error: function(jqXHR, textStatus, errorThrown) {

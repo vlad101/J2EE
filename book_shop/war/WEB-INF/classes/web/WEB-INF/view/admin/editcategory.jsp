@@ -10,9 +10,6 @@
 <!-- Datatable css -->
 <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.0-beta.1/css/jquery.dataTables.css">
 
-<!-- jQuery plugin -->
-<script type="text/javascript" src="/book_shop/assets/jquery/js/jquery-1.10.2.js" ></script>
-
 <!-- custom edit category page js -->
 <script type="text/javascript" src="<c:url value="/assets/js/editcategory.js" />" ></script>
 
@@ -47,7 +44,7 @@
     <br />
     
     <!-- jQuery datatables -->
-    <div id="preloader"><img src="/book_shop/assets/images/loader/loader.gif" alt="Get customer preloader" ></div>
+    <div id="preloader"><img src="<c:url value="/assets/images/loader/loader.gif" />" alt="Get customer preloader" ></div>
     <div id="preloader-text">Loading...</div>
     <div id="category-list">
         <table id="category-list-table" class="display">

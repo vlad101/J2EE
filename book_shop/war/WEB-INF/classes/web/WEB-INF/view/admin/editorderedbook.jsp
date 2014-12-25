@@ -4,8 +4,6 @@
     Author     : Vladimir
 --%>
 
-<script type="text/javascript" src="/book_shop/assets/jquery/js/jquery-1.10.2.js" ></script>
-
 <div id="centerColumn">
                 
     <br>

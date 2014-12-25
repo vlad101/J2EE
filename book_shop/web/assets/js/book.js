@@ -65,7 +65,7 @@ function getBook() {
     
     ajaxObj = {
                 type: "GET",
-                url: "http://localhost:8080/book_shop/api/v1/book/" + $("#book_id").text(),
+                url: base_url + "/book_shop/api/v1/book/" + $("#book_id").text(),
                 data: "ts="+d,
                 contentType: "application/json",
                 error: function(jqXHR, textStatus, errorThrown) {

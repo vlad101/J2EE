@@ -37,9 +37,9 @@
                         [ shopping cart widget ]
                     </div>
                     <a href="#">
-                        <img src="/book_shop/assets/images/logo/logo.jpg" id="logo" alt="Serendipity logo">
+                        <img src="<c:url value="/assets/images/logo/logo.jpg" />" id="logo" alt="Serendipity logo">
                     </a>
-                    <img src="/book_shop/assets/images/logo/logoText.jpg" id="logoText" alt="The Serendipity">
+                    <img src="<c:url value="/assets/images/logo/logoText.jpg" />" id="logoText" alt="The Serendipity">
                 </div>
                 
             </div>

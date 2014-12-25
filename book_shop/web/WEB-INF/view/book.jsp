@@ -7,9 +7,6 @@
 <!-- custom edit book css -->
 <link type="text/css" rel="stylesheet" href="<c:url value="/assets/css/book.css" />" />
 
-<!-- jQuery plugin -->
-<script type="text/javascript" src="<c:url value="/assets/jquery/js/jquery-1.10.2.js" />" ></script>
-
 <!-- custom edit book page js -->
 <script type="text/javascript" src="<c:url value="/assets/js/book.js" />" ></script>
 
@@ -46,7 +43,7 @@
 <link href="<c:url value="/assets/bootstrap/css/bootstrap.min.css" />">
 
 <!--FancyBox Plugin css-->
-<link rel="stylesheet" href="/book_shop/assets/plugins/fancybox/source/jquery.fancybox.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="<c:url value="/assets/plugins/fancybox/source/jquery.fancybox.css" />" type="text/css" media="screen" />
 
 <!--FancyBox Plugin js-->
-<script type="text/javascript" src="/book_shop/assets/plugins/fancybox/source/jquery.fancybox.pack.js"></script>
+<script type="text/javascript" src="<c:url value="/assets/plugins/fancybox/source/jquery.fancybox.pack.js" />"></script>

@@ -38,7 +38,7 @@ $( document ).ready(function() {
         
         ajaxObj = {
                     type: "POST",
-                    url: "http://localhost:8080/book_shop/api/v1/customer/",
+                    url: base_url + "/book_shop/api/v1/customer/",
                     data: JSON.stringify(jsObj),
                     contentType: "application/json",
                     error: function(jqXHR, textStatus, errorThrown) {
@@ -187,7 +187,7 @@ function updateCustomer(obj) {
     ajaxObj = {
         
                 type: "PUT",
-                url: "http://localhost:8080/book_shop/api/v1/customer/",
+                url: base_url + "/book_shop/api/v1/customer/",
                 data: JSON.stringify(obj),
                 contentType: "application/json",
                 error: function(jqXHR, textStatus, errorThrown) {
@@ -222,7 +222,7 @@ function deleteCustomer(obj) {
     
     ajaxObj = {
                 type: "DELETE",
-                url: "http://localhost:8080/book_shop/api/v1/customer/",
+                url: base_url + "/book_shop/api/v1/customer/",
                 data: JSON.stringify(obj),
                 contentType: "application/json",
                 error: function(jqXHR, textStatus, errorThrown) {
@@ -255,7 +255,7 @@ function getCustomer() {
     
     ajaxObj = {
                 type: "GET",
-                url: "http://localhost:8080/book_shop/api/v1/customer/",
+                url: base_url + "/book_shop/api/v1/customer/",
                 data: "ts="+d,
                 contentType: "application/json",
                 error: function(jqXHR, textStatus, errorThrown) {

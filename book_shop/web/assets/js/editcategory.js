@@ -38,7 +38,7 @@ $( document ).ready(function() {
         
         ajaxObj = {
                     type: "POST",
-                    url: "http://localhost:8080/book_shop/api/v1/category/",
+                    url: base_url + "/book_shop/api/v1/category/",
                     data: JSON.stringify(jsObj),
                     contentType: "application/json",
                     error: function(jqXHR, textStatus, errorThrown) {
@@ -143,7 +143,7 @@ function updateCategory(obj) {
     ajaxObj = {
         
                 type: "PUT",
-                url: "http://localhost:8080/book_shop/api/v1/category/",
+                url: base_url + "/book_shop/api/v1/category/",
                 data: JSON.stringify(obj),
                 contentType: "application/json",
                 error: function(jqXHR, textStatus, errorThrown) {
@@ -177,7 +177,7 @@ function deleteCategory(obj) {
     
     ajaxObj = {
                 type: "DELETE",
-                url: "http://localhost:8080/book_shop/api/v1/category/",
+                url: base_url + "/book_shop/api/v1/category/",
                 data: JSON.stringify(obj),
                 contentType: "application/json",
                 error: function(jqXHR, textStatus, errorThrown) {
@@ -210,7 +210,7 @@ function getCategory() {
     
     ajaxObj = {
                 type: "GET",
-                url: "http://localhost:8080/book_shop/api/v1/category/",
+                url: base_url + "/book_shop/api/v1/category/",
                 data: "ts="+d,
                 contentType: "application/json",
                 error: function(jqXHR, textStatus, errorThrown) {
