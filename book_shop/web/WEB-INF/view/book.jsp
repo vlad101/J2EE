@@ -11,7 +11,6 @@
 <script type="text/javascript" src="<c:url value="/assets/jquery/js/jquery-1.10.2.js" />" ></script>
 
 <!-- custom edit book page js -->
-<script type="text/javascript" src="<c:url value="/assets/js/polyfill.js" />" ></script>
 <script type="text/javascript" src="<c:url value="/assets/js/book.js" />" ></script>
 
 <div id="centerColumn">

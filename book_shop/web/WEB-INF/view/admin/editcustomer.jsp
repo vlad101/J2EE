@@ -14,7 +14,6 @@
 <script type="text/javascript" src="/book_shop/assets/jquery/js/jquery-1.10.2.js" ></script>
 
 <!-- custom edit customer page js -->
-<script type="text/javascript" src="<c:url value="/assets/js/polyfill.js" />" ></script>
 <script type="text/javascript" src="<c:url value="/assets/js/editcustomer.js" />" ></script>
 
 <!-- Datatable js -->
