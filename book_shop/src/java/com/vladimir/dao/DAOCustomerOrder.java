@@ -19,7 +19,7 @@ import org.codehaus.jettison.json.JSONArray;
  */
 public class DAOCustomerOrder {
     
-    private DbUtil db;
+    private final DbUtil db;
     private Connection conn = null;
     private PreparedStatement preparedStatement = null;
     private ResultSet rs = null;
@@ -33,7 +33,7 @@ public class DAOCustomerOrder {
     /**
      * The method will allow you to add customer to the database.
      * 
-     * @param categoryName
+     * @param customer
      * @return HTTP status
      */
     public int addCustomer(Customer customer) {
