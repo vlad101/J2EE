@@ -105,7 +105,7 @@ public class AdminController extends HttpServlet {
         
 //        Error page
         else {
-            forward = "/error";
+            forward = "/error/error_404";
         }
         
 //      create view and forward request

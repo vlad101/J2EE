@@ -5,7 +5,7 @@
         <jsp-property-group>
             <description>header and footer settings</description>
             <url-pattern>/index.jsp</url-pattern>
-            <url-pattern>/error.jsp</url-pattern>
+            <url-pattern>/error/*</url-pattern>
             <url-pattern>/WEB-INF/view/*</url-pattern>
             <include-prelude>/WEB-INF/jspf/header.jspf</include-prelude>
             <include-coda>/WEB-INF/jspf/footer.jspf</include-coda>
@@ -62,8 +62,20 @@
         <servlet-name>Jersey REST Service</servlet-name>
         <url-pattern>/api/*</url-pattern>
     </servlet-mapping>
+    
+    <!--error handling-->
     <error-page>
         <error-code>500</error-code>
-        <location>/error.jsp</location>
+        <location>/error/error_500.jsp</location>
+    </error-page>
+    
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error/error_404.jsp</location>
+    </error-page>
+    
+    <error-page>
+        <exception-type>java.lang.Throwable</exception-type>
+        <location>/error/error_java.jsp</location>
     </error-page>
 </web-app>

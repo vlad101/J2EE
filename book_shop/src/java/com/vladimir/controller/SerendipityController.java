@@ -109,7 +109,7 @@ public class SerendipityController extends HttpServlet {
             forward = "/confirmation";
         
         }  else {
-            forward = "/error";
+            forward = "/error/error_404";
         }
         
 //      create view and forward request
