@@ -59,7 +59,7 @@ $( document ).ready(function() {
         
         ajaxObj = {
                     type: "POST",
-                    url: base_url + "book_shop/api/v1/book/",
+                    url: base_url + "/book_shop/api/v1/book/",
                     data: JSON.stringify(jsObj),
                     contentType: "application/json",
                     error: function(jqXHR, textStatus, errorThrown) {

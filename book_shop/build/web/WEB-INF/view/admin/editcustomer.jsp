@@ -10,9 +10,6 @@
 <!-- Datatable css -->
 <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.0-beta.1/css/jquery.dataTables.css">
 
-<!-- jQuery plugin -->
-<script type="text/javascript" src="/book_shop/assets/jquery/js/jquery-1.10.2.js" ></script>
-
 <!-- custom edit customer page js -->
 <script type="text/javascript" src="<c:url value="/assets/js/editcustomer.js" />" ></script>
 
@@ -82,39 +79,39 @@
               
             <form id="update_customer_form" method="post" action="#">
                 <div id="customer_first_name_update">
-                    <label>First Name</label>
+                    <label>First Name</label><br>
                     <input type="text" value="" name="customer_first_name_update">
                 </div><br>
                 <div id="customer_last_name_update">
-                    <label>Last Name</label>
+                    <label>Last Name</label><br>
                     <input type="text" value="" name="customer_last_name_update">
                 </div><br>
                 <div id="customer_cc_number_update">
-                    <label>Credit Card Number</label>
+                    <label>Credit Card Number</label><br>
                     <input type="text" value="" name="customer_cc_number_update">
                 </div><br>
                 <div id="customer_email_update">
-                    <label>Email</label>
+                    <label>Email</label><br>
                     <input type="text" value="" name="customer_email_update">
                 </div><br>
                 <div id="customer_phone_update">
-                    <label>Phone</label>
+                    <label>Phone</label><br>
                     <input type="text" value="" name="customer_phone_update">
                 </div><br>
                 <div id="customer_address_update">
-                    <label>Address</label>
+                    <label>Address</label><br>
                     <input type="text" value="" name="customer_address_update">
                 </div><br>
                 <div id="customer_city_update">
-                    <label>City</label>
+                    <label>City</label><br>
                     <input type="text" value="" name="customer_city_update">
                 </div><br>
                 <div id="customer_state_update">
-                    <label>State</label>
+                    <label>State</label><br>
                     <input type="text" value="" name="customer_state_update">
                 </div><br>
                 <div id="customer_zipcode_update">
-                    <label>Zip Code</label>
+                    <label>Zip Code</label><br>
                     <input type="text" value="" name="customer_zipcode_update">
                 </div>
                     <input type="hidden" value="" name="customer_id_update">
@@ -144,39 +141,39 @@
               
             <form id="add_customer_form" method="post" action="#">
                 <div id="customer_first_name_add">
-                    <label>First Name</label>
+                    <label>First Name</label><br>
                     <input type="text" value="" name="customer_first_name_add">
                 </div><br>
                 <div id="customer_last_name_add">
-                    <label>Last Name</label>
+                    <label>Last Name</label><br>
                     <input type="text" value="" name="customer_last_name_add">
                 </div><br>
                 <div id="customer_cc_number_add">
-                    <label>Credit Card Number</label>
+                    <label>Credit Card Number</label><br>
                     <input type="text" value="" name="customer_cc_number_add">
                 </div><br>
                 <div id="customer_email_add">
-                    <label>Email</label>
+                    <label>Email</label><br>
                     <input type="text" value="" name="customer_email_add">
                 </div><br>
                 <div id="customer_phone_add">
-                    <label>Phone</label>
+                    <label>Phone</label><br>
                     <input type="text" value="" name="customer_phone_add">
                 </div><br>
                 <div id="customer_address_add">
-                    <label>Address</label>
+                    <label>Address</label><br>
                     <input type="text" value="" name="customer_address_add">
                 </div><br>
                 <div id="customer_city_add">
-                    <label>City</label>
+                    <label>City</label><br>
                     <input type="text" value="" name="customer_city_add">
                 </div><br>
                 <div id="customer_state_add">
-                    <label>State</label>
+                    <label>State</label><br>
                     <input type="text" value="" name="customer_state_add">
                 </div><br>
                 <div id="customer_zipcode_add">
-                    <label>Zip Code</label>
+                    <label>Zip Code</label><br>
                     <input type="text" value="" name="customer_zipcode_add">
                 </div><br>
                     <input type="hidden" value="" name="customer_id_add">

@@ -10,9 +10,6 @@
 <!-- Datatable css -->
 <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.0-beta.1/css/jquery.dataTables.css">
 
-<!-- jQuery plugin -->
-<script type="text/javascript" src="<c:url value="/assets/jquery/js/jquery-1.10.2.js" />" ></script>
-
 <!-- custom edit customer order page js -->
 <script type="text/javascript" src="<c:url value="/assets/js/editcustomerorder.js" />" ></script>
 
@@ -79,19 +76,19 @@
         
             <form id="update_customer_order_form" method="post" action="#">
                 <div id="customer_order_name_update">
-                    <label>Customer Name</label>
+                    <label>Customer Name</label><br>
                     <input type="text" value="" name="customer_order_name_update" readonly>
                 </div><br>
                 <div id="customer_order_confirmation_number_update">
-                    <label>Confirmation Number</label>
+                    <label>Confirmation Number</label><br>
                     <input type="text" value="" name="customer_order_confirmation_number_update">
                 </div><br>
                 <div id="customer_order_amount_update">
-                    <label>Amount</label>
+                    <label>Amount</label><br>
                     <input type="text" value="" name="customer_order_amount_update">
                 </div><br>
                 <div id="customer_order_date_created_update">
-                    <label>Date Created</label>
+                    <label>Date Created</label><br>
                     <input type="text" value="" name="customer_order_date_created_update" readonly>
                 </div>
                     <input type="hidden" value="" name="customer_order_id_update">

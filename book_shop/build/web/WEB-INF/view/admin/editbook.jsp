@@ -95,39 +95,40 @@
               
             <form id="update_book_form" method="post" action="#">
                 <div id="book_title_update">
-                    <label>Title</label>
+                    <label>Title</label><br>
                     <input type="text" value="" name="book_title_update">
                 </div><br>
                 <div id="book_author_update">
-                    <label>Author</label>
+                    <label>Author</label><br>
                     <input type="text" value="" name="book_author_update">
                 </div><br>
                 <div id="book_quantity_update">
-                    <label>Quantity</label>
+                    <label>Quantity</label><br>
                     <input type="text" value="" name="book_quantity_update">
                 </div><br>
                 <div id="book_category_name_modal_update">
-                    <label>Category</label>
+                    <label>Category</label><br>
                     <input type="text" value="" name="book_category_name_update" id="book_category_name_update" >
                 </div><br>
                 <div id="book_price_update">
-                    <label>Price</label>
+                    <label>Price</label><br>
                     <input type="text" value="" name="book_price_update">
                 </div><br>
                 <div id="book_description_update">
-                    <label>Description</label>
+                    <label>Description</label><br>
                     <input type="text" value="" name="book_description_update">
                 </div><br>
                 <div id="book_last_update_update">
-                    <label>Last Update</label>
+                    <label>Last Update</label><br>
                     <input type="text" value="" name="book_last_update" readonly>
                 </div>
                  <div id="book_image_list_update">
                     <label><br />Select Image Thumbnail</label>
                     <div id="book_image" style="display:none"></div>
                     <div id="book_image_selection" style="display:none"></div>
-                </div>               
-                <input id="book_image_update" type="file" onchange="loadImageFileAsURL('book_image_update');">
+                </div>
+                <br>
+                <input style="margin-left: 30%;margin-right: 50%;" id="book_image_update" type="file" onchange="loadImageFileAsURL('book_image_update');">
                 <br>
                 <input type="hidden" value="" name="book_id_update">
                          
@@ -156,30 +157,31 @@
               
             <form id="add_book_form" method="post" action="#" enctype="multipart/form-data">
                 <div id="book_title_add">
-                    <label>Title</label>
+                    <label>Title</label><br>
                     <input type="text" value="" name="book_title_add">
                 </div><br>
                 <div id="book_author_add">
-                    <label>Author</label>
+                    <label>Author</label><br>
                     <input type="text" value="" name="book_author_add">
                 </div><br>
                 <div id="book_quantity_add">
-                    <label>Quantity</label>
+                    <label>Quantity</label><br>
                     <input type="text" value="" name="book_quantity_add">
                 </div><br>
                 <div id="book_category_name_modal_add">
-                    <label>Category</label>
+                    <label>Category</label><br>
                     <input type="text" value="" name="book_category_name_add" id="book_category_name_add" >
                 </div><br>
                 <div id="book_price_add">
-                    <label>Price</label>
+                    <label>Price</label><br>
                     <input type="text" value="" name="book_price_add">
                 </div><br>
                 <div id="book_description_add">
-                    <label>Description</label>
+                    <label>Description</label><br>
                     <input type="text" value="" name="book_description_add">
                 </div>
-                    <input id="book_image_add" type="file" onchange="loadImageFileAsURL('book_image_add');">
+                <br>
+                    <input style="margin-left: 34%;margin-right: 50%;" id="book_image_add" type="file" onchange="loadImageFileAsURL('book_image_add');">
                 <br>
                     <input type="hidden" value="" name="book_id_add">
                          
@@ -192,7 +194,6 @@
         </div>
       </div>
     </div>
-
 
 </div>
             

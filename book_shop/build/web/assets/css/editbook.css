@@ -41,6 +41,7 @@ table {
 
 #update-book-modal .modal-body h5 {
     text-align: center;
+    background-color: black;
 }
 
 #update-book-modal .modal-body {
@@ -160,9 +161,4 @@ label.image-block > input + img { /* IMAGE STYLES */
 
 label.image-block > input:checked + img { /* (RADIO CHECKED) IMAGE STYLES */
     border:2px solid #f00;
-}
-
-// update form format
-#update-book-modal > update_book_form {
-    text-align: center;
 }
