@@ -1,8 +1,0 @@
-CREATE TABLE image (
-  `image_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `path` VARCHAR(60) NOT NULL,
-  `book_id` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`image_id`),
-  KEY `fk_book` (`book_id`),
-  CONSTRAINT `fk_book` FOREIGN KEY (`book_id`) REFERENCES `book` (`book_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) 
