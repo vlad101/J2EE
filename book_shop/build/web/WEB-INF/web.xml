@@ -64,6 +64,15 @@
         <url-pattern>/api/*</url-pattern>
     </servlet-mapping>
     
+    <!--Form-based authentication-->    
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <form-login-config>
+            <form-login-page>/admin/login.jsp</form-login-page>
+            <form-error-page>/admin/login_error.jsp</form-error-page>
+        </form-login-config>
+    </login-config>
+    
     <!--error handling-->
     <error-page>
         <error-code>500</error-code>
