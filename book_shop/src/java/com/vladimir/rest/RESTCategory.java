@@ -9,7 +9,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
+//import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -104,6 +104,7 @@ public class RESTCategory {
      * The method creates its own HTTP response and adds category to the 
      * database based on category name passed by the client
      * 
+     * @param categoryInfo
      * @return - the response with the category name
      * @throws Exception 
      */
@@ -157,6 +158,9 @@ public class RESTCategory {
     /**
      * This method will allow you to update data in the category table.
      * In this example we are using both PathParams and the message body (payload).
+     * @param categoryInfo
+     * @return 
+     * @throws java.lang.Exception
      */
     @PUT
     @Consumes({MediaType.APPLICATION_FORM_URLENCODED,MediaType.APPLICATION_JSON})
@@ -223,6 +227,9 @@ public class RESTCategory {
     /**
      * This method will allow you to delete data in the category table.
      * In this example we are using both PathParams and the message body (payload).
+     * @param categoryInfo
+     * @return 
+     * @throws java.lang.Exception
      */
     @DELETE
     @Consumes({MediaType.APPLICATION_FORM_URLENCODED,MediaType.APPLICATION_JSON})

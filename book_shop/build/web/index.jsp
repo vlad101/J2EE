@@ -7,7 +7,13 @@
             <link type="text/css" rel="stylesheet" href="<c:url value="assets/css/index.css" />" />
 
             <div id="indexLeftColumn">
-                [ welcome text ]
+                [ welcome text ]<br><br>
+                <div id="leftColumn-items">
+                    <a href="">Home</a><br>
+                    <a href="">Browse Catalog</a><br>
+                    <a href="">Join Email List</a><br>
+                    <a href="">Customer Service</a>
+                </div>
             </div>
             <div id="indexRightColumn">
                 <div class="categoryBox">

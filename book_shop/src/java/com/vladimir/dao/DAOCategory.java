@@ -157,7 +157,7 @@ public class DAOCategory {
     /**
      * This method will allow you to get category id by name from the database.
      * 
-     * @param categoryId
+     * @param categoryName
      * @return 
      */
     @SuppressWarnings("static-access")

@@ -30,3 +30,8 @@
     line-height: 150%;
     font-size: x-large;
 }
+
+#leftColumn-link-items {
+    padding-top: 15%;
+    font-size: medium;
+}
