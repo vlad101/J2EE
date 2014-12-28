@@ -43,7 +43,7 @@ public class RESTCategory {
         
         try {
             
-            jsonArrayCategoryList = daoCategory.getAllCategories();
+            jsonArrayCategoryList = daoCategory.getAllCategoriesJSON();
         
             // get books belonging to category
             for(int i = 0; i < jsonArrayCategoryList.length(); i++) {

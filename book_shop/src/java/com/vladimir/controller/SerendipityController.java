@@ -1,7 +1,10 @@
 package com.vladimir.controller;
 
+import com.vladimir.dao.DAOCategory;
+import com.vladimir.model.Category;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -45,6 +48,7 @@ public class SerendipityController extends HttpServlet {
         
 //      get - index page request
         if(action.equalsIgnoreCase("/index")) {
+            request.setAttribute("categoryList", getCategoryList("/index"));
             forward = "/index";
         }
         
@@ -116,11 +120,8 @@ public class SerendipityController extends HttpServlet {
             String url;
             
 //                error page
-            
             if( action.contains("error") ) {
-                
                 url = forward + END_URL;
-                
             } else {
 //                user pages
                 url = START_URL + forward + END_URL;
@@ -139,9 +140,7 @@ public class SerendipityController extends HttpServlet {
             throws ServletException, IOException {
         
         try {
-            
             processRequest(request, response);
-            
         } catch (ParseException ex) {
             Logger.getLogger(SerendipityController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -155,5 +154,18 @@ public class SerendipityController extends HttpServlet {
         } catch (ParseException ex) {
             Logger.getLogger(SerendipityController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    private List<Category> getCategoryList(String indexPage) {
+        DAOCategory daoCategory = new DAOCategory();
+        List<Category> categoryList = daoCategory.getCategoryList();
+//        if index page, return only four categories
+//        if not index page, return all categories
+        if(indexPage.equals("/index")) {
+            int categoryListSize = categoryList.size();
+            if(categoryListSize > 5);
+                return categoryList.subList(0, 4);
+        }
+        return categoryList;
     }
 }

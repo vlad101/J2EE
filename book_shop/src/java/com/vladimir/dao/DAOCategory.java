@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.codehaus.jettison.json.JSONArray;
@@ -275,11 +277,11 @@ public class DAOCategory {
     }    
     
     /**
-     * This method will allow you to get all category data from the category table.
+     * This method will allow you to get all category data from the category table for REST request.
      * 
      * @return JSON object with all category data from the table. 
      */
-    public JSONArray getAllCategories() { 
+    public JSONArray getAllCategoriesJSON() { 
         
         JSONArray categoryJsonArray = new JSONArray();
         
@@ -293,24 +295,6 @@ public class DAOCategory {
             
             ToJSON converter = new ToJSON();
             categoryJsonArray = converter.toJSONArray(rs);
-            
-//            // get books belonging to category
-//            for(int i = 0; i <jsonArray.length(); i++) {
-//                JSONObject obj = jsonArray.getJSONObject(i);
-//                DAOBook daoBook = new DAOBook();
-//                int categoryId = obj.getInt("category_id");
-//                List<String> bookList = daoBook.getBookListByCategoryId(categoryId);
-//                obj.put("book_list", bookList);
-//            }
-            
-//            creates a list of categories
-//            method declaration:public List<Category> getCategories(){
-//            while(rs.next()) {
-//                int categoryId = rs.getInt("category_id");
-//                String categoryName = rs.getString("category_name");
-//                Category category = new Category(categoryId, categoryName);
-//                categoryList.add(category);
-//            }
             
             rs.close();
             rs = null;
@@ -330,5 +314,49 @@ public class DAOCategory {
         }
         
         return categoryJsonArray;
+    }
+    
+    /**
+     * This method will allow you to get all category data from the category table.
+     * 
+     * @return Category list with all category data from the table. 
+     */
+    public List<Category> getCategoryList() { 
+        
+        List<Category> categoryList = new ArrayList<Category>();
+        
+        String sql = "SELECT category_id, category_name FROM category;"; // do not use * for production code
+        
+        try {
+        
+            conn = db.getConnection();
+            preparedStatement = conn.prepareStatement(sql);
+            rs = preparedStatement.executeQuery();
+            
+            // get Category data and add it to a category list
+            while(rs.next()) {
+                int categoryId = rs.getInt("category_id");
+                String categoryName = rs.getString("category_name");
+                categoryList.add(new Category(categoryId, categoryName));
+            }
+                        
+            rs.close();
+            rs = null;
+            
+            preparedStatement.close();
+            preparedStatement = null;
+            
+            conn.close();
+            conn = null;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOCategory.class.getName()).log(Level.SEVERE, "Could not select categories.", ex);
+        } catch (Exception e) {
+                Logger.getLogger(DAOCategory.class.getName()).log(Level.SEVERE, "Could not create a JSON object", e);  
+        } finally {
+            db.closeConnection();
+        }
+        
+        return categoryList;
     }
 }

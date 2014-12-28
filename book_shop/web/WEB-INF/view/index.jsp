@@ -25,15 +25,27 @@
                 </div>
             </div>
             <div id="indexRightColumn">
-                <div class="categoryBox">
-                    <a href="#"><span class="categoryLabelText">Science Fiction</span></a>
-                </div>
-                <div class="categoryBox">
-                    <a href="#"><span class="categoryLabelText">Philosophy</span></a>
-                </div>
-                <div class="categoryBox">
-                    <a href="#"><span class="categoryLabelText">Computer & Technology</span></a>
-                </div>
-                <div class="categoryBox">
-                    <a href="#"><span class="categoryLabelText">Medical & Nursing</span></a>
-                </div>
+                <c:choose>
+                    <c:when test="${not empty categoryList}">
+                        <c:forEach var="category" items="${categoryList}" >
+                            <div class="categoryBox">
+                                <a href="#">
+                                    <span class="categoryLabelText">
+                                        ${category.getCategoryName()}
+                                    </span>
+                                </a>
+                            </div>
+                        </c:forEach>
+                        <div class="categoryListBox">
+                             <a href="#">
+                                 <span class="categoryListLabelText">
+                                     More
+                                 </span>
+                             </a>
+                         </div>
+                    </c:when>
+                    <c:otherwise>
+                        <br><p><b>OOPS! Empty category list!</b></p>
+                    </c:otherwise>
+                </c:choose>
+            </div>

@@ -13,6 +13,6 @@
         <button type="button" class="btn btn-success btn-lg" onclick="location='/book_shop/index'" >Back</button>
 
         <h2>Details</h2>
-        <p>Type: {pageContext.exception["class"]}</p>
-        <p>Message: {pageContext.exception["message"]}</p>
+        <p>Type: ${pageContext.exception["class"]}</p>
+        <p>Message: ${pageContext.exception["message"]}</p>
     </div>

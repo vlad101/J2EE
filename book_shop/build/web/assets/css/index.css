@@ -6,7 +6,7 @@
 /* index page styles */
 #indexLeftColumn {
     padding: 1%;
-    height: 467px;//400px;
+    height: 500px;//400px;
     width: 350px;
     float: left;
     background: #ccc;
@@ -21,7 +21,7 @@
 }
 
 #indexRightColumn {
-    height: 407px;//400px;
+    height: 500px;//400px;
     width: 500px;
     float: left;
     background: #eee;
@@ -33,9 +33,24 @@
     margin: 21px 14px 6px;
     float: inherit;
     background: #ccc;
+    border-radius: 3px;
 }
 
 .categoryLabelText {
+    line-height: 150%;
+    font-size: x-large;
+}
+
+.categoryListBox {
+    height: 50px;
+    width: 150px;//212px;
+    margin: 430px 170px 6px;
+    padding-top: 7px;
+    background: #ccc;
+    border-radius: 3px;
+}
+
+.categoryListLabelText {
     line-height: 150%;
     font-size: x-large;
 }
