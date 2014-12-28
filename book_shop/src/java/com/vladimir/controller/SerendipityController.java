@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
             loadOnStartup = 1,
             urlPatterns = {"/index",
                            "/book",
+                           "/categorylist",
                            "/category",
                            "/addToCart",
                            "/cart",
@@ -48,7 +49,7 @@ public class SerendipityController extends HttpServlet {
         
 //      get - index page request
         if(action.equalsIgnoreCase("/index")) {
-            request.setAttribute("categoryList", getCategoryList("/index"));
+            request.setAttribute("categoryList", getCategoryList(action));
             forward = "/index";
         }
         
@@ -57,6 +58,12 @@ public class SerendipityController extends HttpServlet {
             String bookId = request.getParameter("id");
             request.setAttribute("id", bookId);
             forward = "/book";
+        }
+        
+//      get - category list page request
+        else if(action.equalsIgnoreCase("/categorylist")) {
+            request.setAttribute("categoryList", getCategoryList(action));
+            forward = "/categorylist";
         }
         
 //      get - category page request

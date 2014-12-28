@@ -39,7 +39,7 @@
                         <div class="categoryListBox">
                              <a href="#">
                                  <span class="categoryListLabelText">
-                                     More
+                                    <a href="<c:url value='/categorylist'/>" >More...</a>
                                  </span>
                              </a>
                          </div>
