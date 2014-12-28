@@ -21,6 +21,8 @@
         <!-- modernizr plugin -->
         <script src="<c:url value="/assets/js/vendor/modernizr-2.6.2.min.js" />"></script>
         
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js" ></script>
+        
         <!-- Bootstrap -->
         <link type="text/css" rel="stylesheet" href="<c:url value="/assets/bootstrap/css/bootstrap.min.css" />" />
         <!--<link type="text/css" rel="stylesheet" href="<c:url value="/assets/css/normalize.css" />" />-->
@@ -41,21 +43,26 @@
         
         <div id="main">
             <div id="header">
-                
                 <div id="widgetBar">
                     <div class="headerWidget">
-                        [ language toggle ]
+                        <a href="<c:url value='#'/>" >Login</a>
                     </div>
                     <div class="headerWidget">
-                        [ language toggle ]
+                        <a href="<c:url value='/admin'/>" >Admin</a>
                     </div>
                     <div class="headerWidget">
-                        [ shopping cart widget ]
+                        <a href="<c:url value='/user/deleteCookies'/>" >Delete Cookies</a>
+                    </div>
+                    <div class="headerWidget">
+                        <a href="<c:url value='/order/showCart'/>" >Show Cart</a>
+                    </div>
+                    <div class="headerWidget">
+                        <a href="<c:url value='#'/>" >Language: EN/ES</a>
                     </div>
                     <a href="#">
                         <img src="<c:url value="/assets/images/logo/logo.jpg" />" id="logo" alt="Serendipity logo">
                     </a>
-                    <img src="<c:url value="/assets/images/logo/logoText.jpg" />" id="logoText" alt="The Serendipity">
+                    <img src="<c:url value="/assets/images/logo/logoText.jpg" />" id="logoText1" alt="The Serendipity">
+                    <p id="logoText2">Quality Books Served Up Fresh!</p>
                 </div>
-                
             </div>

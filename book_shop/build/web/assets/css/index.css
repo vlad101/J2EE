@@ -5,14 +5,23 @@
 
 /* index page styles */
 #indexLeftColumn {
-    height: 400px;
+    padding: 1%;
+    height: 467px;//400px;
     width: 350px;
     float: left;
     background: #ccc;
 }
 
+#indexLeftColumn p {
+    font-size: small;
+}
+
+#indexLeftColumn a {
+    font-size: large;
+}
+
 #indexRightColumn {
-    height: 400px;
+    height: 407px;//400px;
     width: 500px;
     float: left;
     background: #eee;
@@ -31,7 +40,11 @@
     font-size: x-large;
 }
 
-#leftColumn-link-items {
-    padding-top: 15%;
+#leftColumn-menu-items {
+    border-top: 1px black solid;
+    margin-left: 20%;
+    text-align: center;
+    width: 60%;
+    padding-top: 7%;
     font-size: medium;
 }

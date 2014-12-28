@@ -19,12 +19,22 @@
     border: 1px solid;
 }
 
-#logoText {
+#logoText1 {
     float: left;
-    margin: 20px 0 0 70px;
+    margin: 10px 0 0 0;
     font-family: 'American Typewriter', Courier, monospace;
     font-size: 50px;
     font-weight: bold;
+    color: #333;
+}
+
+#logoText2 {
+    float: left;
+    margin: 0 20px 0 420px;
+    font-family: 'American Typewriter', Courier, monospace;
+    font-size: 20px;
+    font-weight: bold;
+    font-style: italic;
     color: #333;
 }
 
@@ -36,7 +46,7 @@
 }
 
 .headerWidget {
-    width: 194px;
+    width: 110px;
     margin: 20px 2px;
     font-size: small;
     float: right;

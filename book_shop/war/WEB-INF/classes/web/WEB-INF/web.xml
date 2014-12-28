@@ -6,9 +6,6 @@
 	 version="3.0">
     
     <display-name>book_shop</display-name>
-    <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
-    </welcome-file-list>
     
     <jsp-config>
         <jsp-property-group>
@@ -84,5 +81,10 @@
         <error-code>500</error-code>
         <location>/error.jsp</location>
     </error-page>
+    
+    <!--welcome file liost-->
+    <welcome-file-list>
+        <welcome-file>index</welcome-file>
+    </welcome-file-list>
     
 </web-app>

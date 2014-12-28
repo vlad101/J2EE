@@ -17,7 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name="SerendipityController",
             loadOnStartup = 1,
-            urlPatterns = {"/book",
+            urlPatterns = {"/index",
+                           "/book",
                            "/category",
                            "/addToCart",
                            "/cart",
@@ -30,13 +31,9 @@ public class SerendipityController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static final String START_URL = "/WEB-INF/view";
     private static final String END_URL = ".jsp";
-    //private UserDao dao;
     
     public SerendipityController() {
-    
         super();
-        //dao = new UserDao();
-    
     }
     
     @SuppressWarnings("UseSpecificCatch")
@@ -46,15 +43,16 @@ public class SerendipityController extends HttpServlet {
         String forward = "";
         String action = request.getServletPath();
         
+//      get - index page request
+        if(action.equalsIgnoreCase("/index")) {
+            forward = "/index";
+        }
+        
 //      get - book page request
-        if(action.equalsIgnoreCase("/book")) {
-            
-//          TODO: book
+        else if(action.equalsIgnoreCase("/book")) {
             String bookId = request.getParameter("id");
             request.setAttribute("id", bookId);
-            
             forward = "/book";
-            
         }
         
 //      get - category page request
