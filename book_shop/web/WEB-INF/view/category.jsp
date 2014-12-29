@@ -20,14 +20,9 @@
                 <c:forEach var="book" items="${bookList}" >
                     <tr>
                         <td class="lightBlue">
-                            --->>> ${defaultImageMap['${book.getBookId()}']} <<<---
-                            <img src="#" alt="book image">
+                            <img src="<c:url value="/assets/images/book/${defaultImageMap[book.getBookId()]}" />" height="70" width="50" alt="book image">
                         </td>
-                        <td class="lightBlue">
-                            ${book.getTitle()}
-                            <br>
-                            <span class="smallText">${book.getDescription()}</span>
-                        </td>
+                        <td class="lightBlue">${book.getTitle()}</td>
                         <td class="lightBlue">${book.getAuthor()}</td>
                         <td class="lightBlue">${book.getPrice()}</td>
                         <td class="lightBlue"><a href="<c:url value="/book?id=${book.getBookId()}" />">Book Details</a></td>

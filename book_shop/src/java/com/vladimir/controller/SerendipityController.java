@@ -90,23 +90,7 @@ public class SerendipityController extends HttpServlet {
                         List<Book> bookList = getBookList(validCategoryId);
                         request.setAttribute("category", category);
                         request.setAttribute("bookList", bookList);
-                        System.out.println("number of books: " + bookList.size());
-                        Map<Integer, String> defaultImageMap = new HashMap<Integer, String>();
-                        for(Book book : bookList) {
-                            int bookId = book.getBookId();
-                            DAOImage daoImage = new DAOImage();
-                            Image image = daoImage.getDefaultImageByBookId(bookId);
-                            
-                            if(image != null) {
-                                String defaultImagePath = image.getPath();
-                                System.out.println("key: " + bookId);
-                                System.out.println("value: " + defaultImagePath);
-                                defaultImageMap.put(bookId, defaultImagePath);
-                            } else {
-                                defaultImageMap.put(bookId, "no_image.jpg");
-                            }
-                        }
-                        request.setAttribute("defaultImageMap", defaultImageMap);
+                        request.setAttribute("defaultImageMap", getDefaultImageMap(bookList));
                         
                         forward = "/category";
                     } else {
@@ -256,12 +240,39 @@ public class SerendipityController extends HttpServlet {
     }
     
     /**
-     * 
+     * Return a valid category.
+     * @param str
+     * @return 
      */
     private Category isValidCategory(String str) {
         int categoryId = Integer.parseInt(str);
         DAOCategory daoCategory = new DAOCategory();
         Category category = daoCategory.getCategoryById(categoryId);
         return (category != null) ? category : null;
+    }
+    
+    /**
+     * Get default image maps with key book id and value default image map
+     * If image contains a default image, the actual image path will be used
+     * If image does not contain a default image, the default "no_image.jpg" will be used
+     * 
+     * @param bookList
+     * @return 
+     */
+    private Map<Integer, String> getDefaultImageMap(List<Book> bookList) {
+        Map<Integer, String> defaultImageMap = new HashMap<Integer, String>();
+        for(Book book : bookList) {
+            int bookId = book.getBookId();
+            DAOImage daoImage = new DAOImage();
+            Image image = daoImage.getDefaultImageByBookId(bookId);
+
+            if(image != null) {
+                String defaultImagePath = image.getPath();
+                defaultImageMap.put(bookId, defaultImagePath);
+            } else {
+                defaultImageMap.put(bookId, "no_image.jpg");
+            }
+        }
+        return defaultImageMap;
     }
 }
