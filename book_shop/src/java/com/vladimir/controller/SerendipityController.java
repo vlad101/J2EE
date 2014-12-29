@@ -27,6 +27,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name="SerendipityController",
             loadOnStartup = 1,
             urlPatterns = {"/index",
+                           "/booklist",
                            "/book",
                            "/categorylist",
                            "/category",
@@ -58,13 +59,29 @@ public class SerendipityController extends HttpServlet {
             request.setAttribute("categoryList", getCategoryList(action));
             forward = "/index";
         }
+
+//      get - book list page request
+        else if(action.equalsIgnoreCase("/booklist")) {
+            request.setAttribute("bookList", getBookList());
+            forward = "/booklist";
+        }
         
 //      get - book page request
         else if(action.equalsIgnoreCase("/book")) {
             if(request.getParameterMap().containsKey("id")) {
                 String bookId = request.getParameter("id");
-                request.setAttribute("id", bookId);
-                forward = "/book";
+                Book book = getBookByBookId(bookId);
+                if(book != null) {
+                    request.setAttribute("book", book);
+                    int categoryId = book.getCategoryId();
+                    Category category = getCategoryByCategoryId(categoryId);
+                    if(category  != null) {
+                        request.setAttribute("category", category);
+                    }
+                    forward = "/book";
+                } else {
+                    forward = "/error/error_404";
+                }
             } else {
                 forward = "/error/error_404";
             }
@@ -212,6 +229,19 @@ public class SerendipityController extends HttpServlet {
     }
     
     /**
+     * Get category list
+     * @param indexPage
+     * @return
+     * If index page, return only four categories
+     * If not index page, return all categories 
+     */
+    private List<Book> getBookList() {
+        DAOBook daoBook = new DAOBook();
+        List<Book> bookList = daoBook.getBookList();
+        return bookList;
+    }
+    
+    /**
      * Get book list by category id
      * @param categoryId
      * @return
@@ -274,5 +304,21 @@ public class SerendipityController extends HttpServlet {
             }
         }
         return defaultImageMap;
+    }
+
+    private Book getBookByBookId(String bookId) {
+        DAOBook daoBook = new DAOBook();
+        Book book = daoBook.getBookById(Integer.parseInt(bookId));
+        if(book != null)
+            return book;
+        return null;
+    }
+    
+    private Category getCategoryByCategoryId(int categoryId) {
+        DAOCategory daoCategory = new DAOCategory();
+        Category category = daoCategory.getCategoryById(categoryId);
+        if(category != null)
+            return category;
+        return null;
     }
 }

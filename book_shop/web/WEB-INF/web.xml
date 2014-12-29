@@ -33,6 +33,7 @@
         <!-- get request  -->
         <url-pattern>/index</url-pattern>
         <url-pattern>/book</url-pattern>
+        <url-pattern>/booklist</url-pattern>
         <url-pattern>/categorylist</url-pattern>
         <url-pattern>/category</url-pattern>
         <url-pattern>/cart</url-pattern>

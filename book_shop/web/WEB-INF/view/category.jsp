@@ -40,7 +40,18 @@
             <br><p><b>OOPS! No books in the '${category.getCategoryName()}' category!</b></p>
         </c:otherwise>
     </c:choose>
-    <br>
-    <button type="button" id="back-button" class="btn btn-success btn-small" onclick="location='<c:url value="/index" />'" >Back</button>
-    <br>
+            
+    <div class="nav-buttons">
+        <ul>
+            <li>
+                <button type="button" class="btn btn-success btn-small" onclick="location='<c:url value="/index" />'" >Home</button><br>
+            </li>
+            <li>
+                <button type="button" class="btn btn-success btn-small" onclick="location='<c:url value="/categoryList" />'" >Category List</button>
+            </li>
+            <li>
+                <button type="button" class="btn btn-success btn-small" onclick="location='<c:url value="/bookList" />'" >Book List</button>
+            </li>
+        </ul>
+    </div>
 </div>

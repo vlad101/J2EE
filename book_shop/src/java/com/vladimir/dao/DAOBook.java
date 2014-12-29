@@ -176,6 +176,11 @@ public class DAOBook {
         return 200;
     }
 
+    /**
+     * Get book by book id.
+     * @param bookId
+     * @return 
+     */
     public Book getBookById(int bookId){
         
         Book book = null;
@@ -219,7 +224,53 @@ public class DAOBook {
         }
         
         return book;
-    }    
+    }
+    
+    /**
+     * 
+     * @return 
+     */
+    public List<Book> getBookList(){
+        
+        List<Book> bookList = new ArrayList<Book>();
+        String sql = "SELECT * FROM book;";
+        
+        try {
+        
+            conn = db.getConnection();
+            preparedStatement = conn.prepareStatement(sql);
+            rs = preparedStatement.executeQuery();
+            while(rs.next()) {
+                int bookId = rs.getInt("book_id");
+                String title = rs.getString("title");
+                String author = rs.getString("author");
+                int quantity = rs.getInt("quantity");
+                double price = rs.getDouble("price");
+                String description = rs.getString("description");
+                Date lastUpdate = rs.getDate("last_update");
+                int categoryId = rs.getInt("category_id");
+                Book book = new Book(bookId, title, author, quantity, price, 
+                                        description, lastUpdate, categoryId);
+                bookList.add(book);
+            }
+            
+            rs.close();
+            rs = null;
+            
+            preparedStatement.close();
+            preparedStatement = null;
+            
+            conn.close();
+            conn = null;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOBook.class.getName()).log(Level.SEVERE, "Could not select book by ID.", ex);
+        } finally {
+            db.closeConnection();
+        }
+        
+        return bookList;
+    } 
     
     public JSONArray getAllBooks(){
         

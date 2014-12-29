@@ -16,7 +16,7 @@
 
         <br />
         <h1 id="page_title"></h1>
-        <div id="book_id"><%= request.getAttribute("id") %></div>
+        <div id="book_id">${book.getBookId()}</div>
 
         <!--Redirect to the book error-->
         <div id="ajax_book_response_error" class="alert alert-danger"></div>
@@ -35,9 +35,22 @@
         <div id="book_image"></div>
     </div>
     
-    <br>
-    <button type="button" id="back-button" class="btn btn-success btn-small" onclick="location='<c:url value="/index" />'" >Back</button>
-    <br>
+    <div class="nav-buttons">
+        <ul>
+            <li>
+                <button type="button" class="btn btn-success btn-small" onclick="location='<c:url value="/index" />'" >Home</button><br>
+            </li>
+            <li>
+                <button type="button" class="btn btn-success btn-small" onclick="location='<c:url value="/category?id=${book.getCategoryId()}" />'" >'${category.getCategoryName()}' Books</button>
+            </li>    
+            <li>
+                <button type="button" class="btn btn-success btn-small" onclick="location='<c:url value="/categoryList" />'" >Category List</button>
+            </li>
+            <li>
+                <button type="button" class="btn btn-success btn-small" onclick="location='<c:url value="/bookList" />'" >Book List</button>
+            </li>
+        </ul>
+    </div>
             
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="<c:url value="/assets/bootstrap/js/bootstrap.min.js" />"></script>

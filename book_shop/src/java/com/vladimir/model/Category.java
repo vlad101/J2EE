@@ -24,7 +24,7 @@ public class Category {
         return categoryId;
     }
 
-    public void setName(String categoryName){
+    public void setCategoryName(String categoryName){
         this.name = categoryName;
     }
     

@@ -1,0 +1,15 @@
+/* 
+    Created on : Dec 29, 2014, 4:57:20 PM
+    Author     : vladimir
+*/
+
+/*book list page styles */
+#centerColumn {
+    width: 100%;
+    text-align: left;
+    margin-left: 5%;
+}
+
+#centerColumn h1 {
+    text-align: center;
+}

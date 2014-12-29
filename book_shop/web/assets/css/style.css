@@ -102,8 +102,6 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
-
-
 /* html tags */
 body {
     font-family: Arial, Helvetica, sans-serif;
@@ -146,6 +144,27 @@ table {
 .header {
     background-color: #c3e3e0;
     height: 30px;
+}
+
+/*navigation button style*/
+
+/* category button style with the center column*/
+.nav-buttons {
+    margin-left: 5%;
+    width: 100%;
+}
+
+.nav-buttons li {
+    float: left;
+    padding: 1%;
+}
+
+.nav-buttons ul li {
+    display: inline;
+}
+
+.nav-buttons li button {
+    width: 140px;
 }
 
 /* ==========================================================================
