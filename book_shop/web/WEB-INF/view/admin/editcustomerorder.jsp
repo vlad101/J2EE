@@ -16,10 +16,11 @@
 <!-- Datatable js -->
 <script type="text/javascript" language="javascript" src="//cdn.datatables.net/1.10.0/js/jquery.dataTables.js"></script>
 
+<p id="pageTitle">Edit Customer Order</p>
+
 <div id="centerColumn">
                 
-    <br />
-    <h1>Edit Customer Order</h1><br />
+    <br><br>
     
     <!-- Update customer order -->
     <div id="ajax_update_customer_order_response_success" class="alert alert-success"></div>

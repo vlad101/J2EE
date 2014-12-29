@@ -16,11 +16,11 @@
 <!-- Datatable js -->
 <script type="text/javascript" language="javascript" src="//cdn.datatables.net/1.10.0/js/jquery.dataTables.js"></script>
 
+<p id="pageTitle">Edit Category</p>
+
 <div id="centerColumn">
                 
-    <br />
-    <h1>Edit Category</h1><br />
-    
+    <br><br>
     <!-- Add category -->
     <div id="add-category">
         <form id="add_category_form" name="post_category_form" action="#">

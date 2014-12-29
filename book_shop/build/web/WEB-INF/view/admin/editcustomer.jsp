@@ -16,10 +16,10 @@
 <!-- Datatable js -->
 <script type="text/javascript" language="javascript" src="//cdn.datatables.net/1.10.0/js/jquery.dataTables.js"></script>
 
+<p id="pageTitle">Edit Customer</p>
 <div id="centerColumn">
                 
-    <br />
-    <h1>Edit Customer</h1><br />
+    <br><br>
     
     <!-- Add customer -->
     <button type="button" id="customer_add_button" class="btn btn-primary btn-small" data-toggle="modal" data-target="#add-customer-modal" >Add Customer</button>

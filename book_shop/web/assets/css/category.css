@@ -11,7 +11,7 @@
     padding-left: 15px;
 }
 
-#categoryRightColumn {
+#categoryCenterColumn {
     margin-top: 10px;
     width: 650px;
     float: left;
@@ -30,21 +30,21 @@
     width: 139px;
 }
 
-#categoryTitle {
-    margin: -34px 180px 0 0;
-    font-size: x-large;
-    float: right;
-    background-color: #f5eabe;
-    padding: 7px;
-}
-
 .categoryText {
     line-height: 25px;
     font-size: x-large;
 }
 
-#bookTable { width: 600px }
+#bookTable {
+    margin-left: 4%;
+    margin-bottom: 2%;
+    width: 800px;
+}
 
-#bookTable tr { height: 90px }
+#bookTable tr { 
+    height: 90px; 
+}
 
-#bookTable td { width: 145px }
+#bookTable td { 
+    width: 145px; 
+}

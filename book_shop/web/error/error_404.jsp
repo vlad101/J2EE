@@ -5,6 +5,9 @@
 --%>
 <%@ page isErrorPage="true" %>
 
+<p id="pageTitle">Error 404</p>
+<br>
+
 <div>
 
     <h1>404 Error page!</h1>

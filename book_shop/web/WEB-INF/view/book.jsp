@@ -10,6 +10,8 @@
 <!-- custom edit book page js -->
 <script type="text/javascript" src="<c:url value="/assets/js/book.js" />" ></script>
 
+<p id="pageTitle">Book Details</p>
+
 <div id="centerColumn">
                 
     <br />

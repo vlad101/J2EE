@@ -5,8 +5,11 @@
 --%>
 
             <link type="text/css" rel="stylesheet" href="<c:url value="assets/css/index.css" />" />
-
+            
+            <p id="pageTitle">Home</p>
+            
             <div id="indexLeftColumn">
+                <br>
                 <h3>Welcome to Serendipity Book Store!</h3>
                 <br><p>
                     Thanks for visiting. Make yourself at home. Feel free to browse 
@@ -31,7 +34,7 @@
                             <div class="categoryBox">
                                 <a href="#">
                                     <span class="categoryLabelText">
-                                        ${category.getCategoryName()}
+                                        <a href="<c:url value='/category?id=${category.getCategoryId()}'/>" >${category.getCategoryName()}</a>
                                     </span>
                                 </a>
                             </div>
@@ -39,7 +42,7 @@
                         <div class="categoryListBox">
                              <a href="#">
                                  <span class="categoryListLabelText">
-                                    <a href="<c:url value='/categorylist'/>" >More...</a>
+                                    <a href="<c:url value='/categorylist'/>" >All Categories</a>
                                  </span>
                              </a>
                          </div>

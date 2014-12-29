@@ -5,6 +5,9 @@
 --%>
 <%@ page isErrorPage="true" %>
 
+<p id="pageTitle">Error Java</p>
+<br>
+
     <div>
 
         <h1>Java Error page!</h1>

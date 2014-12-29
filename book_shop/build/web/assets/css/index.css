@@ -5,9 +5,11 @@
 
 /* index page styles */
 #indexLeftColumn {
+    margin-top: 2%;
+    margin-left: -10%;
     padding: 1%;
     height: 500px;//400px;
-    width: 350px;
+    width: 330px;
     float: left;
     background: #ccc;
 }
@@ -29,7 +31,7 @@
 
 .categoryBox {
     height: 176px;
-    width: 212px;
+    width: 220px;
     margin: 21px 14px 6px;
     float: inherit;
     background: #ccc;

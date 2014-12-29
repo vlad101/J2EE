@@ -55,9 +55,13 @@ public class SerendipityController extends HttpServlet {
         
 //      get - book page request
         else if(action.equalsIgnoreCase("/book")) {
-            String bookId = request.getParameter("id");
-            request.setAttribute("id", bookId);
-            forward = "/book";
+            if(request.getParameterMap().containsKey("id")) {
+                String bookId = request.getParameter("id");
+                request.setAttribute("id", bookId);
+                forward = "/book";
+            } else {
+                forward = "/error/error_404";
+            }
         }
         
 //      get - category list page request
@@ -68,10 +72,16 @@ public class SerendipityController extends HttpServlet {
         
 //      get - category page request
         else if(action.equalsIgnoreCase("/category")) {
-            
-//          TODO: category
-            forward = "/category";
-            
+            if(request.getParameterMap().containsKey("id")) {
+                String categoryId = request.getParameter("id");
+                System.out.println("!!!!!!!!!!!");
+                System.out.println("CATEGORY ID: " + categoryId);
+                System.out.println("!!!!!!!!!!!");
+                request.setAttribute("id", categoryId);
+                forward = "/category";
+            } else {
+                forward = "/error/error_404";
+            }
         }
         
 //      get - cart page request

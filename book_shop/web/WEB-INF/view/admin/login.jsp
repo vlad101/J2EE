@@ -4,19 +4,16 @@
     Author     : vladimir
 --%>
 
-<%-- 
-    Document   : admin
-    Created on : Jun 5, 2014, 7:23:13 PM
-    Author     : Vladimir
---%>
-
 <link type="text/css" rel="stylesheet" href="<c:url value="/assets/css/admin.css" />" />
 
 <!-- include jquery core files -->
 <script type="text/javascript" src="<c:url value="/assets/js/admin.js" />" ></script>
 
+<p id="pageTitle">Login</p>
+
+<br><br>
+
 <div id="adminCenterColumn">
-    <h1>Admin Login Form</h1>
     <p>Please enter your username and password to continue.</p>
     <form action="security_check" method="get">
         <label class="pad_top">Username</label>

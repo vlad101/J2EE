@@ -6,8 +6,12 @@
 
 <link type="text/css" rel="stylesheet" href="<c:url value="/assets/css/categorylist.css" />" />
 
+<p id="pageTitle">Category List</p>
+
+<br>
+
 <div id="centerColumn">
-    <h1>Category List</h1>
+    <br><br>
     <button type="button" class="btn btn-success btn-small" onclick="location='/book_shop/index'" >Back</button>
     <br><br>
     <c:choose>

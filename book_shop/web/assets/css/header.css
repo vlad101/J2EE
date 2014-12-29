@@ -3,6 +3,17 @@
     Author     : Vladimir
 */
 
+/*title for all the pages*/
+#pageTitle {
+    margin-top: -34px;
+    margin-left: 13px;
+    font-size: x-large;
+    float: left;
+    background-color: #f5eabe;
+    padding: 7px;
+    border-radius: 3px;
+}
+
 /* header styles */
 #header {
     height: 180px;

@@ -9,6 +9,8 @@
 <!-- include jquery core files -->
 <script type="text/javascript" src="<c:url value="/assets/js/admin.js" />" ></script>
 
+<p id="pageTitle">Administration</p>
+
 <div id="adminCenterColumn">
     
         <br><h1>Hello Administrator</h1>
