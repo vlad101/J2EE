@@ -6,12 +6,10 @@
 <%@ page isErrorPage="true" %>
 
 <p id="pageTitle">Error 404</p>
-<br>
+<br><br>
 
 <div>
-
-    <h1>404 Error page!</h1>
-    <p>The server was not able find the file you requested.</p>
+    <p>The server was not able find the page you requested.</p>
     <p>To continue click the Back button.</p>
-    <button type="button" class="btn btn-success btn-small" onclick="location='/book_shop/index'" >Back</button>
+    <button type="button" class="btn btn-success btn-small" onclick="location='<c:url value="/index" />'" >Back</button>
 </div>

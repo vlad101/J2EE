@@ -13,15 +13,14 @@
 
 <div id="adminCenterColumn">
     
-        <br><h1>Hello Administrator</h1>
-        
+    <br>  
     <div class="button-list">
-        <button type="button" class="btn btn-success btn-lg" id="edit-category-button" >Edit category!</button><br><br>
-        <button type="button" class="btn btn-success btn-lg" id="edit-book-button" >Edit Book!</button><br><br>
-        <button type="button" class="btn btn-success btn-lg" id="edit-customer-button" >Edit Customer!</button><br><br>
-        <button type="button" class="btn btn-success btn-lg" id="edit-customer-order-button" >Edit Customer Order!</button>
+        <button type="button" class="btn btn-primary btn-small" id="edit-category-button" >Edit category!</button><br><br>
+        <button type="button" class="btn btn-primary btn-small" id="edit-book-button" >Edit Book!</button><br><br>
+        <button type="button" class="btn btn-primary btn-small" id="edit-customer-button" >Edit Customer!</button><br><br>
+        <button type="button" class="btn btn-primary btn-small" id="edit-customer-order-button" >Edit Customer Order!</button>
     </div>
-    <button type="button" class="btn btn-success btn-lg" onclick="location='/book_shop/index'" >Back</button>
+    <button type="button" class="btn btn-success btn-small" onclick="location='<c:url value="/index" />'" >Back</button>
 </div>
             
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

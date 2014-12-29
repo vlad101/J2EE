@@ -6,6 +6,7 @@ import com.vladimir.dao.DAOImage;
 import com.vladimir.model.Book;
 import com.vladimir.model.Image;
 import com.vladimir.util.ImageFileUtil;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
@@ -161,7 +162,11 @@ public class RESTBook {
                 returnString = jsonObject.put(Integer.toString(obj.getInt("book_id")), obj).toString();
             }
         
-        } catch (Exception e) {
+        } catch (JSONException e) {
+            jsonObject.put("HTTP_CODE", "500");
+            jsonObject.put("MSG", "Server unable to process get book request!");
+            return Response.ok(jsonArrayBookList.put(jsonObject).toString()).build();
+        } catch (ParseException e) {
             jsonObject.put("HTTP_CODE", "500");
             jsonObject.put("MSG", "Server unable to process get book request!");
             return Response.ok(jsonArrayBookList.put(jsonObject).toString()).build();

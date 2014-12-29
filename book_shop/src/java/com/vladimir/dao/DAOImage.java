@@ -227,6 +227,52 @@ public class DAOImage {
     }
     
     /**
+     * This method will allow you to get category data by id from the database.
+     * 
+     * @param bookId
+     * @return 
+     */
+    public Image getDefaultImageByBookId(int bookId){
+        
+        Image image = null;
+        
+        String sql = "SELECT * FROM image WHERE book_id=? AND default_image=1;";
+        
+        try {
+        
+            conn = db.getConnection();
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setInt(1, bookId);
+            rs = preparedStatement.executeQuery();
+            
+//            get the first default image
+            if(rs.next()) {
+                int imageId = rs.getInt("image_id");
+                String imagePath = rs.getString("path");
+                int imageBookId = rs.getInt("book_id");
+                image = new Image(imageId, imagePath, imageBookId);
+            }
+            
+//            close connections
+            rs.close();
+            rs = null;
+            preparedStatement.close();
+            preparedStatement = null;
+            conn.close();
+            conn = null;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOImage.class.getName()).log(Level.SEVERE, "Could not select image by book id.", ex);
+        } finally {
+            db.closeConnection();
+        }
+        if(image != null) {
+            return image;
+        }
+        return null; 
+    }
+    
+    /**
      * This method will allow you to update book image data.
      * 
      * @param bookId

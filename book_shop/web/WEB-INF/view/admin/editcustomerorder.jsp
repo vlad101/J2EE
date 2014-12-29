@@ -103,6 +103,9 @@
         </div>
       </div>
     </div>
+    <br>
+    <button type="button" id="back-button" class="btn btn-success btn-small" onclick="location='<c:url value="/admin" />'" >Back</button>
+    <br>
 </div>
             
 <!-- Include all compiled plugins (below), or include individual files as needed -->

@@ -6,10 +6,12 @@
 
 <%@ page isErrorPage="true" %>
 
-<div>
+<p id="pageTitle">Error 500</p>
 
-    <h1>Internal Server Error page!</h1>
+<br><br>
+
+<div>
     <p>The server was not able find the file you requested.</p>
     <p>To continue click the Back button.</p>
-    <button type="button" class="btn btn-success btn-small" onclick="location='/book_shop/index'" >Back</button>
+    <button type="button" class="btn btn-success btn-small" onclick="location='<c:url value="/index" />'" >Back</button>
 </div>

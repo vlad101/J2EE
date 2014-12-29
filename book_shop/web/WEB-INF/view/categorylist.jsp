@@ -20,7 +20,7 @@
                 <div class="categoryBox">
                     <a href="#">
                         <span class="categoryLabelText">
-                            ${category.getCategoryName()}
+                            <a href="<c:url value='/category?id=${category.getCategoryId()}'/>" >${category.getCategoryName()}</a>
                         </span>
                     </a>
                 </div>

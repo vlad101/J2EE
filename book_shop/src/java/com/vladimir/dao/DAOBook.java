@@ -3,12 +3,10 @@ package com.vladimir.dao;
 import com.vladimir.model.Book;
 import com.vladimir.util.DbUtil;
 import com.vladimir.util.ToJSON;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -23,7 +21,7 @@ import org.codehaus.jettison.json.JSONArray;
  */
 public class DAOBook {
 
-    private DbUtil db;
+    private final DbUtil db;
     private Connection conn = null;
     private PreparedStatement preparedStatement = null;
     private ResultSet rs = null;
@@ -75,10 +73,6 @@ public class DAOBook {
             }
             
             conn.commit();
-                        
-//            rs.close();
-//            rs = null;
-//            System.out.println(bookId);
             
             preparedStatement.close();
             preparedStatement = null;
@@ -262,9 +256,9 @@ public class DAOBook {
         return bookJsonArray;
     }
     
-    public List<String> getBookListByCategoryId(int categoryId) {
+    public List<String> getBookListInfoByCategoryId(int categoryId) {
         
-        List<String> bookList = new ArrayList<String>();
+        List<String> bookListInfo = new ArrayList<String>();
         
         String sql = "SELECT title, author FROM book WHERE category_id=?;";
         
@@ -278,8 +272,51 @@ public class DAOBook {
                 
                 String title = rs.getString("title");
                 String author = rs.getString("author");
-                bookList.add('"' + title + '"' + " by " + author);
+                bookListInfo.add('"' + title + '"' + " by " + author);
                 
+            }
+            
+            rs.close();
+            rs = null;
+            
+            preparedStatement.close();
+            preparedStatement = null;
+            
+            conn.close();
+            conn = null;
+            
+        } catch(SQLException ex) {
+            Logger.getLogger(DAOBook.class.getName()).log(Level.SEVERE, "Could not select book by category id", ex);
+        } finally {
+            db.closeConnection();
+        }
+        
+        return bookListInfo;
+    }
+    
+    public List<Book> getBookListByCategoryId(int categoryId) {
+        
+        List<Book> bookList = new ArrayList<Book>();
+        
+        String sql = "SELECT * FROM book WHERE category_id=?;";
+        
+        try {
+            
+            conn = db.getConnection();
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setInt(1, categoryId);
+            rs = preparedStatement.executeQuery();
+            while( rs.next() ) {
+                int bookId = rs.getInt("book_id");
+                String title = rs.getString("title");
+                String author = rs.getString("author");
+                int quantity = rs.getInt("quantity");
+                double price = rs.getDouble("price");
+                String description = rs.getString("description");
+                Date lastUpdate = rs.getDate("last_update");
+                Book book = new Book(bookId, title, author, quantity, price, 
+                                        description, lastUpdate, categoryId);
+                bookList.add(book);
             }
             
             rs.close();

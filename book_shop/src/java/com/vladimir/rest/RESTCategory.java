@@ -9,7 +9,6 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
-//import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -43,7 +42,7 @@ public class RESTCategory {
         
         try {
             
-            jsonArrayCategoryList = daoCategory.getAllCategoriesJSON();
+            jsonArrayCategoryList = daoCategory.getAllCategoriesJSONREST();
         
             // get books belonging to category
             for(int i = 0; i < jsonArrayCategoryList.length(); i++) {
@@ -55,7 +54,7 @@ public class RESTCategory {
 //                {"category_id":{"category_id":"1","category_name":"Category 1","book_list":["Title 1","Title 2"]}, ...}
                 obj.put("category_id", obj.getString("category_id"));
                 obj.put("category_name", obj.getString("category_name"));
-                obj.put("book_list", daoBook.getBookListByCategoryId( obj.getInt("category_id") ));
+                obj.put("book_list", daoBook.getBookListInfoByCategoryId( obj.getInt("category_id") ));
                 returnString = jsonObject.put(Integer.toString(obj.getInt("category_id")), obj).toString();
             }
         

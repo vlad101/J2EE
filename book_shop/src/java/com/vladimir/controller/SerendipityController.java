@@ -1,10 +1,16 @@
 package com.vladimir.controller;
 
+import com.vladimir.dao.DAOBook;
 import com.vladimir.dao.DAOCategory;
+import com.vladimir.dao.DAOImage;
+import com.vladimir.model.Book;
 import com.vladimir.model.Category;
+import com.vladimir.model.Image;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -74,13 +80,41 @@ public class SerendipityController extends HttpServlet {
         else if(action.equalsIgnoreCase("/category")) {
             if(request.getParameterMap().containsKey("id")) {
                 String categoryId = request.getParameter("id");
-                System.out.println("!!!!!!!!!!!");
-                System.out.println("CATEGORY ID: " + categoryId);
-                System.out.println("!!!!!!!!!!!");
-                request.setAttribute("id", categoryId);
-                forward = "/category";
-            } else {
-                forward = "/error/error_404";
+                
+//              check the category is valid integer
+                if(isInteger(categoryId)) {
+//                    check the category and book are valid
+                    Category category = isValidCategory(categoryId);
+                    if(category != null) {
+                        int validCategoryId = Integer.parseInt(categoryId);
+                        List<Book> bookList = getBookList(validCategoryId);
+                        request.setAttribute("category", category);
+                        request.setAttribute("bookList", bookList);
+                        System.out.println("number of books: " + bookList.size());
+                        Map<Integer, String> defaultImageMap = new HashMap<Integer, String>();
+                        for(Book book : bookList) {
+                            int bookId = book.getBookId();
+                            DAOImage daoImage = new DAOImage();
+                            Image image = daoImage.getDefaultImageByBookId(bookId);
+                            
+                            if(image != null) {
+                                String defaultImagePath = image.getPath();
+                                System.out.println("key: " + bookId);
+                                System.out.println("value: " + defaultImagePath);
+                                defaultImageMap.put(bookId, defaultImagePath);
+                            } else {
+                                defaultImageMap.put(bookId, "no_image.jpg");
+                            }
+                        }
+                        request.setAttribute("defaultImageMap", defaultImageMap);
+                        
+                        forward = "/category";
+                    } else {
+                        forward = "/error/error_404";
+                    }
+                } else {
+                    forward = "/error/error_404";
+                }
             }
         }
         
@@ -173,16 +207,61 @@ public class SerendipityController extends HttpServlet {
         }
     }
     
+//    Helper functions
+    
+    /**
+     * Get category list
+     * @param indexPage
+     * @return
+     * If index page, return only four categories
+     * If not index page, return all categories 
+     */
     private List<Category> getCategoryList(String indexPage) {
         DAOCategory daoCategory = new DAOCategory();
         List<Category> categoryList = daoCategory.getCategoryList();
-//        if index page, return only four categories
-//        if not index page, return all categories
         if(indexPage.equals("/index")) {
             int categoryListSize = categoryList.size();
             if(categoryListSize > 5);
                 return categoryList.subList(0, 4);
         }
         return categoryList;
+    }
+    
+    /**
+     * Get book list by category id
+     * @param categoryId
+     * @return
+     * If index page, return only four categories
+     * If not index page, return all categories 
+     */
+    private List<Book> getBookList(int categoryId) {
+        DAOBook daoBook = new DAOBook();
+        System.out.println("category_id = " + categoryId);
+        List<Book> bookList = daoBook.getBookListByCategoryId(categoryId);
+        return bookList;
+    }
+    
+    /**
+     * Determine if category is an integer value
+     * @param str
+     * @return 
+     */
+    private boolean isInteger(String str) {
+        try {
+            Integer.parseInt(str);
+        } catch(NumberFormatException e) {
+            return false;
+        }
+        return true;
+    }
+    
+    /**
+     * 
+     */
+    private Category isValidCategory(String str) {
+        int categoryId = Integer.parseInt(str);
+        DAOCategory daoCategory = new DAOCategory();
+        Category category = daoCategory.getCategoryById(categoryId);
+        return (category != null) ? category : null;
     }
 }

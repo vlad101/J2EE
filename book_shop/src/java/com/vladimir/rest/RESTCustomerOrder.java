@@ -24,8 +24,8 @@ import org.codehaus.jettison.json.JSONObject;
 
 @Path("/v1/customerOrder")
 public class RESTCustomerOrder {
-   
-    /**
+
+   /**
      * The method creates its own HTTP response with the list of customer orders
      * Ex: http://localhost:8080/book_shop/api/v1/customerOrder
      * 
@@ -80,6 +80,7 @@ public class RESTCustomerOrder {
     /**
      * The method creates its own HTTP response and adds Customer to the database
      * 
+     * @param customerInfo
      * @return - the response with the book name
      * @throws Exception 
      */
@@ -195,6 +196,9 @@ public class RESTCustomerOrder {
     /**
      * This method will allow you to update data in the customer order table.
      * In this example we are using both PathParams and the message body (payload).
+     * @param customerOrderInfo
+     * @return 
+     * @throws java.lang.Exception 
      */
     @PUT
     @Consumes({MediaType.APPLICATION_FORM_URLENCODED,MediaType.APPLICATION_JSON})
@@ -263,6 +267,9 @@ public class RESTCustomerOrder {
     /**
      * This method will allow you to delete data in the customer_order table.
      * In this example we are using both PathParams and the message body (payload).
+     * @param customerOrderInfo
+     * @return 
+     * @throws java.lang.Exception
      */
     @DELETE
     @Consumes({MediaType.APPLICATION_FORM_URLENCODED,MediaType.APPLICATION_JSON})

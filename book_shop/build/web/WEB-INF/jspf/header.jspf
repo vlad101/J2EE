@@ -59,7 +59,7 @@
                     <div class="headerWidget">
                         <a href="<c:url value='#'/>" >Language: EN/ES</a>
                     </div>
-                    <a href="#">
+                    <a href="<c:url value="/index" />">
                         <img src="<c:url value="/assets/images/logo/logo.jpg" />" id="logo" alt="Serendipity logo">
                     </a>
                     <img src="<c:url value="/assets/images/logo/logoText.jpg" />" id="logoText1" alt="The Serendipity">

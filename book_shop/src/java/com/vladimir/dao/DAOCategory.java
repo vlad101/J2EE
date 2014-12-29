@@ -281,7 +281,7 @@ public class DAOCategory {
      * 
      * @return JSON object with all category data from the table. 
      */
-    public JSONArray getAllCategoriesJSON() { 
+    public JSONArray getAllCategoriesJSONREST() { 
         
         JSONArray categoryJsonArray = new JSONArray();
         
