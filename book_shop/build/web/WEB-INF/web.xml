@@ -39,6 +39,9 @@
         <url-pattern>/cart</url-pattern>
         <url-pattern>/checkout</url-pattern>
         <url-pattern>/chooseLanguage</url-pattern>
+        <url-pattern>/search</url-pattern>
+        <url-pattern>/emaillist</url-pattern>
+        <url-pattern>/customerservice</url-pattern>
         <!-- post request  -->
         <url-pattern>/addToCart</url-pattern>
         <url-pattern>/updateCart</url-pattern>

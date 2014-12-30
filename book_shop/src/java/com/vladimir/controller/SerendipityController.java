@@ -26,17 +26,20 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name="SerendipityController",
             loadOnStartup = 1,
-            urlPatterns = {"/index",
-                           "/booklist",
-                           "/book",
-                           "/categorylist",
-                           "/category",
-                           "/addToCart",
-                           "/cart",
-                           "/updateCart",
-                           "/checkout",
-                           "/purchase",
-                           "/chooseLanguage"})
+            urlPatterns = { "/search",
+                            "/emaillist",
+                            "/customerservice",
+                            "/index",
+                            "/booklist",
+                            "/book",
+                            "/categorylist",
+                            "/category",
+                            "/addToCart",
+                            "/cart",
+                            "/updateCart",
+                            "/checkout",
+                            "/purchase",
+                            "/chooseLanguage"})
 public class SerendipityController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
@@ -119,6 +122,21 @@ public class SerendipityController extends HttpServlet {
             }
         }
         
+//      get - search page request
+        else if(action.equalsIgnoreCase("/search")) {
+            forward = "/search";
+        }
+        
+//      get - email list page request
+        else if(action.equalsIgnoreCase("/emaillist")) {
+            forward = "/emaillist";
+        }
+
+//      get - customer service page request
+        else if(action.equalsIgnoreCase("/customerservice")) {
+            forward = "/customerservice";
+        }        
+
 //      get - cart page request
         else if(action.equalsIgnoreCase("/cart")) {
         

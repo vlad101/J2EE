@@ -15,12 +15,18 @@
     
     <br>  
     <div class="button-list">
-        <button type="button" class="btn btn-primary btn-small" id="edit-category-button" >Edit category!</button><br><br>
-        <button type="button" class="btn btn-primary btn-small" id="edit-book-button" >Edit Book!</button><br><br>
-        <button type="button" class="btn btn-primary btn-small" id="edit-customer-button" >Edit Customer!</button><br><br>
-        <button type="button" class="btn btn-primary btn-small" id="edit-customer-order-button" >Edit Customer Order!</button>
+        <button type="button" class="btn btn-primary btn-small" id="edit-category-button" >Edit category</button><br><br>
+        <button type="button" class="btn btn-primary btn-small" id="edit-book-button" >Edit Book</button><br><br>
+        <button type="button" class="btn btn-primary btn-small" id="edit-customer-button" >Edit Customer</button><br><br>
+        <button type="button" class="btn btn-primary btn-small" id="edit-customer-order-button" >Edit Customer Order</button>
     </div>
-    <button type="button" class="btn btn-success btn-small" onclick="location='<c:url value="/index" />'" >Back</button>
+    <div id="nav-buttons">
+        <ul>
+            <li>
+                <button type="button" class="btn btn-success btn-small" onclick="location='<c:url value="/index" />'" >User Home</button><br>
+            </li>
+        </ul>
+    </div>
 </div>
             
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

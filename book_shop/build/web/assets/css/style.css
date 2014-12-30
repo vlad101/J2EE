@@ -149,22 +149,22 @@ table {
 /*navigation button style*/
 
 /* category button style with the center column*/
-.nav-buttons {
-    margin-left: 5%;
+#nav-buttons {
+    margin-left: 2%;
     width: 100%;
 }
 
-.nav-buttons li {
+#nav-buttons li {
     float: left;
-    padding: 1%;
+    padding: 3%;
 }
 
-.nav-buttons ul li {
+#nav-buttons ul li {
     display: inline;
 }
 
-.nav-buttons li button {
-    width: 140px;
+#nav-buttons li button {
+    width: 150px;
 }
 
 /* ==========================================================================

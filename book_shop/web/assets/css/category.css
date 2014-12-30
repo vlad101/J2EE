@@ -47,3 +47,7 @@
 #bookTable td { 
     width: 145px; 
 }
+
+#nav-buttons {
+    margin-left: 18%;
+}

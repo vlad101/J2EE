@@ -1,0 +1,23 @@
+/* 
+    Created on : Dec 30, 2014, 12:32:53 AM
+    Author     : vladimir
+*/
+
+/*customer service page styles */
+#centerColumn {
+    width: 100%;
+}
+
+#centerColumn .button-list {
+    width: 30%;
+    margin: 5%;
+    text-align: left;
+}
+
+#centerColumn .button-list button{
+    width: 80%;
+}
+
+#nav-buttons {
+    margin-left: 34%;
+}

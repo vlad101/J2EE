@@ -162,3 +162,7 @@ label.image-block > input + img { /* IMAGE STYLES */
 label.image-block > input:checked + img { /* (RADIO CHECKED) IMAGE STYLES */
     border:2px solid #f00;
 }
+
+#nav-buttons {
+    margin-left: 23%;
+}

@@ -68,3 +68,7 @@ tr.shown td.details-control {
     text-align: left;
     width: 90%;
 }
+
+#nav-buttons {
+    margin-left: 23%;
+}

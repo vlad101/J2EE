@@ -4,10 +4,6 @@
     Author     : Vladimir
 --%>
 
-<%@page import="com.vladimir.model.Image"%>
-<%@page import="com.vladimir.dao.DAOImage"%>
-<%@page import="com.vladimir.dao.DAOCategory"%>
-
 <link type="text/css" rel="stylesheet" href="<c:url value="/assets/css/category.css" />" />
 <div id="categoryCenterColumn">
     
@@ -29,7 +25,7 @@
                         <td class="lightBlue">[select quantity]</td>
                         <td class="lightBlue">
                             <form action="#" method="post">
-                                <input type="submit" value="purchase button">
+                                <input type="submit" value="Add to cart">
                             </form>
                         </td>
                     </tr>
@@ -41,16 +37,16 @@
         </c:otherwise>
     </c:choose>
             
-    <div class="nav-buttons">
+    <div id="nav-buttons">
         <ul>
             <li>
                 <button type="button" class="btn btn-success btn-small" onclick="location='<c:url value="/index" />'" >Home</button><br>
             </li>
             <li>
-                <button type="button" class="btn btn-success btn-small" onclick="location='<c:url value="/categoryList" />'" >Category List</button>
+                <button type="button" class="btn btn-success btn-small" onclick="location='<c:url value="/categorylist" />'" >Category List</button>
             </li>
             <li>
-                <button type="button" class="btn btn-success btn-small" onclick="location='<c:url value="/bookList" />'" >Book List</button>
+                <button type="button" class="btn btn-success btn-small" onclick="location='<c:url value="/booklist" />'" >Book List</button>
             </li>
         </ul>
     </div>

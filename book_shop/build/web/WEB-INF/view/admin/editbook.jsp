@@ -20,8 +20,7 @@
 
 <div id="centerColumn">
                 
-    <br><br>
-    
+    <br><br>  
     <!-- Add book -->
     <button type="button" id="book_add_button" class="btn btn-primary btn-small" data-toggle="modal" data-target="#add-book-modal" >Add Book</button>
     <br/>
@@ -195,9 +194,18 @@
         </div>
       </div>
     </div>
-    <br>
-    <button type="button" id="back-button" class="btn btn-success btn-small" onclick="location='<c:url value="/admin" />'" >Back</button>
-    <br>
+</div>
+<div id="nav-buttons">
+    <ul>
+        <li>
+            <button type="button" class="btn btn-success btn-small" onclick="location='<c:url value="/admin" />'" >Admin Home</button><br>
+        </li>
+    </ul>
+    <ul>
+        <li>
+            <button type="button" class="btn btn-success btn-small" onclick="location='<c:url value="/index" />'" >User Home</button><br>
+        </li>
+    </ul>
 </div>
             
 <!-- Include all compiled plugins (below), or include individual files as needed -->

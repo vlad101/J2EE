@@ -12,8 +12,6 @@
 
 <div id="centerColumn">
     <br><br>
-    <button type="button" class="btn btn-success btn-small" onclick="location='/book_shop/index'" >Back</button>
-    <br><br>
     <c:choose>
         <c:when test="${not empty categoryList}">
             <c:forEach var="category" items="${categoryList}" >
@@ -30,8 +28,16 @@
             <br><p><b>OOPS! Empty category list!</b></p>
         </c:otherwise>
     </c:choose>
-    <br>
-    <button type="button" class="btn btn-success btn-small" onclick="location='/book_shop/index'" >Back</button>
+     <div id="nav-buttons">
+        <ul>
+            <li>
+                <button type="button" class="btn btn-success btn-small" onclick="location='<c:url value="/index" />'" >Home</button><br>
+            </li>  
+            <li>
+                <button type="button" class="btn btn-success btn-small" onclick="location='<c:url value="/booklist" />'" >Book List</button>
+            </li>
+        </ul>
+    </div>
 </div>
             
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

@@ -4,16 +4,14 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/src/java/com/vladimir/controller/SerendipityController.java</file>
+            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/WEB-INF/view/customerservice.jsp</file>
             <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/WEB-INF/web.xml</file>
-            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/WEB-INF/view/booklist.jsp</file>
-            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/src/java/com/vladimir/rest/RESTBook.java</file>
             <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/WEB-INF/view/category.jsp</file>
-            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/src/java/com/vladimir/dao/DAOBook.java</file>
-            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/assets/css/categorylist.css</file>
+            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/WEB-INF/view/search.jsp</file>
+            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/WEB-INF/jspf/header.jspf</file>
+            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/assets/css/book.css</file>
             <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/WEB-INF/view/admin/admin.jsp</file>
-            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/src/java/com/vladimir/model/Category.java</file>
-            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/WEB-INF/view/book.jsp</file>
-            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/assets/css/style.css</file>
+            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/WEB-INF/view/emaillist.jsp</file>
             <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/WEB-INF/view/index.jsp</file>
         </group>
     </open-files>

@@ -35,7 +35,7 @@
         <div id="book_image"></div>
     </div>
     
-    <div class="nav-buttons">
+    <div id="nav-buttons">
         <ul>
             <li>
                 <button type="button" class="btn btn-success btn-small" onclick="location='<c:url value="/index" />'" >Home</button><br>
@@ -44,10 +44,10 @@
                 <button type="button" class="btn btn-success btn-small" onclick="location='<c:url value="/category?id=${book.getCategoryId()}" />'" >'${category.getCategoryName()}' Books</button>
             </li>    
             <li>
-                <button type="button" class="btn btn-success btn-small" onclick="location='<c:url value="/categoryList" />'" >Category List</button>
+                <button type="button" class="btn btn-success btn-small" onclick="location='<c:url value="/categorylist" />'" >Category List</button>
             </li>
             <li>
-                <button type="button" class="btn btn-success btn-small" onclick="location='<c:url value="/bookList" />'" >Book List</button>
+                <button type="button" class="btn btn-success btn-small" onclick="location='<c:url value="/booklist" />'" >Book List</button>
             </li>
         </ul>
     </div>

@@ -22,9 +22,9 @@
                 </p><br>
                 <div id="leftColumn-menu-items">
                     <a class="current" href="<c:url value='/'/>" >Home</a><br>
-                    <a href="<c:url value='/admin'/>" >Browse Catalog</a><br>
-                    <a href="<c:url value='/email'/>" >Join Email List</a><br>
-                    <a href="<c:url value='/customer_service'/>" >Customer Service</a>
+                    <a href="<c:url value='/search'/>" >Browse Catalog</a><br>
+                    <a href="<c:url value='/emaillist'/>" >Join Email List</a><br>
+                    <a href="<c:url value='/customerservice'/>" >Customer Service</a>
                 </div>
             </div>
             <div id="indexRightColumn">
@@ -43,6 +43,13 @@
                              <a href="#">
                                  <span class="categoryListLabelText">
                                     <a href="<c:url value='/categorylist'/>" >All Categories</a>
+                                 </span>
+                             </a>
+                         </div>
+                        <div class="bookListBox">
+                             <a href="#">
+                                 <span class="bookListLabelText">
+                                    <a href="<c:url value='/booklist'/>" >All Books</a>
                                  </span>
                              </a>
                          </div>

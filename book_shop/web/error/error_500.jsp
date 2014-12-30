@@ -13,5 +13,11 @@
 <div>
     <p>The server was not able find the file you requested.</p>
     <p>To continue click the Back button.</p>
-    <button type="button" class="btn btn-success btn-small" onclick="location='<c:url value="/index" />'" >Back</button>
+    <div id="nav-buttons">
+       <ul>
+           <li>
+               <button type="button" class="btn btn-success btn-small" onclick="location='<c:url value="/index" />'" >Home</button><br>
+           </li>
+       </ul>
+    </div>
 </div>

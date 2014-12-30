@@ -54,7 +54,7 @@
                         <a href="<c:url value='/user/deleteCookies'/>" >Delete Cookies</a>
                     </div>
                     <div class="headerWidget">
-                        <a href="<c:url value='/order/showCart'/>" >Show Cart</a>
+                        <a href="<c:url value='/cart'/>" >Show Cart</a>
                     </div>
                     <div class="headerWidget">
                         <a href="<c:url value='#'/>" >Language: EN/ES</a>
