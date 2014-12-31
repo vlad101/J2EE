@@ -5,6 +5,9 @@
 --%>
 <%@ page isErrorPage="true" %>
 
+<!-- custom edit error css -->
+<link type="text/css" rel="stylesheet" href="<c:url value="/assets/css/error.css" />" />
+
 <p id="pageTitle">Error 404</p>
 <br><br>
 

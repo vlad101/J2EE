@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="3.0" 
-         xmlns="http://java.sun.com/xml/ns/javaee" 
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
-    
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
     <!--application display name-->
     <display-name>book_shop</display-name>
-    
     <!--welcome file list-->
     <welcome-file-list>
         <welcome-file>index</welcome-file>
     </welcome-file-list>
-    
     <jsp-config>
         <jsp-property-group>
             <description>header and footer settings</description>
@@ -21,12 +15,11 @@
             <include-coda>/WEB-INF/jspf/footer.jspf</include-coda>
         </jsp-property-group>
     </jsp-config>
-        
     <!-- public controller  -->
     <servlet>
         <display-name>SerendipityController</display-name>
         <servlet-name>SerendipityController</servlet-name>
-        <servlet-class>com.vladimir.controller.SerendipityController</servlet-class>
+        <servlet-class>com.serendipity.controller.SerendipityController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>SerendipityController</servlet-name>
@@ -47,12 +40,11 @@
         <url-pattern>/updateCart</url-pattern>
         <url-pattern>/purchase</url-pattern>
     </servlet-mapping>
-    
     <!-- administration controller -->
     <servlet>
         <display-name>AdminController</display-name>
         <servlet-name>AdminController</servlet-name>
-        <servlet-class>com.vladimir.controller.AdminController</servlet-class>
+        <servlet-class>com.serendipity.controller.AdminController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AdminController</servlet-name>
@@ -63,7 +55,6 @@
         <url-pattern>/admin/editCustomerOrder</url-pattern>
         <url-pattern>/admin/editOrderedBook</url-pattern>
     </servlet-mapping>
-    
     <!-- REST Web API -->
     <servlet>
         <servlet-name>Jersey REST Service</servlet-name>
@@ -78,8 +69,7 @@
         <servlet-name>Jersey REST Service</servlet-name>
         <url-pattern>/api/*</url-pattern>
     </servlet-mapping>
-    
-    <!--Form-based authentication-->    
+    <!--Form-based authentication-->
     <login-config>
         <auth-method>FORM</auth-method>
         <form-login-config>
@@ -87,18 +77,15 @@
             <form-error-page>/admin/login_error.jsp</form-error-page>
         </form-login-config>
     </login-config>
-    
     <!--error handling-->
     <error-page>
         <error-code>500</error-code>
         <location>/error/error_500.jsp</location>
     </error-page>
-    
     <error-page>
         <error-code>404</error-code>
         <location>/error/error_404.jsp</location>
     </error-page>
-    
     <error-page>
         <exception-type>java.lang.Throwable</exception-type>
         <location>/error/error_java.jsp</location>

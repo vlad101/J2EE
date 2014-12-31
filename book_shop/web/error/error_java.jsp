@@ -5,6 +5,9 @@
 --%>
 <%@ page isErrorPage="true" %>
 
+<!-- custom edit error css -->
+<link type="text/css" rel="stylesheet" href="<c:url value="/assets/css/error.css" />" />
+
 <p id="pageTitle">Error Java</p>
 <br><br>
 
@@ -13,6 +16,9 @@
         <h1>Java Error page!</h1>
         <p>Sorry, java has thrown an exception.</p>
         <p>To continue, click the Back button.</p>
+        <h3>Details</h3>
+        <p>Type: ${pageContext.exception["class"]}</p>
+        <p>Message: ${pageContext.exception["message"]}</p>
         <div id="nav-buttons">
             <ul>
                 <li>
@@ -20,7 +26,4 @@
                 </li>
             </ul>
         </div>
-        <h2>Details</h2>
-        <p>Type: ${pageContext.exception["class"]}</p>
-        <p>Message: ${pageContext.exception["message"]}</p>
     </div>
