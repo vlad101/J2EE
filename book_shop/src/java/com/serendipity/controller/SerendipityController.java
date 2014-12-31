@@ -66,7 +66,7 @@ public class SerendipityController extends HttpServlet {
 //      get - book list page request
         else if(action.equalsIgnoreCase("/booklist")) {
             request.setAttribute("bookList", getBookList());
-            forward = "/booklist";
+            forward = "/book/booklist";
         }
         
 //      get - book page request
@@ -81,7 +81,7 @@ public class SerendipityController extends HttpServlet {
                     if(category  != null) {
                         request.setAttribute("category", category);
                     }
-                    forward = "/book";
+                    forward = "/book/book";
                 } else {
                     forward = "/error/error_404";
                 }
@@ -93,7 +93,7 @@ public class SerendipityController extends HttpServlet {
 //      get - category list page request
         else if(action.equalsIgnoreCase("/categorylist")) {
             request.setAttribute("categoryList", getCategoryList(action));
-            forward = "/categorylist";
+            forward = "/category/categorylist";
         }
         
 //      get - category page request
@@ -112,7 +112,7 @@ public class SerendipityController extends HttpServlet {
                         request.setAttribute("bookList", bookList);
                         request.setAttribute("defaultImageMap", getDefaultImageMap(bookList));
                         
-                        forward = "/category";
+                        forward = "/category/category";
                     } else {
                         forward = "/error/error_404";
                     }
@@ -141,7 +141,7 @@ public class SerendipityController extends HttpServlet {
         else if(action.equalsIgnoreCase("/cart")) {
         
 //          TODO: cart
-            forward = "/cart";
+            forward = "/cart/cart";
             
         }
         
