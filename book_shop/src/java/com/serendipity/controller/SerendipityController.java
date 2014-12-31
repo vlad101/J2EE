@@ -99,6 +99,12 @@ public class SerendipityController extends HttpServlet {
 //      get - category page request
         else if(action.equalsIgnoreCase("/category")) {
             if(request.getParameterMap().containsKey("id")) {
+                System.out.println("HHHEELOOLOOOLLLL");
+                System.out.println("HHHEELOOLOOOLLLL");
+                System.out.println("HHHEELOOLOOOLLLL");
+                System.out.println("HHHEELOOLOOOLLLL");
+                System.out.println("HHHEELOOLOOOLLLL");
+                System.out.println("HHHEELOOLOOOLLLL");
                 String categoryId = request.getParameter("id");
                 
 //              check the category is valid integer
@@ -268,7 +274,6 @@ public class SerendipityController extends HttpServlet {
      */
     private List<Book> getBookList(int categoryId) {
         DAOBook daoBook = new DAOBook();
-        System.out.println("category_id = " + categoryId);
         List<Book> bookList = daoBook.getBookListByCategoryId(categoryId);
         return bookList;
     }

@@ -12,8 +12,6 @@
 <br><br>
 
     <div>
-
-        <h1>Java Error page!</h1>
         <p>Sorry, java has thrown an exception.</p>
         <p>To continue, click the Back button.</p>
         <h3>Details</h3>

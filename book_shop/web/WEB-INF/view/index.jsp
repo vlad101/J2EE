@@ -8,6 +8,10 @@
             
             <p id="pageTitle">Home</p>
             
+            <div id="csrf" style="display:none;">DIV CSRF --->>> ${csrfPreventionSalt}</div>
+            
+            <script>alert();</script>
+            
             <div id="indexLeftColumn">
                 <br>
                 <h3>Welcome to Serendipity Book Store!</h3>
@@ -34,7 +38,7 @@
                             <div class="categoryBox">
                                 <a href="#">
                                     <span class="categoryLabelText">
-                                        <a href="<c:url value='/category?id=${category.getCategoryId()}'/>" >${category.getCategoryName()}</a>
+                                        <a href="<c:url value='/category?id=${category.getCategoryId()}&csrfPreventionSalt=${csrfPreventionSalt}'/>" >${category.getCategoryName()}</a>
                                     </span>
                                 </a>
                             </div>

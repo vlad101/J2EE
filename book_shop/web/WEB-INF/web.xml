@@ -90,4 +90,24 @@
         <exception-type>java.lang.Throwable</exception-type>
         <location>/error/error_java.jsp</location>
     </error-page>
+    
+    <!--filter test-->
+    <filter>
+        <filter-name>loadSalt</filter-name>
+        <filter-class>com.serendipity.csrf.LoadSalt</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>loadSalt</filter-name>
+        <url-pattern>*</url-pattern>
+    </filter-mapping>
+    
+    <filter>
+        <filter-name>validateSalt</filter-name>
+        <filter-class>com.serendipity.csrf.ValidateSalt</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>validateSalt</filter-name>
+        <url-pattern>/category</url-pattern>
+        <url-pattern>/book</url-pattern>
+    </filter-mapping>
 </web-app>
