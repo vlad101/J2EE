@@ -12,6 +12,8 @@
 
     <p id="pageTitle">Book Details</p>
 
+    <div id="csrf" style="visibility: hidden;">${csrfPreventionSalt}</div>    
+    
     <div id="centerColumn">
 
         <br />

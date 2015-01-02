@@ -1,4 +1,8 @@
+// datatable customer list
 var oTable;
+
+// csrf token
+var csrf;
 
 $( document ).ready(function() {
 
@@ -16,6 +20,9 @@ $( document ).ready(function() {
         
         $('#ajax_delete_customer_response_success').hide();
         $('#ajax_delete_customer_response_error').hide();
+        
+        // set csrf token value
+        csrf = "?csrfPreventionSalt="+ $('#csrf').text();
         
         // update customer table
         getCustomer();
@@ -38,7 +45,7 @@ $( document ).ready(function() {
         
         ajaxObj = {
                     type: "POST",
-                    url: base_url + "/book_shop/api/v1/customer/",
+                    url: base_url + "/book_shop/api/v1/customer" + csrf,
                     data: JSON.stringify(jsObj),
                     contentType: "application/json",
                     error: function(jqXHR, textStatus, errorThrown) {
@@ -187,7 +194,7 @@ function updateCustomer(obj) {
     ajaxObj = {
         
                 type: "PUT",
-                url: base_url + "/book_shop/api/v1/customer/",
+                url: base_url + "/book_shop/api/v1/customer"  + csrf,
                 data: JSON.stringify(obj),
                 contentType: "application/json",
                 error: function(jqXHR, textStatus, errorThrown) {
@@ -222,7 +229,7 @@ function deleteCustomer(obj) {
     
     ajaxObj = {
                 type: "DELETE",
-                url: base_url + "/book_shop/api/v1/customer/",
+                url: base_url + "/book_shop/api/v1/customer" + csrf,
                 data: JSON.stringify(obj),
                 contentType: "application/json",
                 error: function(jqXHR, textStatus, errorThrown) {
@@ -255,7 +262,7 @@ function getCustomer() {
     
     ajaxObj = {
                 type: "GET",
-                url: base_url + "/book_shop/api/v1/customer/",
+                url: base_url + "/book_shop/api/v1/customer" + csrf,
                 data: "ts="+d,
                 contentType: "application/json",
                 error: function(jqXHR, textStatus, errorThrown) {

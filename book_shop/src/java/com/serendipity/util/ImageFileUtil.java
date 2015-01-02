@@ -24,23 +24,28 @@ public class ImageFileUtil {
     public void decodeImage(String img64, String fileName) {
         try{
                 String ext;
-             
-                if(img64.contains("data:image/jpg"))
-                    ext = "jpg";
-                else if(img64.contains("data:image/jpeg"))
-                    ext = "jpeg";
-                else
-                    ext = "png";
-             
+                
+                if(img64 != null) {
+                    if(img64.contains("data:image/jpg"))
+                        ext = "jpg";
+                    else if(img64.contains("data:image/jpeg"))
+                        ext = "jpeg";
+                    else
+                        ext = "png";
+                } else {
+                    return;
+                }
+                
                 // remove data:image/png;base64, and then take the rest of the string
                 img64 = img64.replaceFirst("^data:image/[^;]*;base64,?", "");
                 byte[] decodedBytes = DatatypeConverter.parseBase64Binary(img64 );
                 BufferedImage bfi = ImageIO.read(new ByteArrayInputStream(decodedBytes));
 
                 URL location = getClass().getProtectionDomain().getCodeSource().getLocation();
-                String imagePath = location.getPath();
-                imagePath = imagePath.replace("build/web/WEB-INF/classes/com/vladimir/util/ImageFileUtil.class", "web/assets/images/book");
-
+                String imagePath = (String) location.getPath();
+                
+                imagePath = imagePath.replace("build/web/WEB-INF/classes/com/serendipity/util/ImageFileUtil.class", "web/assets/images/book");
+                
                 // create directory if does not exist
                 File directory = new File(imagePath);
                 if (!directory.exists()) {
@@ -66,5 +71,5 @@ public class ImageFileUtil {
              //Implement exception code   
             System.err.println("Not Saved!!!!!!!!!!!!!!!!!");
         }
-    }   
+    }
 }

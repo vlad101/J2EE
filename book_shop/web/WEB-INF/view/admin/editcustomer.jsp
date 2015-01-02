@@ -17,6 +17,9 @@
 <script type="text/javascript" language="javascript" src="//cdn.datatables.net/1.10.0/js/jquery.dataTables.js"></script>
 
 <p id="pageTitle">Edit Customer</p>
+
+<div id="csrf" style="visibility: hidden;">${csrfPreventionSalt}</div>
+
 <div id="centerColumn">
                 
     <br><br>

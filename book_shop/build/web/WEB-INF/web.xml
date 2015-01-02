@@ -107,7 +107,6 @@
     </filter>
     <filter-mapping>
         <filter-name>validateSalt</filter-name>
-        <url-pattern>/category</url-pattern>
-        <url-pattern>/book</url-pattern>
+        <url-pattern>/api/*</url-pattern>
     </filter-mapping>
 </web-app>

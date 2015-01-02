@@ -1,4 +1,8 @@
+// datatable category list
 var oTable;
+
+// CSRF token
+var csrf;
 
 $( document ).ready(function() {
 
@@ -17,8 +21,12 @@ $( document ).ready(function() {
         $('#ajax_delete_category_response_success').hide();
         $('#ajax_delete_category_response_error').hide();
         
+        // set csrf token value
+        csrf = "?csrfPreventionSalt="+ $('#csrf').text();
+        
         // update category table
         getCategory();
+        
     }
     
     setEventHandlers();
@@ -38,7 +46,7 @@ $( document ).ready(function() {
         
         ajaxObj = {
                     type: "POST",
-                    url: base_url + "/book_shop/api/v1/category/",
+                    url: base_url + "/book_shop/api/v1/category" + csrf,
                     data: JSON.stringify(jsObj),
                     contentType: "application/json",
                     error: function(jqXHR, textStatus, errorThrown) {
@@ -101,7 +109,7 @@ $( document ).ready(function() {
     $(document.body).on('click', '#category_delete_button', function(e) {
         var $this = $(this);
         var category_id = $this.val();
-        var obj = {category_id : category_id};
+        var obj = {category_id : category_id, 'csrfPreventionSalt': $('#csrf').text()};
         
         // get the name for the alert box
         var $tr = $this.closest('tr');
@@ -139,11 +147,10 @@ $( document ).ready(function() {
  * @returns {jqXHR}
  */
 function updateCategory(obj) {
-    
     ajaxObj = {
         
                 type: "PUT",
-                url: base_url + "/book_shop/api/v1/category/",
+                url: base_url + "/book_shop/api/v1/category" + csrf,
                 data: JSON.stringify(obj),
                 contentType: "application/json",
                 error: function(jqXHR, textStatus, errorThrown) {
@@ -174,10 +181,10 @@ function updateCategory(obj) {
  * @returns {jqXHR}
  */
 function deleteCategory(obj) {
-    
+
     ajaxObj = {
                 type: "DELETE",
-                url: base_url + "/book_shop/api/v1/category/",
+                url: base_url + "/book_shop/api/v1/category" + csrf,
                 data: JSON.stringify(obj),
                 contentType: "application/json",
                 error: function(jqXHR, textStatus, errorThrown) {
@@ -205,12 +212,12 @@ function deleteCategory(obj) {
  * Get category names from the backend using ajax call and json response.
  */
 function getCategory() {
-    
+
     var d = new Date().getTime();
     
     ajaxObj = {
                 type: "GET",
-                url: base_url + "/book_shop/api/v1/category/",
+                url: base_url + "/book_shop/api/v1/category" + csrf,
                 data: "ts="+d,
                 contentType: "application/json",
                 error: function(jqXHR, textStatus, errorThrown) {

@@ -19,8 +19,7 @@ import org.codehaus.jettison.json.JSONArray;
  */
 public class DAOImage {
     
-    @SuppressWarnings("FieldMayBeFinal")
-    private DbUtil db;
+    private final DbUtil db;
     private Connection conn = null;
     private PreparedStatement preparedStatement = null;
     private ResultSet rs = null;

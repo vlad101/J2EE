@@ -256,7 +256,7 @@ public class RESTBook {
                 
                 Date date = new Date();
                 String fileName = Integer.toString(http_code) + " " + date.toString();
-                ImageFileUtil imageUtil = new com.serendipity.util.ImageFileUtil(); 
+                ImageFileUtil imageUtil = new ImageFileUtil();
                 imageUtil.decodeImage(bookImage, fileName);
                 
                 Image image = new Image(0, fileName.replaceAll(" ", "").replaceAll(":", "") + ext, http_code);
@@ -374,7 +374,7 @@ public class RESTBook {
                 
                 Date date = new Date();
                 String fileName = Integer.toString(updateBookId) + " " + date.toString();
-                ImageFileUtil imageUtil = new com.serendipity.util.ImageFileUtil(); 
+                ImageFileUtil imageUtil = new ImageFileUtil();
                 imageUtil.decodeImage(bookImage, fileName);
                 
                 Image image = new Image(0, fileName.replaceAll(" ", "").replaceAll(":", "") + ext, updateBookId);

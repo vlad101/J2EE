@@ -1,6 +1,9 @@
 // datatable book list
 var oTable;
 
+// CSRF token
+var csrf;
+
 // Encoding images to base64 string
 var encodedImage;
 
@@ -28,6 +31,9 @@ $( document ).ready(function() {
         $('#ajax_delete_book_response_error').hide();
         
         $('#ajax_redirect_book_response_error').hide();
+        
+        // set csrf token value
+        csrf = "?csrfPreventionSalt="+ $('#csrf').text();
         
         // update book table
         getBook();
@@ -59,7 +65,7 @@ $( document ).ready(function() {
         
         ajaxObj = {
                     type: "POST",
-                    url: base_url + "/book_shop/api/v1/book/",
+                    url: base_url + "/book_shop/api/v1/book" + csrf,
                     data: JSON.stringify(jsObj),
                     contentType: "application/json",
                     error: function(jqXHR, textStatus, errorThrown) {
@@ -285,7 +291,7 @@ function updateBook(obj) {
     ajaxObj = {
         
                 type: "PUT",
-                url: base_url + "/book_shop/api/v1/book/",
+                url: base_url + "/book_shop/api/v1/book"  + csrf,
                 data: JSON.stringify(obj),
                 contentType: "application/json",
                 error: function(jqXHR, textStatus, errorThrown) {
@@ -356,7 +362,7 @@ function getBook() {
     
     ajaxObj = {
                 type: "GET",
-                url: base_url + "/book_shop/api/v1/book/",
+                url: base_url + "/book_shop/api/v1/book" + csrf,
                 data: "ts="+d,
                 contentType: "application/json",
                 error: function(jqXHR, textStatus, errorThrown) {
@@ -510,7 +516,7 @@ function getCategoriesTypeAhead() {
     var d = new Date().getTime();
     ajaxObj = {
                 type: "GET",
-                url: base_url + "/book_shop/api/v1/category/",
+                url: base_url + "/book_shop/api/v1/category" + csrf,
                 data: "ts="+d,
                 contentType: "application/json",
                 error: function(jqXHR, textStatus, errorThrown) {
@@ -563,7 +569,7 @@ function viewBook(book_id) {
     
     ajaxObj = {
                 type: "GET",
-                url: base_url + "/book_shop/api/v1/book/" + book_id,
+                url: base_url + "/book_shop/api/v1/book/" + book_id + csrf,
                 data: "ts="+d,
                 contentType: "application/json",
                 error: function(jqXHR, textStatus, errorThrown) {

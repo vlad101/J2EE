@@ -8,10 +8,6 @@
             
             <p id="pageTitle">Home</p>
             
-            <div id="csrf" style="display:none;">DIV CSRF --->>> ${csrfPreventionSalt}</div>
-            
-            <script>alert();</script>
-            
             <div id="indexLeftColumn">
                 <br>
                 <h3>Welcome to Serendipity Book Store!</h3>

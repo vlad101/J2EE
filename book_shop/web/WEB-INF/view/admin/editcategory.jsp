@@ -18,6 +18,8 @@
 
 <p id="pageTitle">Edit Category</p>
 
+<div id="csrf" style="visibility: hidden;">${csrfPreventionSalt}</div>
+
 <div id="centerColumn">
                 
     <br><br>
@@ -25,7 +27,7 @@
     <div id="add-category">
         <form id="add_category_form" name="post_category_form" action="#">
             Add Category  <input type="text" name="category_title" id="category_title" maxlength="50" value="">&nbsp;
-                            <input type="button" name="submit_add_category" id="submit_add_category" value="Submit">
+                          <input type="button" name="submit_add_category" id="submit_add_category" value="Submit">
         </form>
     </div>
     <br />
@@ -83,7 +85,7 @@
               <h5>Edit category name:</h5><br/>
             <form id="update_category_form" method="post" action="#">
                 Category   <input type="text" value="" name="category_name">
-                         <input type="hidden" value="" name="category_id">
+                           <input type="hidden" value="" name="category_id">
             </form>
           </div>
           <div class="modal-footer">

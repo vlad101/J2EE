@@ -18,6 +18,8 @@
 
 <p id="pageTitle">Edit Customer Order</p>
 
+<div id="csrf" style="visibility: hidden;">${csrfPreventionSalt}</div>
+
 <div id="centerColumn">
                 
     <br><br>

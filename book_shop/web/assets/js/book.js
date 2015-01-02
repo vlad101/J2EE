@@ -1,5 +1,5 @@
-// datatable book list
-var oTable;
+// csrf token
+var csrf;
 
 $( document ).ready(function() {
 
@@ -8,6 +8,9 @@ $( document ).ready(function() {
         
         $('#ajax_book_response_error').hide();
         $('#book_id').hide();
+        
+        // set csrf token value
+        csrf = "?csrfPreventionSalt="+ $('#csrf').text();
         
         // get book info
         getBook();
@@ -32,23 +35,6 @@ $( document ).ready(function() {
                 }
         }
     });
-    
-//    Initialize the table and child rows
-    $('#book-list-table tbody').on('click', 'td.details-control', function () {
-        var tr = $(this).closest('tr');
-        var row = oTable.row( tr );
- 
-        if ( row.child.isShown() ) {
-            // This row is already open - close it
-            row.child.hide();
-            tr.removeClass('shown');
-        }
-        else {
-            // Open this row
-            row.child( fnFormatDetails( row.data() ) ).show();
-            tr.addClass('shown');
-        }
-    });
 });
 
 /**
@@ -65,7 +51,7 @@ function getBook() {
     
     ajaxObj = {
                 type: "GET",
-                url: base_url + "/book_shop/api/v1/book/" + $("#book_id").text(),
+                url: base_url + "/book_shop/api/v1/book/" + $("#book_id").text() + csrf,
                 data: "ts="+d,
                 contentType: "application/json",
                 error: function(jqXHR, textStatus, errorThrown) {

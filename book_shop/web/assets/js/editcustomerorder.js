@@ -1,4 +1,8 @@
+// datatable customer order list
 var oTable;
+
+// csrf token
+var csrf;
 
 $( document ).ready(function() {
 
@@ -13,6 +17,9 @@ $( document ).ready(function() {
         
         $('#ajax_delete_customer_order_response_success').hide();
         $('#ajax_delete_customer_order_response_error').hide();
+
+        // set csrf token value
+        csrf = "?csrfPreventionSalt="+ $('#csrf').text();
         
         // update customer table
         getCustomerOrder();
@@ -110,7 +117,7 @@ function updateCustomerOrder(obj) {
     ajaxObj = {
         
                 type: "PUT",
-                url: base_url + "/book_shop/api/v1/customerOrder/",
+                url: base_url + "/book_shop/api/v1/customerOrder" + csrf,
                 data: JSON.stringify(obj),
                 contentType: "application/json",
                 error: function(jqXHR, textStatus, errorThrown) {
@@ -145,7 +152,7 @@ function deleteCustomerOrder(obj) {
     
     ajaxObj = {
                 type: "DELETE",
-                url: base_url + "/book_shop/api/v1/customerOrder/",
+                url: base_url + "/book_shop/api/v1/customerOrder" + csrf,
                 data: JSON.stringify(obj),
                 contentType: "application/json",
                 error: function(jqXHR, textStatus, errorThrown) {
@@ -178,7 +185,7 @@ function getCustomerOrder() {
     
     ajaxObj = {
                 type: "GET",
-                url: base_url + "/book_shop/api/v1/customerOrder/",
+                url: base_url + "/book_shop/api/v1/customerOrder" + csrf,
                 data: "ts="+d,
                 contentType: "application/json",
                 error: function(jqXHR, textStatus, errorThrown) {

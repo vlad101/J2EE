@@ -18,6 +18,8 @@
 
 <p id="pageTitle">Edit Book</p>
 
+<div id="csrf" style="visibility: hidden;">${csrfPreventionSalt}</div>
+
 <div id="centerColumn">
                 
     <br><br>  
