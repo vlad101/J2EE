@@ -55,6 +55,16 @@
         <url-pattern>/admin/editCustomerOrder</url-pattern>
         <url-pattern>/admin/editOrderedBook</url-pattern>
     </servlet-mapping>
+        <!-- cookie controller -->
+    <servlet>
+        <display-name>CookieController</display-name>
+        <servlet-name>CookieController</servlet-name>
+        <servlet-class>com.serendipity.controller.CookieController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CookieController</servlet-name>
+        <url-pattern>/cookie/deleteCookies</url-pattern>
+    </servlet-mapping>
     <!-- REST Web API -->
     <servlet>
         <servlet-name>Jersey REST Service</servlet-name>

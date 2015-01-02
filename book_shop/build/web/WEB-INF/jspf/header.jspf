@@ -51,7 +51,9 @@
                         <a href="<c:url value='/admin'/>" >Admin</a>
                     </div>
                     <div class="headerWidget">
-                        <a href="<c:url value='/user/deleteCookies'/>" >Delete Cookies</a>
+                        <!--The "Delete Cookies" link is for testing and should 
+                        be removed from a production environment -->
+                        <a href="<c:url value='/cookie/deleteCookies'/>" >Delete Cookies</a>
                     </div>
                     <div class="headerWidget">
                         <a href="<c:url value='/cart'/>" >Show Cart</a>

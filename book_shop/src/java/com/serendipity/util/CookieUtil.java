@@ -15,18 +15,23 @@ public class CookieUtil {
      * @param cookieName
      * @return the String value of the cookie
      * 
+     * if(cookieName.equals(cookie.getName())) {
+     *     cookieValue = cookie.getValue();
+     * }
+     * 
      * Code that uses the CookieUtil class to get the value of a cookie.
      * Cookie[] cookies = request.getCookies();
      * String emailAddress = CookieUtil.getCookieValue(cookies, "emailCookie");
+     * 
      */
     public static String getCookieValue(Cookie[] cookies, String cookieName) {
         String cookieValue = "";
         if(cookies != null) {
-                for(Cookie cookie : cookies) {
-                    if(cookieName.equals(cookie.getName())) {
-                        cookieValue = cookie.getValue();
-                    }
+            for(Cookie cookie : cookies) {
+                if(cookieName.equals((cookie.getName()))) {
+                    cookieValue = cookie.getValue();
                 }
+            }
         }
         return cookieValue;
     }
