@@ -45,6 +45,9 @@
             <div id="header">
                 <div id="widgetBar">
                     <div class="headerWidget">
+                        <a href="<c:url value='/customer/register'/>" >Register</a>
+                    </div>
+                    <div class="headerWidget">
                         <a href="<c:url value='#'/>" >Login</a>
                     </div>
                     <div class="headerWidget">
@@ -59,7 +62,7 @@
                         <a href="<c:url value='/cart'/>" >Show Cart</a>
                     </div>
                     <div class="headerWidget">
-                        <a href="<c:url value='#'/>" >Language: EN/ES</a>
+                        <a href="<c:url value='#'/>" >en/esp</a>
                     </div>
                     <a href="<c:url value="/index" />">
                         <img src="<c:url value="/assets/images/logo/logo.jpg" />" id="logo" alt="Serendipity logo">

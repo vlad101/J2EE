@@ -55,7 +55,7 @@
         <url-pattern>/admin/editCustomerOrder</url-pattern>
         <url-pattern>/admin/editOrderedBook</url-pattern>
     </servlet-mapping>
-        <!-- cookie controller -->
+    <!-- cookie controller -->
     <servlet>
         <display-name>CookieController</display-name>
         <servlet-name>CookieController</servlet-name>
@@ -64,6 +64,16 @@
     <servlet-mapping>
         <servlet-name>CookieController</servlet-name>
         <url-pattern>/cookie/deleteCookies</url-pattern>
+    </servlet-mapping>
+    <!-- user controller -->
+    <servlet>
+        <display-name>CustomerController</display-name>
+        <servlet-name>CustomerController</servlet-name>
+        <servlet-class>com.serendipity.controller.CustomerController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CustomerController</servlet-name>
+        <url-pattern>/customer/register</url-pattern>
     </servlet-mapping>
     <!-- REST Web API -->
     <servlet>
@@ -100,7 +110,6 @@
         <exception-type>java.lang.Throwable</exception-type>
         <location>/error/error_java.jsp</location>
     </error-page>
-    
     <!--filter test-->
     <filter>
         <filter-name>loadSalt</filter-name>
@@ -110,7 +119,6 @@
         <filter-name>loadSalt</filter-name>
         <url-pattern>*</url-pattern>
     </filter-mapping>
-    
     <filter>
         <filter-name>validateSalt</filter-name>
         <filter-class>com.serendipity.csrf.ValidateSalt</filter-class>

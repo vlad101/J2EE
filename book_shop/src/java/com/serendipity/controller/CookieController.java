@@ -58,7 +58,7 @@ public class CookieController extends HttpServlet {
             view.forward(request, response);
             
         } catch (Exception ex) {
-            Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CookieController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
