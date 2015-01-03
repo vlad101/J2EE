@@ -3,12 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/src/java/com/serendipity/dao/DAOImage.java</file>
+            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/assets/js/register.js</file>
             <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/WEB-INF/web.xml</file>
-            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/src/java/com/serendipity/util/ImageFileUtil.java</file>
+            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/src/java/com/serendipity/controller/CustomerController.java</file>
+            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/WEB-INF/view/customer/register.jsp</file>
+            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/WEB-INF/view/admin/editcustomer.jsp</file>
             <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/src/java/com/serendipity/rest/RESTBook.java</file>
-            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/assets/js/editbook.js</file>
-            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/WEB-INF/view/category/category.jsp</file>
+            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/src/java/com/serendipity/controller/CookieController.java</file>
+            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/WEB-INF/view/cookie/delete_cookies.jsp</file>
         </group>
     </open-files>
 </project-private>

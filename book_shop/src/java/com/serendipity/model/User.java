@@ -9,11 +9,13 @@ public class User {
     private int userId;
     private String username;
     private String password;
+    private int isAdmin;
     
-    public User(int userId, String username, String password) {
+    public User(int userId, String username, String password, int isAdmin) {
         this.userId = userId;
         this.username = username;
         this.password = password;
+        this.isAdmin = isAdmin;
     }
     
     public void setUserId(int userId) {
@@ -40,9 +42,17 @@ public class User {
         return password;
     }
     
+    public void setIsAdmin(int isAdmin) {
+        this.isAdmin = isAdmin;
+    }
+    
+    public int getIsAdmin() {
+        return isAdmin;
+    }
+    
     @Override
     public String toString(){
         return "User{" + "userId=" + userId + ", username=" 
-                + username + ", password=" + password + '}';
+                + username + ", password=" + password + ", isAdmin=" + isAdmin + '}';
     }
 }

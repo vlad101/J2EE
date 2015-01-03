@@ -1,5 +1,6 @@
 package com.serendipity.dao;
 
+import com.serendipity.model.Category;
 import com.serendipity.model.User;
 import com.serendipity.util.DbUtil;
 import com.serendipity.util.ToJSON;
@@ -7,6 +8,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.codehaus.jettison.json.JSONArray;
@@ -35,11 +38,12 @@ public class DAOUser {
      * @param userId
      * @param username
      * @param password
+     * @param isAdmin
      * @return HTTP status
      */
-    public int addUser(int userId, String username, String password) {
+    public int addUser(int userId, String username, String password, int isAdmin) {
                             
-        String sql = "INSERT INTO category (user_id, username, password) VALUES(?,?,?);";
+        String sql = "INSERT INTO category (user_id, username, password, admin) VALUES(?,?,?,?);";
         
         try {
             
@@ -49,6 +53,7 @@ public class DAOUser {
             preparedStatement.setInt(1, userId);
             preparedStatement.setString(2, username);
             preparedStatement.setString(3, password);
+            preparedStatement.setInt(3, isAdmin);
             preparedStatement.executeUpdate();
             conn.commit();
             
@@ -212,7 +217,7 @@ public class DAOUser {
         
         User user = null;
         
-        String sql = "SELECT username, password FROM user WHERE user_id=?;";
+        String sql = "SELECT username, password, admin FROM user WHERE user_id=?;";
         
         try {
         
@@ -225,7 +230,8 @@ public class DAOUser {
             while(rs.next()) {
                 String username = rs.getString("username");
                 String password = rs.getString("password");
-                user = new User(userId, username, password);
+                int isAdmin = rs.getInt("admin");
+                user = new User(userId, username, password, isAdmin);
             }
             
             rs.close();
@@ -244,14 +250,56 @@ public class DAOUser {
         }
         
         return user;
-    }    
+    }
+    
+    /**
+     * This method will allow you to get user data by id from the database.
+     * 
+     * @param username
+     * @return 
+     */
+    public boolean isUniqueUsername(String username){
+        
+        User user = null;
+        
+        String sql = "SELECT username, password, admin FROM user WHERE username=?;";
+        
+        try {
+        
+            conn = db.getConnection();
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, username);
+            rs = preparedStatement.executeQuery();
+            
+//            if the result is returned, the username name is not unique
+            if(rs.next()) {
+                return false;
+            }
+            
+            rs.close();
+            rs = null;
+            
+            preparedStatement.close();
+            preparedStatement = null;
+            
+            conn.close();
+            conn = null;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOUser.class.getName()).log(Level.SEVERE, "Could not select user by user ID.", ex);
+        } finally {
+            db.closeConnection();
+        }
+        
+        return true;
+    }
     
     /**
      * This method will allow you to get all user data from the user table.
      * 
      * @return JSON object with all category data from the table. 
      */
-    public JSONArray getAllCategories() { 
+    public JSONArray getAllUsersJSONREST() { 
         
         JSONArray userJsonArray = new JSONArray();
         

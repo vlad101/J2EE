@@ -17,3 +17,10 @@
 #nav-buttons {
     margin-left: 10%;
 }
+
+// ajax response on sustomer update
+#ajax_add_customer_response_success, #ajax_add_customer_response_error {
+    width: 50%; 
+    margin: 0 auto; 
+    text-align: center; 
+}

@@ -40,10 +40,11 @@ $( document ).ready(function() {
                     },
                     success: function(data) {
                         if(data[0].HTTP_CODE == 200) {
-                            $('#ajax_add_customer_response_success').css({ 'width': '50%', 'margin': '0 auto' }).show().html( '<strong>Well Done!</strong> ' + data[0].MSG ).delay(10000).fadeOut();
-                            
+                            $('#ajax_add_customer_response_success').css({ 'width': '50%', 'margin': '0 auto', 'text-align':'center' }).show().html( '<strong>Well Done!</strong> ' + data[0].MSG );
+                            $('#add_customer_form').hide();
+                            $('#add_customer_form_submit').hide();
+                        
 //                      clear the text field, after customer is added
-                            $('#add-customer-modal').modal('hide');
                             $('input#customer_first_name_add').val('');
                             $('input#customer_last_name_add').val('');
                             $('input#customer_email_add').val('');
@@ -54,12 +55,8 @@ $( document ).ready(function() {
                             $('input#customer_zipcode_add').val('');
                             $('input#customer_cc_number_add').val('');
                         } else {
-                            $('#ajax_add_customer_response_error').css({ 'width': '100%', 'margin': '0 auto' }).show().html( '<strong>Oh snap!</strong> ' + data[0].MSG ).delay(10000).fadeOut();
+                            $('#ajax_add_customer_response_error').css({ 'width': '50%', 'margin': '0 auto', 'text-align':'center' }).show().html( '<strong>Oh snap!</strong> ' + data[0].MSG ).delay(10000).fadeOut();
                         }
-                    },
-                    complete: function(XMLHttpRequest) {
-                        //console.log(XMLHttpRequest.getAllResponseHeaders());
-                        getCustomer();
                     },
                     dataType: "json" // request json
         };
