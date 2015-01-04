@@ -364,6 +364,7 @@ public class RESTCustomer {
         
         String customerId;
         DAOCustomer daoCustomer = new DAOCustomer();
+        DAOUser daoUser = new DAOUser();
         String returnString;
         JSONArray jsonArray = new JSONArray();
         JSONObject jsonObject = new JSONObject();
@@ -382,14 +383,28 @@ public class RESTCustomer {
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
             }
             
-            int http_code = daoCustomer.deleteCustomer(deleteCustomerId);
+//            delete user by customer_id
+            int http_code = daoUser.deleteUser(deleteCustomerId);
             
             if(http_code == 200) {
                 
                 jsonObject.put("HTTP_CODE", "200");
+                jsonObject.put("MSG", "User has been deleted successfully!");
+                
+            } else {
+                //return Response.status(500).entity("Unable to process add book").build();
+                jsonObject.put("HTTP_CODE", "500");
+                jsonObject.put("MSG", "User was not deleted!");
+                return Response.ok(jsonArray.put(jsonObject).toString()).build();
+            }           
+            
+//            delete customer info
+            http_code = daoCustomer.deleteCustomer(deleteCustomerId);
+            
+            if(http_code == 200) {
+                jsonObject.put("HTTP_CODE", "200");
                 jsonObject.put("MSG", "Customer has been deleted successfully!");
                 returnString = jsonArray.put(jsonObject).toString();
-                
             } else {
                 //return Response.status(500).entity("Unable to process add book").build();
                 jsonObject.put("HTTP_CODE", "500");
@@ -403,7 +418,6 @@ public class RESTCustomer {
             jsonObject.put("MSG", "Server unable to process delete request!");
             returnString = jsonArray.put(jsonObject).toString();
         }
-                
         return Response.ok(returnString).build();
     }  
 }
