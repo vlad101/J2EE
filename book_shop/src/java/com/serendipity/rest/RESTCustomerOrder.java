@@ -8,7 +8,6 @@ import com.serendipity.model.CustomerOrder;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -74,122 +73,6 @@ public class RESTCustomerOrder {
             return Response.ok(jsonArrayCustomerOrderList.put(jsonObject).toString()).build();
         }
                 
-        return Response.ok(returnString).build();
-    }
-    
-    /**
-     * The method creates its own HTTP response and adds Customer to the database
-     * 
-     * @param customerInfo
-     * @return - the response with the book name
-     * @throws Exception 
-     */
-    @POST
-    @Consumes({MediaType.APPLICATION_FORM_URLENCODED,MediaType.APPLICATION_JSON}) // access both form and json data
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response addCustomer(String customerInfo) throws Exception {
-        
-        String returnString;
-        JSONArray jsonArray = new JSONArray();
-        JSONObject jsonObject = new JSONObject();
-        DAOCustomer daoCustomer = new DAOCustomer();
-         
-        try {
-            
-            JSONObject partsData = new JSONObject(customerInfo);
-            
-            String customerFirstName = partsData.optString("customer_first_name_add");
-            String customerLastName = partsData.optString("customer_last_name_add");
-            String customerEmail = partsData.optString("customer_email_add");
-            String customerPhone = partsData.optString("customer_phone_add");
-            String customerAddress = partsData.optString("customer_address_add");
-            String customerCity = partsData.optString("customer_city_add");
-            String customerState = partsData.optString("customer_state_add");
-            String customerZipcode = partsData.optString("customer_zipcode_add");            
-            String customerCcNumber = partsData.optString("customer_cc_number_add");
-            
-//            validate text values
-            if(customerFirstName == null || customerFirstName.length() == 0) {
-                jsonObject.put("HTTP_CODE", "500");
-                jsonObject.put("MSG", "Enter a valid customer first name!");
-                return Response.ok(jsonArray.put(jsonObject).toString()).build();
-            }
-            
-            if(customerLastName == null || customerLastName.length() == 0) {
-                jsonObject.put("HTTP_CODE", "500");
-                jsonObject.put("MSG", "Enter a valid customer last name!");
-                return Response.ok(jsonArray.put(jsonObject).toString()).build();
-            }
-             
-            if(customerEmail == null || customerEmail.length() == 0) {
-                jsonObject.put("HTTP_CODE", "500");
-                jsonObject.put("MSG", "Enter a valid customer email!");
-                return Response.ok(jsonArray.put(jsonObject).toString()).build();
-            }
- 
-            if(customerPhone == null || customerPhone.length() == 0) {
-                jsonObject.put("HTTP_CODE", "500");
-                jsonObject.put("MSG", "Enter a valid customer phone!");
-                return Response.ok(jsonArray.put(jsonObject).toString()).build();
-            } 
-             
-            if(customerAddress == null || customerAddress.length() == 0) {
-                jsonObject.put("HTTP_CODE", "500");
-                jsonObject.put("MSG", "Enter a valid customer address!");
-                return Response.ok(jsonArray.put(jsonObject).toString()).build();
-            } 
-            
-            if(customerCity == null || customerCity.length() == 0) {
-                jsonObject.put("HTTP_CODE", "500");
-                jsonObject.put("MSG", "Enter a valid customer city!");
-                return Response.ok(jsonArray.put(jsonObject).toString()).build();
-            } 
-            
-            if(customerState == null || customerState.length() == 0) {
-                jsonObject.put("HTTP_CODE", "500");
-                jsonObject.put("MSG", "Enter a valid customer state!");
-                return Response.ok(jsonArray.put(jsonObject).toString()).build();
-            }
-             
-//            validate number values
-            long updateCustomerCcNumber;
-            long updateCustomerZipcode;
-            
-            try {
-                updateCustomerCcNumber = Long.parseLong(customerCcNumber);
-                updateCustomerZipcode = Long.parseLong(customerZipcode);
-            } catch (NumberFormatException e) {
-                jsonObject.put("HTTP_CODE", "500");
-                jsonObject.put("MSG", "Enter valid number values!");
-                return Response.ok(jsonArray.put(jsonObject).toString()).build();
-            }
-            
-            Customer customer = new Customer(0,customerFirstName,
-                    customerLastName,customerEmail,customerPhone,customerAddress,
-                    customerCity,customerState,updateCustomerZipcode,updateCustomerCcNumber);
-            
-            int http_code = daoCustomer.addCustomer(customer);
-            
-            if(http_code == 200) {
-                
-                jsonObject.put("HTTP_CODE", "200");
-                jsonObject.put("MSG", "Customer has been entered successfully!");
-                returnString = jsonArray.put(jsonObject).toString();
-                
-            } else {
-                //return Response.status(500).entity("Unable to process add book").build();
-                jsonObject.put("HTTP_CODE", "500");
-                jsonObject.put("MSG", "Enter a valid customer info!");
-                returnString = jsonArray.put(jsonObject).toString();
-            }
-            
-        } catch (Exception e) {
-            //return Response.status(500).entity("Server unable to process request.").build();
-            jsonObject.put("HTTP_CODE", "500");
-            jsonObject.put("MSG", "Server unable to process request - add a book");
-            returnString = jsonArray.put(jsonObject).toString();
-        }
-        
         return Response.ok(returnString).build();
     }
     

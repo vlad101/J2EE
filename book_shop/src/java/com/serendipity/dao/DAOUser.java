@@ -35,25 +35,22 @@ public class DAOUser {
     /**
      * The method will allow you to add user to the database.
      * 
-     * @param userId
-     * @param username
-     * @param password
-     * @param isAdmin
+     * @param user
      * @return HTTP status
      */
-    public int addUser(int userId, String username, String password, int isAdmin) {
+    public int addUser(User user) {
                             
-        String sql = "INSERT INTO category (user_id, username, password, admin) VALUES(?,?,?,?);";
+        String sql = "INSERT INTO user (user_id, username, password, admin) VALUES(?,?,?,?);";
         
         try {
             
             conn = db.getConnection();
             conn.setAutoCommit(false);
             preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setInt(1, userId);
-            preparedStatement.setString(2, username);
-            preparedStatement.setString(3, password);
-            preparedStatement.setInt(3, isAdmin);
+            preparedStatement.setInt(1, user.getUserId());
+            preparedStatement.setString(2, user.getUsername());
+            preparedStatement.setString(3, user.getPassword());
+            preparedStatement.setInt(4, user.getIsAdmin());
             preparedStatement.executeUpdate();
             conn.commit();
             
@@ -87,7 +84,7 @@ public class DAOUser {
      */
     public int updateUserInfo(User user) {
                 
-        String sql = "UPDATE user SET user_id=?, username=?, password=? WHERE user_id=?;";
+        String sql = "UPDATE user SET user_id=?, username=?, password=?,admin=? WHERE user_id=?;";
         
         try {
         
@@ -97,7 +94,8 @@ public class DAOUser {
             preparedStatement.setInt(1, user.getUserId());
             preparedStatement.setString(2, user.getUsername());
             preparedStatement.setString(3, user.getPassword());
-            preparedStatement.setInt(4, user.getUserId());
+            preparedStatement.setInt(4, user.getIsAdmin());
+            preparedStatement.setInt(5, user.getUserId());
             preparedStatement.executeUpdate();
             conn.commit();
             
@@ -253,15 +251,13 @@ public class DAOUser {
     }
     
     /**
-     * This method will allow you to get user data by id from the database.
+     * This method will allow you to check if username is unique.
      * 
      * @param username
      * @return 
      */
     public boolean isUniqueUsername(String username){
-        
-        User user = null;
-        
+                
         String sql = "SELECT username, password, admin FROM user WHERE username=?;";
         
         try {
@@ -290,8 +286,7 @@ public class DAOUser {
         } finally {
             db.closeConnection();
         }
-        
-        return true;
+        return true; //unique username
     }
     
     /**

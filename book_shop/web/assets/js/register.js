@@ -47,6 +47,9 @@ $( document ).ready(function() {
 //                      clear the text field, after customer is added
                             $('input#customer_first_name_add').val('');
                             $('input#customer_last_name_add').val('');
+                            $('input#customer_username_add').val('');
+                            $('input#customer_password1_add').val('');
+                            $('input#customer_password2_add').val('');
                             $('input#customer_email_add').val('');
                             $('input#customer_phone_add').val('');
                             $('input#customer_address_add').val('');
@@ -55,26 +58,12 @@ $( document ).ready(function() {
                             $('input#customer_zipcode_add').val('');
                             $('input#customer_cc_number_add').val('');
                         } else {
-                            $('#ajax_add_customer_response_error').css({ 'width': '50%', 'margin': '0 auto', 'text-align':'center' }).show().html( '<strong>Oh snap!</strong> ' + data[0].MSG ).delay(10000).fadeOut();
+                            $('#ajax_add_customer_response_error').css({ 'width': '60%', 'margin': '0 auto', 'text-align':'center' }).show().html( '<strong>Oh snap!</strong> ' + data[0].MSG ).delay(10000).fadeOut();
                         }
                     },
                     dataType: "json" // request json
         };
         
         $.ajax(ajaxObj);
-    });
-    
-    $(document.body).on('click', '#customer_add_button', function() {
-//        clear all text fields        
-        $('#add-customer-modal input[name="customer_id_add"]').val('');
-        $('#add-customer-modal input[name="customer_first_name_add"]').val('');
-        $('#add-customer-modal input[name="customer_last_name_add"]').val('');
-        $('#add-customer-modal input[name="customer_email_add"]').val('');
-        $('#add-customer-modal input[name="customer_phone_add"]').val('');
-        $('#add-customer-modal input[name="customer_address_add"]').val('');
-        $('#add-customer-modal input[name="customer_city_add"]').val('');
-        $('#add-customer-modal input[name="customer_state_add"]').val('');
-        $('#add-customer-modal input[name="customer_zipcode_add"]').val('');
-        $('#add-customer-modal input[name="customer_cc_number_add"]').val('');
     });
 });

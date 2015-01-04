@@ -2,6 +2,7 @@ package com.serendipity.dao;
 
 import com.serendipity.model.Category;
 import com.serendipity.model.Customer;
+import com.serendipity.model.User;
 import com.serendipity.util.DbUtil;
 import com.serendipity.util.ToJSON;
 import java.sql.Connection;
@@ -34,9 +35,14 @@ public class DAOCustomer {
      * The method will allow you to add customer to the database.
      * 
      * @param customer
+     * @param username
+     * @param password
      * @return HTTP status
      */
-    public int addCustomer(Customer customer) {
+    public int addCustomer(Customer customer, String username, String password) {
+        
+        ResultSet generatedKeys = null;
+        int customerId = -1;
         
         String customerFirstName = customer.getFirstName();
         String customerLastName = customer.getLastName();
@@ -54,7 +60,9 @@ public class DAOCustomer {
         
             conn = db.getConnection();
             conn.setAutoCommit(false);
-            preparedStatement = conn.prepareStatement(sql);
+            
+//            get the customer id of the inserted customer
+            preparedStatement = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             preparedStatement.setString(1, customerFirstName);
             preparedStatement.setString(2, customerLastName);
             preparedStatement.setString(3, customerEmail);
@@ -65,8 +73,21 @@ public class DAOCustomer {
             preparedStatement.setLong(8, customerZipcode);
             preparedStatement.setLong(9, customerCcNumber);
                         
-            preparedStatement.executeUpdate();
+            int affectedRows = preparedStatement.executeUpdate();
+            
+//            get the generated customer_id after insert success
+            if(affectedRows == 0) {
+                Logger.getLogger(DAOCustomer.class.getName()).log(Level.SEVERE, "Coud not add customer.");
+                return 500;
+            }
+            
             conn.commit();
+            
+//            get customer id of the added customer
+            generatedKeys = preparedStatement.getGeneratedKeys();
+            if(generatedKeys.next()) {
+                customerId = generatedKeys.getInt(1);
+            }
             
             preparedStatement.close();
             preparedStatement = null;
@@ -75,18 +96,28 @@ public class DAOCustomer {
             conn = null;
             
         } catch (SQLException ex) {
-            Logger.getLogger(DAOBook.class.getName()).log(Level.SEVERE, "Coud not add customer.", ex);
+            Logger.getLogger(DAOCustomer.class.getName()).log(Level.SEVERE, "Coud not add customer.", ex);
             try {
                 conn.rollback();
             } catch (SQLException ex1) {
-                Logger.getLogger(DAOBook.class.getName()).log(Level.SEVERE, null, ex1);
+                Logger.getLogger(DAOCustomer.class.getName()).log(Level.SEVERE, null, ex1);
                 return 500;
             }
             return 500;
-        } finally {
-            db.closeConnection();
         }
         
+        if(customerId != -1) {
+            // create and add user to database
+            DAOUser daoUser = new DAOUser();
+            User user = new User(customerId, username, password, 0);
+            int http = daoUser.addUser(user);
+            if(http != 200) {
+                return 500;
+            }
+        } else {
+            Logger.getLogger(DAOCustomer.class.getName()).log(Level.SEVERE, "Coud not add customer.");
+            return 500;
+        }
         return 200;
     }
     
@@ -267,7 +298,7 @@ public class DAOCustomer {
             conn = null;
             
         } catch (SQLException ex) {
-            Logger.getLogger(DAOBook.class.getName()).log(Level.SEVERE, "Could not select customer by ID.", ex);
+            Logger.getLogger(DAOCustomer.class.getName()).log(Level.SEVERE, "Could not select customer by ID.", ex);
         } finally {
             db.closeConnection();
         }

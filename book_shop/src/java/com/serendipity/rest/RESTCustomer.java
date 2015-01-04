@@ -1,6 +1,7 @@
 package com.serendipity.rest;
 
 import com.serendipity.dao.DAOCustomer;
+import com.serendipity.dao.DAOUser;
 import com.serendipity.model.Customer;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -68,6 +69,7 @@ public class RESTCustomer {
     /**
      * The method creates its own HTTP response and adds Customer to the database
      * 
+     * @param customerInfo
      * @return - the response with the book name
      * @throws Exception 
      */
@@ -87,6 +89,9 @@ public class RESTCustomer {
             
             String customerFirstName = partsData.optString("customer_first_name_add");
             String customerLastName = partsData.optString("customer_last_name_add");
+            String userUsername = partsData.optString("customer_username_add");
+            String userPassword1 = partsData.optString("customer_password1_add");
+            String userPassword2 = partsData.optString("customer_password2_add");
             String customerEmail = partsData.optString("customer_email_add");
             String customerPhone = partsData.optString("customer_phone_add");
             String customerAddress = partsData.optString("customer_address_add");
@@ -94,6 +99,11 @@ public class RESTCustomer {
             String customerState = partsData.optString("customer_state_add");
             String customerZipcode = partsData.optString("customer_zipcode_add");            
             String customerCcNumber = partsData.optString("customer_cc_number_add");
+            
+            // trim all white spaces from username and password
+            userUsername = userUsername.replaceAll("\\s","");
+            userPassword1 = userPassword1.replaceAll("\\s","");
+            userPassword2 = userPassword2.replaceAll("\\s","");
             
 //            validate text values
             if(customerFirstName == null || customerFirstName.length() == 0) {
@@ -107,7 +117,31 @@ public class RESTCustomer {
                 jsonObject.put("MSG", "Enter a valid customer last name!");
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
             }
+
+            if(userUsername == null || userUsername.length() == 0) {
+                jsonObject.put("HTTP_CODE", "500");
+                jsonObject.put("MSG", "Enter a valid customer username!");
+                return Response.ok(jsonArray.put(jsonObject).toString()).build();
+            }
+            
+             if(userPassword1 == null || userPassword1.length() == 0) {
+                jsonObject.put("HTTP_CODE", "500");
+                jsonObject.put("MSG", "Enter a valid customer password!");
+                return Response.ok(jsonArray.put(jsonObject).toString()).build();
+            }
              
+            if(userPassword2 == null || userPassword2.length() == 0) {
+                jsonObject.put("HTTP_CODE", "500");
+                jsonObject.put("MSG", "Enter a valid customer password confirm!");
+                return Response.ok(jsonArray.put(jsonObject).toString()).build();
+            }
+            
+            if(!userPassword1.equals(userPassword2)) {
+                jsonObject.put("HTTP_CODE", "500");
+                jsonObject.put("MSG", "Cutstomer password and password confirm do not match!");
+                return Response.ok(jsonArray.put(jsonObject).toString()).build();
+            }
+            
             if(customerEmail == null || customerEmail.length() == 0) {
                 jsonObject.put("HTTP_CODE", "500");
                 jsonObject.put("MSG", "Enter a valid customer email!");
@@ -137,17 +171,32 @@ public class RESTCustomer {
                 jsonObject.put("MSG", "Enter a valid customer state!");
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
             }
+            
+//            validate username is unique
+            DAOUser daoUser = new DAOUser();
+            if(!daoUser.isUniqueUsername(userUsername)) {
+                jsonObject.put("HTTP_CODE", "500");
+                jsonObject.put("MSG", "The customer username already in use!");
+                return Response.ok(jsonArray.put(jsonObject).toString()).build();
+            }
              
-//            validate number values\
+//            validate number values
             long updateCustomerCcNumber;
             long updateCustomerZipcode;
             
             try {
                 updateCustomerCcNumber = Long.parseLong(customerCcNumber);
+            } catch (NumberFormatException e) {
+                jsonObject.put("HTTP_CODE", "500");
+                jsonObject.put("MSG", "Enter a valid customer credit card number!");
+                return Response.ok(jsonArray.put(jsonObject).toString()).build();
+            }
+            
+            try {
                 updateCustomerZipcode = Long.parseLong(customerZipcode);
             } catch (NumberFormatException e) {
                 jsonObject.put("HTTP_CODE", "500");
-                jsonObject.put("MSG", "Enter valid number values!");
+                jsonObject.put("MSG", "Enter a valid customer zipcode!");
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
             }
             
@@ -155,7 +204,7 @@ public class RESTCustomer {
                     customerLastName,customerEmail,customerPhone,customerAddress,
                     customerCity,customerState,updateCustomerZipcode,updateCustomerCcNumber);
             
-            int http_code = daoCustomer.addCustomer(customer);
+            int http_code = daoCustomer.addCustomer(customer, userUsername, userPassword1);
             
             if(http_code == 200) {
                 
@@ -173,7 +222,7 @@ public class RESTCustomer {
         } catch (Exception e) {
             //return Response.status(500).entity("Server unable to process request.").build();
             jsonObject.put("HTTP_CODE", "500");
-            jsonObject.put("MSG", "Server unable to process request - add a book");
+            jsonObject.put("MSG", "Server unable to process add a customer request");
             returnString = jsonArray.put(jsonObject).toString();
         }
         
@@ -183,6 +232,9 @@ public class RESTCustomer {
     /**
      * This method will allow you to update data in the customer table.
      * In this example we are using both PathParams and the message body (payload).
+     * @param customerInfo
+     * @return 
+     * @throws java.lang.Exception
      */
     @PUT
     @Consumes({MediaType.APPLICATION_FORM_URLENCODED,MediaType.APPLICATION_JSON})
@@ -300,6 +352,9 @@ public class RESTCustomer {
     /**
      * This method will allow you to delete data in the customer table.
      * In this example we are using both PathParams and the message body (payload).
+     * @param customerInfo
+     * @return 
+     * @throws java.lang.Exception
      */
     @DELETE
     @Consumes({MediaType.APPLICATION_FORM_URLENCODED,MediaType.APPLICATION_JSON})

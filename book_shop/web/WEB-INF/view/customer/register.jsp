@@ -37,17 +37,29 @@
             <label>Last Name</label><br>
             <input type="text" value="" name="customer_last_name_add">
         </div><br>
-        <div id="customer_cc_number_add">
-            <label>Credit Card Number</label><br>
-            <input type="text" value="" name="customer_cc_number_add">
-        </div><br>
         <div id="customer_email_add">
             <label>Email</label><br>
             <input type="text" value="" name="customer_email_add">
         </div><br>
+        <div id="customer_username_add">
+            <label>Username</label><br>
+            <input type="text" value="" name="customer_username_add">
+        </div><br>
+        <div id="customer_password1_add">
+            <label>Password</label><br>
+            <input type="text" value="" name="customer_password1_add">
+        </div><br>
+        <div id="customer_password2_add">
+            <label>Re-enter Password</label><br>
+            <input type="text" value="" name="customer_password2_add">
+        </div><br>
         <div id="customer_phone_add">
             <label>Phone</label><br>
             <input type="text" value="" name="customer_phone_add">
+        </div><br>
+        <div id="customer_cc_number_add">
+            <label>Credit Card Number</label><br>
+            <input type="text" value="" name="customer_cc_number_add">
         </div><br>
         <div id="customer_address_add">
             <label>Address</label><br>
