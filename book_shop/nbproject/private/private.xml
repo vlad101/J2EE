@@ -5,9 +5,9 @@
         <group>
             <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/WEB-INF/web.xml</file>
             <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/src/java/com/serendipity/dao/DAOCustomer.java</file>
+            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/src/java/com/serendipity/dao/DAOUser.java</file>
             <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/assets/js/editcustomer.js</file>
             <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/WEB-INF/view/admin/editcustomer.jsp</file>
-            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/src/java/com/serendipity/dao/DAOUser.java</file>
             <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/src/java/com/serendipity/rest/RESTCustomer.java</file>
         </group>
     </open-files>

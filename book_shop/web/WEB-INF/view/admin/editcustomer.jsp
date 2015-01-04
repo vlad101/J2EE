@@ -81,10 +81,10 @@
             <div id="ajax_update_customer_response_error" class="alert alert-danger"></div><br />
               
             <form id="update_customer_form" method="post" action="#">
-                <div id="customer_first_name_update">
+                <div id="customer_admin_update">
                     <label>Check box if Admin</label><br>
-<!--                    <input type="hidden" value="0" name="customer_admin_update">
-                    <input type="checkbox" value="1" name="customer_admin_update">-->
+                <!--<input type="hidden" value="0" name="customer_admin_update"> -->
+                    <input type="checkbox" value="1" name="customer_admin_update">
                 </div><br>
                 <div id="customer_first_name_update">
                     <label>First Name</label><br>
@@ -185,7 +185,7 @@
                         <option value="GU">Guam</option>
                         <option value="MP">Northern Mariana Islands</option>
                         <option value="PR">Puerto Rico</option>
-                        <option value="UM">United States Minor Outlying Islands</option>
+                        <option value="UM">US Minor Outlying Islands</option>
                         <option value="VI">Virgin Islands</option>
                         <option value="AA">Armed Forces Americas</option>
                         <option value="AP">Armed Forces Pacific</option>

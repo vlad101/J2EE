@@ -128,7 +128,7 @@
                     <option value="GU">Guam</option>
                     <option value="MP">Northern Mariana Islands</option>
                     <option value="PR">Puerto Rico</option>
-                    <option value="UM">United States Minor Outlying Islands</option>
+                    <option value="UM">US Minor Outlying Islands</option>
                     <option value="VI">Virgin Islands</option>
                     <option value="AA">Armed Forces Americas</option>
                     <option value="AP">Armed Forces Pacific</option>

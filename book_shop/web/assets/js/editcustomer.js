@@ -101,6 +101,9 @@ $( document ).ready(function() {
         var customer_id = row.data().customer_id;
         var customer_first_name = row.data().first_name;
         var customer_last_name = row.data().last_name;
+        var customer_username = row.data().username;
+        var customer_password = row.data().password;
+        var customer_admin = row.data().admin;
         var customer_email = row.data().email;
         var customer_phone = row.data().phone;
         var customer_address = row.data().address;
@@ -108,15 +111,30 @@ $( document ).ready(function() {
         var customer_state = row.data().state;
         var customer_zipcode = row.data().zipcode;
         var customer_cc_number = row.data().cc_number;
-                
+        
+        console.log(customer_username);
+        console.log(customer_password);
+        console.log(customer_admin);
+        console.log(customer_state);
+        
         $('#update-customer-modal input[name="customer_id_update"]').val(customer_id);
         $('#update-customer-modal input[name="customer_first_name_update"]').val(customer_first_name);
         $('#update-customer-modal input[name="customer_last_name_update"]').val(customer_last_name);
+        $('#update-customer-modal input[name="customer_username_update"]').val(customer_username);
+        $('#update-customer-modal input[name="customer_password1_update"]').val(customer_password);
+        $('#update-customer-modal input[name="customer_password2_update"]').val(customer_password);
+//        $('#update-customer-modal input[name="customer_admin_update"]').val(customer_admin);
+        // admin checkbox status - 1 is admin, 0 is public user
+        if(customer_admin == 1) {
+            $('#update-customer-modal input[name="customer_admin_update"]').attr('checked', true);
+        } else {
+            $('#update-customer-modal input[name="customer_admin_update"]').attr('checked', false);
+        }
         $('#update-customer-modal input[name="customer_email_update"]').val(customer_email);
         $('#update-customer-modal input[name="customer_phone_update"]').val(customer_phone);
         $('#update-customer-modal input[name="customer_address_update"]').val(customer_address);
         $('#update-customer-modal input[name="customer_city_update"]').val(customer_city);
-        $('#update-customer-modal input[name="customer_state_update"]').val(customer_state);
+        $('#customer_state_update select').val(customer_state);
         $('#update-customer-modal input[name="customer_zipcode_update"]').val(customer_zipcode);
         $('#update-customer-modal input[name="customer_cc_number_update"]').val(customer_cc_number);
     });
@@ -133,9 +151,9 @@ $( document ).ready(function() {
     
     
      /**
-     * The event handler for submit button - update category.
-     * It triggers a ajax PUT call to api/v1/category
-     * It will submit a category entry update to a Serendipity database 
+     * The event handler for submit button - update customer.
+     * It triggers a ajax PUT call to api/v1/customer
+     * It will submit a customer entry update to a Serendipity database 
      */
     
     $(document.body).on('click', '#customer_delete_button', function(e) {
@@ -315,14 +333,13 @@ function doGetCustomerData(customer_list) {
     for(var i in customer_array) {
         customer = customer_array[i];
         
-        console.log(customer_list[customer].username);
-        console.log(customer_list[customer].password);
-        console.log(customer_list[customer].admin);
-        
         aaData.push({
             'customer_id':      customer_list[customer].customer_id,
             'first_name':       customer_list[customer].first_name,
             'last_name':        customer_list[customer].last_name,
+            'username':         customer_list[customer].username,
+            'password':         customer_list[customer].password,
+            'admin':            customer_list[customer].admin,
             'email':            customer_list[customer].email,
             'phone':            customer_list[customer].phone,
             'address':          customer_list[customer].address,
@@ -376,10 +393,10 @@ function fnFormatDetails( data ) {
     // `data` is the original data object for the row
     
     var retval;
-    
-    retval +=   '<tr><td><strong>Category: </strong>' + data.category_name + '</td></tr>';
-    
     retval = '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">';
+    retval += '<tr><td><strong>Admin: </strong>' + (data.admin == 1 ? "Admin" : "Public") + '</td></tr>';
+    retval += '<tr><td><strong>Username: </strong>' + data.username + '</td></tr>';
+    retval += '<tr><td><strong>Password: </strong>' + data.password + '</td></tr>';
     retval += '<tr><td><strong>Credit Card: </strong>' + data.cc_number + '</td></tr>';
     retval += '<tr><td><strong>Email: </strong>' + data.email + '</td></tr>';
     retval += '<tr><td><strong>Phone: </strong>' + data.phone + '</td></tr>';

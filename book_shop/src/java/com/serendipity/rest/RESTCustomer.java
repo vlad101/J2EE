@@ -349,13 +349,6 @@ public class RESTCustomer {
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
             }
             
-//            validate username is unique
-            if(!daoUser.isUniqueUsername(userUsername)) {
-                jsonObject.put("HTTP_CODE", "500");
-                jsonObject.put("MSG", "The customer username already in use!");
-                return Response.ok(jsonArray.put(jsonObject).toString()).build();
-            }
-            
 //            validate number values
             int updateCustomerId;
             long updateCustomerCcNumber;

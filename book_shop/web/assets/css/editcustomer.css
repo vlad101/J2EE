@@ -72,3 +72,9 @@ tr.shown td.details-control {
 #nav-buttons {
     margin-left: 23%;
 }
+
+select#customer_state_update {
+    max-width: 1px;
+    min-width: 1px;
+    width: 1px !important;
+}
