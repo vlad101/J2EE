@@ -3,6 +3,7 @@ package com.serendipity.rest;
 import com.serendipity.dao.DAOCustomer;
 import com.serendipity.dao.DAOUser;
 import com.serendipity.model.Customer;
+import com.serendipity.model.User;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -243,7 +244,9 @@ public class RESTCustomer {
     public Response updateCustomer(String customerInfo) throws Exception {
         
         Customer customer;
+        User user;
         DAOCustomer daoCustomer = new DAOCustomer();
+        DAOUser daoUser = new DAOUser();
         
         String returnString;
         
@@ -256,6 +259,9 @@ public class RESTCustomer {
             String customerId = partsData.optString("customer_id_update");
             String customerFirstName = partsData.optString("customer_first_name_update");
             String customerLastName = partsData.optString("customer_last_name_update");
+            String userUsername = partsData.optString("customer_username_update");
+            String userPassword1 = partsData.optString("customer_password1_update");
+            String userPassword2 = partsData.optString("customer_password2_update");
             String customerEmail = partsData.optString("customer_email_update");
             String customerPhone = partsData.optString("customer_phone_update");
             String customerAddress = partsData.optString("customer_address_update");
@@ -263,7 +269,8 @@ public class RESTCustomer {
             String customerState = partsData.optString("customer_state_update");
             String customerZipcode = partsData.optString("customer_zipcode_update");
             String customerCcNumber = partsData.optString("customer_cc_number_update");
-
+            int userAdmin = partsData.optInt("customer_admin_update");
+            
 //            validate text values
             if(customerFirstName == null || customerFirstName.length() == 0) {
                 jsonObject.put("HTTP_CODE", "500");
@@ -274,6 +281,31 @@ public class RESTCustomer {
             if(customerLastName == null || customerLastName.length() == 0) {
                 jsonObject.put("HTTP_CODE", "500");
                 jsonObject.put("MSG", "Enter a valid customer last name!");
+                return Response.ok(jsonArray.put(jsonObject).toString()).build();
+            }
+            
+
+            if(userUsername == null || userUsername.length() == 0) {
+                jsonObject.put("HTTP_CODE", "500");
+                jsonObject.put("MSG", "Enter a valid customer username!");
+                return Response.ok(jsonArray.put(jsonObject).toString()).build();
+            }
+            
+             if(userPassword1 == null || userPassword1.length() == 0) {
+                jsonObject.put("HTTP_CODE", "500");
+                jsonObject.put("MSG", "Enter a valid customer password!");
+                return Response.ok(jsonArray.put(jsonObject).toString()).build();
+            }
+             
+            if(userPassword2 == null || userPassword2.length() == 0) {
+                jsonObject.put("HTTP_CODE", "500");
+                jsonObject.put("MSG", "Enter a valid customer password confirm!");
+                return Response.ok(jsonArray.put(jsonObject).toString()).build();
+            }
+            
+            if(!userPassword1.equals(userPassword2)) {
+                jsonObject.put("HTTP_CODE", "500");
+                jsonObject.put("MSG", "Cutstomer password and password confirm do not match!");
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
             }
              
@@ -307,6 +339,13 @@ public class RESTCustomer {
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
             }
             
+//            validate username is unique
+            if(!daoUser.isUniqueUsername(userUsername)) {
+                jsonObject.put("HTTP_CODE", "500");
+                jsonObject.put("MSG", "The customer username already in use!");
+                return Response.ok(jsonArray.put(jsonObject).toString()).build();
+            }
+            
 //            validate number values
             int updateCustomerId;
             long updateCustomerCcNumber;
@@ -321,12 +360,29 @@ public class RESTCustomer {
                 jsonObject.put("MSG", "Enter valid number values!");
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
             }
+            
+//            update user credentials
+            user = new User(updateCustomerId, userUsername, userPassword2, userAdmin);
+            int http_code = daoUser.updateUserInfo(user);
+            if(http_code == 200) {
+                
+                jsonObject.put("HTTP_CODE", "200");
+                jsonObject.put("MSG", "User has been updated successfully!");
+                returnString = jsonArray.put(jsonObject).toString();
+                
+            } else {
+                //return Response.status(500).entity("Unable to process add customer").build();
+                jsonObject.put("HTTP_CODE", "500");
+                jsonObject.put("MSG", "User was not updated!");
+                return Response.ok(jsonArray.put(jsonObject).toString()).build();
+            }           
    
+//            update customer credentials
             customer = new Customer(updateCustomerId,customerFirstName,
                     customerLastName,customerEmail,customerPhone,customerAddress,
                     customerCity,customerState,updateCustomerZipcode,updateCustomerCcNumber);
-            int http_code = daoCustomer.updateCustomer(customer);
             
+            http_code = daoCustomer.updateCustomer(customer);
             if(http_code == 200) {
                 
                 jsonObject.put("HTTP_CODE", "200");
