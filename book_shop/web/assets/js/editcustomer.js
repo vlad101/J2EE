@@ -315,6 +315,10 @@ function doGetCustomerData(customer_list) {
     for(var i in customer_array) {
         customer = customer_array[i];
         
+        console.log(customer_list[customer].username);
+        console.log(customer_list[customer].password);
+        console.log(customer_list[customer].admin);
+        
         aaData.push({
             'customer_id':      customer_list[customer].customer_id,
             'first_name':       customer_list[customer].first_name,

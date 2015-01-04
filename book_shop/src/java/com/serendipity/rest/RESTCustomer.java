@@ -45,6 +45,8 @@ public class RESTCustomer {
             for(int i = 0; i < jsonArrayCustomerList.length(); i++) {
                 
                 JSONObject obj = jsonArrayCustomerList.getJSONObject(i);
+                
+//                get general customer info
                 obj.put("customer_id", obj.getInt("customer_id"));
                 obj.put("first_name", obj.getString("first_name"));
                 obj.put("last_name", obj.getString("last_name"));
@@ -55,6 +57,14 @@ public class RESTCustomer {
                 obj.put("state", obj.getString("state"));
                 obj.put("zipcode", obj.getString("zipcode"));
                 obj.put("cc_number", obj.getString("cc_number"));
+                
+//                get user credential info
+                DAOUser daoUser = new DAOUser();
+                User user = daoUser.getUserById(obj.getInt("customer_id"));
+                obj.put("username", user.getUsername());
+                obj.put("password", user.getPassword());
+                obj.put("admin", user.getIsAdmin());
+                
                 returnString = jsonObject.put(Integer.toString(obj.getInt("customer_id")), obj).toString();
             }
         
