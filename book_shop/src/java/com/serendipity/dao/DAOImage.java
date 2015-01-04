@@ -166,6 +166,49 @@ public class DAOImage {
         
         return 200; // success
     }
+    
+    
+    /**
+     * This method will allow you to delete data in the book image table.
+     * Consider storing data in the temporary table and not to delete completely.
+     * 
+     * @param bookId
+     * @return HTTP status
+     */
+    public int deleteImageByBookId(int bookId) {
+         
+        String sql = "DELETE FROM image WHERE book_id=?;";
+        
+        try {
+        
+            conn = db.getConnection();
+            conn.setAutoCommit(false);
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setInt(1, bookId);
+            preparedStatement.executeUpdate();
+            conn.commit();
+            
+            preparedStatement.close();
+            preparedStatement = null;
+            
+            conn.close();
+            conn = null;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOImage.class.getName()).log(Level.SEVERE, "Coud not delete image.", ex);
+            try {
+                conn.rollback();
+            } catch (SQLException ex1) {
+                Logger.getLogger(DAOImage.class.getName()).log(Level.SEVERE, null, ex1);
+                return 500;
+            }
+            return 500;
+        } finally {
+            db.closeConnection();
+        }
+        
+        return 200; // success
+    }
 
     /**
      * This method will allow you to get category data by id from the database.

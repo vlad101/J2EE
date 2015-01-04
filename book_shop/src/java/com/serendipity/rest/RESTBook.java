@@ -442,6 +442,7 @@ public class RESTBook {
         
         String bookId;
         DAOBook daoBook = new DAOBook();
+        DAOImage daoImage = new DAOImage();
         String returnString;
         JSONArray jsonArray = new JSONArray();
         JSONObject jsonObject = new JSONObject();
@@ -460,7 +461,23 @@ public class RESTBook {
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
             }
             
-            int http_code = daoBook.deleteBook(deleteBookId);
+//            delete image by book_id
+            int http_code = daoImage.deleteImageByBookId(deleteBookId);
+            
+            if(http_code == 200) {
+                
+                jsonObject.put("HTTP_CODE", "200");
+                jsonObject.put("MSG", "Image has been deleted successfully!");
+                
+            } else {
+                //return Response.status(500).entity("Unable to process add book").build();
+                jsonObject.put("HTTP_CODE", "500");
+                jsonObject.put("MSG", "Image was not deleted!");
+                return Response.ok(jsonArray.put(jsonObject).toString()).build();
+            }  
+ 
+//            delete book by book_id
+            http_code = daoBook.deleteBook(deleteBookId);
             
             if(http_code == 200) {
                 

@@ -326,7 +326,7 @@ function deleteBook(obj) {
     
     ajaxObj = {
                 type: "DELETE",
-                url: base_url + "/book_shop/api/v1/book/",
+                url: base_url + "/book_shop/api/v1/book" + csrf,
                 data: JSON.stringify(obj),
                 contentType: "application/json",
                 error: function(jqXHR, textStatus, errorThrown) {
