@@ -57,13 +57,19 @@ $( document ).ready(function() {
                             
 //                      clear the text field, after customer is added
                             $('#add-customer-modal').modal('hide');
+                            $('input#customer_admin_add').attr('checked', false);
                             $('input#customer_first_name_add').val('');
                             $('input#customer_last_name_add').val('');
+                            $('input#customer_username_add').val('');
+                            $('input#customer_password1_add').val('');
+                            $('input#customer_password2_add').val('');
                             $('input#customer_email_add').val('');
                             $('input#customer_phone_add').val('');
                             $('input#customer_address_add').val('');
                             $('input#customer_city_add').val('');
-                            $('input#customer_state_add').val('');
+//                            $('input#customer_state_add').val('');
+                            $('#customer_state_add option[selected="selected"').removeAttr('selected');
+                            $('#customer_state_add option:first').attr('selected','selected');
                             $('input#customer_zipcode_add').val('');
                             $('input#customer_cc_number_add').val('');
                         } else {
@@ -169,15 +175,22 @@ $( document ).ready(function() {
     } );
     
     $(document.body).on('click', '#customer_add_button', function() {
-//        clear all text fields        
+//        clear all text fields
+        $('#add-customer-modal input[name="customer_admin_add"]').attr('checked', false);
         $('#add-customer-modal input[name="customer_id_add"]').val('');
         $('#add-customer-modal input[name="customer_first_name_add"]').val('');
         $('#add-customer-modal input[name="customer_last_name_add"]').val('');
+        $('#add-customer-modal input[name="customer_username_add"]').val('');
+        $('#add-customer-modal input[name="customer_password1_add"]').val('');
+        $('#add-customer-modal input[name="customer_password2_add"]').val('');
         $('#add-customer-modal input[name="customer_email_add"]').val('');
         $('#add-customer-modal input[name="customer_phone_add"]').val('');
         $('#add-customer-modal input[name="customer_address_add"]').val('');
         $('#add-customer-modal input[name="customer_city_add"]').val('');
-        $('#add-customer-modal input[name="customer_state_add"]').val('');
+//        $('#add-customer-modal input[name="customer_state_add"]').val('');
+//        $('#add-customer-modal input[name="customer_state_add"] option:selected').prop('selected',false);
+        $('#customer_state_add option[selected="selected"').removeAttr('selected');
+        $('#customer_state_add option:first').attr('selected','selected');
         $('#add-customer-modal input[name="customer_zipcode_add"]').val('');
         $('#add-customer-modal input[name="customer_cc_number_add"]').val('');
     });

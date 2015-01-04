@@ -1,6 +1,5 @@
 package com.serendipity.dao;
 
-import com.serendipity.model.Category;
 import com.serendipity.model.Customer;
 import com.serendipity.model.User;
 import com.serendipity.util.DbUtil;
@@ -20,7 +19,7 @@ import org.codehaus.jettison.json.JSONArray;
  */
 public class DAOCustomer {
     
-    private DbUtil db;
+    private final DbUtil db;
     private Connection conn = null;
     private PreparedStatement preparedStatement = null;
     private ResultSet rs = null;
@@ -37,11 +36,12 @@ public class DAOCustomer {
      * @param customer
      * @param username
      * @param password
+     * @param admin
      * @return HTTP status
      */
-    public int addCustomer(Customer customer, String username, String password) {
+    public int addCustomer(Customer customer, String username, String password, int admin) {
         
-        ResultSet generatedKeys = null;
+        ResultSet generatedKeys;
         int customerId = -1;
         
         String customerFirstName = customer.getFirstName();
@@ -109,7 +109,7 @@ public class DAOCustomer {
         if(customerId != -1) {
             // create and add user to database
             DAOUser daoUser = new DAOUser();
-            User user = new User(customerId, username, password, 0);
+            User user = new User(customerId, username, password, admin);
             int http = daoUser.addUser(user);
             if(http != 200) {
                 return 500;
@@ -255,6 +255,7 @@ public class DAOCustomer {
     /**
      * This method will allow you to get all customer data from the customer table.
      * 
+     * @param customerId
      * @return JSON object with all customer data from the table. 
      */
     public Customer getCustomerById(int customerId){

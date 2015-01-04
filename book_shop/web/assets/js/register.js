@@ -54,7 +54,9 @@ $( document ).ready(function() {
                             $('input#customer_phone_add').val('');
                             $('input#customer_address_add').val('');
                             $('input#customer_city_add').val('');
-                            $('input#customer_state_add').val('');
+//                            $('input#customer_state_add').val('');
+                            $('#customer_state_add option[selected="selected"').removeAttr('selected');
+                            $('#customer_state_add option:first').attr('selected','selected');
                             $('input#customer_zipcode_add').val('');
                             $('input#customer_cc_number_add').val('');
                         } else {

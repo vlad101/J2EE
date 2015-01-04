@@ -96,9 +96,10 @@ public class RESTCustomer {
             String customerPhone = partsData.optString("customer_phone_add");
             String customerAddress = partsData.optString("customer_address_add");
             String customerCity = partsData.optString("customer_city_add");
-            String customerState = partsData.optString("customer_state_add");
+            String customerState = partsData.optString("customer_state_add");            
             String customerZipcode = partsData.optString("customer_zipcode_add");            
             String customerCcNumber = partsData.optString("customer_cc_number_add");
+            int userAdmin = partsData.optInt("customer_admin_add");
             
             // trim all white spaces from username and password
             userUsername = userUsername.replaceAll("\\s","");
@@ -204,7 +205,7 @@ public class RESTCustomer {
                     customerLastName,customerEmail,customerPhone,customerAddress,
                     customerCity,customerState,updateCustomerZipcode,updateCustomerCcNumber);
             
-            int http_code = daoCustomer.addCustomer(customer, userUsername, userPassword1);
+            int http_code = daoCustomer.addCustomer(customer, userUsername, userPassword1, userAdmin);
             
             if(http_code == 200) {
                 
