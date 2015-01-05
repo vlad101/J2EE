@@ -25,10 +25,6 @@
         <servlet-name>SerendipityController</servlet-name>
         <!-- get request  -->
         <url-pattern>/index</url-pattern>
-        <url-pattern>/book</url-pattern>
-        <url-pattern>/booklist</url-pattern>
-        <url-pattern>/categorylist</url-pattern>
-        <url-pattern>/category</url-pattern>
         <url-pattern>/cart</url-pattern>
         <url-pattern>/checkout</url-pattern>
         <url-pattern>/chooseLanguage</url-pattern>
@@ -39,6 +35,28 @@
         <url-pattern>/addToCart</url-pattern>
         <url-pattern>/updateCart</url-pattern>
         <url-pattern>/purchase</url-pattern>
+    </servlet-mapping>
+    <!-- book controller  -->
+    <servlet>
+        <display-name>BookController</display-name>
+        <servlet-name>BookController</servlet-name>
+        <servlet-class>com.serendipity.controller.BookController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BookController</servlet-name>
+        <url-pattern>/book</url-pattern>
+        <url-pattern>/booklist</url-pattern>
+    </servlet-mapping>
+    <!-- category controller  -->
+    <servlet>
+        <display-name>CategoryController</display-name>
+        <servlet-name>CategoryController</servlet-name>
+        <servlet-class>com.serendipity.controller.CategoryController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CategoryController</servlet-name>
+        <url-pattern>/category</url-pattern>
+        <url-pattern>/categorylist</url-pattern>
     </servlet-mapping>
     <!-- administration controller -->
     <servlet>
@@ -74,6 +92,7 @@
     <servlet-mapping>
         <servlet-name>CustomerController</servlet-name>
         <url-pattern>/customer/register</url-pattern>
+        <url-pattern>/customer/customer</url-pattern>
     </servlet-mapping>
     <!-- REST Web API -->
     <servlet>

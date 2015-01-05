@@ -30,10 +30,6 @@ import javax.servlet.http.HttpServletResponse;
                             "/emaillist",
                             "/customerservice",
                             "/index",
-                            "/booklist",
-                            "/book",
-                            "/categorylist",
-                            "/category",
                             "/addToCart",
                             "/cart",
                             "/updateCart",
@@ -59,67 +55,8 @@ public class SerendipityController extends HttpServlet {
         
 //      get - index page request
         if(action.equalsIgnoreCase("/index")) {
-            request.setAttribute("categoryList", getCategoryList(action));
+            request.setAttribute("categoryList", getCategoryList());
             forward = "/index";
-        }
-
-//      get - book list page request
-        else if(action.equalsIgnoreCase("/booklist")) {
-            request.setAttribute("bookList", getBookList());
-            forward = "/book/booklist";
-        }
-        
-//      get - book page request
-        else if(action.equalsIgnoreCase("/book")) {
-            if(request.getParameterMap().containsKey("id")) {
-                String bookId = request.getParameter("id");
-                Book book = getBookByBookId(bookId);
-                if(book != null) {
-                    request.setAttribute("book", book);
-                    int categoryId = book.getCategoryId();
-                    Category category = getCategoryByCategoryId(categoryId);
-                    if(category  != null) {
-                        request.setAttribute("category", category);
-                    }
-                    forward = "/book/book";
-                } else {
-                    forward = "/error/error_404";
-                }
-            } else {
-                forward = "/error/error_404";
-            }
-        }
-        
-//      get - category list page request
-        else if(action.equalsIgnoreCase("/categorylist")) {
-            request.setAttribute("categoryList", getCategoryList(action));
-            forward = "/category/categorylist";
-        }
-        
-//      get - category page request
-        else if(action.equalsIgnoreCase("/category")) {
-            if(request.getParameterMap().containsKey("id")) {
-                String categoryId = request.getParameter("id");
-                
-//              check the category is valid integer
-                if(isInteger(categoryId)) {
-//                    check the category and book are valid
-                    Category category = isValidCategory(categoryId);
-                    if(category != null) {
-                        int validCategoryId = Integer.parseInt(categoryId);
-                        List<Book> bookList = getBookList(validCategoryId);
-                        request.setAttribute("category", category);
-                        request.setAttribute("bookList", bookList);
-                        request.setAttribute("defaultImageMap", getDefaultImageMap(bookList));
-                        
-                        forward = "/category/category";
-                    } else {
-                        forward = "/error/error_404";
-                    }
-                } else {
-                    forward = "/error/error_404";
-                }
-            }
         }
         
 //      get - search page request
@@ -235,107 +172,13 @@ public class SerendipityController extends HttpServlet {
      * If index page, return only four categories
      * If not index page, return all categories 
      */
-    private List<Category> getCategoryList(String indexPage) {
+    private List<Category> getCategoryList() {
         DAOCategory daoCategory = new DAOCategory();
         List<Category> categoryList = daoCategory.getCategoryList();
-        if(indexPage.equals("/index")) {
-            int categoryListSize = categoryList.size();
-            if(categoryListSize > 5);
-                return categoryList.subList(0, 4);
+        int categoryListSize = categoryList.size();
+        if(categoryListSize > 5) {
+            return categoryList.subList(0, 4);
         }
         return categoryList;
-    }
-    
-    /**
-     * Get category list
-     * @param indexPage
-     * @return
-     * If index page, return only four categories
-     * If not index page, return all categories 
-     */
-    private List<Book> getBookList() {
-        DAOBook daoBook = new DAOBook();
-        List<Book> bookList = daoBook.getBookList();
-        return bookList;
-    }
-    
-    /**
-     * Get book list by category id
-     * @param categoryId
-     * @return
-     * If index page, return only four categories
-     * If not index page, return all categories 
-     */
-    private List<Book> getBookList(int categoryId) {
-        DAOBook daoBook = new DAOBook();
-        List<Book> bookList = daoBook.getBookListByCategoryId(categoryId);
-        return bookList;
-    }
-    
-    /**
-     * Determine if category is an integer value
-     * @param str
-     * @return 
-     */
-    private boolean isInteger(String str) {
-        try {
-            Integer.parseInt(str);
-        } catch(NumberFormatException e) {
-            return false;
-        }
-        return true;
-    }
-    
-    /**
-     * Return a valid category.
-     * @param str
-     * @return 
-     */
-    private Category isValidCategory(String str) {
-        int categoryId = Integer.parseInt(str);
-        DAOCategory daoCategory = new DAOCategory();
-        Category category = daoCategory.getCategoryById(categoryId);
-        return (category != null) ? category : null;
-    }
-    
-    /**
-     * Get default image maps with key book id and value default image map
-     * If image contains a default image, the actual image path will be used
-     * If image does not contain a default image, the default "no_image.jpg" will be used
-     * 
-     * @param bookList
-     * @return 
-     */
-    private Map<Integer, String> getDefaultImageMap(List<Book> bookList) {
-        Map<Integer, String> defaultImageMap = new HashMap<Integer, String>();
-        for(Book book : bookList) {
-            int bookId = book.getBookId();
-            DAOImage daoImage = new DAOImage();
-            Image image = daoImage.getDefaultImageByBookId(bookId);
-
-            if(image != null) {
-                String defaultImagePath = image.getPath();
-                defaultImageMap.put(bookId, defaultImagePath);
-            } else {
-                defaultImageMap.put(bookId, "no_image.jpg");
-            }
-        }
-        return defaultImageMap;
-    }
-
-    private Book getBookByBookId(String bookId) {
-        DAOBook daoBook = new DAOBook();
-        Book book = daoBook.getBookById(Integer.parseInt(bookId));
-        if(book != null)
-            return book;
-        return null;
-    }
-    
-    private Category getCategoryByCategoryId(int categoryId) {
-        DAOCategory daoCategory = new DAOCategory();
-        Category category = daoCategory.getCategoryById(categoryId);
-        if(category != null)
-            return category;
-        return null;
     }
 }

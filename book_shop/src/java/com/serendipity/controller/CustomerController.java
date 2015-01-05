@@ -1,5 +1,9 @@
 package com.serendipity.controller;
 
+import com.serendipity.dao.DAOCustomer;
+import com.serendipity.dao.DAOUser;
+import com.serendipity.model.Customer;
+import com.serendipity.model.User;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.logging.Level;
@@ -17,7 +21,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name="CustomerController",
             loadOnStartup = 1,
-            urlPatterns = {"/customer"})
+            urlPatterns = { "/customer/customer",
+                            "/customer/register"})
 public class CustomerController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
@@ -34,9 +39,44 @@ public class CustomerController extends HttpServlet {
 
         String forward;
         String action = request.getServletPath();
+        
+//        get - register page request
         if(action.equalsIgnoreCase("/customer/register")) {
             forward = "/register";
-        } else {
+        }
+        
+//        get - customer page request
+        else if(action.equalsIgnoreCase("/customer/customer")) {
+            if(request.getParameterMap().containsKey("id")) {
+                String customerId = request.getParameter("id");
+                
+                int validCustomerId;
+                try
+                {
+                    validCustomerId = Integer.parseInt(customerId);
+                    User user = getUserByCustomerId(validCustomerId);
+                    if(user != null) {
+                        request.setAttribute("user", user);
+                        Customer customer = getCustomerByCustomerId(validCustomerId);
+                        if(customer  != null) {
+                            request.setAttribute("customer", customer);
+                            forward = "/customer";
+                        } else {
+                            forward = "/error/error_404";
+                        }
+                    } else {
+                        forward = "/error/error_404";
+                    }
+                } catch(NumberFormatException e) {
+                    forward = "/error/error_404";
+                }
+            } else {
+                forward = "/error/error_404";
+            }
+        } 
+        
+//        error page
+        else {
             forward = "/error/error_404";
         }
         
@@ -71,5 +111,23 @@ public class CustomerController extends HttpServlet {
         } catch (ParseException ex) {
             Logger.getLogger(CustomerController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    private User getUserByCustomerId(int customerId) {
+        DAOUser daoUser = new DAOUser();
+        User user = daoUser.getUserById(customerId);
+        if(user != null) {
+            return user;
+        }
+        return null;
+    }
+    
+    private Customer getCustomerByCustomerId(int customerId) {
+        DAOCustomer daoCustomer = new DAOCustomer();
+        Customer customer = daoCustomer.getCustomerById(customerId);
+        if(customer != null) {
+            return customer;
+        }
+        return null;
     }
 }

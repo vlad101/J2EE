@@ -21,6 +21,8 @@ $( document ).ready(function() {
         $('#ajax_delete_customer_response_success').hide();
         $('#ajax_delete_customer_response_error').hide();
         
+        $('#ajax_redirect_customer_response_error').hide();
+        
         // set csrf token value
         csrf = "?csrfPreventionSalt="+ $('#csrf').text();
         
@@ -99,8 +101,8 @@ $( document ).ready(function() {
         var row = oTable.row( $tr );
         
         var customer_id = row.data().customer_id;
-        var customer_first_name = row.data().first_name;
-        var customer_last_name = row.data().last_name;
+        var customer_first_name = row.data().first_name.replace(/(<([^>]+)>)/ig,"");
+        var customer_last_name = row.data().last_name.replace(/(<([^>]+)>)/ig,"");
         var customer_username = row.data().username;
         var customer_password = row.data().password;
         var customer_admin = row.data().admin;
@@ -112,18 +114,12 @@ $( document ).ready(function() {
         var customer_zipcode = row.data().zipcode;
         var customer_cc_number = row.data().cc_number;
         
-        console.log(customer_username);
-        console.log(customer_password);
-        console.log(customer_admin);
-        console.log(customer_state);
-        
         $('#update-customer-modal input[name="customer_id_update"]').val(customer_id);
         $('#update-customer-modal input[name="customer_first_name_update"]').val(customer_first_name);
         $('#update-customer-modal input[name="customer_last_name_update"]').val(customer_last_name);
         $('#update-customer-modal input[name="customer_username_update"]').val(customer_username);
         $('#update-customer-modal input[name="customer_password1_update"]').val(customer_password);
         $('#update-customer-modal input[name="customer_password2_update"]').val(customer_password);
-//        $('#update-customer-modal input[name="customer_admin_update"]').val(customer_admin);
         // admin checkbox status - 1 is admin, 0 is public user
         if(customer_admin == 1) {
             $('#update-customer-modal input[name="customer_admin_update"]').attr('checked', true);
@@ -285,7 +281,7 @@ function deleteCustomer(obj) {
 }
 
 /**
- * Get category names from the backend using ajax call and json response.
+ * Get customer names from the backend using ajax call and json response.
  */
 function getCustomer() {
     
@@ -335,8 +331,8 @@ function doGetCustomerData(customer_list) {
         
         aaData.push({
             'customer_id':      customer_list[customer].customer_id,
-            'first_name':       customer_list[customer].first_name,
-            'last_name':        customer_list[customer].last_name,
+            'first_name':       '<a style="cursor:pointer;" onClick="viewCustomer(' + customer_list[customer].customer_id + ');">' + customer_list[customer].first_name + '</a>',
+            'last_name':        '<a style="cursor:pointer;" onClick="viewCustomer(' + customer_list[customer].customer_id + ');">' + customer_list[customer].last_name + '</a>',
             'username':         customer_list[customer].username,
             'password':         customer_list[customer].password,
             'admin':            customer_list[customer].admin,
@@ -389,6 +385,11 @@ function doBuildDataTable(aaData) {
     }
 }
 
+/*
+ * 
+ * @param data
+ * @returns {String}
+ */
 function fnFormatDetails( data ) {
     // `data` is the original data object for the row
     
@@ -406,4 +407,19 @@ function fnFormatDetails( data ) {
     retval += '<tr><td><strong>Zipcode: </strong>' + data.zipcode + '</td></tr>';
     retval += '</table>';
     return retval;
+}
+
+/**
+ * Get customer info from the backend using ajax call and json response.
+ *
+ * @param customer_id
+ */
+
+function viewCustomer(customer_id) {
+    
+    if(customer_id === parseInt(customer_id, 10)) {
+        window.location.href = "/book_shop/customer/customer?id=" + customer_id;
+    } else {
+        $('#ajax_redirect_customer_response_error').css({'width': '50%', 'margin': '0 auto'}).show().html('<strong>Oh snap! Invalid customer id!</strong> ').delay(5000).fadeOut();
+    }
 }

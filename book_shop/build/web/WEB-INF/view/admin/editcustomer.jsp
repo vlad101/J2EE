@@ -37,7 +37,11 @@
     <!-- Delete customer -->
     <div id="ajax_delete_customer_response_success" class="alert alert-success"></div>
     <div id="ajax_delete_customer_response_error" class="alert alert-danger"></div>
-    <br />
+    
+    <!-- Redirect customer -->
+    <div id="ajax_redirect_customer_response_error" class="alert alert-danger"></div>
+    
+    <br>
     
     <!-- jQuery datatables -->
     <div id="preloader"><img src="/book_shop/assets/images/loader/loader.gif" alt="Get customer preloader" ></div>
@@ -84,6 +88,8 @@
                 <div id="customer_admin_update">
                     <label>Check box if Admin</label><br>
                 <!--<input type="hidden" value="0" name="customer_admin_update"> -->
+                    <!--<input type="checkbox" value="" name="customer_admin_update">-->
+                    <input type="hidden" value="0" name="customer_admin_update">
                     <input type="checkbox" value="1" name="customer_admin_update">
                 </div><br>
                 <div id="customer_first_name_update">

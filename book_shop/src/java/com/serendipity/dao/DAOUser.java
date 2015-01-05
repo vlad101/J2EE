@@ -1,6 +1,5 @@
 package com.serendipity.dao;
 
-import com.serendipity.model.Category;
 import com.serendipity.model.User;
 import com.serendipity.util.DbUtil;
 import com.serendipity.util.ToJSON;
@@ -8,8 +7,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.codehaus.jettison.json.JSONArray;
