@@ -87,10 +87,10 @@
             <form id="update_customer_form" method="post" action="#">
                 <div id="customer_admin_update">
                     <label>Check box if Admin</label><br>
-                <!--<input type="hidden" value="0" name="customer_admin_update"> -->
-                    <!--<input type="checkbox" value="" name="customer_admin_update">-->
-                    <input type="hidden" value="0" name="customer_admin_update">
+                    <input type="hidden" value="0" name="customer_admin_update"> 
                     <input type="checkbox" value="1" name="customer_admin_update">
+                    <!--<input type="hidden" value="0" name="customer_admin_update">-->
+                    <!--<input type="checkbox" value="" name="customer_admin_update">-->
                 </div><br>
                 <div id="customer_first_name_update">
                     <label>First Name</label><br>

@@ -121,10 +121,11 @@ $( document ).ready(function() {
         $('#update-customer-modal input[name="customer_password1_update"]').val(customer_password);
         $('#update-customer-modal input[name="customer_password2_update"]').val(customer_password);
         // admin checkbox status - 1 is admin, 0 is public user
+//        $('#update-customer-modal input[name="customer_admin_update"]').val(customer_admin);
         if(customer_admin == 1) {
-            $('#update-customer-modal input[name="customer_admin_update"]').attr('checked', true);
+            $('#update-customer-modal input[name="customer_admin_update"]').prop('checked', true);
         } else {
-            $('#update-customer-modal input[name="customer_admin_update"]').attr('checked', false);
+            $('#update-customer-modal input[name="customer_admin_update"]').prop('checked', false);
         }
         $('#update-customer-modal input[name="customer_email_update"]').val(customer_email);
         $('#update-customer-modal input[name="customer_phone_update"]').val(customer_phone);
