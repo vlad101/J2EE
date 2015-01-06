@@ -2,15 +2,11 @@ package com.serendipity.controller;
 
 import com.serendipity.dao.DAOBook;
 import com.serendipity.dao.DAOCategory;
-import com.serendipity.dao.DAOImage;
 import com.serendipity.model.Book;
 import com.serendipity.model.Category;
-import com.serendipity.model.Image;
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -46,13 +42,13 @@ public class BookController extends HttpServlet {
         String action = request.getServletPath();
 
 //      get - book list page request
-        if(action.equalsIgnoreCase("/booklist")) {
+        if(action.equalsIgnoreCase("/book/booklist")) {
             request.setAttribute("bookList", getBookList());
             forward = "/booklist";
         }
         
 //      get - book page request
-        else if(action.equalsIgnoreCase("/book")) {
+        else if(action.equalsIgnoreCase("/book/book")) {
             if(request.getParameterMap().containsKey("id")) {
                 String bookId = request.getParameter("id");
                 

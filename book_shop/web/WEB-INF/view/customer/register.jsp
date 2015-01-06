@@ -152,12 +152,12 @@
     </ul>
     <ul>
         <li>
-            <button type="button" class="btn btn-success btn-small" onclick="location='<c:url value="/categorylist" />'" >Category List</button><br>
+            <button type="button" class="btn btn-success btn-small" onclick="location='<c:url value="/category/categorylist" />'" >Category List</button><br>
         </li>
     </ul>
     <ul>
         <li>
-            <button type="button" class="btn btn-success btn-small" onclick="location='<c:url value="/booklist" />'" >Book List</button><br>
+            <button type="button" class="btn btn-success btn-small" onclick="location='<c:url value="/book/booklist" />'" >Book List</button><br>
         </li>
     </ul>
 </div>

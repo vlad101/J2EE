@@ -31,7 +31,7 @@ import javax.servlet.http.HttpServletResponse;
 public class CategoryController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
-    private static final String START_URL = "/WEB-INF/view";
+    private static final String START_URL = "/WEB-INF/view/category";
     private static final String END_URL = ".jsp";
     
     public CategoryController() {
@@ -46,13 +46,13 @@ public class CategoryController extends HttpServlet {
         String action = request.getServletPath();
         
 //      get - index page request
-        if(action.equalsIgnoreCase("/categorylist")) {
+        if(action.equalsIgnoreCase("/category/categorylist")) {
             request.setAttribute("categoryList", getCategoryList());
-            forward = "/category/categorylist";
+            forward = "/categorylist";
         }
         
 //      get - category page request
-        else if(action.equalsIgnoreCase("/category")) {
+        else if(action.equalsIgnoreCase("/category/category")) {
             if(request.getParameterMap().containsKey("id")) {
                 String categoryId = request.getParameter("id");
                 
@@ -67,7 +67,7 @@ public class CategoryController extends HttpServlet {
                         request.setAttribute("bookList", bookList);
                         request.setAttribute("defaultImageMap", getDefaultImageMap(bookList));
                         
-                        forward = "/category/category";
+                        forward = "/category";
                     } else {
                         forward = "/error/error_404";
                     }

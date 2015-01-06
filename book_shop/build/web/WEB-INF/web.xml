@@ -44,8 +44,8 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>BookController</servlet-name>
-        <url-pattern>/book</url-pattern>
-        <url-pattern>/booklist</url-pattern>
+        <url-pattern>/book/book</url-pattern>
+        <url-pattern>/book/booklist</url-pattern>
     </servlet-mapping>
     <!-- category controller  -->
     <servlet>
@@ -55,8 +55,8 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>CategoryController</servlet-name>
-        <url-pattern>/category</url-pattern>
-        <url-pattern>/categorylist</url-pattern>
+        <url-pattern>/category/category</url-pattern>
+        <url-pattern>/category/categorylist</url-pattern>
     </servlet-mapping>
     <!-- administration controller -->
     <servlet>

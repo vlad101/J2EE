@@ -34,7 +34,7 @@
                             <div class="categoryBox">
                                 <a href="#">
                                     <span class="categoryLabelText">
-                                        <a href="<c:url value='/category?id=${category.getCategoryId()}&csrfPreventionSalt=${csrfPreventionSalt}'/>" >${category.getCategoryName()}</a>
+                                        <a href="<c:url value='/category/category?id=${category.getCategoryId()}'/>" >${category.getCategoryName()}</a>
                                     </span>
                                 </a>
                             </div>
@@ -42,14 +42,14 @@
                         <div class="categoryListBox">
                              <a href="#">
                                  <span class="categoryListLabelText">
-                                    <a href="<c:url value='/categorylist'/>" >All Categories</a>
+                                    <a href="<c:url value='/category/categorylist'/>" >All Categories</a>
                                  </span>
                              </a>
                          </div>
                         <div class="bookListBox">
                              <a href="#">
                                  <span class="bookListLabelText">
-                                    <a href="<c:url value='/booklist'/>" >All Books</a>
+                                    <a href="<c:url value='/book/booklist'/>" >All Books</a>
                                  </span>
                              </a>
                          </div>

@@ -17,7 +17,7 @@
                 <div class="bookBox">
                     <a href="#">
                         <span class="categoryLabelText">
-                            <a href="<c:url value='/book?id=${book.getBookId()}'/>" >${book.getTitle()}</a>
+                            <a href="<c:url value='/book/book?id=${book.getBookId()}'/>" >${book.getTitle()}</a>
                         </span>
                     </a>
                 </div>
@@ -33,7 +33,7 @@
                 <button type="button" class="btn btn-success btn-small" onclick="location='<c:url value="/index" />'" >Home</button><br>
             </li>  
             <li>
-                <button type="button" class="btn btn-success btn-small" onclick="location='<c:url value="/categorylist" />'" >Category List</button>
+                <button type="button" class="btn btn-success btn-small" onclick="location='<c:url value="/category/categorylist" />'" >Category List</button>
             </li>
         </ul>
     </div>
