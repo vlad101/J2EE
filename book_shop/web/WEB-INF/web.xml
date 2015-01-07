@@ -29,7 +29,6 @@
         <url-pattern>/checkout</url-pattern>
         <url-pattern>/chooseLanguage</url-pattern>
         <url-pattern>/search</url-pattern>
-        <url-pattern>/emaillist</url-pattern>
         <url-pattern>/customerservice</url-pattern>
         <!-- post request  -->
         <url-pattern>/addToCart</url-pattern>
@@ -94,7 +93,17 @@
         <url-pattern>/customer/register</url-pattern>
         <url-pattern>/customer/customer</url-pattern>
     </servlet-mapping>
-    <!-- REST Web API -->
+    <!-- email controller  -->
+    <servlet>
+        <display-name>EmailListController</display-name>
+        <servlet-name>EmailListController</servlet-name>
+        <servlet-class>com.serendipity.controller.EmailListController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EmailListController</servlet-name>
+        <url-pattern>/email/emaillist</url-pattern>
+    </servlet-mapping>
+        <!-- REST Web API -->
     <servlet>
         <servlet-name>Jersey REST Service</servlet-name>
         <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>

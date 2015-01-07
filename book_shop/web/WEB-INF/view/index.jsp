@@ -23,7 +23,7 @@
                 <div id="leftColumn-menu-items">
                     <a class="current" href="<c:url value='/'/>" >Home</a><br>
                     <a href="<c:url value='/search'/>" >Browse Catalog</a><br>
-                    <a href="<c:url value='/emaillist'/>" >Join Email List</a><br>
+                    <a href="<c:url value='/email/emaillist'/>" >Join Email List</a><br>
                     <a href="<c:url value='/customerservice'/>" >Customer Service</a>
                 </div>
             </div>

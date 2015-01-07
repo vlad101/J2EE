@@ -1,16 +1,10 @@
 package com.serendipity.controller;
 
-import com.serendipity.dao.DAOBook;
 import com.serendipity.dao.DAOCategory;
-import com.serendipity.dao.DAOImage;
-import com.serendipity.model.Book;
 import com.serendipity.model.Category;
-import com.serendipity.model.Image;
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -27,7 +21,6 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name="SerendipityController",
             loadOnStartup = 1,
             urlPatterns = { "/search",
-                            "/emaillist",
                             "/customerservice",
                             "/index",
                             "/addToCart",
@@ -62,11 +55,6 @@ public class SerendipityController extends HttpServlet {
 //      get - search page request
         else if(action.equalsIgnoreCase("/search")) {
             forward = "/search";
-        }
-        
-//      get - email list page request
-        else if(action.equalsIgnoreCase("/emaillist")) {
-            forward = "/emaillist";
         }
 
 //      get - customer service page request
@@ -117,7 +105,9 @@ public class SerendipityController extends HttpServlet {
 //          TODO: implement purchase
             forward = "/confirmation";
         
-        }  else {
+        }
+//     error page   
+        else {
             forward = "/error/error_404";
         }
         
