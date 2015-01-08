@@ -40,10 +40,6 @@ public class EmailListController extends HttpServlet {
         
 //      get - index page request
         if(action.equalsIgnoreCase("/email/emaillist")) {
-//            TO DO
-            System.out.println("!!!!!!!!!!!!!!!!!!!");
-            System.out.println("Email list hello!!!!!!");
-            System.out.println("!!!!!!!!!!!!!!!!!!!");
             forward = "/emaillist";
         }
 //        error page
