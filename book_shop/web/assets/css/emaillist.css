@@ -18,6 +18,19 @@
     width: 80%;
 }
 
+#add_email_form {
+    text-align: left;
+    float: left;
+    width: 100%;
+    margin-left: 5%;
+}
+
+button#add_email_form_submit {
+    float: left;
+    margin-left: 5%;
+}
+
 #nav-buttons {
     margin-left: 34%;
+    margin-top: 30%;
 }

@@ -86,9 +86,9 @@ public class RESTEmail {
             
             JSONObject partsData = new JSONObject(emailInfo);
             
-            String firstName = partsData.optString("first_name");
-            String lastName = partsData.optString("last_name");
-            String email = partsData.optString("email");
+            String firstName = partsData.optString("email_first_name_add");
+            String lastName = partsData.optString("email_last_name_add");
+            String email = partsData.optString("email_add");
             
             if (firstName == null || firstName.length() == 0) {
                 jsonObject.put("HTTP_CODE", "500");
@@ -154,10 +154,10 @@ public class RESTEmail {
         try {
             
             JSONObject partsData = new JSONObject(emailInfo);
-            emailListId = partsData.optString("emailList_id");
-            firstName = partsData.optString("first_name");
-            lastName = partsData.optString("last_name");
-            email = partsData.optString("email");
+            emailListId = partsData.optString("email_list_id_update");
+            firstName = partsData.optString("email_first_name_update");
+            lastName = partsData.optString("email_last_name_update");
+            email = partsData.optString("email_update");
             
 //            validate email id
             int emailId;

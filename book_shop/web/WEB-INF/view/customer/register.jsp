@@ -8,7 +8,7 @@
 <link type="text/css" rel="stylesheet" href="<c:url value="/assets/css/register.css" />" />
 
     <!-- custom edit registration page js -->
-    <script type="text/javascript" src="<c:url value="/assets/js/register.js" />" ></script>
+<script type="text/javascript" src="<c:url value="/assets/js/register.js" />" ></script>
     
 <p id="pageTitle">Registration</p>
 
@@ -142,7 +142,7 @@
         <input type="hidden" value="" name="customer_id_add">
         <input type="hidden" value="0" name="customer_admin_add">
     </form>
-    <button type="button" class="btn btn-primary" id="add_customer_form_submit">Save changes</button>
+    <button type="button" class="btn btn-primary" id="add_customer_form_submit">Register</button>
 </div>
 <div id="nav-buttons">
     <ul>

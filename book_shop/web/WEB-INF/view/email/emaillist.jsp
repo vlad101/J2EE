@@ -14,16 +14,34 @@
 
 <div id="csrf" style="visibility: hidden;">${csrfPreventionSalt}</div>
 
-<div id="centerColumn">
+ <div id="centerColumn">
     
-<br><br>
-<p>Join our email list.</p>
-<p>If you do, we'll send you announcements about new releases and special offers.</p>
-<br>
+    <br><br>
+    <p>Join our email list to receive announcements about new releases and special offers.</p>
+    <br>
 
-<div id="validate_form_success" class="alert alert-success"></div>
-<div id="validate_form_error" class="alert alert-danger"></div>
+    <!-- error and success message -->
+    <div id="ajax_add_email_response_error" class="alert alert-danger"></div>
 
+    <!-- adding new email -->
+    <div id="ajax_add_email_response_success" class="alert alert-success"></div>
+
+    <form id="add_email_form" method="post" action="#">
+        <div id="email_first_name_add">
+            <label>First Name</label><br>
+            <input type="text" value="" name="email_first_name_add">
+        </div><br>
+        <div id="email_last_name_add">
+            <label>Last Name</label><br>
+            <input type="text" value="" name="email_last_name_add">
+        </div><br>
+        <div id="email_add">
+            <label>Email</label><br>
+            <input type="text" value="" name="email_add">
+        </div><br>
+    </form>
+    <button type="button" class="btn btn-primary" id="add_email_form_submit">Save changes</button>
+    
 </div>
 <div id="nav-buttons">
     <ul>
