@@ -1,6 +1,6 @@
 package com.serendipity.util;
 
-import com.serendipity.rest.Status;
+import com.serendipity.rest.RESTStatus;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -87,7 +87,7 @@ public class DbUtil {
                 preparedStatement = null;
 
             } catch (SQLException ex) {
-                Logger.getLogger(Status.class.getName()).log(Level.SEVERE, "Could not get database time.", ex);
+                Logger.getLogger(RESTStatus.class.getName()).log(Level.SEVERE, "Could not get database time.", ex);
             }
         }
         
