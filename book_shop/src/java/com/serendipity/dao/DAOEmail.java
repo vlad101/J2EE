@@ -251,7 +251,7 @@ public class DAOEmail {
      * @param email
      * @return 
      */
-    public boolean isUniqueUsername(String email){
+    public boolean isUniqueEmail(String email){
                 
         String sql = "SELECT * FROM email_list WHERE email=?;";
         

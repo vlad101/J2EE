@@ -17,7 +17,7 @@
  <div id="centerColumn">
     
     <br><br>
-    <p>Join our email list to receive announcements about new releases and special offers.</p>
+    <p id="intro">Join our email list to receive announcements about new releases and special offers.</p>
     <br>
 
     <!-- error and success message -->
@@ -29,19 +29,24 @@
     <form id="add_email_form" method="post" action="#">
         <div id="email_first_name_add">
             <label>First Name</label><br>
-            <input type="text" value="" name="email_first_name_add">
+            <input type="text" value="" name="email_first_name_add" id="email_first_name_add_form">
         </div><br>
         <div id="email_last_name_add">
             <label>Last Name</label><br>
-            <input type="text" value="" name="email_last_name_add">
+            <input type="text" value="" name="email_last_name_add" id="email_last_name_add_form">
         </div><br>
         <div id="email_add">
             <label>Email</label><br>
-            <input type="text" value="" name="email_add">
+            <input type="text" value="" name="email_add" id="email_add_form">
         </div><br>
     </form>
     <button type="button" class="btn btn-primary" id="add_email_form_submit">Save changes</button>
     
+    <div id="email-add" style="visibility: hidden;" >
+        <br>Dear&nbsp;<span id="first-name"></span>&nbsp;<span id="last-name"></span>
+        &nbsp;thanks for joining our email list!<br>
+        Confirmation email was sent to your email (<span id="email"></span>).
+    </div>
 </div>
 <div id="nav-buttons">
     <ul>
@@ -50,9 +55,6 @@
         </li>
     </ul>
 </div>
-            
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
             
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="<c:url value="/assets/bootstrap/js/bootstrap.min.js" />"></script>

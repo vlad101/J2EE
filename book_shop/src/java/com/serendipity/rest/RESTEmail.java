@@ -31,7 +31,7 @@ public class RESTEmail {
      */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getCategoryList() throws Exception {
+    public Response getEmailList() throws Exception {
         
         String returnString = null;
         JSONArray jsonArrayEmailList = new JSONArray();
@@ -90,31 +90,38 @@ public class RESTEmail {
             String lastName = partsData.optString("email_last_name_add");
             String email = partsData.optString("email_add");
             
-            if (firstName == null || firstName.length() == 0) {
+            if (firstName.length() == 0 || firstName == null) {
                 jsonObject.put("HTTP_CODE", "500");
                 jsonObject.put("MSG", "Enter a valid first name!");
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
             }
 
-            if (lastName == null || lastName.length() == 0) {
+            if (lastName.length() == 0 || lastName == null) {
                 jsonObject.put("HTTP_CODE", "500");
                 jsonObject.put("MSG", "Enter a valid last name!");
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
             }
 
-            if (email == null || email.length() == 0) {
+            if (email.length() == 0 || email == null) {
                 jsonObject.put("HTTP_CODE", "500");
                 jsonObject.put("MSG", "Enter a valid email!");
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
-            }            
+            }
+            
+            if(!daoEmail.isUniqueEmail(email)) { // check if email already exists
+                jsonObject.put("HTTP_CODE", "500");
+                jsonObject.put("MSG", "Email already exists!");
+                return Response.ok(jsonArray.put(jsonObject).toString()).build();
+            }
             
             Email emailEntry = new Email(0, firstName, lastName, email);
+            daoEmail = new DAOEmail();
             int http_code = daoEmail.addEmail(emailEntry);
             
             if(http_code == 200) {
                 
                 jsonObject.put("HTTP_CODE", "200");
-                jsonObject.put("MSG", "Email has been to email list successfully!");
+                jsonObject.put("MSG", "Email has been added to email list successfully!");
                 returnString = jsonArray.put(jsonObject).toString();
                 
             } else {
@@ -188,10 +195,16 @@ public class RESTEmail {
                 jsonObject.put("HTTP_CODE", "500");
                 jsonObject.put("MSG", "Enter a valid email!");
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
+            } 
+            
+            if(!daoEmail.isUniqueEmail(email)) { // check if email already exists
+                jsonObject.put("HTTP_CODE", "500");
+                jsonObject.put("MSG", "Email already exists!");
+                return Response.ok(jsonArray.put(jsonObject).toString()).build();
             }
             
             emailListEntry = new Email(emailId, firstName, lastName, email);
-            
+            daoEmail = new DAOEmail();
             int http_code = daoEmail.updateEmailInfo(emailListEntry);
             
             if(http_code == 200) {
@@ -244,7 +257,7 @@ public class RESTEmail {
                 emailId = Integer.parseInt(emailListId);
             } catch (NumberFormatException e) {
                 jsonObject.put("HTTP_CODE", "500");
-                jsonObject.put("MSG", "Email entry id id is not valid!");
+                jsonObject.put("MSG", "Email entry id is not valid!");
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
             }
             

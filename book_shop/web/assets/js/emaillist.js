@@ -1,3 +1,6 @@
+// csrf token
+var csrf;
+
 $( document ).ready(function() {
     
 //    set page event handlers
@@ -25,6 +28,7 @@ $( document ).ready(function() {
         e.preventDefault(); // cancel form submit
         
         var jsObj = $add_email_form.serializeObject();
+            
         var ajaxObj = {};
         
         ajaxObj = {
@@ -37,16 +41,22 @@ $( document ).ready(function() {
                     },
                     success: function(data) {
                         if(data[0].HTTP_CODE == 200) {
+                            $('#ajax_add_email_response_error').hide();
+                            $('#intro').hide();
                             $('#ajax_add_email_response_success').css({ 'width': '50%', 'margin': '0 auto', 'text-align':'center' }).show().html( '<strong>Well Done!</strong> ' + data[0].MSG );
+                            $('#email-add').css('visibility', 'visible');
+                            $('#first-name').text($('input#email_first_name_add_form').val());
+                            $('#last-name').text($('input#email_last_name_add_form').val());
+                            $('#email').text($('input#email_add_form').val());
                             $('#add_email_form').hide();
                             $('#add_email_form_submit').hide();
                         
 //                      clear the text field, after customer is added
-                            $('input#first_name_add').val('');
-                            $('input#last_name_add').val('');
+                            $('input#email_first_name_add').val('');
+                            $('input#email_last_name_add').val('');
                             $('input#email_add').val('');
                         } else {
-                            $('#ajax_add_customer_response_error').css({ 'width': '60%', 'margin': '0 auto', 'text-align':'center' }).show().html( '<strong>Oh snap!</strong> ' + data[0].MSG ).delay(10000).fadeOut();
+                            $('#ajax_add_email_response_error').css({ 'width': '60%', 'margin': '0 auto', 'text-align':'center' }).show().html( '<strong>Oh snap!</strong> ' + data[0].MSG ).delay(10000).fadeOut();
                         }
                     },
                     dataType: "json" // request json

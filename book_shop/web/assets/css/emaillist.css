@@ -32,5 +32,12 @@ button#add_email_form_submit {
 
 #nav-buttons {
     margin-left: 34%;
-    margin-top: 30%;
+    margin-top: 5%;
+}
+
+// ajax response on sustomer update
+#ajax_add_email_response_success, #ajax_add_email_response_error {
+    width: 50%; 
+    margin: 0 auto; 
+    text-align: center; 
 }
