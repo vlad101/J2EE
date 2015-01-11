@@ -4,15 +4,32 @@
     Author     : Vladimir
 --%>
 
-            <%@page import="java.util.Calendar"%>
-            <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-            <link type="text/css" rel="stylesheet" href="<c:url value="/assets/css/footer.css" />" />
-      
-            <!--get current year-->
-            <% Calendar.getInstance().get(Calendar.YEAR); %>
-            
+                <%@page import="java.util.Calendar"%>
+                <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+                <link type="text/css" rel="stylesheet" href="<c:url value="/assets/css/footer.css" />" />
+
+
+                <!--get current year-->
+                <% Calendar.getInstance().get(Calendar.YEAR); %>
+
             <div id="footer">
-                <hr>
+                    <hr>
+                <div id="footer-menu-items">
+                    <ul>
+                        <li>
+                            <a href="<c:url value='/'/>" >Home</a>|
+                        </li>
+                        <li>
+                            <a href="<c:url value='/search'/>" >Browse Catalog</a>|
+                        </li>
+                        <li>
+                            <a href="<c:url value='/email/emaillist'/>" >Join Email List</a>|
+                        </li>
+                        <li>
+                            <a href="<c:url value='/customerservice'/>" >Customer Service</a>
+                        </li>
+                    </ul>
+                </div>
                 <p id="footerText">Copyright &#169; 
                     <!-- Get previous year -->
                     <%= Calendar.getInstance().get(Calendar.YEAR) - 1 %>

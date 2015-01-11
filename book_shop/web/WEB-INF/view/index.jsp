@@ -20,12 +20,6 @@
                     If you find a book that you like, we hope that you'll use this site 
                     to order it. Most of the books we carry aren't available anywhere else!
                 </p><br>
-                <div id="leftColumn-menu-items">
-                    <a class="current" href="<c:url value='/'/>" >Home</a><br>
-                    <a href="<c:url value='/search'/>" >Browse Catalog</a><br>
-                    <a href="<c:url value='/email/emaillist'/>" >Join Email List</a><br>
-                    <a href="<c:url value='/customerservice'/>" >Customer Service</a>
-                </div>
             </div>
             <div id="indexRightColumn">
                 <c:choose>
