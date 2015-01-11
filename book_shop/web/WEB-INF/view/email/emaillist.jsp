@@ -26,7 +26,7 @@
     <!-- adding new email -->
     <div id="ajax_add_email_response_success" class="alert alert-success"></div>
 
-    <form id="add_email_form" method="post" action="#">
+    <form id="add_email_form" action="#">
         <div id="email_first_name_add">
             <label>First Name</label><br>
             <input type="text" value="" name="email_first_name_add" id="email_first_name_add_form">

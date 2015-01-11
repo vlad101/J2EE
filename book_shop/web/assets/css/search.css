@@ -19,5 +19,25 @@
 }
 
 #nav-buttons {
-    margin-left: 34%;
+    margin-left: 24%;
+}
+
+#ajax_search_book_title_response_error{
+    width: 50%; 
+    margin: 0 auto; 
+    text-align: center;
+}
+
+#bookTable {
+    margin-left: 4%;
+    margin-bottom: 2%;
+    width: 800px;
+}
+
+#bookTable tr { 
+    height: 90px; 
+}
+
+#bookTable td { 
+    width: 145px; 
 }
