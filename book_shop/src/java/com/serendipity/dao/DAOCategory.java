@@ -275,6 +275,47 @@ public class DAOCategory {
         
         return category;
     }    
+
+    /**
+     * Get category list by category name
+     * @param categoryName
+     * @return 
+     */
+    public JSONArray searchCategoryByCategoryName(String categoryName){
+        
+        JSONArray categoryJsonArray = new JSONArray();
+        
+        String sql = "SELECT * FROM category WHERE category_name LIKE ?;";
+        
+        try {
+        
+            conn = db.getConnection();
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, "%" + categoryName+ "%");
+            rs = preparedStatement.executeQuery();
+
+            ToJSON converter = new ToJSON();
+            categoryJsonArray = converter.toJSONArray(rs);
+            
+            rs.close();
+            rs = null;
+            
+            preparedStatement.close();
+            preparedStatement = null;
+            
+            conn.close();
+            conn = null;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOCategory.class.getName()).log(Level.SEVERE, "Could not select book by book author.", ex);
+        } catch (Exception ex) {
+            Logger.getLogger(DAOCategory.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            db.closeConnection();
+        }
+        
+        return categoryJsonArray;
+    }
     
     /**
      * This method will allow you to get all category data from the category table for REST request.

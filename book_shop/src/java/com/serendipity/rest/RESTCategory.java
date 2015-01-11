@@ -3,16 +3,21 @@ package com.serendipity.rest;
 import com.serendipity.dao.DAOBook;
 import com.serendipity.dao.DAOCategory;
 import com.serendipity.model.Category;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.codehaus.jettison.json.JSONArray;
+import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
 
@@ -98,6 +103,58 @@ public class RESTCategory {
 //        
 //        return response;
 //    }
+    
+    /**
+     * The method creates its own HTTP response and searches Book table by author
+     * 
+     * @param categoryInfo
+     * @return - the response with the book name
+     * @throws Exception 
+     */
+    @GET
+    @Path("/search/category/{categoryName}")
+    @Consumes({MediaType.APPLICATION_FORM_URLENCODED,MediaType.APPLICATION_JSON}) // access both form and json data
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response searchCategoryByCategoryName(@PathParam("categoryName") String categoryInfo) throws Exception {
+        
+        String returnString;
+        JSONArray jsonArray = new JSONArray();
+        JSONObject jsonObject = new JSONObject();
+        JSONObject obj;
+        DAOCategory daoCategory = new DAOCategory();
+        JSONArray jsonArrayCategoryList  = new JSONArray();
+            
+        String categoryName = categoryInfo;
+            
+//      validate category name
+        if (categoryName == null || categoryName.length() == 0 || !categoryName.matches(".*\\w.*")) {
+            jsonObject.put("HTTP_CODE", "500");
+            jsonObject.put("MSG", "Enter a valid category!");
+            return Response.ok(jsonArray.put(jsonObject).toString()).build();
+        }
+        
+        try {
+            jsonArrayCategoryList = daoCategory.searchCategoryByCategoryName(categoryName);
+
+            // get books belonging to category
+            for(int i = 0; i < jsonArrayCategoryList.length(); i++) {
+
+                obj = jsonArrayCategoryList.getJSONObject(i);
+
+                obj.put("category_id", obj.getInt("category_id"));
+                obj.put("category_name", obj.getString("category_name"));
+
+                jsonObject.put(Integer.toString(obj.getInt("category_id")), obj);
+            }
+            returnString = jsonObject.put("HTTP_CODE", "200").toString();
+        } catch (JSONException e) {
+            jsonObject.put("HTTP_CODE", "500");
+            jsonObject.put("MSG", "Server unable to process get book request!");
+            return Response.ok(jsonArrayCategoryList.put(jsonObject).toString()).build();
+        }
+        
+        return Response.ok(returnString).build();
+    }
     
     /**
      * The method creates its own HTTP response and adds category to the 

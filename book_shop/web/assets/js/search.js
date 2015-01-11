@@ -18,6 +18,7 @@ $( document ).ready(function() {
     
     setEventHandlers();
     
+//    navigation search buttons
     $('#search-title-button').click(function(e){
         $('#centerColumn .button-list').hide();
         $('#search_book_title_form').css({'display':'inline'});
@@ -29,6 +30,13 @@ $( document ).ready(function() {
         $('#centerColumn .button-list').hide();
         $('#search_book_author_form').css({'display':'inline'});
         $('#search_book_author_form_submit').css({'display':'inline'});
+        $('#search-home-button').css({'display':'inline'});
+    });
+    
+    $('#search-category-button').click(function(e){
+        $('#centerColumn .button-list').hide();
+        $('#search_category_name_form').css({'display':'inline'});
+        $('#search_category_name_form_submit').css({'display':'inline'});
         $('#search-home-button').css({'display':'inline'});
     });
     
@@ -50,6 +58,13 @@ $( document ).ready(function() {
         $('#search_book_author_form_submit').css({'display':'none'});
         $('#book-author-search').css({'display':'none'});
         $('#search-author-result').val('');
+        
+//        author search
+        $('input#category_name_search_form').val('');
+        $('#search_category_name_form').css({'display':'none'});
+        $('#search_category_name_form_submit').css({'display':'none'});
+        $('#category-name-search').css({'display':'none'});
+        $('#search-category-result').val('');
     });
     
     /**
@@ -150,6 +165,54 @@ $( document ).ready(function() {
         $.ajax(ajaxObj);
     });
     
+    /**
+     * The event handler for submit button - search category name.
+     * It triggers a ajax POST call to api/v1/category
+     * It will submit a search book title entry to a Serendipity database 
+     */
+    var $search_category_name_form = $('#search_category_name_form');
+    $('#search_category_name_form_submit').click(function(e){
+        
+        e.preventDefault(); // cancel form submit
+        
+        var jsObj = $search_category_name_form.serializeObject();
+        
+        var category_name = $('input#category_name_search_form').val();
+        if(category_name.trim() == "") {
+            return;
+        }
+        
+        var ajaxObj = {};
+        ajaxObj = {
+                    type: "GET",
+                    url: base_url + "/book_shop/api/v1/category/search/category/" + $('input#category_name_search_form').val() + csrf,
+                    data: JSON.stringify(jsObj),
+                    contentType: "application/json",
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.log("Error " + jqXHR.getAllResponseHeaders() + " " + errorThrown);
+                    },
+                    success: function(data) {
+                        if(data.HTTP_CODE == 200) {
+                            $('#ajax_search_book_author_response_error').hide();
+                            $('#ajax_search_book_author_response_error').hide();
+                            $('#ajax_search_category_name_response_error').hide();
+                            $('#category-name-search').css('display', 'inline');
+                            $('#category-name').text($('input#category_name_search_form').val());
+                            $('#search_category_name_form').hide();
+                            $('#search_category_name_form_submit').hide();
+                            doGetSearchByCategoryResults(data);
+                        
+//                      clear the text field, after customer is added
+                            $('input#category_name_search').val('');
+                        } else {
+                            $('#ajax_search_category_name_response_error').css({ 'visibility':'visible', 'width': '60%', 'margin': '0 auto', 'text-align':'center' }).html( '<strong>Oh snap!</strong> ' + data[0].MSG ).show().delay(10000).fadeOut();
+                        }
+                    },
+                    dataType: "json" // request json
+        };
+        
+        $.ajax(ajaxObj);
+    });
 });
 
 
@@ -220,5 +283,34 @@ function doGetSearchByAuthorResults(result_list) {
         data_table = data_table + table_cells;
         data_table = data_table + '</table>';
         $('#search-author-result').html(data_table).css({'display':'inline'});
+    }
+}
+
+function doGetSearchByCategoryResults(result_list) {
+    var data_table = '';
+    var table_cells = '';
+    var result_array = [];
+    for(var result in result_list) {
+        result_array.push(result);
+    }
+    result_array.sort();
+    var index = 0;
+    for(var i in result_array) {
+        result = result_array[i];
+        if(result_list[result].category_id !== undefined) {
+            table_cells = table_cells + '<tr>';
+            table_cells = table_cells + '<td class="lightBlue">' + result_list[result].category_name + '</td>';
+            table_cells = table_cells + '<td class="lightBlue"><a href="/book_shop/category/category?id=' + result_list[result].category_id + '">Book List</a></td>';
+            table_cells = table_cells + '</tr>';
+            index++;
+        }
+    }
+    if(index == 0) {
+        $('#search-category-result').html("<b>No '" + $('input#category_name_search_form').val() +"' category found!</b>");
+    } else {
+        data_table = '<table id="bookTable">';
+        data_table = data_table + table_cells;
+        data_table = data_table + '</table>';
+        $('#search-category-result').html(data_table).css({'display':'inline'});
     }
 }

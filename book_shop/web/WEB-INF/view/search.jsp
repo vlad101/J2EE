@@ -59,6 +59,23 @@
         <br><br>
         <div id="search-author-result"></div>
     </div>
+    
+    <!--category search by category name-->
+    <form id="search_category_name_form" action="#" style="display:none;" >
+        <div id="category_name_search">
+            <label>Enter Category Name</label><br>
+            <input type="text" value="" name="category_name_search" id="category_name_search_form">
+        </div>
+    </form>
+    <br>
+    <button type="button" class="btn btn-primary" id="search_category_name_form_submit" style="display: none;" >Search</button>
+    
+    <div id="category-name-search" style="display:none;" >
+        <br>Search results for category '<span id="category-name"></span>'.
+        <br><br>
+        <div id="search-category-result"></div>
+    </div>
+    
     <br><br>
     <button type="button" id="search-home-button" class="btn btn-primary btn-small" style="display: none;" >Back</button><br>
 </div>
