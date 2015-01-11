@@ -241,7 +241,7 @@ function doGetSearchByTitleResults(result_list) {
         }
     }
     if(index == 0) {
-        $('#search-title-result').html("<b>No '" + $('input#book_title_search_form').val() +"' book title found!</b>");
+        $('#search-title-result').html("<b>No '" + $('input#book_title_search_form').val() +"' book title found!</b><br>");
     } else {
         data_table = '<table id="bookTable">';
         data_table = data_table + table_cells;
@@ -277,7 +277,7 @@ function doGetSearchByAuthorResults(result_list) {
         }
     }
     if(index == 0) {
-        $('#search-author-result').html("<b>No book by '" + $('input#book_author_search_form').val() +"' found!</b>");
+        $('#search-author-result').html("<b>No book by '" + $('input#book_author_search_form').val() +"' found!</b><br>");
     } else {
         data_table = '<table id="bookTable">';
         data_table = data_table + table_cells;
@@ -306,7 +306,7 @@ function doGetSearchByCategoryResults(result_list) {
         }
     }
     if(index == 0) {
-        $('#search-category-result').html("<b>No '" + $('input#category_name_search_form').val() +"' category found!</b>");
+        $('#search-category-result').html("<b>No '" + $('input#category_name_search_form').val() +"' category found!</b><br>");
     } else {
         data_table = '<table id="bookTable">';
         data_table = data_table + table_cells;

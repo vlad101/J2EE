@@ -32,51 +32,50 @@
     <form id="search_book_title_form" action="#" style="display:none;" >
         <div id="book_title_search">
             <label>Enter Book Title</label><br>
-            <input type="text" value="" name="book_title_search" id="book_title_search_form">
+            <input type="text" value="" name="book_title_search" id="book_title_search_form"><br><br>
         </div>
+        <button type="button" class="btn btn-primary" id="search_book_title_form_submit" style="display: none;" >Search</button><br><br>
     </form>
-    <br>
-    <button type="button" class="btn btn-primary" id="search_book_title_form_submit" style="display: none;" >Search</button>
-    
+        
     <div id="book-title-search" style="display:none;" >
         <br>Search results for '<span id="book-name"></span>'.
         <br><br>
-        <div id="search-title-result"></div>
+        <div id="search-title-result"></div><br>
     </div>
     
     <!--book search by author-->
     <form id="search_book_author_form" action="#" style="display:none;" >
         <div id="book_author_search">
             <label>Enter Book Author</label><br>
-            <input type="text" value="" name="book_author_search" id="book_author_search_form">
+            <input type="text" value="" name="book_author_search" id="book_author_search_form"><br><br>
         </div>
+        <button type="button" class="btn btn-primary" id="search_book_author_form_submit" style="display: none;" >Search</button><br><br>
     </form>
-    <br>
-    <button type="button" class="btn btn-primary" id="search_book_author_form_submit" style="display: none;" >Search</button>
     
     <div id="book-author-search" style="display:none;" >
         <br>Search results for author '<span id="book-author"></span>'.
         <br><br>
-        <div id="search-author-result"></div>
+        <div id="search-author-result"></div><br>
     </div>
     
     <!--category search by category name-->
     <form id="search_category_name_form" action="#" style="display:none;" >
         <div id="category_name_search">
             <label>Enter Category Name</label><br>
-            <input type="text" value="" name="category_name_search" id="category_name_search_form">
-        </div>
+            <input type="text" value="" name="category_name_search" id="category_name_search_form"><br><br>
+        </div><br>
+        <button type="button" class="btn btn-primary" id="search_category_name_form_submit" style="display: none;" >Search</button><br><br>
     </form>
-    <br>
-    <button type="button" class="btn btn-primary" id="search_category_name_form_submit" style="display: none;" >Search</button>
+    
+    
     
     <div id="category-name-search" style="display:none;" >
         <br>Search results for category '<span id="category-name"></span>'.
         <br><br>
-        <div id="search-category-result"></div>
+        <div id="search-category-result"></div><br>
     </div>
     
-    <br><br>
+    
     <button type="button" id="search-home-button" class="btn btn-primary btn-small" style="display: none;" >Back</button><br>
 </div>
 
