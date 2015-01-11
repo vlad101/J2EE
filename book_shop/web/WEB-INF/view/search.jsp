@@ -20,7 +20,7 @@
 
 <div id="centerColumn">
 
-    <!-- book title search form -->
+    <!-- search navigation buttons -->
     <br><br>
     <div class="button-list">
         <button type="button" class="btn btn-primary btn-small" id="search-title-button" >Search By Title</button><br><br>
@@ -28,6 +28,7 @@
         <button type="button" class="btn btn-primary btn-small" id="search-category-button" >Search By Category</button><br><br>
     </div>
     
+    <!--book search by title-->
     <form id="search_book_title_form" action="#" style="display:none;" >
         <div id="book_title_search">
             <label>Enter Book Title</label><br>
@@ -43,14 +44,26 @@
         <div id="search-title-result"></div>
     </div>
     
+    <!--book search by author-->
+    <form id="search_book_author_form" action="#" style="display:none;" >
+        <div id="book_author_search">
+            <label>Enter Book Author</label><br>
+            <input type="text" value="" name="book_author_search" id="book_author_search_form">
+        </div>
+    </form>
+    <br>
+    <button type="button" class="btn btn-primary" id="search_book_author_form_submit" style="display: none;" >Search</button>
+    
+    <div id="book-author-search" style="display:none;" >
+        <br>Search results for author '<span id="book-author"></span>'.
+        <br><br>
+        <div id="search-author-result"></div>
+    </div>
+    <br><br>
+    <button type="button" id="search-home-button" class="btn btn-primary btn-small" style="display: none;" >Back</button><br>
 </div>
-<br>
+
 <div id="nav-buttons">
-    <ul>
-        <li>
-            <button type="button" id="search-home-button" class="btn btn-success btn-small" style="display: none;" >Search</button><br>
-        </li>
-    </ul>
     <ul>
         <li>
             <button type="button" class="btn btn-success btn-small" onclick="location='<c:url value="/index" />'" >Home</button><br>

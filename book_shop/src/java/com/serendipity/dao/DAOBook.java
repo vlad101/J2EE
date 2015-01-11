@@ -429,6 +429,47 @@ public class DAOBook {
         return bookJsonArray;
     }
     
+    /**
+     * Get book list by book author
+     * @param bookAuthor
+     * @return 
+     */
+    public JSONArray searchBookByAuthor(String bookAuthor){
+        
+        JSONArray bookJsonArray = new JSONArray();
+        
+        String sql = "SELECT * FROM book WHERE author LIKE ?;";
+        
+        try {
+        
+            conn = db.getConnection();
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, "%" + bookAuthor + "%");
+            rs = preparedStatement.executeQuery();
+
+            ToJSON converter = new ToJSON();
+            bookJsonArray = converter.toJSONArray(rs);
+            
+            rs.close();
+            rs = null;
+            
+            preparedStatement.close();
+            preparedStatement = null;
+            
+            conn.close();
+            conn = null;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOBook.class.getName()).log(Level.SEVERE, "Could not select book by book author.", ex);
+        } catch (Exception ex) {
+            Logger.getLogger(DAOBook.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            db.closeConnection();
+        }
+        
+        return bookJsonArray;
+    }
+    
     public List<String> getBookListByCustomerOrderId(int customerOrderId) {
         
         List<String> bookList = new ArrayList<String>();

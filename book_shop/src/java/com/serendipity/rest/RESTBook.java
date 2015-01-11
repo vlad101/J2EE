@@ -176,7 +176,7 @@ public class RESTBook {
     }
     
     /**
-     * The method creates its own HTTP response and searches Book table
+     * The method creates its own HTTP response and searches Book table by title
      * 
      * @param bookInfo
      * @return - the response with the book name
@@ -186,9 +186,9 @@ public class RESTBook {
     @Path("/search/title/{title}")
     @Consumes({MediaType.APPLICATION_FORM_URLENCODED,MediaType.APPLICATION_JSON}) // access both form and json data
     @Produces(MediaType.APPLICATION_JSON)
-    public Response searchBook(@PathParam("title") String bookInfo) throws Exception {
+    public Response searchBookByTitle(@PathParam("title") String bookInfo) throws Exception {
         
-        String returnString = null;
+        String returnString;
         JSONArray jsonArray = new JSONArray();
         JSONObject jsonObject = new JSONObject();
         JSONObject obj;
@@ -200,12 +200,89 @@ public class RESTBook {
 //      validate title, author, and category name
         if (bookTitle == null || bookTitle.length() == 0 || !bookTitle.matches(".*\\w.*")) {
             jsonObject.put("HTTP_CODE", "500");
-            jsonObject.put("MSG", "Enter a valid book title or author!");
+            jsonObject.put("MSG", "Enter a valid book title!");
             return Response.ok(jsonArray.put(jsonObject).toString()).build();
         }
         
         try {
             jsonArrayBookList = daoBook.searchBookByTitle(bookTitle);
+
+            // get books belonging to category
+            for(int i = 0; i < jsonArrayBookList.length(); i++) {
+
+                obj = jsonArrayBookList.getJSONObject(i);
+                DAOCategory daoCategory = new DAOCategory();
+
+                obj.put("book_id", obj.getInt("book_id"));
+                obj.put("title", obj.getString("title"));
+                obj.put("author", obj.getString("author"));
+                obj.put("quantity", obj.getInt("quantity"));
+                obj.put("price", obj.getDouble("price"));
+                obj.put("description", obj.getString("description"));
+
+    //          Date Update
+                String lastUpdate = obj.getString("last_update");
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                Date dateUpdate = sdf.parse(lastUpdate);
+                obj.put("last_update", dateUpdate);
+
+                obj.put("category_id", obj.getInt("category_id"));
+                obj.put("category_name", daoCategory.getCategoryById(obj.getInt("category_id")).getCategoryName());
+
+    //          get image path for book
+                DAOImage daoImage = new DAOImage();
+                Image image = daoImage.getDefaultImageByBookId(obj.getInt("book_id"));
+                if(image != null)
+                    obj.put("image_path", image.getPath());
+                else
+                    obj.put("image_path", "no_image.jpg");
+                jsonObject.put(Integer.toString(obj.getInt("book_id")), obj);
+            }
+            returnString = jsonObject.put("HTTP_CODE", "200").toString();
+        } catch (JSONException e) {
+            jsonObject.put("HTTP_CODE", "500");
+            jsonObject.put("MSG", "Server unable to process get book request!");
+            return Response.ok(jsonArrayBookList.put(jsonObject).toString()).build();
+        } catch (ParseException e) {
+            jsonObject.put("HTTP_CODE", "500");
+            jsonObject.put("MSG", "Server unable to process get book request!");
+            return Response.ok(jsonArrayBookList.put(jsonObject).toString()).build();
+        }
+        
+        return Response.ok(returnString).build();
+    }
+    
+    /**
+     * The method creates its own HTTP response and searches Book table by author
+     * 
+     * @param bookInfo
+     * @return - the response with the book name
+     * @throws Exception 
+     */
+    @GET
+    @Path("/search/author/{author}")
+    @Consumes({MediaType.APPLICATION_FORM_URLENCODED,MediaType.APPLICATION_JSON}) // access both form and json data
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response searchBookByAuthor(@PathParam("author") String bookInfo) throws Exception {
+        
+        String returnString;
+        JSONArray jsonArray = new JSONArray();
+        JSONObject jsonObject = new JSONObject();
+        JSONObject obj;
+        DAOBook daoBook = new DAOBook();
+        JSONArray jsonArrayBookList  = new JSONArray();
+            
+        String bookAuthor = bookInfo;
+            
+//      validate title, author, and category name
+        if (bookAuthor == null || bookAuthor.length() == 0 || !bookAuthor.matches(".*\\w.*")) {
+            jsonObject.put("HTTP_CODE", "500");
+            jsonObject.put("MSG", "Enter a valid book author!");
+            return Response.ok(jsonArray.put(jsonObject).toString()).build();
+        }
+        
+        try {
+            jsonArrayBookList = daoBook.searchBookByAuthor(bookAuthor);
 
             // get books belonging to category
             for(int i = 0; i < jsonArrayBookList.length(); i++) {
