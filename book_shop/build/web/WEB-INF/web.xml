@@ -125,6 +125,16 @@
             <form-error-page>/admin/login_error.jsp</form-error-page>
         </form-login-config>
     </login-config>
+    <!--context listener-->
+    <!-- define a servlet context listener -->
+    <listener>
+        <listener-class>com.serendipity.util.SerendipityContextListener</listener-class>
+    </listener>
+    <!-- define a context initialization parameter -->
+    <context-param>
+        <param-name>custServEmail</param-name>
+        <param-value>custserv@serendipity.com</param-value>
+    </context-param>
     <!--error handling-->
     <error-page>
         <error-code>500</error-code>

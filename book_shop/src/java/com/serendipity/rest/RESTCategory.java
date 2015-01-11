@@ -3,9 +3,6 @@ package com.serendipity.rest;
 import com.serendipity.dao.DAOBook;
 import com.serendipity.dao.DAOCategory;
 import com.serendipity.model.Category;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -71,38 +68,6 @@ public class RESTCategory {
                 
         return Response.ok(returnString).build();
     }
-
-    /**
-     * The method creates its own HTTP response with the category based on the
-     * id passed by the client
-     * Ex: http://localhost:8080/book_shop/api/v1/category/id/2
-     * 
-     * @return - the response with the category name
-     * @throws Exception 
-     */
-//    @GET
-//    @Path("/id/{categoryId}")
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public Response getCategoryById(
-//            @PathParam("categoryId") String categoryId) 
-//                        throws Exception {
-//        
-//        Response response;
-//        int id;
-//        
-//        try {
-//            id = Integer.parseInt(categoryId);
-//        } catch (NumberFormatException e) {
-//            return Response.status(400).entity("Please supply the valid category id for this search!").build();
-//        }
-//        
-//        DAOCategory daoCategory = new DAOCategory();
-//        JSONArray category = daoCategory.getCategoryById(id);
-//        
-//        response = Response.ok(category.toString()).build();
-//        
-//        return response;
-//    }
     
     /**
      * The method creates its own HTTP response and searches Book table by author

@@ -118,31 +118,31 @@ public class RESTCustomer {
             userPassword2 = userPassword2.replaceAll("\\s","");
             
 //            validate text values
-            if(customerFirstName == null || customerFirstName.length() == 0) {
+            if(customerFirstName == null || customerFirstName.length() == 0 || !customerFirstName.matches(".*\\w.*")) {
                 jsonObject.put("HTTP_CODE", "500");
                 jsonObject.put("MSG", "Enter a valid customer first name!");
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
             }
             
-            if(customerLastName == null || customerLastName.length() == 0) {
+            if(customerLastName == null || customerLastName.length() == 0 || !customerLastName.matches(".*\\w.*")) {
                 jsonObject.put("HTTP_CODE", "500");
                 jsonObject.put("MSG", "Enter a valid customer last name!");
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
             }
 
-            if(userUsername == null || userUsername.length() == 0) {
+            if(userUsername == null || userUsername.length() == 0 || !userUsername.matches(".*\\w.*")) {
                 jsonObject.put("HTTP_CODE", "500");
                 jsonObject.put("MSG", "Enter a valid customer username!");
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
             }
             
-             if(userPassword1 == null || userPassword1.length() == 0) {
+             if(userPassword1 == null || userPassword1.length() == 0 || !userPassword1.matches(".*\\w.*")) {
                 jsonObject.put("HTTP_CODE", "500");
                 jsonObject.put("MSG", "Enter a valid customer password!");
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
             }
              
-            if(userPassword2 == null || userPassword2.length() == 0) {
+            if(userPassword2 == null || userPassword2.length() == 0 || !userPassword2.matches(".*\\w.*")) {
                 jsonObject.put("HTTP_CODE", "500");
                 jsonObject.put("MSG", "Enter a valid customer password confirm!");
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
@@ -154,31 +154,31 @@ public class RESTCustomer {
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
             }
             
-            if(customerEmail == null || customerEmail.length() == 0) {
+            if(customerEmail == null || customerEmail.length() == 0 || !customerEmail.matches(".*\\w.*")) {
                 jsonObject.put("HTTP_CODE", "500");
                 jsonObject.put("MSG", "Enter a valid customer email!");
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
             }
  
-            if(customerPhone == null || customerPhone.length() == 0) {
+            if(customerPhone == null || customerPhone.length() == 0 || !customerPhone.matches(".*\\w.*")) {
                 jsonObject.put("HTTP_CODE", "500");
                 jsonObject.put("MSG", "Enter a valid customer phone!");
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
             } 
              
-            if(customerAddress == null || customerAddress.length() == 0) {
+            if(customerAddress == null || customerAddress.length() == 0 || !customerAddress.matches(".*\\w.*")) {
                 jsonObject.put("HTTP_CODE", "500");
                 jsonObject.put("MSG", "Enter a valid customer address!");
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
             } 
             
-            if(customerCity == null || customerCity.length() == 0) {
+            if(customerCity == null || customerCity.length() == 0 || !customerCity.matches(".*\\w.*")) {
                 jsonObject.put("HTTP_CODE", "500");
                 jsonObject.put("MSG", "Enter a valid customer city!");
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
             } 
             
-            if(customerState == null || customerState.length() == 0) {
+            if(customerState == null || customerState.length() == 0 || !customerState.matches(".*\\w.*")) {
                 jsonObject.put("HTTP_CODE", "500");
                 jsonObject.put("MSG", "Enter a valid customer state!");
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
@@ -282,32 +282,32 @@ public class RESTCustomer {
             int userAdmin = partsData.optInt("customer_admin_update");
             
 //            validate text values
-            if(customerFirstName == null || customerFirstName.length() == 0) {
+            if(customerFirstName == null || customerFirstName.length() == 0 || !customerFirstName.matches(".*\\w.*")) {
                 jsonObject.put("HTTP_CODE", "500");
                 jsonObject.put("MSG", "Enter a valid customer first name!");
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
             }
             
-            if(customerLastName == null || customerLastName.length() == 0) {
+            if(customerLastName == null || customerLastName.length() == 0 || !customerLastName.matches(".*\\w.*")) {
                 jsonObject.put("HTTP_CODE", "500");
                 jsonObject.put("MSG", "Enter a valid customer last name!");
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
             }
             
 
-            if(userUsername == null || userUsername.length() == 0) {
+            if(userUsername == null || userUsername.length() == 0 || !userUsername.matches(".*\\w.*")) {
                 jsonObject.put("HTTP_CODE", "500");
                 jsonObject.put("MSG", "Enter a valid customer username!");
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
             }
             
-             if(userPassword1 == null || userPassword1.length() == 0) {
+             if(userPassword1 == null || userPassword1.length() == 0 || !userPassword1.matches(".*\\w.*")) {
                 jsonObject.put("HTTP_CODE", "500");
                 jsonObject.put("MSG", "Enter a valid customer password!");
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
             }
              
-            if(userPassword2 == null || userPassword2.length() == 0) {
+            if(userPassword2 == null || userPassword2.length() == 0 || !userPassword2.matches(".*\\w.*")) {
                 jsonObject.put("HTTP_CODE", "500");
                 jsonObject.put("MSG", "Enter a valid customer password confirm!");
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
@@ -319,31 +319,31 @@ public class RESTCustomer {
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
             }
              
-            if(customerEmail == null || customerEmail.length() == 0) {
+            if(customerEmail == null || customerEmail.length() == 0 || !customerEmail.matches(".*\\w.*")) {
                 jsonObject.put("HTTP_CODE", "500");
                 jsonObject.put("MSG", "Enter a valid customer email!");
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
             }
  
-            if(customerPhone == null || customerPhone.length() == 0) {
+            if(customerPhone == null || customerPhone.length() == 0 || !customerPhone.matches(".*\\w.*")) {
                 jsonObject.put("HTTP_CODE", "500");
                 jsonObject.put("MSG", "Enter a valid customer phone!");
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
             } 
              
-            if(customerAddress == null || customerAddress.length() == 0) {
+            if(customerAddress == null || customerAddress.length() == 0 || !customerAddress.matches(".*\\w.*")) {
                 jsonObject.put("HTTP_CODE", "500");
                 jsonObject.put("MSG", "Enter a valid customer address!");
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
             } 
             
-            if(customerCity == null || customerCity.length() == 0) {
+            if(customerCity == null || customerCity.length() == 0 || !customerCity.matches(".*\\w.*")) {
                 jsonObject.put("HTTP_CODE", "500");
                 jsonObject.put("MSG", "Enter a valid customer city!");
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
             } 
             
-            if(customerState == null || customerState.length() == 0) {
+            if(customerState == null || customerState.length() == 0 || !customerState.matches(".*\\w.*")) {
                 jsonObject.put("HTTP_CODE", "500");
                 jsonObject.put("MSG", "Enter a valid customer state!");
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();

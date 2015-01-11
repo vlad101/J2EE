@@ -26,7 +26,7 @@
     </p>
     <p><b>Phone:&nbsp;</b>1-800-221-5528</p>
     <p><b>FAX:&nbsp;</b>1-559-440-0963</p>
-    <p><b>Email:&nbsp;</b><a href="mailto:custserv@serendipity.com">custserv@serendipity.com</a></p>
+    <p><b>Email:&nbsp;</b><a href="mailto:${custServEmail}">${custServEmail}</a></p>
     <div id="nav-buttons">
         <ul>
             <li>

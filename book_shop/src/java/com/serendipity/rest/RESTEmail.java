@@ -90,19 +90,19 @@ public class RESTEmail {
             String lastName = partsData.optString("email_last_name_add");
             String email = partsData.optString("email_add");
             
-            if (firstName.length() == 0 || firstName == null) {
+            if (firstName.length() == 0 || firstName == null || !firstName.matches(".*\\w.*")) {
                 jsonObject.put("HTTP_CODE", "500");
                 jsonObject.put("MSG", "Enter a valid first name!");
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
             }
 
-            if (lastName.length() == 0 || lastName == null) {
+            if (lastName.length() == 0 || lastName == null || !lastName.matches(".*\\w.*")) {
                 jsonObject.put("HTTP_CODE", "500");
                 jsonObject.put("MSG", "Enter a valid last name!");
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
             }
 
-            if (email.length() == 0 || email == null) {
+            if (email.length() == 0 || email == null || !email.matches(".*\\w.*")) {
                 jsonObject.put("HTTP_CODE", "500");
                 jsonObject.put("MSG", "Enter a valid email!");
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
@@ -177,21 +177,21 @@ public class RESTEmail {
             }
             
 //            validate first name
-            if(firstName == null || firstName.length() == 0) {
+            if(firstName == null || firstName.length() == 0 || !firstName.matches(".*\\w.*")) {
                 jsonObject.put("HTTP_CODE", "500");
                 jsonObject.put("MSG", "Enter a valid first name!");
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
             }
             
 //            validate last name
-            if(lastName == null || lastName.length() == 0) {
+            if(lastName == null || lastName.length() == 0 || !lastName.matches(".*\\w.*")) {
                 jsonObject.put("HTTP_CODE", "500");
                 jsonObject.put("MSG", "Enter a valid last name!");
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
             }
             
 //            validate email
-            if(email == null || email.length() == 0) {
+            if(email == null || email.length() == 0 || !email.matches(".*\\w.*")) {
                 jsonObject.put("HTTP_CODE", "500");
                 jsonObject.put("MSG", "Enter a valid email!");
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();

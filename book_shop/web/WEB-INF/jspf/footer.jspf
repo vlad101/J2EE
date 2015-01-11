@@ -9,9 +9,6 @@
                 <link type="text/css" rel="stylesheet" href="<c:url value="/assets/css/footer.css" />" />
 
 
-                <!--get current year-->
-                <% Calendar.getInstance().get(Calendar.YEAR); %>
-
             <div id="footer">
                     <hr>
                 <div id="footer-menu-items">
@@ -31,11 +28,11 @@
                     </ul>
                 </div>
                 <p id="footerText">Copyright &#169; 
-                    <!-- Get previous year -->
-                    <%= Calendar.getInstance().get(Calendar.YEAR) - 1 %>
+                    <!-- Get previous year from context listener -->
+                    ${currentYear}
                     -
-                    <!-- Get current year -->
-                    <%= Calendar.getInstance().get(Calendar.YEAR) %> 
+                    <!-- Get current year from context listener -->
+                    ${nextYear}
                     Serendipity, Inc. All rights reserved.</p>
             </div>
         </div>

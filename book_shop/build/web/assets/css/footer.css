@@ -33,7 +33,7 @@
     width: 100%;
     font-size: medium;
     padding-left: 3%;
-    padding-right: 3%;
+    padding-right: 6%;
 }
 
 #footer-menu-items ul li {
@@ -46,6 +46,6 @@
 
 #footer-menu-items {
     margin-top: -1%;
-    width:80%;
-    margin-left: 10%;
+    width:90%;
+    margin-left: 5%;
 }
