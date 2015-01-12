@@ -142,7 +142,7 @@ $( document ).ready(function() {
                 image_update = image_update + '<input type="checkbox" name="' + image_path_delete + '" >';
             }
             image_update = image_update + '<label id="image-block" class="image-block" ><input id="' + $(this).attr('href').substring(30).replace(/\..*/,'') + '" type="radio" name="fb" value="small" style="display:none" />';
-            image_update = image_update + '<img src="' + $(this).attr('href') + '"  width="100" height="100" alt="Book cover" ></label><br />';
+            image_update = image_update + '<img src="' + $(this).attr('href') + '"  width="80" height="100" alt="Book cover" ></label><br />';
             i++;
         });
             
@@ -416,11 +416,11 @@ function doGetBookData(book_list) {
                     image_source = "/book_shop/assets/images/book/" + book_list[book].image_path[i];
                 }
                     
-                images = images + '<a class="fancybox" href="' + image_source + '" ><img src=' + image_source + ' width="150" height="150" alt="Book cover"></a>&nbsp&nbsp';
+                images = images + '<a class="fancybox" href="' + image_source + '" ><img src=' + image_source + ' width="110" height="150" alt="Book cover"></a>&nbsp&nbsp';
             }
         } else {
             image_source = "/book_shop/assets/images/book/no_image.jpg";
-            images = images + '<a class="fancybox" href="' + image_source + '" ><img src=' + image_source + ' width="150" height="150" alt="Book cover"></a>';
+            images = images + '<a class="fancybox" href="' + image_source + '" ><img src=' + image_source + ' width="110" height="150" alt="Book cover"></a>';
         }
         images = images + '</div>';
         

@@ -105,12 +105,12 @@ function doGetBookData(book_list) {
             } else {
                 image_source = "/book_shop/assets/images/book/" + book_list[book].image_path[i];
             }
-            images = images + '<a class="fancybox" href="' + image_source + '" data-fancybox-group="gallery" ><img src=' + image_source + ' width="150" height="260" alt="Book cover"></a>&nbsp&nbsp';
+            images = images + '<a class="fancybox" href="' + image_source + '" data-fancybox-group="gallery" ><img src=' + image_source + ' width="140" height="200" alt="Book cover"></a>&nbsp&nbsp';
         }
         $('#book_image').html(images);
     } else {
         image_source = "/book_shop/assets/images/book/no_image.jpg";
-        $('#book_image').html('<a class="fancybox" href="' + image_source + '" data-fancybox-group="gallery" ><img src=' + image_source + ' width="150" height="260" alt="Book cover"></a>');
+        $('#book_image').html('<a class="fancybox" href="' + image_source + '" data-fancybox-group="gallery" ><img src=' + image_source + ' width="140" height="200" alt="Book cover"></a>');
     }
     
     $('#book_title').html('<p><strong>Title</strong>: ' + book_list[book].title + '</p>');

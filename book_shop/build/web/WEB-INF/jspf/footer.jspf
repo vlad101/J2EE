@@ -17,13 +17,13 @@
                             <a href="<c:url value='/'/>" >Home</a>|
                         </li>
                         <li>
-                            <a href="<c:url value='/search'/>" >Browse Catalog</a>|
+                            <a href="<c:url value='/search'/>" >Search</a>|
                         </li>
                         <li>
-                            <a href="<c:url value='/email/emaillist'/>" >Join Email List</a>|
+                            <a href="<c:url value='/email/emaillist'/>" >Email List</a>|
                         </li>
                         <li>
-                            <a href="<c:url value='/customerservice'/>" >Customer Service</a>
+                            <a href="<c:url value='/customerservice'/>" >Support</a>
                         </li>
                     </ul>
                 </div>

@@ -32,8 +32,8 @@
     text-align: center;
     width: 100%;
     font-size: medium;
-    padding-left: 3%;
-    padding-right: 6%;
+    padding-left: 2%;
+    padding-right: 4%;
 }
 
 #footer-menu-items ul li {
@@ -47,5 +47,5 @@
 #footer-menu-items {
     margin-top: -1%;
     width:90%;
-    margin-left: 5%;
+    margin-left: 4%;
 }

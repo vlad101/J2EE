@@ -488,7 +488,7 @@ public class RESTBook {
 //            validate text values
             if(bookTitle == null || bookTitle.length() == 0 || !bookTitle.matches(".*\\w.*") || 
                     bookAuthor == null || bookAuthor.length() == 0 || !bookAuthor.matches(".*\\w.*") ||
-                    bookCategoryName.length() == 0 || bookCategoryName == null || bookCategoryName.matches(".*\\w.*")) {
+                    bookCategoryName.length() == 0 || bookCategoryName == null || !bookCategoryName.matches(".*\\w.*")) {
                 jsonObject.put("HTTP_CODE", "500");
                 jsonObject.put("MSG", "Enter a valid book info!");
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
