@@ -10,6 +10,10 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.codehaus.jettison.json.JSONArray;
+import com.serendipity.util.PasswordUtil;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 
 /**
  * Business logic for the user data - User table in the database.
@@ -18,10 +22,13 @@ import org.codehaus.jettison.json.JSONArray;
  */
 public class DAOUser {
     
-    private DbUtil db;
+    private final DbUtil db;
     private Connection conn = null;
     private PreparedStatement preparedStatement = null;
     private ResultSet rs = null;
+    
+//    password security
+    
     
     public DAOUser() {
         
@@ -34,10 +41,16 @@ public class DAOUser {
      * 
      * @param user
      * @return HTTP status
+     * @throws java.security.NoSuchAlgorithmException
+     * @throws java.io.UnsupportedEncodingException
      */
-    public int addUser(User user) {
-                            
-        String sql = "INSERT INTO user (user_id, username, password, admin) VALUES(?,?,?,?);";
+    public int addUser(User user) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+        
+        // get secured password and salt
+        PasswordUtil passwordUtil = new PasswordUtil();
+        String[] passwordSecurity = passwordUtil.securePasswordOnCreateOrUpdate(user.getPassword());
+        
+        String sql = "INSERT INTO user (user_id, username, password, salt, admin) VALUES(?,?,?,?,?);";
         
         try {
             
@@ -46,8 +59,9 @@ public class DAOUser {
             preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setInt(1, user.getUserId());
             preparedStatement.setString(2, user.getUsername());
-            preparedStatement.setString(3, user.getPassword());
-            preparedStatement.setInt(4, user.getIsAdmin());
+            preparedStatement.setString(3, passwordSecurity[0]);
+            preparedStatement.setString(4, passwordSecurity[1]);
+            preparedStatement.setInt(5, user.getIsAdmin());
             preparedStatement.executeUpdate();
             conn.commit();
             
@@ -78,10 +92,18 @@ public class DAOUser {
      * 
      * @param user
      * @return HTTP status
+     * @throws java.security.NoSuchAlgorithmException
+     * @throws java.io.UnsupportedEncodingException
      */
-    public int updateUserInfo(User user) {
-                
-        String sql = "UPDATE user SET user_id=?, username=?, password=?,admin=? WHERE user_id=?;";
+    public int updateUserInfo(User user) throws NoSuchAlgorithmException, UnsupportedEncodingException, IOException {
+            
+        // get secured password and salt
+        PasswordUtil passwordUtil = new PasswordUtil();
+        String[] passwordSecurity = passwordUtil.securePasswordOnCreateOrUpdate(user.getPassword());
+        passwordUtil = new PasswordUtil();
+        passwordUtil.authenticate();
+        
+        String sql = "UPDATE user SET user_id=?, username=?, password=?, salt=?, admin=? WHERE user_id=?;";
         
         try {
         
@@ -90,9 +112,10 @@ public class DAOUser {
             preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setInt(1, user.getUserId());
             preparedStatement.setString(2, user.getUsername());
-            preparedStatement.setString(3, user.getPassword());
-            preparedStatement.setInt(4, user.getIsAdmin());
-            preparedStatement.setInt(5, user.getUserId());
+            preparedStatement.setString(3, passwordSecurity[0]);
+            preparedStatement.setString(4, passwordSecurity[1]);
+            preparedStatement.setInt(5, user.getIsAdmin());
+            preparedStatement.setInt(6, user.getUserId());
             preparedStatement.executeUpdate();
             conn.commit();
             
@@ -212,7 +235,7 @@ public class DAOUser {
         
         User user = null;
         
-        String sql = "SELECT username, password, admin FROM user WHERE user_id=?;";
+        String sql = "SELECT username, password, salt, admin FROM user WHERE user_id=?;";
         
         try {
         
@@ -225,6 +248,7 @@ public class DAOUser {
             while(rs.next()) {
                 String username = rs.getString("username");
                 String password = rs.getString("password");
+                String salt = rs.getString("salt");
                 int isAdmin = rs.getInt("admin");
                 user = new User(userId, username, password, isAdmin);
             }
@@ -295,7 +319,7 @@ public class DAOUser {
         
         JSONArray userJsonArray = new JSONArray();
         
-        String sql = "SELECT user_id, username, password FROM user;"; // do not use * for production code
+        String sql = "SELECT user_id, username, password, salt, admin FROM user;"; // do not use * for production code
         
         try {
         

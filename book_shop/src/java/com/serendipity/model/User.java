@@ -9,6 +9,7 @@ public class User {
     private int userId;
     private String username;
     private String password;
+    private String salt;
     private int isAdmin;
     
     public User(int userId, String username, String password, int isAdmin) {
@@ -42,6 +43,14 @@ public class User {
         return password;
     }
     
+    public void setSalt(String salt) {
+        this.salt = salt;
+    }
+    
+    public String getSalt() {
+        return salt;
+    }
+    
     public void setIsAdmin(int isAdmin) {
         this.isAdmin = isAdmin;
     }
@@ -53,6 +62,7 @@ public class User {
     @Override
     public String toString(){
         return "User{" + "userId=" + userId + ", username=" 
-                + username + ", password=" + password + ", isAdmin=" + isAdmin + '}';
+                + username + ", password=" + password + ", salt=" 
+                    + salt + ", isAdmin=" + isAdmin + '}';
     }
 }

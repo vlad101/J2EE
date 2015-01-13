@@ -4,6 +4,8 @@ import com.serendipity.model.Customer;
 import com.serendipity.model.User;
 import com.serendipity.util.DbUtil;
 import com.serendipity.util.ToJSON;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -39,7 +41,7 @@ public class DAOCustomer {
      * @param admin
      * @return HTTP status
      */
-    public int addCustomer(Customer customer, String username, String password, int admin) {
+    public int addCustomer(Customer customer, String username, String password, int admin) throws NoSuchAlgorithmException, UnsupportedEncodingException {
         
         ResultSet generatedKeys;
         int customerId = -1;
