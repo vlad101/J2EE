@@ -145,7 +145,7 @@ public class RESTCategory {
             
             String categoryTitle = partsData.optString("category_title");
             
-            if (categoryTitle == null || categoryTitle.length() == 0) {
+            if (categoryTitle == null || categoryTitle.length() == 0 || !categoryTitle.matches(".*\\w.*")) {
                 jsonObject.put("HTTP_CODE", "500");
                 jsonObject.put("MSG", "Enter a valid category name!");
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();
@@ -213,7 +213,7 @@ public class RESTCategory {
             }
             
 //            validate category title
-            if(categoryName == null || categoryName.length() == 0) {
+            if(categoryName == null || categoryName.length() == 0 || !categoryName.matches(".*\\w.*")) {
                 jsonObject.put("HTTP_CODE", "500");
                 jsonObject.put("MSG", "Enter a valid category name!");
                 return Response.ok(jsonArray.put(jsonObject).toString()).build();

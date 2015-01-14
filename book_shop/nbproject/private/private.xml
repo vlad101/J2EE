@@ -3,28 +3,22 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/src/java/com/serendipity/dao/DAOShoppingCart.java</file>
             <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/assets/css/category.css</file>
+            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/WEB-INF/view/login/LoginSuccess.jsp</file>
             <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/WEB-INF/view/search.jsp</file>
             <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/assets/js/editcategory.js</file>
-            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/src/java/com/serendipity/model/ShoppingCart.java</file>
-            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/assets/js/book.js</file>
+            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/src/java/com/serendipity/dao/DAOCustomer.java</file>
             <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/WEB-INF/view/admin/admin.jsp</file>
-            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/assets/css/search.css</file>
-            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/src/java/com/serendipity/rest/RESTBook.java</file>
             <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/assets/js/editbook.js</file>
-            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/WEB-INF/view/index.jsp</file>
-            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/WEB-INF/jspf/footer.jspf</file>
-            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/WEB-INF/view/customerservice.jsp</file>
+            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/src/java/com/serendipity/model/User.java</file>
+            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/src/java/com/serendipity/controller/LoginServlet.java</file>
             <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/WEB-INF/web.xml</file>
             <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/WEB-INF/view/email/emaillist.jsp</file>
             <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/src/java/com/serendipity/dao/DAOBook.java</file>
-            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/src/java/com/serendipity/dao/DAOCategory.java</file>
             <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/assets/js/emaillist.js</file>
-            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/assets/css/footer.css</file>
-            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/assets/css/index.css</file>
+            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/WEB-INF/view/login/login.jsp</file>
             <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/assets/js/search.js</file>
-            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/src/java/com/serendipity/rest/RESTEmail.java</file>
+            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/src/java/com/serendipity/controller/LogoutServlet.java</file>
         </group>
     </open-files>
 </project-private>

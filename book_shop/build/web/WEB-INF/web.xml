@@ -4,7 +4,8 @@
     <display-name>book_shop</display-name>
     <!--welcome file list-->
     <welcome-file-list>
-        <welcome-file>index</welcome-file>
+        <!--<welcome-file>index</welcome-file>-->
+        <welcome-file>/WEB-INF/view/login/login.jsp</welcome-file>
     </welcome-file-list>
     <jsp-config>
         <jsp-property-group>

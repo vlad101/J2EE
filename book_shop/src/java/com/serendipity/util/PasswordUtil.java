@@ -47,22 +47,11 @@ public class PasswordUtil {
            //byte[] bSalt = base64ToByte(salt);
  
            // Compute the new DIGEST
-           
-           System.out.println("!!!!!!!!!!!!!!!");
-           System.out.println("!!!!!!!!!!!!!!!");
-           System.out.println("!!!!!!!!!!!!!!!");
-           System.out.println("!!!!!!!!!!!!!!!");
            byte[] proposedDigest = getHash(ITERATION_NUMBER, "admin", base64ToByte("yEeo46bJjFE="));
            String prop = Arrays.toString(proposedDigest);
            String act = Arrays.toString(base64ToByte("xDSulVZoKCmPTMwcJdPXNTD0snY="));
            System.out.println("prop " + prop);
            System.out.println("act " + act);
-           System.out.println("!!!!!!!!!!!!!!!");
-           System.out.println("!!!!!!!!!!!!!!!");
-           System.out.println("!!!!!!!!!!!!!!!");
-           System.out.println("!!!!!!!!!!!!!!!");
-//           (proposedDigest, bDigest)
-           
    }
     
     
