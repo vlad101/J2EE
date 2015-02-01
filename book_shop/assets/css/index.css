@@ -1,0 +1,48 @@
+/* 
+    Created on : Jun 3, 2014, 6:24:45 PM
+    Author     : Vladimir
+*/
+
+/* index page styles */
+#indexLeftColumn {
+    margin-top: 2%;
+    margin-left: -10%;
+    padding: 1%;
+    height: 480px;//400px;
+    width: 330px;
+    float: left;
+    background: #ccc;
+}
+
+#indexLeftColumn p {
+    font-size: small;
+}
+
+#indexLeftColumn a {
+    font-size: large;
+}
+
+#indexRightColumn {
+    height: 480px;//400px;
+    width: 500px;
+    float: left;
+    background: #eee;
+}
+
+.categoryBox, .categoryListBox, .bookListBox {
+    height: 176px;
+    width: 220px;
+    margin: 21px 14px 6px;
+    float: inherit;
+    background: #ccc;
+    border-radius: 3px;
+}
+
+.categoryListBox, .bookListBox {
+    height: 50px;
+}
+
+.categoryLabelText, .categoryListLabelText, .bookListLabelText {
+    line-height: 150%;
+    font-size: x-large;
+}

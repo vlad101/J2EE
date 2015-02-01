@@ -1,0 +1,36 @@
+/* 
+    Created on : Jan 4, 2015, 7:26:48 PM
+    Author     : vladimir
+*/
+
+#leftColumn {
+    padding:15px;
+    text-align: left;
+}
+
+#update-customer-modal .modal-dialog, #add-customer-modal .modal-dialog {
+    border: 1px solid black;
+    border-radius: 2%;
+    width: 40%;
+}
+
+#update-customer-modal .modal-header, #add-customer-modal .modal-header {
+    background-color: #D3D3D3;
+}
+
+#update-customer-modal .modal-body h5, #add-customer-modal .modal-body h5 {
+    text-align: center;
+}
+
+#update-customer-modal .modal-body, #add-customer-modal .modal-body {
+    border-top: 1px black solid;
+}
+
+#nav-buttons {
+    margin-left: 10%;
+}
+
+#customer_update_button {
+    float: left;
+    margin-left: 43%;
+}

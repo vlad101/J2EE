@@ -1,0 +1,168 @@
+/* 
+    Created on : Jun 27, 2014, 9:35:00 PM
+    Author     : Vladimir
+*/
+
+#book-list {
+    width: 80%;
+    border: 1px solid;
+    padding: 2%;
+    margin-left: auto;
+    margin-right: auto;
+}
+    
+table { 
+    border: 1px solid black;
+}
+
+#book-list-table td {
+    border-bottom: 0.5% solid red;
+    border-top: 0.5% solid black;
+    border-color: rgb(160,160,255);
+}
+
+#book-list-table tr.odd, #book-list-table tr.odd .sorting_1 {
+    background-color: #C6E2FF;
+}
+
+#book-list-table tr.even, #book-list-table tr.even .sorting_1 {
+    background-color: white;
+}
+
+#update-book-modal .modal-dialog {
+    border: 1px solid black;
+    border-radius: 2%;
+    width: 40%;
+}
+
+#update-book-modal .modal-header, #add-book-modal .modal-header {
+    background-color: #D3D3D3;
+}
+
+#update-book-modal .modal-body h5 {
+    text-align: center;
+    background-color: black;
+}
+
+#update-book-modal .modal-body {
+    border-top: 1px black solid;
+}
+
+td.details-control {
+    background: url('../images/datatable/details_open.png') no-repeat center center;
+    cursor: pointer;
+}
+tr.shown td.details-control {
+    background: url('../images/datatable/details_close.png') no-repeat center center;
+}
+
+#book-list-table tbody tr td p {
+    text-align: left;
+    margin-left: 10%;
+}
+
+#book-list-table tbody tr td table {
+    border-top: 1px;
+    border-bottom: 1px;
+    border-left: 0px;
+    border-right: 0px;
+    text-align: left;
+    width: 90%;
+}
+
+// hide quantity column
+/*#book-list-table tbody tr td.hide_qty_column {
+    display: none;
+}*/
+
+#book-list-table tr *:nth-child(4) {
+    display: none;
+}
+
+#book-list-table tr *:nth-child(5) {
+    display: none;
+}
+#book-list-table tr *:nth-child(7) {
+    display: none;
+}
+
+#book-list-table tr *:nth-child(8) {
+    display: none;
+}
+
+#book-list-table tr *:nth-child(9) {
+    display: none;
+}
+
+// typeahead styling
+
+.tt-query {
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+.tt-hint {
+    color: #999;
+}
+
+.tt-dropdown-menu {
+    height: 124px;
+    overflow-y: auto;
+    width: 200px;
+    margin-top: 10px;
+    padding: 8px 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    -webkit-border-radius: 8px;
+       -moz-border-radius: 8px;
+            border-radius: 8px;
+    -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+       -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+            box-shadow: 0 5px 10px rgba(0,0,0,.2);
+}
+
+.tt-suggestion {
+    padding: 3px 20px;
+    font-size: 18px;
+    line-height: 24px;
+}
+
+.tt-suggestion.tt-cursor {
+    color: #fff;
+    background-color: #0097cf;
+
+}
+
+.tt-suggestion p {
+    margin: 0;
+}
+
+.gist {
+     font-size: 8px;
+}
+
+.empty-message {
+    padding: 5px 10px;
+    text-align: center;
+}
+
+// image update book selection
+label.image-block > input { /* HIDE RADIO */
+    visibility: hidden;
+    position: absolute;
+}
+
+label.image-block > input + img { /* IMAGE STYLES */
+    cursor:pointer;
+    border:2px solid transparent;
+}
+
+label.image-block > input:checked + img { /* (RADIO CHECKED) IMAGE STYLES */
+    border:2px solid #f00;
+}
+
+#nav-buttons {
+    margin-left: 23%;
+}

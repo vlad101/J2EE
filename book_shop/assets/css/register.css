@@ -1,0 +1,26 @@
+/* 
+    Created on : Jan 2, 2015, 6:53:00 PM
+    Author     : vladimir
+*/
+
+/*registration page styles */
+#centerColumn {
+    width: 100%;
+    text-align: left;
+    margin-left: 5%;
+}
+
+#centerColumn h1 {
+    text-align: center;
+}
+
+#nav-buttons {
+    margin-left: 10%;
+}
+
+// ajax response on sustomer update
+#ajax_add_customer_response_success, #ajax_add_customer_response_error {
+    width: 50%; 
+    margin: 0 auto; 
+    text-align: center; 
+}

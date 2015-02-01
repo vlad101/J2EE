@@ -1,0 +1,80 @@
+/* 
+    Created on : Jul 23, 2014, 9:39:52 PM
+    Author     : Vladimir
+*/
+
+#customer-list {
+    width: 80%;
+    border: 1px solid;
+    padding: 2%;
+    margin-left: auto;
+    margin-right: auto;
+}
+    
+table { 
+    border: 1px solid black;
+}
+
+#customer-list-table td {
+    border-bottom: 0.5% solid red;
+    border-top: 0.5% solid black;
+    border-color: rgb(160,160,255);
+}
+
+#customer-list-table tr.odd, #customer-list-table tr.odd .sorting_1 {
+    background-color: #C6E2FF;
+}
+
+#customer-list-table tr.even, #customer-list-table tr.even .sorting_1 {
+    background-color: white;
+}
+
+#update-customer-modal .modal-dialog, #add-customer-modal .modal-dialog {
+    border: 1px solid black;
+    border-radius: 2%;
+    width: 40%;
+}
+
+#update-customer-modal .modal-header, #add-customer-modal .modal-header {
+    background-color: #D3D3D3;
+}
+
+#update-customer-modal .modal-body h5, #add-customer-modal .modal-body h5 {
+    text-align: center;
+}
+
+#update-customer-modal .modal-body, #add-customer-modal .modal-body {
+    border-top: 1px black solid;
+}
+
+td.details-control {
+    background: url('../images/datatable/details_open.png') no-repeat center center;
+    cursor: pointer;
+}
+tr.shown td.details-control {
+    background: url('../images/datatable/details_close.png') no-repeat center center;
+}
+
+#customer-list-table tbody tr td p {
+    text-align: left;
+    margin-left: 10%;
+}
+
+#customer-list-table tbody tr td table {
+    border-top: 1px;
+    border-bottom: 1px;
+    border-left: 0px;
+    border-right: 0px;
+    text-align: left;
+    width: 90%;
+}
+
+#nav-buttons {
+    margin-left: 23%;
+}
+
+select#customer_state_update {
+    max-width: 1px;
+    min-width: 1px;
+    width: 1px !important;
+}

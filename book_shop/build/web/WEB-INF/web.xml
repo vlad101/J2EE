@@ -4,8 +4,7 @@
     <display-name>book_shop</display-name>
     <!--welcome file list-->
     <welcome-file-list>
-        <!--<welcome-file>index</welcome-file>-->
-        <welcome-file>/WEB-INF/view/login/login.jsp</welcome-file>
+        <welcome-file>index</welcome-file>
     </welcome-file-list>
     <jsp-config>
         <jsp-property-group>
@@ -16,12 +15,18 @@
             <include-coda>/WEB-INF/jspf/footer.jspf</include-coda>
         </jsp-property-group>
     </jsp-config>
-    <!-- public controller  -->
+    <!--User authentication-->
     <servlet>
-        <display-name>SerendipityController</display-name>
-        <servlet-name>SerendipityController</servlet-name>
-        <servlet-class>com.serendipity.controller.SerendipityController</servlet-class>
+        <display-name>AuthenticationController</display-name>
+        <servlet-name>AuthenticationController</servlet-name>
+        <servlet-class>com.serendipity.controller.AuthenticationController</servlet-class>
     </servlet>
+    <servlet-mapping>
+        <servlet-name>AuthenticationController</servlet-name>
+        <url-pattern>/login</url-pattern>
+        <url-pattern>/login/userlogin</url-pattern>
+    </servlet-mapping>   
+    <!-- public controller  -->
     <servlet-mapping>
         <servlet-name>SerendipityController</servlet-name>
         <!-- get request  -->
@@ -104,7 +109,7 @@
         <servlet-name>EmailListController</servlet-name>
         <url-pattern>/email/emaillist</url-pattern>
     </servlet-mapping>
-        <!-- REST Web API -->
+    <!-- REST Web API -->
     <servlet>
         <servlet-name>Jersey REST Service</servlet-name>
         <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
@@ -118,15 +123,6 @@
         <servlet-name>Jersey REST Service</servlet-name>
         <url-pattern>/api/*</url-pattern>
     </servlet-mapping>
-    <!--Form-based authentication-->
-    <login-config>
-        <auth-method>FORM</auth-method>
-        <form-login-config>
-            <form-login-page>/admin/login.jsp</form-login-page>
-            <form-error-page>/admin/login_error.jsp</form-error-page>
-        </form-login-config>
-    </login-config>
-    <!--context listener-->
     <!-- define a servlet context listener -->
     <listener>
         <listener-class>com.serendipity.util.SerendipityContextListener</listener-class>
@@ -150,6 +146,14 @@
         <location>/error/error_java.jsp</location>
     </error-page>
     <!--filter test-->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/applicationContext.xml</param-value>
+    </context-param>
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/applicationContext.xml</param-value>
+    </context-param>
     <filter>
         <filter-name>loadSalt</filter-name>
         <filter-class>com.serendipity.csrf.LoadSalt</filter-class>

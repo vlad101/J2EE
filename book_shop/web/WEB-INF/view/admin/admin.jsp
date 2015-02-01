@@ -12,6 +12,13 @@
 <p id="pageTitle">Administration</p>
 
 <div id="adminCenterColumn">
+    <!--http://www.journaldev.com/1907/java-servlet-session-management-tutorial-with-examples-of-cookies-httpsession-and-url-rewriting#servlet-url-rewriting-->
+    <c:if test="${not empty username}">
+        <p>You're logged in as <b>username</b> ${username} and <b>password</b> ${password}!</p>
+    </c:if>
+    <c:if test="${empty username}">
+        <p>You're not logged in!</p>
+    </c:if>
     
     <br>  
     <div class="button-list">

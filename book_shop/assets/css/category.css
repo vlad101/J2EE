@@ -1,0 +1,53 @@
+/* 
+    Created on : Jun 1, 2014, 5:42:38 PM
+    Author     : Vladimir
+*/
+
+/* category page styles */
+#categoryCenterColumn {
+    margin-top: 10px;
+    width: 650px;
+    float: left;
+}
+
+#back-button {
+    float: left;
+    margin-left: 5%;
+    margin-bottom: 5%;
+}
+
+.categoryButton {
+    margin: 15px 22px;
+    padding: 13px;
+    display: block;
+    background-color: #d3ede8;
+}
+
+#selectedCategory {
+    background-color: #b2d2d2;
+    margin-left: 10px;
+    width: 139px;
+}
+
+.categoryText {
+    line-height: 25px;
+    font-size: x-large;
+}
+
+#bookTable {
+    margin-left: 4%;
+    margin-bottom: 2%;
+    width: 800px;
+}
+
+#bookTable tr { 
+    height: 90px; 
+}
+
+#bookTable td { 
+    width: 145px; 
+}
+
+#nav-buttons {
+    margin-left: 18%;
+}

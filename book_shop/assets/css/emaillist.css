@@ -1,0 +1,43 @@
+/* 
+    Created on : Dec 30, 2014, 12:32:34 AM
+    Author     : vladimir
+*/
+
+/*email page styles */
+#centerColumn {
+    width: 100%;
+}
+
+#centerColumn .button-list {
+    width: 30%;
+    margin: 5%;
+    text-align: left;
+}
+
+#centerColumn .button-list button{
+    width: 80%;
+}
+
+#add_email_form {
+    text-align: left;
+    float: left;
+    width: 100%;
+    margin-left: 5%;
+}
+
+button#add_email_form_submit {
+    float: left;
+    margin-left: 5%;
+}
+
+#nav-buttons {
+    margin-left: 34%;
+    margin-top: 5%;
+}
+
+// ajax response on sustomer update
+#ajax_add_email_response_success, #ajax_add_email_response_error {
+    width: 50%; 
+    margin: 0 auto; 
+    text-align: center; 
+}

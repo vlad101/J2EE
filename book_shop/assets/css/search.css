@@ -1,0 +1,43 @@
+/* 
+    Created on : Dec 30, 2014, 12:32:23 AM
+    Author     : vladimir
+*/
+
+/*search page styles */
+#centerColumn {
+    width: 100%;
+}
+
+#centerColumn .button-list {
+    width: 30%;
+    margin: 5%;
+    text-align: left;
+}
+
+#centerColumn .button-list button{
+    width: 80%;
+}
+
+#nav-buttons {
+    margin-left: 34%;
+}
+
+#ajax_search_book_title_response_error{
+    width: 50%; 
+    margin: 0 auto; 
+    text-align: center;
+}
+
+#bookTable {
+    margin-left: 4%;
+    margin-bottom: 2%;
+    width: 800px;
+}
+
+#bookTable tr { 
+    height: 90px; 
+}
+
+#bookTable td { 
+    width: 145px; 
+}

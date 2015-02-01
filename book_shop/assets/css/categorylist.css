@@ -1,0 +1,19 @@
+/* 
+    Created on : Dec 28, 2014, 2:11:06 PM
+    Author     : vladimir
+*/
+
+/*category list page styles */
+#centerColumn {
+    width: 100%;
+    text-align: left;
+    margin-left: 5%;
+}
+
+#centerColumn h1 {
+    text-align: center;
+}
+
+#nav-buttons {
+    margin-left: 18%;
+}

@@ -9,16 +9,16 @@
 <!-- include jquery core files -->
 <script type="text/javascript" src="<c:url value="/assets/js/admin.js" />" ></script>
 
-<p id="pageTitle">Login</p>
+<p id="pageTitle">User Login</p>
 
 <br><br>
 
 <div id="adminCenterColumn">
     <p>Please enter your username and password to continue.</p>
-        <form action="LoginServlet" method="post">
+        <form action="/book_shop/login/userlogin" method="post">
 
-            Username: <input type="text" name="user"><br>
-            Password: <input type="password" name="pwd"><br>
+            Username: <input type="text" name="username"><br>
+            Password: <input type="password" name="password"><br>
             <input type="submit" value="Login">
         </form>
 </div>

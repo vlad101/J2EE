@@ -1,0 +1,23 @@
+/* 
+    Created on : Jun 7, 2014, 6:12:21 PM
+    Author     : Vladimir
+*/
+
+/*admin page styles */
+#adminCenterColumn {
+    width: 100%;
+}
+
+#adminCenterColumn .button-list {
+    width: 30%;
+    margin: 5%;
+    text-align: left;
+}
+
+#adminCenterColumn .button-list button{
+    width: 80%;
+}
+
+#nav-buttons {
+    margin-left: 34%;
+}
