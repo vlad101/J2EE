@@ -19,8 +19,15 @@
 
             Username: <input type="text" name="username"><br>
             Password: <input type="password" name="password"><br>
+            <input type="hidden" name="csrfPreventionSalt" value="<c:out value='${csrfPreventionSalt}'/>"/>
             <input type="submit" value="Login">
         </form>
+    <br><br>
+    <c:if test="${not empty error}">
+        <p>${error}</p><br>
+    </c:if>
+    <p>Not Registered? <a href="<c:url value='/customer/register'/>" >Register</a></p>
+    
 </div>
             
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

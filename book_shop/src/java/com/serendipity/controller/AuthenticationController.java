@@ -1,7 +1,11 @@
 package com.serendipity.controller;
 
+import com.serendipity.dao.DAOCategory;
+import com.serendipity.model.Category;
+import com.serendipity.util.CookieUtil;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -19,7 +23,9 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name="AuthenticationController",
             loadOnStartup = 1,
-            urlPatterns = {"/login"})
+            urlPatterns = {"/login",
+                           "/logout",
+                           "/login/userlogin"})
 public class AuthenticationController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
@@ -36,48 +42,60 @@ public class AuthenticationController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ParseException {
 
-        String forward;
+        String forward = "";
         String action = request.getServletPath();
         
         if(action.equalsIgnoreCase("/login")) {
             
 //          TODO: implement admin page
             forward = "/login/login";
-        }
+        } 
         
+//   create authentication function to validate user
         else if(action.equalsIgnoreCase("/login/userlogin")) {
             
             // get request parameters for userID and password
             String username = request.getParameter("username");
-            String password = request.getParameter("password");
+                       
             //setting session to expiry in 30 mins
             HttpSession session = request.getSession();
             session.setMaxInactiveInterval(30*60);
             
+            //allow access only if session exists
             if(username.equals("admin")) {
-                request.setAttribute("username", username);
-                request.setAttribute("password", password);
+                session = request.getSession();
+                session.setAttribute("user", username);
+                //setting session to expiry in 30 mins
+                session.setMaxInactiveInterval(30*60);
+                Cookie userName = new Cookie("username", username);
+                response.addCookie(userName);
+                request.setAttribute("categoryList", getCategoryList());
+                
+                
+//                String user = (String) session.getAttribute("user");
+                CookieUtil cookieUtil = new CookieUtil();
+                Cookie[] cookies = request.getCookies();
+                if(cookies !=null){
+                    
+                    @SuppressWarnings("static-access")
+                    String userNameCookie = cookieUtil.getCookieValue(cookies, "user");
+                    request.setAttribute("username", userNameCookie);
+                    
+                    @SuppressWarnings("static-access")
+                    String sessionIdCookie = cookieUtil.getCookieValue(cookies, "JSESSIONID");
+                    request.setAttribute("sessionID", sessionIdCookie);
+                    
+                } else {
+                    request.setAttribute("sessionID", session.getId());
+                }
+                
+                forward = "/index";
+                
+            } else {
+                String error = "Either user name or password is wrong.";
+                request.setAttribute("error", error);
+                forward = "/login/login";
             }
-            
-            
-//            if(userID.equals(user) && password.equals(pwd)){
-//                HttpSession session = request.getSession();
-//                session.setAttribute("user", "Pankaj");
-//                //setting session to expiry in 30 mins
-//                session.setMaxInactiveInterval(30*60);
-//                Cookie userName = new Cookie("user", user);
-//                response.addCookie(userName);
-//                //Get the encoded URL string
-//                String encodedURL = response.encodeRedirectURL("LoginSuccess.jsp");
-//                response.sendRedirect(encodedURL);
-//            }else{
-//                RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.html");
-//                PrintWriter out= response.getWriter();
-//                out.println("<font color=red>Either user name or password is wrong.</font>");
-//                rd.include(request, response);
-//            }
-            
-            forward = "/admin/admin";
         }
         
 //        Error page
@@ -97,13 +115,20 @@ public class AuthenticationController extends HttpServlet {
                 url = forward + END_URL;
                 
             } else {
-                
-//               administrative pages
+            
                 url = START_URL_ADMIN + forward + END_URL;
                 
             }
             
-            RequestDispatcher view = request.getRequestDispatcher(url);
+            RequestDispatcher view;
+            if(action.equalsIgnoreCase("/login/userlogin")) {
+                // Get the encoded URL string
+                view = request.getRequestDispatcher(response.encodeRedirectURL(url));
+            }
+            else {
+                view = request.getRequestDispatcher(url);
+            }
+            
             view.forward(request, response);
             
         } catch (Exception ex) {
@@ -132,5 +157,22 @@ public class AuthenticationController extends HttpServlet {
         } catch (ParseException ex) {
             Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    /**
+     * Get category list
+     * @param indexPage
+     * @return
+     * If index page, return only four categories
+     * If not index page, return all categories 
+     */
+    private List<Category> getCategoryList() {
+        DAOCategory daoCategory = new DAOCategory();
+        List<Category> categoryList = daoCategory.getCategoryList();
+        int categoryListSize = categoryList.size();
+        if(categoryListSize > 5) {
+            return categoryList.subList(0, 4);
+        }
+        return categoryList;
     }
 }

@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -44,6 +45,7 @@ public class SerendipityController extends HttpServlet {
             throws ServletException, IOException, ParseException {
 
         String forward = "";
+        HttpSession session = request.getSession();
         String action = request.getServletPath();
         
 //      get - index page request
@@ -66,8 +68,12 @@ public class SerendipityController extends HttpServlet {
         else if(action.equalsIgnoreCase("/cart")) {
         
 //          TODO: cart
-            forward = "/cart/cart";
             
+            if(session.getAttribute("user") == null) {
+                forward = "/login/cart";
+            } else {
+                forward = "/login/cart";
+            }
         }
         
 //      get - checkout page request

@@ -4,7 +4,7 @@
     Author     : Vladimir
 --%>
 
-            <link type="text/css" rel="stylesheet" href="<c:url value="assets/css/index.css" />" />
+            <link type="text/css" rel="stylesheet" href="<c:url value="/assets/css/index.css" />" />
             
             <p id="pageTitle">Home</p>
             

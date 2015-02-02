@@ -12,21 +12,20 @@
 <p id="pageTitle">Administration</p>
 
 <div id="adminCenterColumn">
-    <!--http://www.journaldev.com/1907/java-servlet-session-management-tutorial-with-examples-of-cookies-httpsession-and-url-rewriting#servlet-url-rewriting-->
     <c:if test="${not empty username}">
         <p>You're logged in as <b>username</b> ${username} and <b>password</b> ${password}!</p>
+        <div class="button-list">
+            <button type="button" class="btn btn-primary btn-small" id="edit-category-button" >Edit category</button><br><br>
+            <button type="button" class="btn btn-primary btn-small" id="edit-book-button" >Edit Book</button><br><br>
+            <button type="button" class="btn btn-primary btn-small" id="edit-customer-button" >Edit Customer</button><br><br>
+            <button type="button" class="btn btn-primary btn-small" id="edit-customer-order-button" >Edit Customer Order</button>
+        </div>
     </c:if>
     <c:if test="${empty username}">
-        <p>You're not logged in!</p>
+        <br><br><p>You're not logged in!</p><a href="<c:url value='/login'/>" >Login</a>
     </c:if>
     
-    <br>  
-    <div class="button-list">
-        <button type="button" class="btn btn-primary btn-small" id="edit-category-button" >Edit category</button><br><br>
-        <button type="button" class="btn btn-primary btn-small" id="edit-book-button" >Edit Book</button><br><br>
-        <button type="button" class="btn btn-primary btn-small" id="edit-customer-button" >Edit Customer</button><br><br>
-        <button type="button" class="btn btn-primary btn-small" id="edit-customer-order-button" >Edit Customer Order</button>
-    </div>
+    <br>
     <div id="nav-buttons">
         <ul>
             <li>
