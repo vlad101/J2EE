@@ -44,12 +44,12 @@
         <div id="main">
             <div id="header">
                 <div id="widgetBar">
-                    <c:if test="${empty username}">
+                    <c:if test="${empty sessionScope.username}">
                         <div class="headerWidget">
                             <a href="<c:url value='/login'/>" >Login</a>
                         </div>
                     </c:if>
-                    <c:if test="${not empty username && empty error}">
+                    <c:if test="${not empty sessionScope.username && empty error}">
                         <div class="headerWidget">
                             <a href="<c:url value='/logout'/>" >Logout</a>
                         </div>   
@@ -66,10 +66,10 @@
                         <a href="<c:url value='/cookie/deleteCookies'/>" >Delete Cookies</a>
                     </div>
                     <div class="headerWidget">
-                        <c:if test="${not empty username && empty error}">
+                        <c:if test="${not empty sessionScope.username && empty error}">
                             <a href="<c:url value='/cart'/>" >Show Cart</a>
                         </c:if>
-                        <c:if test="${empty username}">
+                        <c:if test="${empty sessionScope.username}">
                             <a href="<c:url value='/login'/>" >Show Cart</a>
                         </c:if>
                     </div>

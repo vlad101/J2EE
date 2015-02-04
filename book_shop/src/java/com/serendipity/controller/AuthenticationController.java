@@ -49,7 +49,28 @@ public class AuthenticationController extends HttpServlet {
             
 //          TODO: implement admin page
             forward = "/login/login";
-        } 
+        }
+        
+        else if(action.equalsIgnoreCase("/logout")) {
+            response.setContentType("text/html");
+            Cookie[] cookies = request.getCookies();
+            if(cookies != null){
+            for(Cookie cookie : cookies){
+                if(cookie.getName().equals("JSESSIONID")){
+                    System.out.println("JSESSIONID="+cookie.getValue());
+                }
+                cookie.setMaxAge(0);
+                response.addCookie(cookie);
+            }
+            }
+            //invalidate the session if exists
+            HttpSession session = request.getSession(false);
+            if(session != null){
+                session.invalidate();
+            }
+            //no encoding because we have invalidated the session
+            forward = "/login/login";
+        }
         
 //   create authentication function to validate user
         else if(action.equalsIgnoreCase("/login/userlogin")) {
@@ -64,7 +85,7 @@ public class AuthenticationController extends HttpServlet {
             //allow access only if session exists
             if(username.equals("admin")) {
                 session = request.getSession();
-                session.setAttribute("user", username);
+                session.setAttribute("username", username);
                 //setting session to expiry in 30 mins
                 session.setMaxInactiveInterval(30*60);
                 Cookie userName = new Cookie("username", username);

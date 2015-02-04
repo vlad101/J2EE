@@ -24,6 +24,7 @@
     <servlet-mapping>
         <servlet-name>AuthenticationController</servlet-name>
         <url-pattern>/login</url-pattern>
+        <url-pattern>/logout</url-pattern>
         <url-pattern>/login/userlogin</url-pattern>
     </servlet-mapping>   
     <!-- public controller  -->

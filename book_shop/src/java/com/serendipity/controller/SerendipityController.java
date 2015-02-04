@@ -69,10 +69,10 @@ public class SerendipityController extends HttpServlet {
         
 //          TODO: cart
             
-            if(session.getAttribute("user") == null) {
-                forward = "/login/cart";
+            if(session.getAttribute("username") == null) {
+                forward = "/login/login";
             } else {
-                forward = "/login/cart";
+                forward = "/cart/cart";
             }
         }
         
