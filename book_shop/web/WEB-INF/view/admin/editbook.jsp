@@ -21,67 +21,75 @@
 <div id="csrf" style="visibility: hidden;">${csrfPreventionSalt}</div>
 
 <div id="centerColumn">
-                
-    <br><br>  
+              
+    <c:if test="${empty sessionScope.username}">
+        <br><br><p>You're not logged in!</p><a href="<c:url value='/login'/>" >Login</a>
+    </c:if>
+    
     <!-- Add book -->
-    <button type="button" id="book_add_button" class="btn btn-primary btn-small" data-toggle="modal" data-target="#add-book-modal" >Add Book</button>
+    <c:if test="${not empty sessionScope.username && empty error}">
+        <br><br>
+        <button type="button" id="book_add_button" class="btn btn-primary btn-small" data-toggle="modal" data-target="#add-book-modal" >Add Book</button>
+    </c:if>
     <br/>
     
-    <!-- adding new book success -->
-    <div id="ajax_add_book_response_success" class="alert alert-success"></div>
-    
-    <!-- Update book success -->
-    <div id="ajax_update_book_response_success" class="alert alert-success"></div>
-    <div id="imgTest"></div>
-    
-    <!-- Delete book -->
-    <div id="ajax_delete_book_response_success" class="alert alert-success"></div>
-    <div id="ajax_delete_book_response_error" class="alert alert-danger"></div>
-    
-    <!--Redirect to the book error-->
-    <div id="ajax_redirect_book_response_error" class="alert alert-danger"></div>
-    <br />
-    
     <!-- jQuery datatables -->
-    <div id="preloader"><img src="<c:url value="/assets/images/loader/loader.gif" />" alt="Get book preloader" ></div>
-    <div id="preloader-text">Loading...</div>
-    <div id="book-list" >
-        <table id="book-list-table" class="display" >
-            <thead>
-                <tr>
-                    <th>Expand</th>
-                    <th>Title</th>
-                    <th>Author</th>
-                    <th>Quantity</th>
-                    <th>Category</th>
-                    <th>Price</th>
-                    <th>Description</th>
-                    <th>Last Update</th>
-                    <th>Image</th>
-                    <th>Update</th>
-                    <th>Delete</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-            <tfoot>
-                <tr>
-                    <th>Expand</th>
-                    <th>Title</th>
-                    <th>Author</th>
-                    <th>Quantity</th>
-                    <th>Category</th>
-                    <th>Price</th>
-                    <th>Description</th>
-                    <th>Last Update</th>
-                    <th>Image</th>
-                    <th>Update</th>
-                    <th>Delete</th>
-                </tr>
-            </tfoot>
-        </table>
-    </div>
-       
+    <c:if test="${not empty sessionScope.username && empty error}">
+        
+        <!-- adding new book success -->
+        <div id="ajax_add_book_response_success" class="alert alert-success"></div>
 
+        <!-- Update book success -->
+        <div id="ajax_update_book_response_success" class="alert alert-success"></div>
+        <div id="imgTest"></div>
+
+        <!-- Delete book -->
+        <div id="ajax_delete_book_response_success" class="alert alert-success"></div>
+        <div id="ajax_delete_book_response_error" class="alert alert-danger"></div>
+
+        <!--Redirect to the book error-->
+        <div id="ajax_redirect_book_response_error" class="alert alert-danger"></div>
+        <br />
+    
+        <div id="preloader"><img src="<c:url value="/assets/images/loader/loader.gif" />" alt="Get book preloader" ></div>
+        <div id="preloader-text">Loading...</div>
+        <div id="book-list" >
+            <table id="book-list-table" class="display" >
+                <thead>
+                    <tr>
+                        <th>Expand</th>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>Quantity</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Description</th>
+                        <th>Last Update</th>
+                        <th>Image</th>
+                        <th>Update</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+                <tfoot>
+                    <tr>
+                        <th>Expand</th>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>Quantity</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Description</th>
+                        <th>Last Update</th>
+                        <th>Image</th>
+                        <th>Update</th>
+                        <th>Delete</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </c:if>
+        
     <!-- Update Book Modal -->
     <div class="modal fade" id="update-book-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
       <div class="modal-dialog">

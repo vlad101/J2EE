@@ -21,49 +21,54 @@
 <div id="csrf" style="visibility: hidden;">${csrfPreventionSalt}</div>
 
 <div id="centerColumn">
-                
-    <br><br>
     
-    <!-- Update customer order -->
-    <div id="ajax_update_customer_order_response_success" class="alert alert-success"></div>
-    
-    <!-- Delete customer order -->
-    <div id="ajax_delete_customer_order_response_success" class="alert alert-success"></div>
-    <div id="ajax_delete_customer_order_response_error" class="alert alert-danger"></div>
-    <br />
+    <c:if test="${empty sessionScope.username}">
+        <br><br><p>You're not logged in!</p><a href="<c:url value='/login'/>" >Login</a>
+        <br><br>
+    </c:if>
     
     <!-- jQuery datatables -->
-    <div id="preloader"><img src="<c:url value="/assets/images/loader/loader.gif" />" alt="Get customer order preloader" ></div>
-    <div id="preloader-text">Loading...</div>
-    <div id="customer_order-list">
-        <table id="customer_order-list-table" class="display">
-            <thead>
-                <tr>
-                    <th>Expand</th>
-                    <th>Customer Name</th>
-                    <th>Confirmation Number</th>
-                    <th>Amount</th>
-                    <th>Date Created</th>
-                    <th>Update</th>
-                    <th>Delete</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-            <tfoot>
-                <tr>
-                    <th>Expand</th>
-                    <th>Customer Name</th>
-                    <th>Confirmation Number</th>
-                    <th>Amount</th>
-                    <th>Date Created</th>
-                    <th>Update</th>
-                    <th>Delete</th>
-                </tr>
-            </tfoot>
-        </table>
-    </div>
-       
+    <c:if test="${not empty sessionScope.username && empty error}">
+        
+        <!-- Update customer order -->
+        <div id="ajax_update_customer_order_response_success" class="alert alert-success"></div>
 
+        <!-- Delete customer order -->
+        <div id="ajax_delete_customer_order_response_success" class="alert alert-success"></div>
+        <div id="ajax_delete_customer_order_response_error" class="alert alert-danger"></div>
+        <br />
+    
+        <div id="preloader"><img src="<c:url value="/assets/images/loader/loader.gif" />" alt="Get customer order preloader" ></div>
+        <div id="preloader-text">Loading...</div>
+        <div id="customer_order-list">
+            <table id="customer_order-list-table" class="display">
+                <thead>
+                    <tr>
+                        <th>Expand</th>
+                        <th>Customer Name</th>
+                        <th>Confirmation Number</th>
+                        <th>Amount</th>
+                        <th>Date Created</th>
+                        <th>Update</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+                <tfoot>
+                    <tr>
+                        <th>Expand</th>
+                        <th>Customer Name</th>
+                        <th>Confirmation Number</th>
+                        <th>Amount</th>
+                        <th>Date Created</th>
+                        <th>Update</th>
+                        <th>Delete</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </c:if>
+       
     <!-- Update Customer Order Modal -->
     <div class="modal fade" id="update-customer_order-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
       <div class="modal-dialog">

@@ -55,24 +55,25 @@
                         </div>   
                         <div class="headerWidget">
                             <a href="<c:url value='#'/>" >Edit Profile</a>
-                        </div> 
-                    </c:if>
-                    <div class="headerWidget">
-                        <a href="<c:url value='/admin'/>" >Admin</a>
-                    </div>
-                    <div class="headerWidget">
-                        <!--The "Delete Cookies" link is for testing and should 
-                        be removed from a production environment -->
-                        <a href="<c:url value='/cookie/deleteCookies'/>" >Delete Cookies</a>
-                    </div>
-                    <div class="headerWidget">
-                        <c:if test="${not empty sessionScope.username && empty error}">
+                        </div>
+                        <div class="headerWidget">
+                            <a href="<c:url value='/admin'/>" >Admin</a>
+                        </div>
+                        <div class="headerWidget">        
                             <a href="<c:url value='/cart'/>" >Show Cart</a>
-                        </c:if>
-                        <c:if test="${empty sessionScope.username}">
+                        </div>
+                    </c:if>
+<!--                    <div class="headerWidget">
+                        The "Delete Cookies" link is for testing and should 
+                        be removed from a production environment 
+                        <a href="<c:url value='/cookie/deleteCookies'/>" >Delete Cookies</a>
+                    </div>-->
+                    <c:if test="${empty sessionScope.username}">
+                        <div class="headerWidget">  
                             <a href="<c:url value='/login'/>" >Show Cart</a>
-                        </c:if>
-                    </div>
+                        </div>
+                    </c:if>
+                    
                     <a href="<c:url value="/index" />">
                         <img src="<c:url value="/assets/images/logo/logo.jpg" />" id="logo" alt="Serendipity logo">
                     </a>

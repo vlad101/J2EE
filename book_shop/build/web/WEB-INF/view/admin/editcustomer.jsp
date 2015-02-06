@@ -22,54 +22,62 @@
 
 <div id="centerColumn">
                 
-    <br><br>
-    
     <!-- Add customer -->
-    <button type="button" id="customer_add_button" class="btn btn-primary btn-small" data-toggle="modal" data-target="#add-customer-modal" >Add Customer</button>
-    <br/>
     
-    <!-- adding new customer -->
-    <div id="ajax_add_customer_response_success" class="alert alert-success"></div>
+    <c:if test="${empty sessionScope.username}">
+        <br><br><p>You're not logged in!</p><a href="<c:url value='/login'/>" >Login</a>
+    </c:if>
     
-    <!-- Update customer -->
-    <div id="ajax_update_customer_response_success" class="alert alert-success"></div>
-    
-    <!-- Delete customer -->
-    <div id="ajax_delete_customer_response_success" class="alert alert-success"></div>
-    <div id="ajax_delete_customer_response_error" class="alert alert-danger"></div>
-    
-    <!-- Redirect customer -->
-    <div id="ajax_redirect_customer_response_error" class="alert alert-danger"></div>
-    
-    <br>
-    
+    <c:if test="${not empty sessionScope.username && empty error}">
+        <br><br>
+        <button type="button" id="customer_add_button" class="btn btn-primary btn-small" data-toggle="modal" data-target="#add-customer-modal" >Add Customer</button>
+        <br/>
+    </c:if>
+        
     <!-- jQuery datatables -->
-    <div id="preloader"><img src="/book_shop/assets/images/loader/loader.gif" alt="Get customer preloader" ></div>
-    <div id="preloader-text">Loading...</div>
-    <div id="customer-list">
-        <table id="customer-list-table" class="display">
-            <thead>
-                <tr>
-                    <th>Expand</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Update</th>
-                    <th>Delete</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-            <tfoot>
-                <tr>
-                    <th>Expand</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Update</th>
-                    <th>Delete</th>
-                </tr>
-            </tfoot>
-        </table>
-    </div>
-       
+    <c:if test="${not empty sessionScope.username && empty error}">
+        
+        <!-- adding new customer -->
+        <div id="ajax_add_customer_response_success" class="alert alert-success"></div>
+
+        <!-- Update customer -->
+        <div id="ajax_update_customer_response_success" class="alert alert-success"></div>
+
+        <!-- Delete customer -->
+        <div id="ajax_delete_customer_response_success" class="alert alert-success"></div>
+        <div id="ajax_delete_customer_response_error" class="alert alert-danger"></div>
+
+        <!-- Redirect customer -->
+        <div id="ajax_redirect_customer_response_error" class="alert alert-danger"></div>
+
+        <br>
+        
+        <div id="preloader"><img src="/book_shop/assets/images/loader/loader.gif" alt="Get customer preloader" ></div>
+        <div id="preloader-text">Loading...</div>
+        <div id="customer-list">
+            <table id="customer-list-table" class="display">
+                <thead>
+                    <tr>
+                        <th>Expand</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Update</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+                <tfoot>
+                    <tr>
+                        <th>Expand</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Update</th>
+                        <th>Delete</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </c:if>   
 
     <!-- Update Customer Modal -->
     <div class="modal fade" id="update-customer-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">

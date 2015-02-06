@@ -23,56 +23,65 @@
 <div id="centerColumn">
                 
     <br><br>
+    
+    <c:if test="${empty sessionScope.username}">
+        <br><br><p>You're not logged in!</p><a href="<c:url value='/login'/>" >Login</a>
+    </c:if>
+    
     <!-- Add category -->
-    <div id="add-category">
-        <form id="add_category_form" name="post_category_form" action="#">
-            Add Category  <input type="text" name="category_title" id="category_title" maxlength="50" value="">&nbsp;
-                          <input type="button" name="submit_add_category" id="submit_add_category" value="Submit">
-        </form>
-    </div>
-    <br />
-    
-    <!-- adding new category -->
-    <div id="ajax_add_category_response_success" class="alert alert-success"></div>
-    <div id="ajax_add_category_response_error" class="alert alert-danger"></div>
-    
-    <!-- Update category -->
-    <div id="ajax_update_category_response_success" class="alert alert-success"></div>
-    <div id="ajax_update_category_response_error" class="alert alert-danger"></div>
-    
-    <!-- Delete category -->
-    <div id="ajax_delete_category_response_success" class="alert alert-success"></div>
-    <div id="ajax_delete_category_response_error" class="alert alert-danger"></div>
+    <c:if test="${not empty sessionScope.username && empty error}">
+        <div id="add-category">
+            <form id="add_category_form" name="post_category_form" action="#">
+                Add Category  <input type="text" name="category_title" id="category_title" maxlength="50" value="">&nbsp;
+                              <input type="button" name="submit_add_category" id="submit_add_category" value="Submit">
+            </form>
+        </div>
+    </c:if>
     <br />
     
     <!-- jQuery datatables -->
-    <div id="preloader"><img src="/book_shop/assets/images/loader/loader.gif" alt="Get customer preloader" ></div>
-    <div id="preloader-text">Loading...</div>
-    <div id="category-list">
-        <table id="category-list-table" class="display">
-            <thead>
-                <tr>
-                    <th>Expand</th>
-                    <th>Category</th>
-                    <th>Book Qty</th>
-                    <th>Update</th>
-                    <th>Delete</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-            <tfoot>
-                <tr>
-                    <th>Expand</th>
-                    <th>Category</th>
-                    <th>Book Qty</th>
-                    <th>Update</th>
-                    <th>Delete</th>
-                </tr>
-            </tfoot>
-        </table>
-    </div>
-       
+    <c:if test="${not empty sessionScope.username && empty error}">
+        
+        <!-- adding new category -->
+        <div id="ajax_add_category_response_success" class="alert alert-success"></div>
+        <div id="ajax_add_category_response_error" class="alert alert-danger"></div>
 
+        <!-- Update category -->
+        <div id="ajax_update_category_response_success" class="alert alert-success"></div>
+        <div id="ajax_update_category_response_error" class="alert alert-danger"></div>
+
+        <!-- Delete category -->
+        <div id="ajax_delete_category_response_success" class="alert alert-success"></div>
+        <div id="ajax_delete_category_response_error" class="alert alert-danger"></div>
+        <br />
+        
+        <div id="preloader"><img src="/book_shop/assets/images/loader/loader.gif" alt="Get customer preloader" ></div>
+        <div id="preloader-text">Loading...</div>
+        <div id="category-list">
+            <table id="category-list-table" class="display">
+                <thead>
+                    <tr>
+                        <th>Expand</th>
+                        <th>Category</th>
+                        <th>Book Qty</th>
+                        <th>Update</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+                <tfoot>
+                    <tr>
+                        <th>Expand</th>
+                        <th>Category</th>
+                        <th>Book Qty</th>
+                        <th>Update</th>
+                        <th>Delete</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </c:if>
+        
     <!-- Update Category Modal -->
     <div class="modal fade" id="update-category-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
       <div class="modal-dialog">
