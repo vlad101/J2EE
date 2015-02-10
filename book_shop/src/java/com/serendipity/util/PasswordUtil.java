@@ -1,5 +1,7 @@
 package com.serendipity.util;
 
+import com.serendipity.dao.DAOUser;
+import com.serendipity.model.User;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
@@ -40,18 +42,26 @@ public class PasswordUtil {
         return securityArray;        
     }
     
-    public void authenticate()//(String password, String salt)
-                        throws NoSuchAlgorithmException, UnsupportedEncodingException, IOException{
- 
-           //byte[] bDigest = base64ToByte(password);
-           //byte[] bSalt = base64ToByte(salt);
- 
-           // Compute the new DIGEST
-           byte[] proposedDigest = getHash(ITERATION_NUMBER, "admin", base64ToByte("yEeo46bJjFE="));
-           String prop = Arrays.toString(proposedDigest);
-           String act = Arrays.toString(base64ToByte("xDSulVZoKCmPTMwcJdPXNTD0snY="));
-           System.out.println("prop " + prop);
-           System.out.println("act " + act);
+    public boolean authenticate(String username, String password)
+                        throws NoSuchAlgorithmException, UnsupportedEncodingException, IOException{ 
+        // Compute the new DIGEST
+        if(password.trim().length() <= 0 || password == null ||
+                username.trim().length() <= 0 || username == null) {
+            return false;
+        }
+        
+        DAOUser daoUser = new DAOUser();
+        User user = daoUser.getUserByUsername(username);
+        if(user == null || user.getSalt().trim().length() <= 0 || user.getSalt().trim() == null ||
+            user.getPassword().trim().length() <= 0 || user.getPassword().trim() == null) {
+            return false;
+        }
+        
+        byte[] proposedDigest = getHash(ITERATION_NUMBER, password, base64ToByte(user.getSalt()));
+        if(user.getPassword().equals(byteToBase64(proposedDigest))) {
+            return true;
+        }
+        return false;
    }
     
     

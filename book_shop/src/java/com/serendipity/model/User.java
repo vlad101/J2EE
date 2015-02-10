@@ -12,11 +12,12 @@ public class User {
     private String salt;
     private int isAdmin;
     
-    public User(int userId, String username, String password, int isAdmin) {
+    public User(int userId, String username, String password, int isAdmin, String salt) {
         this.userId = userId;
         this.username = username;
         this.password = password;
         this.isAdmin = isAdmin;
+        this.salt = salt;
     }
     
     public void setUserId(int userId) {

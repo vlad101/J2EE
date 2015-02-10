@@ -3,9 +3,12 @@ package com.serendipity.controller;
 import com.serendipity.dao.DAOCategory;
 import com.serendipity.model.Category;
 import com.serendipity.util.CookieUtil;
+import com.serendipity.util.PasswordUtil;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.util.List;
+import java.util.jar.Pack200;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -31,6 +34,7 @@ public class AuthenticationController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static final String START_URL_ADMIN = "/WEB-INF/view";
     private static final String END_URL = ".jsp";
+    private PasswordUtil passwordUtil;
     
     public AuthenticationController() {
     
@@ -40,10 +44,11 @@ public class AuthenticationController extends HttpServlet {
     
     @SuppressWarnings("UseSpecificCatch")
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ParseException {
+            throws ServletException, IOException, ParseException, NoSuchAlgorithmException {
 
-        String forward = "";
+        String forward;
         String action = request.getServletPath();
+        boolean validUser = false;
         
         if(action.equalsIgnoreCase("/login")) {
             
@@ -75,47 +80,58 @@ public class AuthenticationController extends HttpServlet {
 //   create authentication function to validate user
         else if(action.equalsIgnoreCase("/login/userlogin")) {
             
-            // get request parameters for userID and password
-            String username = request.getParameter("username");
+            forward = "/login/login";
                        
             //setting session to expiry in 30 mins
             HttpSession session = request.getSession();
-            session.setMaxInactiveInterval(30*60);
+            session.setMaxInactiveInterval(30*60); 
             
-            //allow access only if session exists
-            if(username.equals("admin")) {
-                session = request.getSession();
-                session.setAttribute("username", username);
-                //setting session to expiry in 30 mins
-                session.setMaxInactiveInterval(30*60);
-                Cookie userName = new Cookie("username", username);
-                response.addCookie(userName);
-                request.setAttribute("categoryList", getCategoryList());
+            if(request.getParameterMap().containsKey("password") && 
+                    request.getParameterMap().containsKey("username")) {
                 
+                String username = request.getParameter("username");
+                String password = request.getParameter("password");
                 
-//                String user = (String) session.getAttribute("user");
-                CookieUtil cookieUtil = new CookieUtil();
-                Cookie[] cookies = request.getCookies();
-                if(cookies !=null){
-                    
-                    @SuppressWarnings("static-access")
-                    String userNameCookie = cookieUtil.getCookieValue(cookies, "user");
-                    request.setAttribute("username", userNameCookie);
-                    
-                    @SuppressWarnings("static-access")
-                    String sessionIdCookie = cookieUtil.getCookieValue(cookies, "JSESSIONID");
-                    request.setAttribute("sessionID", sessionIdCookie);
-                    
-                } else {
-                    request.setAttribute("sessionID", session.getId());
+                if(password != null && password.trim().length() > 0 &&
+                    username != null && username.trim().length() > 0) {
+                    passwordUtil = new PasswordUtil();
+                    validUser = passwordUtil.authenticate(username, password);
                 }
                 
-                forward = "/index";
-                
+                if(validUser) {
+                    // get admin and user info
+                    
+                    
+                    session = request.getSession();
+                    session.setAttribute("username", username);
+                    session.setMaxInactiveInterval(30*60);
+                    Cookie userName = new Cookie("username", username);
+                    response.addCookie(userName);
+                    request.setAttribute("categoryList", getCategoryList());
+
+
+    //                String user = (String) session.getAttribute("user");
+                    CookieUtil cookieUtil = new CookieUtil();
+                    Cookie[] cookies = request.getCookies();
+                    if(cookies != null){
+
+                        @SuppressWarnings("static-access")
+                        String userNameCookie = cookieUtil.getCookieValue(cookies, "user");
+                        request.setAttribute("username", userNameCookie);
+
+                        @SuppressWarnings("static-access")
+                        String sessionIdCookie = cookieUtil.getCookieValue(cookies, "JSESSIONID");
+                        request.setAttribute("sessionID", sessionIdCookie);
+
+                    } else {
+                        request.setAttribute("sessionID", session.getId());
+                    }
+
+                    forward = "/index";
+                }
             } else {
                 String error = "Either user name or password is wrong.";
                 request.setAttribute("error", error);
-                forward = "/login/login";
             }
         }
         
@@ -167,6 +183,8 @@ public class AuthenticationController extends HttpServlet {
             
         } catch (ParseException ex) {
             Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(AuthenticationController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -177,6 +195,8 @@ public class AuthenticationController extends HttpServlet {
             processRequest(request, response);
         } catch (ParseException ex) {
             Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(AuthenticationController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

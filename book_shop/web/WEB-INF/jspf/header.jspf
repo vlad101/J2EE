@@ -63,7 +63,7 @@
                             <a href="<c:url value='/cart'/>" >Show Cart</a>
                         </div>
                     </c:if>
-<!--                    <div class="headerWidget">
+<!--                <div class="headerWidget">
                         The "Delete Cookies" link is for testing and should 
                         be removed from a production environment 
                         <a href="<c:url value='/cookie/deleteCookies'/>" >Delete Cookies</a>

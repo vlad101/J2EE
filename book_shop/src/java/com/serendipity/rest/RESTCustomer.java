@@ -365,7 +365,7 @@ public class RESTCustomer {
             }
             
 //            update user credentials
-            user = new User(updateCustomerId, userUsername, userPassword2, userAdmin);
+            user = new User(updateCustomerId, userUsername, userPassword2, userAdmin, null);
             int http_code = daoUser.updateUserInfo(user);
             if(http_code == 200) {
                 

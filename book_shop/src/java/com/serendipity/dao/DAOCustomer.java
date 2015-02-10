@@ -111,7 +111,7 @@ public class DAOCustomer {
         if(customerId != -1) {
             // create and add user to database
             DAOUser daoUser = new DAOUser();
-            User user = new User(customerId, username, password, admin);
+            User user = new User(customerId, username, password, admin, null);
             int http = daoUser.addUser(user);
             if(http != 200) {
                 return 500;

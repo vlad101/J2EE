@@ -100,8 +100,6 @@ public class DAOUser {
         // get secured password and salt
         PasswordUtil passwordUtil = new PasswordUtil();
         String[] passwordSecurity = passwordUtil.securePasswordOnCreateOrUpdate(user.getPassword());
-        passwordUtil = new PasswordUtil();
-        passwordUtil.authenticate();
         
         String sql = "UPDATE user SET user_id=?, username=?, password=?, salt=?, admin=? WHERE user_id=?;";
         
@@ -223,7 +221,7 @@ public class DAOUser {
         }
         
         return userId;
-    }   
+    }  
 
     /**
      * This method will allow you to get user data by id from the database.
@@ -250,7 +248,53 @@ public class DAOUser {
                 String password = rs.getString("password");
                 String salt = rs.getString("salt");
                 int isAdmin = rs.getInt("admin");
-                user = new User(userId, username, password, isAdmin);
+                user = new User(userId, username, password, isAdmin, salt);
+            }
+            
+            rs.close();
+            rs = null;
+            
+            preparedStatement.close();
+            preparedStatement = null;
+            
+            conn.close();
+            conn = null;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOUser.class.getName()).log(Level.SEVERE, "Could not select user by user ID.", ex);
+        } finally {
+            db.closeConnection();
+        }
+        
+        return user;
+    }
+    
+    /**
+     * This method will allow you to get user data by username from the database.
+     * 
+     * @param userId
+     * @return 
+     */
+    public User getUserByUsername(String userName){
+        
+        User user = null;
+        
+        String sql = "SELECT * FROM user WHERE username=?;";
+        
+        try {
+        
+            conn = db.getConnection();
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, userName);
+            rs = preparedStatement.executeQuery();
+            
+//            creates a user object
+            while(rs.next()) {
+                int userId = rs.getInt("user_id");
+                String password = rs.getString("password");
+                String salt = rs.getString("salt");
+                int isAdmin = rs.getInt("admin");
+                user = new User(userId, userName, password, isAdmin, salt);
             }
             
             rs.close();
