@@ -54,7 +54,7 @@
                             <a href="<c:url value='/logout'/>" >Logout</a>
                         </div>   
                         <div class="headerWidget">
-                            <a href="<c:url value='#'/>" >Edit Profile</a>
+                            <a href="<c:url value='/customer/customer?id=${sessionScope.customer.getCustomerId()}'/>" >Edit Profile</a>
                         </div>
                         <div class="headerWidget">
                             <a href="<c:url value='/admin'/>" >Admin</a>

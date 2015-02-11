@@ -7,10 +7,10 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-import java.util.Arrays;
 import org.apache.tomcat.util.codec.binary.Base64;
 
 /**
+ * 
  * A utility class for hashing and salting passwords
  * 
  * The stored password looks like this : Hash(hash(hash(hash(……….hash(password||salt)))))))))))))))
@@ -45,8 +45,7 @@ public class PasswordUtil {
     public boolean authenticate(String username, String password)
                         throws NoSuchAlgorithmException, UnsupportedEncodingException, IOException{ 
         // Compute the new DIGEST
-        if(password.trim().length() <= 0 || password == null ||
-                username.trim().length() <= 0 || username == null) {
+        if(password.trim().length() <= 0 || username.trim().length() <= 0) {
             return false;
         }
         
@@ -58,10 +57,7 @@ public class PasswordUtil {
         }
         
         byte[] proposedDigest = getHash(ITERATION_NUMBER, password, base64ToByte(user.getSalt()));
-        if(user.getPassword().equals(byteToBase64(proposedDigest))) {
-            return true;
-        }
-        return false;
+        return user.getPassword().equals(byteToBase64(proposedDigest));
    }
     
     

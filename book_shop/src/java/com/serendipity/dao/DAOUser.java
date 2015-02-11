@@ -272,7 +272,7 @@ public class DAOUser {
     /**
      * This method will allow you to get user data by username from the database.
      * 
-     * @param userId
+     * @param userName
      * @return 
      */
     public User getUserByUsername(String userName){

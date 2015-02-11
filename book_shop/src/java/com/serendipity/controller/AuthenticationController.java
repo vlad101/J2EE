@@ -1,7 +1,10 @@
 package com.serendipity.controller;
 
 import com.serendipity.dao.DAOCategory;
+import com.serendipity.dao.DAOCustomer;
+import com.serendipity.dao.DAOUser;
 import com.serendipity.model.Category;
+import com.serendipity.model.Customer;
 import com.serendipity.util.CookieUtil;
 import com.serendipity.util.PasswordUtil;
 import java.io.IOException;
@@ -126,8 +129,18 @@ public class AuthenticationController extends HttpServlet {
                     } else {
                         request.setAttribute("sessionID", session.getId());
                     }
-
-                    forward = "/index";
+                    
+//                    Get user info
+                    DAOUser daoUser = new DAOUser();
+                    int userId = daoUser.getUserByUsername(username).getUserId();
+                    
+//                  Get customer info
+                    DAOCustomer daoCustomer = new DAOCustomer();
+                    Customer customer = daoCustomer.getCustomerById(userId);
+                    if(customer != null) {
+                        session.setAttribute("customer", customer);
+                        forward = "/index";
+                    }
                 }
             } else {
                 String error = "Either user name or password is wrong.";
