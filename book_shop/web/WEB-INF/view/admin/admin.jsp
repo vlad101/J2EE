@@ -18,7 +18,7 @@
     </c:if>
         
     <c:if test="${not empty sessionScope.username && empty error}">
-        <p>You're logged in as <b>username</b> ${username} and <b>password</b> ${password}!</p>
+        <!--<p>You're logged in as <b>username</b> ${username} and <b>password</b> ${password}!</p>-->
         <div class="button-list">
             <button type="button" class="btn btn-primary btn-small" id="edit-category-button" >Edit category</button><br><br>
             <button type="button" class="btn btn-primary btn-small" id="edit-book-button" >Edit Book</button><br><br>
@@ -27,7 +27,7 @@
         </div>
     </c:if>
     
-    <br>
+    <!--<br>-->
     <div id="nav-buttons">
         <ul>
             <li>

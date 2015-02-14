@@ -4,28 +4,29 @@
     Author     : vladimir
 --%>
 
-<link type="text/css" rel="stylesheet" href="<c:url value="/assets/css/admin.css" />" />
+<link type="text/css" rel="stylesheet" href="<c:url value="/assets/css/login.css" />" />
 
 <!-- include jquery core files -->
-<script type="text/javascript" src="<c:url value="/assets/js/admin.js" />" ></script>
+<script type="text/javascript" src="<c:url value="/assets/js/login.js" />" ></script>
 
 <p id="pageTitle">User Login</p>
 
 <br><br>
 
 <div id="adminCenterColumn">
-    <p>Please enter your username and password to continue.</p>
+    <p>Please enter your username and password to continue.</p><br>
+    <c:if test="${not empty error}">
+        <span id="login-error-message">${error}</span><br><br>
+    </c:if>
         <form action="/book_shop/login/userlogin" method="post">
 
-            Username: <input type="text" name="username"><br>
-            Password: <input type="password" name="password"><br>
-            <input type="hidden" name="csrfPreventionSalt" value="<c:out value='${csrfPreventionSalt}'/>"/>
+            Username: <input type="text" name="username"><br><br>
+            Password: <input type="password" name="password"><br><br>
+            <input type="hidden" name="csrfPreventionSalt" value="<c:out value='${csrfPreventionSalt}'/>"/><br>
             <input type="submit" value="Login">
         </form>
-    <br><br>
-    <c:if test="${not empty error}">
-        <p>${error}</p><br>
-    </c:if>
+    <br>
+
     <p>Not Registered? <a href="<c:url value='/customer/register'/>" >Register</a></p>
     
 </div>

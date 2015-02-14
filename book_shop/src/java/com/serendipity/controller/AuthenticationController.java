@@ -5,6 +5,7 @@ import com.serendipity.dao.DAOCustomer;
 import com.serendipity.dao.DAOUser;
 import com.serendipity.model.Category;
 import com.serendipity.model.Customer;
+import com.serendipity.model.User;
 import com.serendipity.util.CookieUtil;
 import com.serendipity.util.PasswordUtil;
 import java.io.IOException;
@@ -50,12 +51,10 @@ public class AuthenticationController extends HttpServlet {
             throws ServletException, IOException, ParseException, NoSuchAlgorithmException {
 
         String forward;
+        HttpSession session = request.getSession();
         String action = request.getServletPath();
-        boolean validUser = false;
         
         if(action.equalsIgnoreCase("/login")) {
-            
-//          TODO: implement admin page
             forward = "/login/login";
         }
         
@@ -63,20 +62,21 @@ public class AuthenticationController extends HttpServlet {
             response.setContentType("text/html");
             Cookie[] cookies = request.getCookies();
             if(cookies != null){
-            for(Cookie cookie : cookies){
-                if(cookie.getName().equals("JSESSIONID")){
-                    System.out.println("JSESSIONID="+cookie.getValue());
+                for(Cookie cookie : cookies){
+                    if(cookie.getName().equals("JSESSIONID")){
+                        System.out.println("JSESSIONID="+cookie.getValue());
+                    }
+                    cookie.setMaxAge(0);
+                    response.addCookie(cookie);
                 }
-                cookie.setMaxAge(0);
-                response.addCookie(cookie);
             }
-            }
+            
             //invalidate the session if exists
-            HttpSession session = request.getSession(false);
+            session = request.getSession(false);
             if(session != null){
                 session.invalidate();
             }
-            //no encoding because we have invalidated the session
+            
             forward = "/login/login";
         }
         
@@ -84,9 +84,14 @@ public class AuthenticationController extends HttpServlet {
         else if(action.equalsIgnoreCase("/login/userlogin")) {
             
             forward = "/login/login";
-                       
+            request.setAttribute("categoryList", getCategoryList());
+            String error = "Either user name or password is wrong.";
+            
+            if(session.getAttribute("username") != null) {
+                forward = "/index";
+            }
+            
             //setting session to expiry in 30 mins
-            HttpSession session = request.getSession();
             session.setMaxInactiveInterval(30*60); 
             
             if(request.getParameterMap().containsKey("password") && 
@@ -94,57 +99,36 @@ public class AuthenticationController extends HttpServlet {
                 
                 String username = request.getParameter("username");
                 String password = request.getParameter("password");
-                
-                if(password != null && password.trim().length() > 0 &&
-                    username != null && username.trim().length() > 0) {
-                    passwordUtil = new PasswordUtil();
-                    validUser = passwordUtil.authenticate(username, password);
-                }
+                boolean validUser = isValidUser(username, password);
                 
                 if(validUser) {
-                    // get admin and user info
-                    
-                    
+//                    get and set session attributes
                     session = request.getSession();
                     session.setAttribute("username", username);
                     session.setMaxInactiveInterval(30*60);
+                    
+//                  set cookies
                     Cookie userName = new Cookie("username", username);
                     response.addCookie(userName);
-                    request.setAttribute("categoryList", getCategoryList());
-
-
-    //                String user = (String) session.getAttribute("user");
-                    CookieUtil cookieUtil = new CookieUtil();
                     Cookie[] cookies = request.getCookies();
                     if(cookies != null){
-
-                        @SuppressWarnings("static-access")
-                        String userNameCookie = cookieUtil.getCookieValue(cookies, "user");
-                        request.setAttribute("username", userNameCookie);
-
-                        @SuppressWarnings("static-access")
-                        String sessionIdCookie = cookieUtil.getCookieValue(cookies, "JSESSIONID");
-                        request.setAttribute("sessionID", sessionIdCookie);
-
+                        request.setAttribute("username", CookieUtil.getCookieValue(cookies, "user"));
+                        request.setAttribute("sessionID", CookieUtil.getCookieValue(cookies, "JSESSIONID"));
                     } else {
                         request.setAttribute("sessionID", session.getId());
+                        request.setAttribute("error", error);
                     }
                     
 //                    Get user info
-                    DAOUser daoUser = new DAOUser();
-                    int userId = daoUser.getUserByUsername(username).getUserId();
+                    Customer customer = getCustomer(username);
                     
-//                  Get customer info
-                    DAOCustomer daoCustomer = new DAOCustomer();
-                    Customer customer = daoCustomer.getCustomerById(userId);
                     if(customer != null) {
                         session.setAttribute("customer", customer);
                         forward = "/index";
                     }
+                } else {
+                    request.setAttribute("error", error);
                 }
-            } else {
-                String error = "Either user name or password is wrong.";
-                request.setAttribute("error", error);
             }
         }
         
@@ -228,5 +212,33 @@ public class AuthenticationController extends HttpServlet {
             return categoryList.subList(0, 4);
         }
         return categoryList;
+    }
+    
+    private Customer getCustomer(String username) {
+        int userId = -1;
+        Customer customer = null;
+        DAOCustomer daoCustomer = new DAOCustomer();
+        DAOUser daoUser = new DAOUser();
+        
+        User user = daoUser.getUserByUsername(username);
+        if(user != null) {
+            userId = user.getUserId();
+        }
+        
+        if(userId != -1) {
+            customer = daoCustomer.getCustomerById(userId);
+        }
+        return customer;
+    }
+    
+    private boolean isValidUser(String username, String password) 
+                        throws NoSuchAlgorithmException, IOException {
+        boolean validUser = false;
+        if(password != null && password.trim().length() > 0 &&
+                    username != null && username.trim().length() > 0) {
+            passwordUtil = new PasswordUtil();
+            validUser = passwordUtil.authenticate(username, password);
+        }
+        return validUser;
     }
 }
