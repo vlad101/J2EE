@@ -45,7 +45,7 @@
             <div id="header">
                 <div id="widgetBar">
                     <c:if test="${empty sessionScope.username}">
-                        <span class="header-username" ></span><br>
+                        <span class="header-username" >New Customer? <a href="<c:url value='/customer/register'/>" >Register</a></span><br>
                         <div class="headerWidget">
                             <a href="<c:url value='/login'/>" >Login</a>
                         </div>

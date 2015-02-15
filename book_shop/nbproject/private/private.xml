@@ -8,11 +8,12 @@
             <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/WEB-INF/view/admin/admin.jsp</file>
             <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/src/java/com/serendipity/controller/SerendipityController.java</file>
             <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/assets/js/editcustomer.js</file>
+            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/src/java/com/serendipity/model/Cart.java</file>
             <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/WEB-INF/view/index.jsp</file>
             <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/src/java/com/serendipity/util/PasswordUtil.java</file>
             <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/WEB-INF/web.xml</file>
+            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/src/java/com/serendipity/model/Book.java</file>
             <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/src/java/com/serendipity/controller/AuthenticationController.java</file>
-            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/assets/css/login.css</file>
             <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/assets/css/header.css</file>
             <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/WEB-INF/view/login/login.jsp</file>
             <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/WEB-INF/jspf/header.jspf</file>
