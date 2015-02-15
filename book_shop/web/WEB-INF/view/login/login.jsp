@@ -14,10 +14,17 @@
 <br><br>
 
 <div id="adminCenterColumn">
+
+    <c:if test="${not empty logoutMessage}">
+        <span id="logout-message">${logoutMessage}</span><br><br>
+    </c:if>
+        
     <p>Please enter your username and password to continue.</p><br>
+    
     <c:if test="${not empty error}">
         <span id="login-error-message">${error}</span><br><br>
     </c:if>
+        
         <form action="/book_shop/login/userlogin" method="post">
 
             Username: <input type="text" name="username"><br><br>

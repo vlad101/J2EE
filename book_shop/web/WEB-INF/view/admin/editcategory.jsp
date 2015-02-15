@@ -25,22 +25,25 @@
     <br><br>
     
     <c:if test="${empty sessionScope.username}">
-        <br><br><p>You're not logged in!</p><a href="<c:url value='/login'/>" >Login</a>
+        <br><br>
+        <p>You're not logged in!</p><a href="<c:url value='/login'/>" >Login</a>
+    </c:if>
+        
+    <c:if test="${not empty sessionScope.username && sessionScope.isAdmin == false }">
+        <br><br>
+        <p>You don't have sufficient permission to access the page!</p>
     </c:if>
     
-    <!-- Add category -->
-    <c:if test="${not empty sessionScope.username && empty error}">
+    <c:if test="${not empty sessionScope.username  && sessionScope.isAdmin == true}">
+        <!-- Add category -->
         <div id="add-category">
             <form id="add_category_form" name="post_category_form" action="#">
                 Add Category  <input type="text" name="category_title" id="category_title" maxlength="50" value="">&nbsp;
                               <input type="button" name="submit_add_category" id="submit_add_category" value="Submit">
             </form>
         </div>
-    </c:if>
-    <br />
-    
-    <!-- jQuery datatables -->
-    <c:if test="${not empty sessionScope.username && empty error}">
+        
+        <br>
         
         <!-- adding new category -->
         <div id="ajax_add_category_response_success" class="alert alert-success"></div>
@@ -57,6 +60,8 @@
         
         <div id="preloader"><img src="/book_shop/assets/images/loader/loader.gif" alt="Get customer preloader" ></div>
         <div id="preloader-text">Loading...</div>
+        
+        <!-- jQuery datatables -->
         <div id="category-list">
             <table id="category-list-table" class="display">
                 <thead>

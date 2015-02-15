@@ -58,9 +58,11 @@
                         <div class="headerWidget">
                             <a href="<c:url value='/customer/customer?id=${sessionScope.customer.getCustomerId()}'/>" >Edit Profile</a>
                         </div>
-                        <div class="headerWidget">
-                            <a href="<c:url value='/admin'/>" >Admin</a>
-                        </div>
+                        <c:if test="${sessionScope.isAdmin == true }">
+                            <div class="headerWidget">
+                                <a href="<c:url value='/admin'/>" >Admin</a>
+                            </div>
+                        </c:if>
                         <div class="headerWidget">        
                             <a href="<c:url value='/cart'/>" >Show Cart</a>
                         </div>

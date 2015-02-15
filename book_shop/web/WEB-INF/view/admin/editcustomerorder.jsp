@@ -23,12 +23,17 @@
 <div id="centerColumn">
     
     <c:if test="${empty sessionScope.username}">
-        <br><br><p>You're not logged in!</p><a href="<c:url value='/login'/>" >Login</a>
+        <br><br>
+        <p>You're not logged in!</p><a href="<c:url value='/login'/>" >Login</a>
         <br><br>
     </c:if>
     
-    <!-- jQuery datatables -->
-    <c:if test="${not empty sessionScope.username && empty error}">
+    <c:if test="${not empty sessionScope.username && sessionScope.isAdmin == false }">
+        <br><br>
+        <p>You don't have sufficient permission to access the page!</p>
+    </c:if>
+    
+    <c:if test="${not empty sessionScope.username  && sessionScope.isAdmin == true}">
         
         <!-- Update customer order -->
         <div id="ajax_update_customer_order_response_success" class="alert alert-success"></div>
@@ -40,6 +45,8 @@
     
         <div id="preloader"><img src="<c:url value="/assets/images/loader/loader.gif" />" alt="Get customer order preloader" ></div>
         <div id="preloader-text">Loading...</div>
+        
+        <!-- jQuery datatables -->
         <div id="customer_order-list">
             <table id="customer_order-list-table" class="display">
                 <thead>

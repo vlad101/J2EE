@@ -17,8 +17,13 @@
         <br><br><p>You're not logged in!</p><a href="<c:url value='/login'/>" >Login</a>
     </c:if>
         
-    <c:if test="${not empty sessionScope.username && empty error}">
-        <!--<p>You're logged in as <b>username</b> ${username} and <b>password</b> ${password}!</p>-->
+    <c:if test="${not empty sessionScope.username && sessionScope.isAdmin == false }">
+        <br><br>
+        <p>You don't have sufficient permission to access the page!</p>
+    </c:if>
+    
+    <br>
+    <c:if test="${not empty sessionScope.username && sessionScope.isAdmin == true }">
         <div class="button-list">
             <button type="button" class="btn btn-primary btn-small" id="edit-category-button" >Edit category</button><br><br>
             <button type="button" class="btn btn-primary btn-small" id="edit-book-button" >Edit Book</button><br><br>
@@ -27,7 +32,6 @@
         </div>
     </c:if>
     
-    <!--<br>-->
     <div id="nav-buttons">
         <ul>
             <li>

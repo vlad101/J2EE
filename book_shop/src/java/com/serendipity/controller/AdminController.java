@@ -1,5 +1,9 @@
 package com.serendipity.controller;
 
+import com.serendipity.dao.DAOCustomer;
+import com.serendipity.dao.DAOUser;
+import com.serendipity.model.Customer;
+import com.serendipity.model.User;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.logging.Level;
@@ -10,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -27,7 +32,9 @@ public class AdminController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
     private static final String START_URL_ADMIN = "/WEB-INF/view/admin";
+    private static final String START_URL = "/WEB-INF/view";
     private static final String END_URL = ".jsp";
+    private boolean isLoggedIn = true;
     //private UserDao dao;
     
     public AdminController() {
@@ -41,60 +48,236 @@ public class AdminController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ParseException {
 
-        String forward = "";
+        String forward;
+        HttpSession session = request.getSession();
         String action = request.getServletPath();
+        forward = "/login/login";
+        
+        String username = (String) session.getAttribute("username");
+        int userId = -1;
+        Customer customer = null;
+        User user;
+        DAOUser daoUser = new DAOUser();
         
         if(action.equalsIgnoreCase("/admin")) {
             
-//          TODO: implement admin page
-            
-            
-            forward = "/admin";
+            if(session.getAttribute("username") != null) {
+                
+                isLoggedIn = true;
+                
+//               Get User Info
+                user = daoUser.getUserByUsername(username);
+                if(user != null) {
+                    userId = user.getUserId();
+                }
+                
+//               Get Customer info
+                if(userId != -1) {
+                    customer = getCustomer(username);
+                }
+
+                if(customer != null) {
+                        
+                    forward = "/admin";
+                    
+//                    is user admin? set admin value
+                    if(isUserAdmin(customer.getCustomerId())) {
+                        session.setAttribute("isAdmin", true);
+                    } else {
+                        session.setAttribute("isAdmin", false);
+                    }
+
+//                        set customer
+                    session.setAttribute("customer", customer);
+                }
+            } else {
+                isLoggedIn = false;
+            }
         }
         
 //        admin edit category
         else if(action.equalsIgnoreCase("/admin/editcategory")) {
             
-//          TODO: implement edit category page
-            
-            
-            forward = "/editcategory";
+            if(session.getAttribute("username") != null) {
+                
+                isLoggedIn = true;
+                
+//               Get User Info
+                user = daoUser.getUserByUsername(username);
+                if(user != null) {
+                    userId = user.getUserId();
+                }
+                
+//               Get Customer info
+                if(userId != -1) {
+                    customer = getCustomer(username);
+                }
+
+                if(customer != null) {
+                    
+                    forward = "/editcategory";
+                        
+//                    is user admin? set admin value
+                    if(isUserAdmin(customer.getCustomerId())) {
+                        session.setAttribute("isAdmin", true);
+                    } else {
+                        session.setAttribute("isAdmin", false);
+                    }
+
+//                        set customer
+                    session.setAttribute("customer", customer);
+                }
+            } else {
+                isLoggedIn = false;
+            }
         }
         
  //        admin edit book
         else if(action.equalsIgnoreCase("/admin/editbook")) {
             
-//          TODO: implement edit book page
-            
-            
-            forward = "/editbook";
+            if(session.getAttribute("username") != null) {
+                
+                isLoggedIn = true;
+                
+//               Get User Info
+                user = daoUser.getUserByUsername(username);
+                if(user != null) {
+                    userId = user.getUserId();
+                }
+                
+//               Get Customer info
+                if(userId != -1) {
+                    customer = getCustomer(username);
+                }
+
+                if(customer != null) {
+                    
+                    forward = "/editbook";
+                        
+//                    is user admin? set admin value
+                    if(isUserAdmin(customer.getCustomerId())) {
+                        session.setAttribute("isAdmin", true);
+                    } else {
+                        session.setAttribute("isAdmin", false);
+                    }
+
+//                        set customer
+                    session.setAttribute("customer", customer);
+                }
+            } else {
+                isLoggedIn = false;
+            }
         }       
         
  //        admin edit customer
         else if(action.equalsIgnoreCase("/admin/editcustomer")) {
             
-//          TODO: implement edit customer page
-            
-            
-            forward = "/editcustomer";
+            if(session.getAttribute("username") != null) {
+                
+                isLoggedIn = true;
+                
+//               Get User Info
+                user = daoUser.getUserByUsername(username);
+                if(user != null) {
+                    userId = user.getUserId();
+                }
+                
+//               Get Customer info
+                if(userId != -1) {
+                    customer = getCustomer(username);
+                }
+
+                if(customer != null) {
+                    
+                    forward = "/editcustomer";
+                        
+//                    is user admin? set admin value
+                    if(isUserAdmin(customer.getCustomerId())) {
+                        session.setAttribute("isAdmin", true);
+                    } else {
+                        session.setAttribute("isAdmin", false);
+                    }
+
+//                        set customer
+                    session.setAttribute("customer", customer);
+                }
+            } else {
+                isLoggedIn = false;
+            }
         }
         
  //        admin edit customer order
         else if(action.equalsIgnoreCase("/admin/editcustomerorder")) {
             
-//          TODO: implement edit customer order page
-            
-            
-            forward = "/editcustomerorder";
+            if(session.getAttribute("username") != null) {
+                
+                isLoggedIn = true;
+                
+//               Get User Info
+                user = daoUser.getUserByUsername(username);
+                if(user != null) {
+                    userId = user.getUserId();
+                }
+                
+//               Get Customer info
+                if(userId != -1) {
+                    customer = getCustomer(username);
+                }
+
+                if(customer != null) {
+                    
+                    forward = "/editcustomerorder";
+                        
+//                    is user admin? set admin value
+                    if(isUserAdmin(customer.getCustomerId())) {
+                        session.setAttribute("isAdmin", true);
+                    } else {
+                        session.setAttribute("isAdmin", false);
+                    }
+
+//                        set customer
+                    session.setAttribute("customer", customer);
+                }
+            } else {
+                isLoggedIn = false;
+            }
         }
         
  //        admin edit ordered book
         else if(action.equalsIgnoreCase("/admin/editorderedbook")) {
             
-//          TODO: implement edit ordered book page
-            
-            
-            forward = "/editorderedbook";
+            if(session.getAttribute("username") != null) {
+                
+                isLoggedIn = true;
+                
+//               Get User Info
+                user = daoUser.getUserByUsername(username);
+                if(user != null) {
+                    userId = user.getUserId();
+                }
+                
+//               Get Customer info
+                if(userId != -1) {
+                    customer = getCustomer(username);
+                }
+
+                if(customer != null) {
+                    
+                    forward = "/editorderedbook";
+                        
+//                    is user admin? set admin value
+                    if(isUserAdmin(customer.getCustomerId())) {
+                        session.setAttribute("isAdmin", true);
+                    } else {
+                        session.setAttribute("isAdmin", false);
+                    }
+
+//                        set customer
+                    session.setAttribute("customer", customer);
+                }
+            } else {
+                isLoggedIn = false;
+            }
         }
         
 //        Error page
@@ -116,9 +299,13 @@ public class AdminController extends HttpServlet {
             } else {
                 
 //               administrative pages
-                url = START_URL_ADMIN + forward + END_URL;
-                    
+                if(isLoggedIn) {
+                    url = START_URL_ADMIN + forward + END_URL;
+                } else {
+                    url = START_URL + forward + END_URL;
+                }
             }
+            System.err.println(url);
             
             RequestDispatcher view = request.getRequestDispatcher(url);
             view.forward(request, response);
@@ -149,5 +336,32 @@ public class AdminController extends HttpServlet {
         } catch (ParseException ex) {
             Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    private Customer getCustomer(String username) {
+        int userId = -1;
+        Customer customer = null;
+        DAOCustomer daoCustomer = new DAOCustomer();
+        DAOUser daoUser = new DAOUser();
+        
+        User user = daoUser.getUserByUsername(username);
+        if(user != null) {
+            userId = user.getUserId();
+        }
+        
+        if(userId != -1) {
+            customer = daoCustomer.getCustomerById(userId);
+        }
+        return customer;
+    }
+
+    private boolean isUserAdmin(int userId) {
+        DAOUser daoUser = new DAOUser();
+        User user = daoUser.getUserById(userId);
+        if(user != null) {
+            int isAdmin = user.getIsAdmin();
+            return (isAdmin == 1);
+        }
+        return false;
     }
 }

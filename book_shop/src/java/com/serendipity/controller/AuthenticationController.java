@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.util.List;
-import java.util.jar.Pack200;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -63,15 +62,18 @@ public class AuthenticationController extends HttpServlet {
             Cookie[] cookies = request.getCookies();
             if(cookies != null){
                 for(Cookie cookie : cookies){
-                    if(cookie.getName().equals("JSESSIONID")){
-                        System.out.println("JSESSIONID="+cookie.getValue());
-                    }
+//                    if(cookie.getName().equals("JSESSIONID")){
+//                        System.out.println("JSESSIONID="+cookie.getValue());
+//                    }
                     cookie.setMaxAge(0);
                     response.addCookie(cookie);
                 }
             }
             
             //invalidate the session if exists
+            String logoutMessage = "You have been logged out successfully";
+            request.setAttribute("logoutMessage", logoutMessage);
+            
             session = request.getSession(false);
             if(session != null){
                 session.invalidate();
@@ -123,6 +125,15 @@ public class AuthenticationController extends HttpServlet {
                     Customer customer = getCustomer(username);
                     
                     if(customer != null) {
+                        
+//                        is user admin? set admin value
+                        if(isUserAdmin(customer.getCustomerId())) {
+                            session.setAttribute("isAdmin", true);
+                        } else {
+                            session.setAttribute("isAdmin", false);
+                        }
+                        
+//                        set customer
                         session.setAttribute("customer", customer);
                         forward = "/index";
                     }
@@ -240,5 +251,15 @@ public class AuthenticationController extends HttpServlet {
             validUser = passwordUtil.authenticate(username, password);
         }
         return validUser;
+    }
+    
+    private boolean isUserAdmin(int userId) {
+        DAOUser daoUser = new DAOUser();
+        User user = daoUser.getUserById(userId);
+        if(user != null) {
+            int isAdmin = user.getIsAdmin();
+            return (isAdmin == 1);
+        }
+        return false;
     }
 }

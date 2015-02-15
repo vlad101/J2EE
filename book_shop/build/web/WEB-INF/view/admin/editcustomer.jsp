@@ -21,22 +21,25 @@
 <div id="csrf" style="visibility: hidden;">${csrfPreventionSalt}</div>
 
 <div id="centerColumn">
-                
-    <!-- Add customer -->
     
-    <c:if test="${empty sessionScope.username}">
-        <br><br><p>You're not logged in!</p><a href="<c:url value='/login'/>" >Login</a>
+    <c:if test="${empty sessionScope.username && sessionScope.isAdmin == true}">
+        <br><br>
+        <p>You're not logged in!</p><a href="<c:url value='/login'/>" >Login</a>
+        <br><br>
+    </c:if>
+        
+    <c:if test="${not empty sessionScope.username && sessionScope.isAdmin == false }">
+        <br><br>
+        <p>You don't have sufficient permission to access the page!</p>
     </c:if>
     
-    <c:if test="${not empty sessionScope.username && empty error}">
+    <c:if test="${not empty sessionScope.username && sessionScope.isAdmin == true}">
+        
+        <!-- Add customer -->
         <br><br>
         <button type="button" id="customer_add_button" class="btn btn-primary btn-small" data-toggle="modal" data-target="#add-customer-modal" >Add Customer</button>
         <br/>
-    </c:if>
-        
-    <!-- jQuery datatables -->
-    <c:if test="${not empty sessionScope.username && empty error}">
-        
+                
         <!-- adding new customer -->
         <div id="ajax_add_customer_response_success" class="alert alert-success"></div>
 
@@ -54,6 +57,8 @@
         
         <div id="preloader"><img src="/book_shop/assets/images/loader/loader.gif" alt="Get customer preloader" ></div>
         <div id="preloader-text">Loading...</div>
+        
+        <!-- jQuery datatables -->
         <div id="customer-list">
             <table id="customer-list-table" class="display">
                 <thead>

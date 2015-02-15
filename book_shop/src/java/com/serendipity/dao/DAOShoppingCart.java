@@ -1,6 +1,5 @@
 package com.serendipity.dao;
 
-import com.serendipity.model.Email;
 import com.serendipity.model.ShoppingCart;
 import com.serendipity.util.DbUtil;
 import com.serendipity.util.ToJSON;
@@ -83,18 +82,17 @@ public class DAOShoppingCart {
      */
     public int updateShoppingCartInfo(ShoppingCart shoppingCart) {
                 
-        String sql = "UPDATE shopping_cart SET shopping_cart_id=?, book_id=?, quantity=?,customer_id=? WHERE shoppoing_cart_id=?;";
+        String sql = "UPDATE shopping_cart SET book_id=?, quantity=?,customer_id=? WHERE shoppoing_cart_id=?;";
         
         try {
         
             conn = db.getConnection();
             conn.setAutoCommit(false);
             preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setInt(1, shoppingCart.getShoppingCartId());
-            preparedStatement.setInt(2, shoppingCart.getBookId());
-            preparedStatement.setInt(3, shoppingCart.getQuantity());
-            preparedStatement.setInt(4, shoppingCart.getCustomerId());
-            preparedStatement.setInt(5, shoppingCart.getShoppingCartId());
+            preparedStatement.setInt(1, shoppingCart.getBookId());
+            preparedStatement.setInt(2, shoppingCart.getQuantity());
+            preparedStatement.setInt(3, shoppingCart.getCustomerId());
+            preparedStatement.setInt(4, shoppingCart.getShoppingCartId());
             preparedStatement.executeUpdate();
             conn.commit();
             

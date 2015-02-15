@@ -6,3 +6,7 @@
 #login-error-message {
     color: red;
 }
+
+#adminCenterColumn > span#logout-message {
+    color: red;
+}
