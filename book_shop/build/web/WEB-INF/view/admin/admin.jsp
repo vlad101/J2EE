@@ -14,7 +14,7 @@
 <div id="adminCenterColumn">
     
     <c:if test="${empty sessionScope.username}">
-        <br><br><p>You're not logged in!</p><a href="<c:url value='/login'/>" >Login</a>
+        <br><br><p>You're not logged in!</p><a href="<c:url value='/login/login'/>" >Login</a>
     </c:if>
         
     <c:if test="${not empty sessionScope.username && sessionScope.isAdmin == false }">

@@ -305,7 +305,6 @@ public class AdminController extends HttpServlet {
                     url = START_URL + forward + END_URL;
                 }
             }
-            System.err.println(url);
             
             RequestDispatcher view = request.getRequestDispatcher(url);
             view.forward(request, response);

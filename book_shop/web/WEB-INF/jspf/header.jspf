@@ -47,13 +47,13 @@
                     <c:if test="${empty sessionScope.username}">
                         <span class="header-username" >New Customer? <a href="<c:url value='/customer/register'/>" >Register</a></span><br>
                         <div class="headerWidget">
-                            <a href="<c:url value='/login'/>" >Login</a>
+                            <a href="<c:url value='/login/login'/>" >Login</a>
                         </div>
                     </c:if>
                     <c:if test="${not empty sessionScope.username && empty error}">
                         <span class="header-username" >Welcome, ${sessionScope.username}! Not <a href="<c:url value='/logout'/>" >${sessionScope.username}</a>?</span><br>
                         <div class="headerWidget">
-                            <a href="<c:url value='/logout'/>" >Logout</a>
+                            <a href="<c:url value='/login/logout'/>" >Logout</a>
                         </div>   
                         <div class="headerWidget">
                             <a href="<c:url value='/customer/customer?id=${sessionScope.customer.getCustomerId()}'/>" >Edit Profile</a>
@@ -64,7 +64,7 @@
                             </div>
                         </c:if>
                         <div class="headerWidget">        
-                            <a href="<c:url value='/cart'/>" >Show Cart</a>
+                            <a href="<c:url value='/cart/cart'/>" >Show Cart</a>
                         </div>
                     </c:if>
 <!--                <div class="headerWidget">
@@ -74,7 +74,7 @@
                     </div>-->
                     <c:if test="${empty sessionScope.username}">
                         <div class="headerWidget">  
-                            <a href="<c:url value='/login'/>" >Show Cart</a>
+                            <a href="<c:url value='/login/login'/>" >Show Cart</a>
                         </div>
                     </c:if>
                     

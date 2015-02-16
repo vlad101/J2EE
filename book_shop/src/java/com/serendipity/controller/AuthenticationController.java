@@ -29,8 +29,8 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name="AuthenticationController",
             loadOnStartup = 1,
-            urlPatterns = {"/login",
-                           "/logout",
+            urlPatterns = {"/login/login",
+                           "/login/logout",
                            "/login/userlogin"})
 public class AuthenticationController extends HttpServlet {
 
@@ -53,11 +53,11 @@ public class AuthenticationController extends HttpServlet {
         HttpSession session = request.getSession();
         String action = request.getServletPath();
         
-        if(action.equalsIgnoreCase("/login")) {
+        if(action.equalsIgnoreCase("/login/login")) {
             forward = "/login/login";
         }
         
-        else if(action.equalsIgnoreCase("/logout")) {
+        else if(action.equalsIgnoreCase("/login/logout")) {
             response.setContentType("text/html");
             Cookie[] cookies = request.getCookies();
             if(cookies != null){

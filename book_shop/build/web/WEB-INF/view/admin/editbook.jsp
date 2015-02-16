@@ -24,7 +24,7 @@
     
     <c:if test="${empty sessionScope.username}">
         <br><br>
-        <p>You're not logged in!</p><a href="<c:url value='/login'/>" >Login</a>
+        <p>You're not logged in!</p><a href="<c:url value='/login/login'/>" >Login</a>
         <br><br>
     </c:if>
         

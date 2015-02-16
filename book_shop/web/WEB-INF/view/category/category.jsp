@@ -35,13 +35,11 @@
                             <a href="<c:url value="/book/book?id=${book.getBookId()}" />">Book Details</a>
                         </td>
                         <td>
-                            <input type="text" id="book_id-${book.getBookId()}-qty-${book.getQuantity()}" class="book-quantity" value="${book.getQuantity()}" >
+                            <input type="text" id="book_id-${book.getBookId()}-qty-${book.getQuantity()}" class="book-quantity" value="1" >
                             <span id="book_id-${book.getBookId()}-invalid-qty" ></span>
                         </td>
                         <td>
-                            <form action="#" method="post">
-                                <input type="submit" value="Add to cart">
-                            </form>
+                            <button type="button" id="add_book_${book.getBookId()}_to_cart_button" class="btn btn-primary btn-small" >Add to cart</button>
                         </td>
                     </tr>
                 </c:forEach>

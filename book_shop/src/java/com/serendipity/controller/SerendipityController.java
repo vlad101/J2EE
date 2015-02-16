@@ -24,9 +24,6 @@ import javax.servlet.http.HttpSession;
             urlPatterns = { "/search",
                             "/customerservice",
                             "/index",
-                            "/addToCart",
-                            "/cart",
-                            "/updateCart",
                             "/checkout",
                             "/purchase",
                             "/chooseLanguage"})
@@ -62,18 +59,6 @@ public class SerendipityController extends HttpServlet {
 //      get - customer service page request
         else if(action.equalsIgnoreCase("/customerservice")) {
             forward = "/customerservice";
-        }        
-
-//      get - cart page request
-        else if(action.equalsIgnoreCase("/cart")) {
-        
-//          TODO: cart
-            
-            if(session.getAttribute("username") == null) {
-                forward = "/login/login";
-            } else {
-                forward = "/cart/cart";
-            }
         }
         
 //      get - checkout page request
@@ -88,20 +73,6 @@ public class SerendipityController extends HttpServlet {
         else if(action.equalsIgnoreCase("chooselanguage")) {
         
 //          TODO: switch language
-        
-        }
-
-//      post - add books to cart request
-        else if(action.equalsIgnoreCase("/addtocart")) {
-        
-//          TODO: implement add to cart
-        
-        }
-        
-//      post - update books in cart request
-        else if(action.equalsIgnoreCase("/updatecart")) {
-        
-//          TODO: implement update cart
         
         }
         

@@ -11,7 +11,6 @@ $( document ).ready(function() {
         
 //        check if number is valid
         if( !/^[1-9]\d*$/g.test($(this).val()) ) {
-//            $('table tbody tr td span#book_id-' + bookId + '-invalid-qty').html("<br>Invalid value " + "'" + $(this).val() + "'").css({'color' : 'red'}).delay(5000).fadeOut(400);
             $(this).val(qty);
             return;
         }
@@ -23,5 +22,10 @@ $( document ).ready(function() {
         } else {
             $(this).val($(this).val());
         }
+    });
+    
+    $('[id^=add_book_]').click(function(){
+        alert($(this).attr('id'));
+        
     });
 });

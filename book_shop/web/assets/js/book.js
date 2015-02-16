@@ -93,7 +93,7 @@ function doGetBookData(book_list) {
     
 //  get and display book data details
     //alert(book_list[book].book_id);
-    $('#page_title').html('Edit ' + book_list[book].title + ' by ' + book_list[book].author);
+    $('#page_title').html(book_list[book].title + ' by ' + book_list[book].author);
     
     if (book_list[book].hasOwnProperty("image_path")) {
         var images = '';
