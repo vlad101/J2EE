@@ -51,3 +51,8 @@
 #nav-buttons {
     margin-left: 18%;
 }
+
+table#bookTable tbody tr td input.book-quantity{
+    text-align: center;
+    width: 40px;
+}

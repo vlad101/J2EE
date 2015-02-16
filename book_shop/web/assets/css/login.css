@@ -3,10 +3,6 @@
     Author     : vladimir
 */
 
-#login-error-message {
-    color: red;
-}
-
-#adminCenterColumn > span#logout-message {
+#login-error-message, #adminCenterColumn > span#logout-message {
     color: red;
 }

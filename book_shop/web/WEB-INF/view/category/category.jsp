@@ -5,6 +5,10 @@
 --%>
 
 <link type="text/css" rel="stylesheet" href="<c:url value="/assets/css/category.css" />" />
+
+<!-- custom edit category page js -->
+<script type="text/javascript" src="<c:url value="/assets/js/category.js" />" ></script>
+
 <div id="categoryCenterColumn">
     
     <p id="pageTitle">${category.getCategoryName()}</p>
@@ -13,17 +17,28 @@
     <c:choose>
         <c:when test="${not empty bookList}">
             <table id="bookTable">
-                <c:forEach var="book" items="${bookList}" >
-                    <tr>
-                        <td class="lightBlue">
+                <c:forEach var="book" items="${bookList}" varStatus="loopStatus" >
+                    <tr class="${loopStatus.index % 2 == 0 ? 'lightBlue' : 'white'}">
+                        <td>
                             <img src="<c:url value="/assets/images/book/${defaultImageMap[book.getBookId()]}" />" height="70" width="50" alt="book image">
                         </td>
-                        <td class="lightBlue">${book.getTitle()}</td>
-                        <td class="lightBlue">${book.getAuthor()}</td>
-                        <td class="lightBlue">${book.getPrice()}</td>
-                        <td class="lightBlue"><a href="<c:url value="/book/book?id=${book.getBookId()}" />">Book Details</a></td>
-                        <td class="lightBlue">[select quantity]</td>
-                        <td class="lightBlue">
+                        <td>
+                            ${book.getTitle()}
+                        </td>
+                        <td>
+                            ${book.getAuthor()}
+                        </td>
+                        <td>
+                            ${book.getPrice()}
+                        </td>
+                        <td>
+                            <a href="<c:url value="/book/book?id=${book.getBookId()}" />">Book Details</a>
+                        </td>
+                        <td>
+                            <input type="text" id="book_id-${book.getBookId()}-qty-${book.getQuantity()}" class="book-quantity" value="${book.getQuantity()}" >
+                            <span id="book_id-${book.getBookId()}-invalid-qty" ></span>
+                        </td>
+                        <td>
                             <form action="#" method="post">
                                 <input type="submit" value="Add to cart">
                             </form>
