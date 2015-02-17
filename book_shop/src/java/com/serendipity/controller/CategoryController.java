@@ -2,10 +2,14 @@ package com.serendipity.controller;
 
 import com.serendipity.dao.DAOBook;
 import com.serendipity.dao.DAOCategory;
+import com.serendipity.dao.DAOCustomer;
 import com.serendipity.dao.DAOImage;
+import com.serendipity.dao.DAOUser;
 import com.serendipity.model.Book;
 import com.serendipity.model.Category;
+import com.serendipity.model.Customer;
 import com.serendipity.model.Image;
+import com.serendipity.model.User;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.HashMap;
@@ -19,6 +23,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -43,6 +48,7 @@ public class CategoryController extends HttpServlet {
             throws ServletException, IOException, ParseException {
 
         String forward = "";
+        HttpSession session = request.getSession();
         String action = request.getServletPath();
         
 //      get - index page request
@@ -61,6 +67,23 @@ public class CategoryController extends HttpServlet {
 //                    check the category and book are valid
                     Category category = isValidCategory(categoryId);
                     if(category != null) {
+                        
+//                        get user/customer info
+                        if(session.getAttribute("username") != null) {
+                            session.setAttribute("username", session.getAttribute("username"));
+                            
+                            DAOUser daoUser = new DAOUser();
+                            User user = daoUser.getUserByUsername((String)session.getAttribute("username"));
+                            
+                            if(user != null) { 
+                                DAOCustomer daoCustomer = new DAOCustomer();
+                                Customer customer = daoCustomer.getCustomerById(user.getUserId());
+                                if(customer != null) {
+                                    session.setAttribute("customer", customer);
+                                }
+                            }
+                        }
+                                    
                         int validCategoryId = Integer.parseInt(categoryId);
                         List<Book> bookList = getBookList(validCategoryId);
                         request.setAttribute("category", category);

@@ -13,6 +13,8 @@
     
     <p id="pageTitle">${category.getCategoryName()}</p>
     
+    <div id="csrf" style="visibility: hidden;">${csrfPreventionSalt}</div>
+       
     <br>
     <c:choose>
         <c:when test="${not empty bookList}">

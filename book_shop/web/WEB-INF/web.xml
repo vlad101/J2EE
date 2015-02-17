@@ -201,7 +201,8 @@
     </filter>
     <filter-mapping>
         <filter-name>validateSalt</filter-name>
-        <url-pattern>/api/*</url-pattern>
+        <url-pattern>/api*</url-pattern>
+        <!--login url needed-->
     </filter-mapping>
     
 </web-app>

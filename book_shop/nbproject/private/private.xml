@@ -4,25 +4,21 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/assets/css/category.css</file>
-            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/WEB-INF/view/admin/editcustomerorder.jsp</file>
+            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/src/java/com/serendipity/controller/CartController.java</file>
             <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/WEB-INF/view/admin/editcategory.jsp</file>
-            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/assets/js/book.js</file>
             <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/src/java/com/serendipity/dao/DAOCustomer.java</file>
             <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/WEB-INF/view/admin/admin.jsp</file>
             <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/src/java/com/serendipity/controller/SerendipityController.java</file>
-            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/WEB-INF/view/admin/editcustomer.jsp</file>
             <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/assets/js/category.js</file>
-            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/src/java/com/serendipity/controller/AdminController.java</file>
             <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/WEB-INF/view/category/category.jsp</file>
-            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/WEB-INF/view/index.jsp</file>
+            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/assets/js/editbook.js</file>
             <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/src/java/com/serendipity/util/PasswordUtil.java</file>
             <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/WEB-INF/web.xml</file>
+            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/WEB-INF/view/book/book.jsp</file>
             <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/src/java/com/serendipity/controller/AuthenticationController.java</file>
             <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/WEB-INF/view/login/login.jsp</file>
             <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/WEB-INF/jspf/header.jspf</file>
-            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/src/java/com/serendipity/dao/DAOUser.java</file>
-            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/web/WEB-INF/view/admin/editbook.jsp</file>
-            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/src/java/com/serendipity/rest/RESTCustomer.java</file>
+            <file>file:/home/vladimir/Documents/workspace/J2EE/book_shop/src/java/com/serendipity/controller/CategoryController.java</file>
         </group>
     </open-files>
 </project-private>

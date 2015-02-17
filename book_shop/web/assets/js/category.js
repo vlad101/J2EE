@@ -1,4 +1,14 @@
+// CSRF token
+var csrf;
+
 $( document ).ready(function() {
+    
+    function setEventHandlers() {
+        // set csrf token value
+        csrf = "?csrfPreventionSalt="+ $('#csrf').text();
+    }
+    
+    setEventHandlers();
     
     $('[id^=book_id]').change(function(){
         
@@ -24,8 +34,49 @@ $( document ).ready(function() {
         }
     });
     
-    $('[id^=add_book_]').click(function(){
-        alert($(this).attr('id'));
+    $('[id^=add_book_]').click(function(e){
         
+        var customerId = -1;
+        var bookId = -1;
+        var bookQty = -1;
+        
+//        get client id
+        customerId = $('#customer-id').text().trim();
+        
+//        get book id
+        bookId = $(this).attr('id').replace(/\D/g,'');
+        
+//        get book qty
+        bookQty = $(this).closest("tr").find('td:eq(5)').find('.book-quantity').val();
+        
+        if(customerId == -1) {
+            window.location.href = "/book_shop/login/login";
+            return;
+        }
+        
+        if(bookId != -1 && bookQty != -1) {
+            
+            var ajaxObj = {
+                        type: "GET",
+                        url: base_url + "/book_shop/cart/addToCart",
+                        data: {'customer_id':customerId,'book_id':bookId,'book_qty':bookQty,'csrfPreventionSalt': $('#csrf').text()},
+                        contentType: "application/json",
+                        error: function(jqXHR, textStatus, errorThrown) {
+                            console.log("Error " + jqXHR.getAllResponseHeaders() + " " + errorThrown);
+                        },
+                        success: addToCart,
+                        dataType: "json" // request json
+            };
+        
+            $.ajax(ajaxObj);
+        }
     });
 });
+
+function addToCart(content) {
+    if(content.add == true) {
+        alert('Very Good');
+    } else {
+        alert('Not Very Good');
+    }
+}

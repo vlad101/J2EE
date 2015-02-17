@@ -51,7 +51,7 @@
                         </div>
                     </c:if>
                     <c:if test="${not empty sessionScope.username && empty error}">
-                        <span class="header-username" >Welcome, ${sessionScope.username}! Not <a href="<c:url value='/logout'/>" >${sessionScope.username}</a>?</span><br>
+                        <span class="header-username" >Welcome, ${sessionScope.username}! Not <a href="<c:url value='/login/logout'/>" >${sessionScope.username}</a>?</span><br>
                         <div class="headerWidget">
                             <a href="<c:url value='/login/logout'/>" >Logout</a>
                         </div>   
@@ -84,4 +84,10 @@
                     <img src="<c:url value="/assets/images/logo/logoText.jpg" />" id="logoText1" alt="The Serendipity">
                     <p id="logoText2">Quality Books Served Up Fresh!</p>
                 </div>
+            </div>
+              
+            <!--get customer id-->
+            <div id="customer-id" style="visibility: hidden;">
+            <c:if test="${not empty sessionScope.username}">${sessionScope.customer.getCustomerId()}</c:if>
+            <c:if test="${empty sessionScope.username}">-1</c:if>
             </div>

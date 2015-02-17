@@ -60,8 +60,29 @@ public class CartController extends HttpServlet {
 //      post - add books to cart request
         else if(action.equalsIgnoreCase("/cart/addtocart")) {
             
+            int customerId = -1;
+            int bookId = -1;
+            int bookQty = -1;
+            
+            if(request.getParameterMap().containsKey("customer_id")) {
+                customerId = Integer.parseInt(request.getParameter("customer_id"));
+            }
+            if(request.getParameterMap().containsKey("book_id")) {
+                bookId = Integer.parseInt(request.getParameter("book_id"));
+            }
+            if(request.getParameterMap().containsKey("book_qty")) {
+                bookQty = Integer.parseInt(request.getParameter("book_qty"));
+            }
+            
             try {
-                json.put("add", true);
+                if(customerId != -1 && bookId != -1 && bookQty != -1) {
+                    System.out.println("customerId = " + customerId);
+                    System.out.println("bookId = " + bookId);
+                    System.out.println("bookQty = " + bookQty);
+                    json.put("add", true);
+                } else {
+                    json.put("add", false);
+                }                 
             } catch (JSONException e) { 
                 json.put("add", false);
             }
