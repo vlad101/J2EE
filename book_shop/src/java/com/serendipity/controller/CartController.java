@@ -1,10 +1,12 @@
 package com.serendipity.controller;
 
-import com.serendipity.dao.DAOCategory;
-import com.serendipity.model.Category;
+import com.serendipity.dao.DAOShoppingCart;
+import com.serendipity.model.ShoppingCart;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.List;
+import java.util.HashMap;
+import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -14,7 +16,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.codehaus.jettison.json.JSONArray;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
@@ -32,6 +33,7 @@ public class CartController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static final String START_URL = "/WEB-INF/view/cart";
     private static final String END_URL = ".jsp";
+    HashMap map = new HashMap();
     
     public CartController() {
         super();
@@ -60,26 +62,62 @@ public class CartController extends HttpServlet {
 //      post - add books to cart request
         else if(action.equalsIgnoreCase("/cart/addtocart")) {
             
+            
+//            Parse json
+            StringBuilder sb = new StringBuilder();
+            BufferedReader reader = request.getReader();
+            try {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line);
+                }
+            } finally {
+                reader.close();
+            }
+            
+            parseJSON(sb.toString().replace(':', '=').replaceAll("[\\[\\]()\"]",""));
+            
             int customerId = -1;
             int bookId = -1;
             int bookQty = -1;
             
-            if(request.getParameterMap().containsKey("customer_id")) {
-                customerId = Integer.parseInt(request.getParameter("customer_id"));
-            }
-            if(request.getParameterMap().containsKey("book_id")) {
-                bookId = Integer.parseInt(request.getParameter("book_id"));
-            }
-            if(request.getParameterMap().containsKey("book_qty")) {
-                bookQty = Integer.parseInt(request.getParameter("book_qty"));
-            }
+            String cId = getJSONValue("customer_id");
+            String bId = getJSONValue("book_id");
+            String bQty = getJSONValue("book_qty");
+
+            customerId = Integer.parseInt(cId);
+            bookId = Integer.parseInt(bId);
+            bookQty = Integer.parseInt(bQty);
             
             try {
                 if(customerId != -1 && bookId != -1 && bookQty != -1) {
+                    
+                    
+                    System.out.println("!!!!!!!!!!");
+                    System.out.println("!!!!!!!!!!");
+                    System.out.println("!!!!!!!!!!");
+                    
+                    
                     System.out.println("customerId = " + customerId);
                     System.out.println("bookId = " + bookId);
                     System.out.println("bookQty = " + bookQty);
-                    json.put("add", true);
+                    ShoppingCart shoppingCart = new ShoppingCart(0, bookId, bookQty, customerId);
+                    DAOShoppingCart daoShoppingCart = new DAOShoppingCart();
+                    
+                    // must check item quantity and update item quantity
+                    int http = daoShoppingCart.addShoppingCart(shoppingCart);
+                    
+                    if(http == 200) {
+                        json.put("add", true);
+                    } else {
+                        json.put("add", true);
+                    }
+                    
+                    System.out.println("!!!!!!!!!!");
+                    System.out.println("!!!!!!!!!!");
+                    System.out.println("!!!!!!!!!!");
+                    
+                    
                 } else {
                     json.put("add", false);
                 }                 
@@ -149,4 +187,19 @@ public class CartController extends HttpServlet {
             Logger.getLogger(CartController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public void parseJSON(String foo) {
+        String foo2 = foo.substring(1, foo.length() - 1);  // hack off braces
+        StringTokenizer st = new StringTokenizer(foo2, ",");
+        while (st.hasMoreTokens()) {
+          String thisToken = st.nextToken();
+          StringTokenizer st2 = new StringTokenizer(thisToken, "=");
+
+        map.put(st2.nextToken(), st2.nextToken());
+  }
+}
+
+        String getJSONValue(String key) {
+         return map.get(key).toString();
+       }
 }
