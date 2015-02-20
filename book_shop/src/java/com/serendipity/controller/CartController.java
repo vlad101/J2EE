@@ -2,6 +2,7 @@ package com.serendipity.controller;
 
 import com.serendipity.dao.DAOShoppingCart;
 import com.serendipity.model.ShoppingCart;
+import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.text.ParseException;
@@ -61,67 +62,30 @@ public class CartController extends HttpServlet {
 
 //      post - add books to cart request
         else if(action.equalsIgnoreCase("/cart/addtocart")) {
-            
-            
-//            Parse json
-            StringBuilder sb = new StringBuilder();
-            BufferedReader reader = request.getReader();
+            Gson gson = new Gson();
             try {
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    sb.append(line);
+                StringBuilder sb = new StringBuilder();
+                String s;
+                while ((s = request.getReader().readLine()) != null) {
+                    sb.append(s);
                 }
-            } finally {
-                reader.close();
-            }
-            
-            parseJSON(sb.toString().replace(':', '=').replaceAll("[\\[\\]()\"]",""));
-            
-            int customerId = -1;
-            int bookId = -1;
-            int bookQty = -1;
-            
-            String cId = getJSONValue("customer_id");
-            String bId = getJSONValue("book_id");
-            String bQty = getJSONValue("book_qty");
 
-            customerId = Integer.parseInt(cId);
-            bookId = Integer.parseInt(bId);
-            bookQty = Integer.parseInt(bQty);
-            
-            try {
-                if(customerId != -1 && bookId != -1 && bookQty != -1) {
-                    
-                    
-                    System.out.println("!!!!!!!!!!");
-                    System.out.println("!!!!!!!!!!");
-                    System.out.println("!!!!!!!!!!");
-                    
-                    
-                    System.out.println("customerId = " + customerId);
-                    System.out.println("bookId = " + bookId);
-                    System.out.println("bookQty = " + bookQty);
-                    ShoppingCart shoppingCart = new ShoppingCart(0, bookId, bookQty, customerId);
+                ShoppingCart shoppingCart = (ShoppingCart) gson.fromJson(sb.toString(), ShoppingCart.class);
+                
+                if(shoppingCart != null) {
                     DAOShoppingCart daoShoppingCart = new DAOShoppingCart();
-                    
-                    // must check item quantity and update item quantity
                     int http = daoShoppingCart.addShoppingCart(shoppingCart);
-                    
                     if(http == 200) {
                         json.put("add", true);
                     } else {
-                        json.put("add", true);
+                        json.put("add", false);
                     }
-                    
-                    System.out.println("!!!!!!!!!!");
-                    System.out.println("!!!!!!!!!!");
-                    System.out.println("!!!!!!!!!!");
-                    
-                    
                 } else {
                     json.put("add", false);
-                }                 
-            } catch (JSONException e) { 
+                }
+
+
+            } catch (Exception ex) {
                 json.put("add", false);
             }
             

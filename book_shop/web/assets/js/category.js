@@ -59,7 +59,8 @@ $( document ).ready(function() {
             var ajaxObj = {
                         type: "POST",
                         url: base_url + "/book_shop/cart/addToCart" + csrf,
-                        data: JSON.stringify({'customer_id':customerId,'book_id':bookId,'book_qty':bookQty}),
+                        //data: JSON.stringify({'customer_id':customerId,'book_id':bookId,'book_qty':bookQty}),
+                        data: JSON.stringify({'customerId':customerId,'bookId':bookId,'quantity':bookQty}),
                         contentType: "application/json",
                         error: function(jqXHR, textStatus, errorThrown) {
                             console.log("Error " + jqXHR.getAllResponseHeaders() + " " + errorThrown);
