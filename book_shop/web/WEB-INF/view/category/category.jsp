@@ -37,11 +37,22 @@
                             <a href="<c:url value="/book/book?id=${book.getBookId()}" />">Book Details</a>
                         </td>
                         <td>
+                        <c:if test="${book.getQuantity() == 0}">
+                            <input type="text" id="book_id-${book.getBookId()}-qty-${book.getQuantity()}" class="book-quantity" value="0" disabled="disabled" >
+                            <span id="book_id-${book.getBookId()}-invalid-qty" ></span>
+                        </c:if>
+                        <c:if test="${book.getQuantity() >= 1}">
                             <input type="text" id="book_id-${book.getBookId()}-qty-${book.getQuantity()}" class="book-quantity" value="1" >
                             <span id="book_id-${book.getBookId()}-invalid-qty" ></span>
+                        </c:if>
                         </td>
                         <td>
+                        <c:if test="${book.getQuantity() == 0}">
+                            <button type="button" id="add_book_${book.getBookId()}_to_cart_button" class="btn btn-disabled" disabled >Out of Stock</button>
+                        </c:if>
+                        <c:if test="${book.getQuantity() >= 1}">
                             <button type="button" id="add_book_${book.getBookId()}_to_cart_button" class="btn btn-primary btn-small" >Add to cart</button>
+                        </c:if>
                         </td>
                     </tr>
                 </c:forEach>

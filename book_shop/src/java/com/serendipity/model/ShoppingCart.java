@@ -20,7 +20,7 @@ public class ShoppingCart {
         this.customerId = customerId;
     }
     
-    // Constructor used for gson
+    // Constructor used for gson at category page
     public ShoppingCart(int bookId, int quantity, int customerId) {
         this.shoppingCartId = 0;
         this.bookId = bookId;

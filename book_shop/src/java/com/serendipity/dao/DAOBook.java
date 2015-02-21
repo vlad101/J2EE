@@ -141,6 +141,43 @@ public class DAOBook {
         return 200;
     }
     
+    public int updateQuantityByBookId(int bookId, int bookQty) {
+        
+        String sql = "UPDATE book SET quantity=? WHERE book_id=?;";
+        
+        try {
+        
+            conn = db.getConnection();
+            conn.setAutoCommit(false);
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setInt(1, bookQty);
+            preparedStatement.setInt(2, bookId);
+            
+            preparedStatement.executeUpdate();
+            conn.commit();
+            
+            preparedStatement.close();
+            preparedStatement = null;
+            
+            conn.close();
+            conn = null;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOBook.class.getName()).log(Level.SEVERE, "Coud not update book quantity.", ex);
+            try {
+                conn.rollback();
+            } catch (SQLException ex1) {
+                Logger.getLogger(DAOBook.class.getName()).log(Level.SEVERE, null, ex1);
+                return 500;
+            }
+            return 500;
+        } finally {
+            db.closeConnection();
+        }
+        
+        return 200;
+    }
+    
     public int deleteBook(int bookId) {
                
         String sql = "DELETE FROM book WHERE book_id=?;";
@@ -518,5 +555,49 @@ public class DAOBook {
         }
         
         return bookList;
+    }
+    
+    /**
+     * Get book quantity by book id
+     * @param bookId
+     * @return 
+     */
+    public int getBookQtyByBookId(int bookId){
+        
+        int qty = -1;
+        
+        String sql = "SELECT quantity FROM book WHERE book_id = ?;";
+        
+        try {
+        
+            conn = db.getConnection();
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setInt(1, bookId);
+            rs = preparedStatement.executeQuery();
+
+            if(rs.next()) {
+                qty = rs.getInt("quantity");
+            }
+            
+            rs.close();
+            rs = null;
+            
+            preparedStatement.close();
+            preparedStatement = null;
+            
+            conn.close();
+            conn = null;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOBook.class.getName()).log(Level.SEVERE, "Could not select book by book author.", ex);
+            return qty;
+        } catch (Exception ex) {
+            Logger.getLogger(DAOBook.class.getName()).log(Level.SEVERE, null, ex);
+            return qty;
+        } finally {
+            db.closeConnection();
+        }
+        
+        return qty;
     }
 }

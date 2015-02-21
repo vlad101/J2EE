@@ -3,6 +3,7 @@ package com.serendipity.controller;
 import com.serendipity.dao.DAOShoppingCart;
 import com.serendipity.model.ShoppingCart;
 import com.google.gson.Gson;
+import com.serendipity.dao.DAOBook;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.text.ParseException;
@@ -73,20 +74,37 @@ public class CartController extends HttpServlet {
                 ShoppingCart shoppingCart = (ShoppingCart) gson.fromJson(sb.toString(), ShoppingCart.class);
                 
                 if(shoppingCart != null) {
-                    DAOShoppingCart daoShoppingCart = new DAOShoppingCart();
-                    int http = daoShoppingCart.addShoppingCart(shoppingCart);
-                    if(http == 200) {
-                        json.put("add", true);
+                    DAOBook daoBook = new DAOBook();
+                    int bookQty = daoBook.getBookQtyByBookId(shoppingCart.getBookId());
+                    int cartBookQty = shoppingCart.getQuantity();
+                    if(bookQty != -1 && bookQty >= cartBookQty && cartBookQty > 0) { 
+                        DAOShoppingCart daoShoppingCart = new DAOShoppingCart();
+                        int http = daoShoppingCart.addShoppingCart(shoppingCart);
+                        if(http == 200) {
+                            daoBook = new DAOBook();
+                            int qtyUpdate = daoBook.updateQuantityByBookId(shoppingCart.getBookId(), (bookQty - cartBookQty));
+                            if(qtyUpdate == 200) {
+                                json.put("add", true);
+                            } else {
+                                json.put("add", false);
+                                json.put("error", "Book quantity update error");
+                            }
+                        } else {
+                            json.put("add", false);
+                            json.put("error", "Add shopping cart error");
+                        }
                     } else {
                         json.put("add", false);
+                        json.put("error", "Invalid book quantity error");
                     }
                 } else {
                     json.put("add", false);
+                    json.put("error", "Shopping cart error");
                 }
-
 
             } catch (Exception ex) {
                 json.put("add", false);
+                json.put("error", "Shopping cart request error");
             }
             
             response.setContentType("application/json");
