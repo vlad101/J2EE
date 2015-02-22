@@ -2,10 +2,16 @@ package com.serendipity.controller;
 
 import com.serendipity.dao.DAOBook;
 import com.serendipity.dao.DAOCategory;
+import com.serendipity.dao.DAOCustomer;
 import com.serendipity.dao.DAOImage;
+import com.serendipity.dao.DAOShoppingCart;
+import com.serendipity.dao.DAOUser;
 import com.serendipity.model.Book;
 import com.serendipity.model.Category;
+import com.serendipity.model.Customer;
 import com.serendipity.model.Image;
+import com.serendipity.model.ShoppingCart;
+import com.serendipity.model.User;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.HashMap;
@@ -19,6 +25,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -44,6 +51,36 @@ public class BookController extends HttpServlet {
 
         String forward = "";
         String action = request.getServletPath();
+        HttpSession session = request.getSession();
+        
+        // Get shopping cart items
+        if(session.getAttribute("username") != null) {
+            
+            int userId = -1;
+
+//                   Get User Info
+            String userName = (String) session.getAttribute("username");
+
+            DAOUser daoUser = new DAOUser();
+            User user = daoUser.getUserByUsername(userName);
+            if(user != null) {
+                userId = user.getUserId();
+            }
+
+            if(userId != -1) {
+//                  Get shopping cart list count for the menu header
+                List shoppingCartList = getShoppingCartLisByCustomerId(userId);
+                request.setAttribute("shoppingCartListCount", shoppingCartList.size());
+
+//                        Get customer id
+                DAOCustomer daoCustomer = new DAOCustomer();
+                Customer customer = daoCustomer.getCustomerById(userId);
+
+                if(customer != null) {
+                    session.setAttribute("customer", customer);
+                }
+            }
+        }
 
 //      get - book list page request
         if(action.equalsIgnoreCase("/book/booklist")) {
@@ -184,5 +221,11 @@ public class BookController extends HttpServlet {
             }
         }
         return defaultImageMap;
+    }
+    
+    private List<ShoppingCart> getShoppingCartLisByCustomerId(int customerId) {
+        DAOShoppingCart daoShoppingCart = new DAOShoppingCart();
+        List shoppingCartList = daoShoppingCart.getShoppingCartByCustomerId(customerId);
+        return shoppingCartList;
     }
 }

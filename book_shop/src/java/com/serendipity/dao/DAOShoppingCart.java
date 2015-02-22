@@ -82,7 +82,7 @@ public class DAOShoppingCart {
      */
     public int updateShoppingCartInfo(ShoppingCart shoppingCart) {
                 
-        String sql = "UPDATE shopping_cart SET book_id=?, quantity=?,customer_id=? WHERE shoppoing_cart_id=?;";
+        String sql = "UPDATE shopping_cart SET book_id=?, quantity=?,customer_id=? WHERE shopping_cart_id=?;";
         
         try {
         
@@ -204,6 +204,52 @@ public class DAOShoppingCart {
         }
         
         return shoppingCartList;
+    }
+    
+    /**
+     * This method will allow you to get shopping cart books by customer id from the database.
+     * 
+     * @param customerId
+     * @param bookId
+     * @return user id
+     */
+    public ShoppingCart getShoppingCartByBookId(int customerId, int bookId){
+        
+        ShoppingCart shoppingCart = null;
+        String sql = "SELECT shopping_cart_id, book_id, quantity, customer_id FROM shopping_cart WHERE customer_id=? AND book_id=?;";
+        
+        try {
+        
+            conn = db.getConnection();
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setInt(1,customerId);
+            preparedStatement.setInt(2,bookId);
+            rs = preparedStatement.executeQuery();
+            
+//            creates a user object
+            if(rs.next()) {
+                int shoppingCartId = rs.getInt("shopping_cart_id");
+                int quantity = rs.getInt("quantity");
+                shoppingCart = new ShoppingCart(shoppingCartId, bookId, quantity, customerId);
+            }
+            
+            rs.close();
+            rs = null;
+            
+            preparedStatement.close();
+            preparedStatement = null;
+            
+            conn.close();
+            conn = null;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOShoppingCart.class.getName()).log(Level.SEVERE, "Could not select shopping cart by book id.", ex);
+            shoppingCart = null;
+        } finally {
+            db.closeConnection();
+        }
+        
+        return shoppingCart;
     }
     
     /**

@@ -1,11 +1,14 @@
 package com.serendipity.controller;
 
 import com.serendipity.dao.DAOCustomer;
+import com.serendipity.dao.DAOShoppingCart;
 import com.serendipity.dao.DAOUser;
 import com.serendipity.model.Customer;
+import com.serendipity.model.ShoppingCart;
 import com.serendipity.model.User;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -14,6 +17,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -39,6 +43,7 @@ public class CustomerController extends HttpServlet {
 
         String forward;
         String action = request.getServletPath();
+        HttpSession session = request.getSession();
         
 //        get - register page request
         if(action.equalsIgnoreCase("/customer/register")) {
@@ -59,7 +64,12 @@ public class CustomerController extends HttpServlet {
                         request.setAttribute("user", user);
                         Customer customer = getCustomerByCustomerId(validCustomerId);
                         if(customer  != null) {
-                            request.setAttribute("customer", customer);
+                            session.setAttribute("customer", customer);
+                            
+//                           Get shopping cart list count for the menu header
+                            List shoppingCartList = getShoppingCartLisByCustomerId(user.getUserId());
+                            request.setAttribute("shoppingCartListCount", shoppingCartList.size());
+                            
                             forward = "/customer";
                         } else {
                             forward = "/error/error_404";
@@ -129,5 +139,11 @@ public class CustomerController extends HttpServlet {
             return customer;
         }
         return null;
+    }
+    
+    private List<ShoppingCart> getShoppingCartLisByCustomerId(int customerId) {
+        DAOShoppingCart daoShoppingCart = new DAOShoppingCart();
+        List shoppingCartList = daoShoppingCart.getShoppingCartByCustomerId(customerId);
+        return shoppingCartList;
     }
 }

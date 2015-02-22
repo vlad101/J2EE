@@ -18,3 +18,8 @@
     width: 145px;
     height: 90px;
 }
+
+table#cartTable tr td input.book-quantity{
+    text-align: center;
+    width: 40px;
+}

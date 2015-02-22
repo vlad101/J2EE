@@ -63,8 +63,18 @@
                                 <a href="<c:url value='/admin'/>" >Admin</a>
                             </div>
                         </c:if>
-                        <div class="headerWidget">        
-                            <a href="<c:url value='/cart/cart'/>" >Show Cart</a>
+                        <div class="headerWidget">
+                            <c:if test="${shoppingCartListCount == 0}">
+                                <a href="<c:url value='/cart/cart'/>" >Show Cart</a>
+                            </c:if>
+                            <c:if test="${shoppingCartListCount != 0}">
+                                <a href="<c:url value='/cart/cart'/>" >Show Cart (${shoppingCartListCount})</a>
+                            </c:if>
+                        </div>
+                    </c:if>
+                    <c:if test="${empty sessionScope.username}">
+                        <div class="headerWidget">
+                            <a href="<c:url value='/login/login'/>" >Show Cart</a>
                         </div>
                     </c:if>
 <!--                <div class="headerWidget">
@@ -72,12 +82,6 @@
                         be removed from a production environment 
                         <a href="<c:url value='/cookie/deleteCookies'/>" >Delete Cookies</a>
                     </div>-->
-                    <c:if test="${empty sessionScope.username}">
-                        <div class="headerWidget">  
-                            <a href="<c:url value='/login/login'/>" >Show Cart</a>
-                        </div>
-                    </c:if>
-                    
                     <a href="<c:url value="/index" />">
                         <img src="<c:url value="/assets/images/logo/logo.jpg" />" id="logo" alt="Serendipity logo">
                     </a>

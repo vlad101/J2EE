@@ -4,11 +4,13 @@ import com.serendipity.dao.DAOBook;
 import com.serendipity.dao.DAOCategory;
 import com.serendipity.dao.DAOCustomer;
 import com.serendipity.dao.DAOImage;
+import com.serendipity.dao.DAOShoppingCart;
 import com.serendipity.dao.DAOUser;
 import com.serendipity.model.Book;
 import com.serendipity.model.Category;
 import com.serendipity.model.Customer;
 import com.serendipity.model.Image;
+import com.serendipity.model.ShoppingCart;
 import com.serendipity.model.User;
 import java.io.IOException;
 import java.text.ParseException;
@@ -51,9 +53,30 @@ public class CategoryController extends HttpServlet {
         HttpSession session = request.getSession();
         String action = request.getServletPath();
         
+//        Get shopping cart list count for the menu header
+        if(session.getAttribute("username") != null) {
+            session.setAttribute("username", session.getAttribute("username"));
+
+            DAOUser daoUser = new DAOUser();
+            User user = daoUser.getUserByUsername((String)session.getAttribute("username"));
+
+            if(user != null) { 
+                DAOCustomer daoCustomer = new DAOCustomer();
+                Customer customer = daoCustomer.getCustomerById(user.getUserId());
+                if(customer != null) {
+                    session.setAttribute("customer", customer);
+                }
+
+//                Get shopping cart list count for the menu header
+                List shoppingCartList = getShoppingCartLisByCustomerId(user.getUserId());
+                request.setAttribute("shoppingCartListCount", shoppingCartList.size());
+            }
+        }
+        
 //      get - index page request
         if(action.equalsIgnoreCase("/category/categorylist")) {
             request.setAttribute("categoryList", getCategoryList());
+            
             forward = "/categorylist";
         }
         
@@ -67,22 +90,6 @@ public class CategoryController extends HttpServlet {
 //                    check the category and book are valid
                     Category category = isValidCategory(categoryId);
                     if(category != null) {
-                        
-//                        get user/customer info
-                        if(session.getAttribute("username") != null) {
-                            session.setAttribute("username", session.getAttribute("username"));
-                            
-                            DAOUser daoUser = new DAOUser();
-                            User user = daoUser.getUserByUsername((String)session.getAttribute("username"));
-                            
-                            if(user != null) { 
-                                DAOCustomer daoCustomer = new DAOCustomer();
-                                Customer customer = daoCustomer.getCustomerById(user.getUserId());
-                                if(customer != null) {
-                                    session.setAttribute("customer", customer);
-                                }
-                            }
-                        }
                                     
                         int validCategoryId = Integer.parseInt(categoryId);
                         List<Book> bookList = getBookList(validCategoryId);
@@ -219,5 +226,11 @@ public class CategoryController extends HttpServlet {
             }
         }
         return defaultImageMap;
+    }
+    
+    private List<ShoppingCart> getShoppingCartLisByCustomerId(int customerId) {
+        DAOShoppingCart daoShoppingCart = new DAOShoppingCart();
+        List shoppingCartList = daoShoppingCart.getShoppingCartByCustomerId(customerId);
+        return shoppingCartList;
     }
 }

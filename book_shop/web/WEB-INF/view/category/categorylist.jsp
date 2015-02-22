@@ -15,6 +15,9 @@
     <c:choose>
         <c:when test="${not empty categoryList}">
             <table id="categoryTable">
+                <tr class="header">
+                    <th>Category Book List</th>
+                </tr>
                 <c:forEach var="category" items="${categoryList}" varStatus="loopStatus">
                     <tr class="${loopStatus.index % 2 == 0 ? 'lightBlue' : 'white'}">
                         <td>

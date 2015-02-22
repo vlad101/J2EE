@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
-    
     <!--application display name-->
     <display-name>book_shop</display-name>
-    
     <!--welcome file -->
     <welcome-file-list>
         <welcome-file>index</welcome-file>
     </welcome-file-list>
-    
     <!-- JSP config for header/footer -->
     <jsp-config>
         <jsp-property-group>
@@ -19,74 +16,63 @@
             <include-coda>/WEB-INF/jspf/footer.jspf</include-coda>
         </jsp-property-group>
     </jsp-config>
-    
     <!-- 
         Servlets 
                 -->
-    
     <!-- public controller  -->
     <servlet>
         <display-name>SerendipityController</display-name>
         <servlet-name>SerendipityController</servlet-name>
         <servlet-class>com.serendipity.controller.SerendipityController</servlet-class>
     </servlet>
-    
     <!--User authentication controller-->
     <servlet>
         <display-name>AuthenticationController</display-name>
         <servlet-name>AuthenticationController</servlet-name>
         <servlet-class>com.serendipity.controller.AuthenticationController</servlet-class>
     </servlet>
-    
     <!-- Category controller  -->
     <servlet>
         <display-name>CategoryController</display-name>
         <servlet-name>CategoryController</servlet-name>
         <servlet-class>com.serendipity.controller.CategoryController</servlet-class>
     </servlet>
-    
     <!-- Book controller  -->
     <servlet>
         <display-name>BookController</display-name>
         <servlet-name>BookController</servlet-name>
         <servlet-class>com.serendipity.controller.BookController</servlet-class>
     </servlet>
-    
     <!-- Administration controller -->
     <servlet>
         <display-name>AdminController</display-name>
         <servlet-name>AdminController</servlet-name>
         <servlet-class>com.serendipity.controller.AdminController</servlet-class>
     </servlet>
-    
     <!-- Cookie controller -->
     <servlet>
         <display-name>CookieController</display-name>
         <servlet-name>CookieController</servlet-name>
         <servlet-class>com.serendipity.controller.CookieController</servlet-class>
     </servlet>
-    
     <!-- Cart controller -->
     <servlet>
         <display-name>CartController</display-name>
         <servlet-name>CartController</servlet-name>
-        <servlet-class>com.serendipity.controller.CartController</servlet-class>
+        <servlet-class>com.serendipity.controller.ShoppingCartController</servlet-class>
     </servlet>
-    
     <!-- Customer controller -->
     <servlet>
         <display-name>CustomerController</display-name>
         <servlet-name>CustomerController</servlet-name>
         <servlet-class>com.serendipity.controller.CustomerController</servlet-class>
     </servlet>
-    
     <!-- Email controller  -->
     <servlet>
         <display-name>EmailListController</display-name>
         <servlet-name>EmailListController</servlet-name>
         <servlet-class>com.serendipity.controller.EmailListController</servlet-class>
     </servlet>
-    
     <!-- REST Web API controller -->
     <servlet>
         <servlet-name>Jersey REST Service</servlet-name>
@@ -97,7 +83,6 @@
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
-        
     <!-- 
         Servlet mapping 
                         -->
@@ -110,26 +95,22 @@
         <url-pattern>/customerservice</url-pattern>
         <url-pattern>/purchase</url-pattern>
     </servlet-mapping>
-        
     <servlet-mapping>
         <servlet-name>CartController</servlet-name>
         <url-pattern>/cart/cart</url-pattern>
         <url-pattern>/cart/addToCart</url-pattern>
         <url-pattern>/cart/updateCart</url-pattern>
-    </servlet-mapping>   
-
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>BookController</servlet-name>
         <url-pattern>/book/book</url-pattern>
         <url-pattern>/book/booklist</url-pattern>
     </servlet-mapping>
-
     <servlet-mapping>
         <servlet-name>CategoryController</servlet-name>
         <url-pattern>/category/category</url-pattern>
         <url-pattern>/category/categorylist</url-pattern>
     </servlet-mapping>
-
     <servlet-mapping>
         <servlet-name>AdminController</servlet-name>
         <url-pattern>/admin</url-pattern>
@@ -139,39 +120,32 @@
         <url-pattern>/admin/editCustomerOrder</url-pattern>
         <url-pattern>/admin/editOrderedBook</url-pattern>
     </servlet-mapping>
-
     <servlet-mapping>
         <servlet-name>CookieController</servlet-name>
         <url-pattern>/cookie/deleteCookies</url-pattern>
     </servlet-mapping>
-    
     <servlet-mapping>
         <servlet-name>CustomerController</servlet-name>
         <url-pattern>/customer/register</url-pattern>
         <url-pattern>/customer/customer</url-pattern>
     </servlet-mapping>
-    
     <servlet-mapping>
         <servlet-name>EmailListController</servlet-name>
         <url-pattern>/email/emaillist</url-pattern>
     </servlet-mapping>
-
     <servlet-mapping>
         <servlet-name>Jersey REST Service</servlet-name>
         <url-pattern>/api/*</url-pattern>
     </servlet-mapping>
-    
     <!-- Context listener -->
     <listener>
         <listener-class>com.serendipity.util.SerendipityContextListener</listener-class>
     </listener>
-    
     <!-- Context initialization parameter -->
     <context-param>
         <param-name>custServEmail</param-name>
         <param-value>custserv@serendipity.com</param-value>
     </context-param>
-    
     <!--Error handling-->
     <error-page>
         <error-code>500</error-code>
@@ -185,7 +159,6 @@
         <exception-type>java.lang.Throwable</exception-type>
         <location>/error/error_java.jsp</location>
     </error-page>
-    
     <!-- Filter CSRF prevention -->
     <filter>
         <filter-name>loadSalt</filter-name>
@@ -204,5 +177,4 @@
         <url-pattern>/api*</url-pattern>
         <!--login url needed-->
     </filter-mapping>
-    
 </web-app>

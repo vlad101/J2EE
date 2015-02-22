@@ -146,6 +146,12 @@ table {
     height: 30px;
 }
 
+.header th{
+    background-color: #c3e3e0;
+    height: 30px;
+    text-align: center;
+}
+
 /*navigation button style*/
 
 /* category button style with the center column*/

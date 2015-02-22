@@ -2,9 +2,11 @@ package com.serendipity.controller;
 
 import com.serendipity.dao.DAOCategory;
 import com.serendipity.dao.DAOCustomer;
+import com.serendipity.dao.DAOShoppingCart;
 import com.serendipity.dao.DAOUser;
 import com.serendipity.model.Category;
 import com.serendipity.model.Customer;
+import com.serendipity.model.ShoppingCart;
 import com.serendipity.model.User;
 import com.serendipity.util.CookieUtil;
 import com.serendipity.util.PasswordUtil;
@@ -124,6 +126,10 @@ public class AuthenticationController extends HttpServlet {
 //                    Get user info
                     Customer customer = getCustomer(username);
                     
+//                  Get shopping cart list count for the menu header
+                    List shoppingCartList = getShoppingCartLisByCustomerId(customer.getCustomerId());
+                    request.setAttribute("shoppingCartListCount", shoppingCartList.size());
+                    
                     if(customer != null) {
                         
 //                        is user admin? set admin value
@@ -167,6 +173,36 @@ public class AuthenticationController extends HttpServlet {
             
             RequestDispatcher view;
             if(action.equalsIgnoreCase("/login/userlogin")) {
+                
+                int userId = -1;
+                
+                // Get shopping cart items
+                if(session.getAttribute("username") != null) {
+                    
+//                   Get User Info
+                    String userName = (String) session.getAttribute("username");
+                    
+                    DAOUser daoUser = new DAOUser();
+                    User user = daoUser.getUserByUsername(userName);
+                    if(user != null) {
+                        userId = user.getUserId();
+                    }
+                    
+                    if(userId != -1) {
+    //                  Get shopping cart list count for the menu header
+                        List shoppingCartList = getShoppingCartLisByCustomerId(userId);
+                        request.setAttribute("shoppingCartListCount", shoppingCartList.size());
+                        
+//                        Get customer id
+                        DAOCustomer daoCustomer = new DAOCustomer();
+                        Customer customer = daoCustomer.getCustomerById(userId);
+                        
+                        if(customer != null) {
+                            session.setAttribute("customer", customer);
+                        }
+                    }
+                }
+                
                 // Get the encoded URL string
                 view = request.getRequestDispatcher(response.encodeRedirectURL(url));
             }
@@ -261,5 +297,11 @@ public class AuthenticationController extends HttpServlet {
             return (isAdmin == 1);
         }
         return false;
+    }
+    
+    private List<ShoppingCart> getShoppingCartLisByCustomerId(int customerId) {
+        DAOShoppingCart daoShoppingCart = new DAOShoppingCart();
+        List shoppingCartList = daoShoppingCart.getShoppingCartByCustomerId(customerId);
+        return shoppingCartList;
     }
 }

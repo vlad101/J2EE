@@ -1,11 +1,14 @@
 package com.serendipity.controller;
 
 import com.serendipity.dao.DAOCustomer;
+import com.serendipity.dao.DAOShoppingCart;
 import com.serendipity.dao.DAOUser;
 import com.serendipity.model.Customer;
+import com.serendipity.model.ShoppingCart;
 import com.serendipity.model.User;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -35,7 +38,6 @@ public class AdminController extends HttpServlet {
     private static final String START_URL = "/WEB-INF/view";
     private static final String END_URL = ".jsp";
     private boolean isLoggedIn = true;
-    //private UserDao dao;
     
     public AdminController() {
     
@@ -52,6 +54,35 @@ public class AdminController extends HttpServlet {
         HttpSession session = request.getSession();
         String action = request.getServletPath();
         forward = "/login/login";
+        
+        // Get shopping cart items
+        if(session.getAttribute("username") != null) {
+            
+            int userId = -1;
+
+//                   Get User Info
+            String userName = (String) session.getAttribute("username");
+
+            DAOUser daoUser = new DAOUser();
+            User user = daoUser.getUserByUsername(userName);
+            if(user != null) {
+                userId = user.getUserId();
+            }
+
+            if(userId != -1) {
+//                  Get shopping cart list count for the menu header
+                List shoppingCartList = getShoppingCartLisByCustomerId(userId);
+                request.setAttribute("shoppingCartListCount", shoppingCartList.size());
+
+//                  Get customer id
+                DAOCustomer daoCustomer = new DAOCustomer();
+                Customer customer = daoCustomer.getCustomerById(userId);
+
+                if(customer != null) {
+                    session.setAttribute("customer", customer);
+                }
+            }
+        }
         
         String username = (String) session.getAttribute("username");
         int userId = -1;
@@ -362,5 +393,11 @@ public class AdminController extends HttpServlet {
             return (isAdmin == 1);
         }
         return false;
+    }
+    
+    private List<ShoppingCart> getShoppingCartLisByCustomerId(int customerId) {
+        DAOShoppingCart daoShoppingCart = new DAOShoppingCart();
+        List shoppingCartList = daoShoppingCart.getShoppingCartByCustomerId(customerId);
+        return shoppingCartList;
     }
 }

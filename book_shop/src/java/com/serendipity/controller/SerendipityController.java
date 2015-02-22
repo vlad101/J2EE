@@ -1,7 +1,13 @@
 package com.serendipity.controller;
 
 import com.serendipity.dao.DAOCategory;
+import com.serendipity.dao.DAOCustomer;
+import com.serendipity.dao.DAOShoppingCart;
+import com.serendipity.dao.DAOUser;
 import com.serendipity.model.Category;
+import com.serendipity.model.Customer;
+import com.serendipity.model.ShoppingCart;
+import com.serendipity.model.User;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.List;
@@ -44,6 +50,35 @@ public class SerendipityController extends HttpServlet {
         String forward = "";
         HttpSession session = request.getSession();
         String action = request.getServletPath();
+        
+        // Get shopping cart items
+        if(session.getAttribute("username") != null) {
+            
+            int userId = -1;
+
+//                   Get User Info
+            String userName = (String) session.getAttribute("username");
+
+            DAOUser daoUser = new DAOUser();
+            User user = daoUser.getUserByUsername(userName);
+            if(user != null) {
+                userId = user.getUserId();
+            }
+
+            if(userId != -1) {
+//                  Get shopping cart list count for the menu header
+                List shoppingCartList = getShoppingCartLisByCustomerId(userId);
+                request.setAttribute("shoppingCartListCount", shoppingCartList.size());
+
+//                        Get customer id
+                DAOCustomer daoCustomer = new DAOCustomer();
+                Customer customer = daoCustomer.getCustomerById(userId);
+
+                if(customer != null) {
+                    session.setAttribute("customer", customer);
+                }
+            }
+        }
         
 //      get - index page request
         if(action.equalsIgnoreCase("/index")) {
@@ -147,5 +182,11 @@ public class SerendipityController extends HttpServlet {
             return categoryList.subList(0, 4);
         }
         return categoryList;
+    }
+    
+    private List<ShoppingCart> getShoppingCartLisByCustomerId(int customerId) {
+        DAOShoppingCart daoShoppingCart = new DAOShoppingCart();
+        List shoppingCartList = daoShoppingCart.getShoppingCartByCustomerId(customerId);
+        return shoppingCartList;
     }
 }
