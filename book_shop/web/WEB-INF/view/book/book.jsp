@@ -27,7 +27,21 @@
 
         <!-- Get book details -->
     <div id="leftColumn">
-        <div id="book_title" ></div>
+        <p>
+        <c:if test="${book.getQuantity() == 0}">
+            <input type="text" id="book_id-${book.getBookId()}-qty-${book.getQuantity()}" class="book-quantity" value="0" disabled="disabled" >&nbsp;&nbsp;&nbsp;&nbsp;
+            <button type="button" id="add_book_${book.getBookId()}_to_cart_button" class="btn btn-disabled" disabled >Out of Stock</button>
+        </c:if>
+        <c:if test="${book.getQuantity() >= 1}">
+            <input type="text" id="book_id-${book.getBookId()}-qty-${book.getQuantity()}" class="book-quantity" value="1" >&nbsp;&nbsp;&nbsp;&nbsp;
+            <button type="button" id="add_book_${book.getBookId()}_to_cart_button" class="btn btn-primary btn-small" >Add to cart</button>
+        </c:if>
+        <span id="invalid-qty" ></span>
+        </p>
+        <br><br>
+        <div id="book_title" >
+            <p>${book.getTitle()}</p>
+        </div>
         <div id="book_author"></div>
         <div id="book_quantity"></div>
         <div id="book_category"></div>

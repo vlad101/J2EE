@@ -14,15 +14,19 @@
     <br><br>
     <c:choose>
         <c:when test="${not empty categoryList}">
-            <c:forEach var="category" items="${categoryList}" >
-                <div class="categoryBox">
-                    <a href="#">
-                        <span class="categoryLabelText">
-                            <a href="<c:url value='/category/category?id=${category.getCategoryId()}'/>" >${category.getCategoryName()}</a>
-                        </span>
-                    </a>
-                </div>
-            </c:forEach>
+            <table id="categoryTable">
+                <c:forEach var="category" items="${categoryList}" varStatus="loopStatus">
+                    <tr class="${loopStatus.index % 2 == 0 ? 'lightBlue' : 'white'}">
+                        <td>
+                            <div class="categoryBox">
+                                <span class="categoryLabelText">
+                                        <p><a href="<c:url value='/category/category?id=${category.getCategoryId()}'/>" >${category.getCategoryName()}</a></p>
+                                </span>
+                            </div>
+                        </td>
+                    </tr>
+                </c:forEach>
+            </table>
         </c:when>
         <c:otherwise>
             <br><p><b>OOPS! Empty category list!</b></p>

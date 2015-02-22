@@ -6,14 +6,43 @@
 /*book list page styles */
 #centerColumn {
     width: 100%;
-    text-align: left;
-    margin-left: 5%;
 }
 
 #centerColumn h1 {
     text-align: center;
 }
 
-#nav-buttons {
-    margin-left: 18%;
+table#bookTable {
+    margin: 0 auto; /* or margin: 0 auto 0 auto */
+    width: 97%;
+}
+
+table#bookTable tr td {
+    text-align: left;
+    width: 100px;
+}
+
+table#bookTable tr td p {
+    margin-left: 30px;
+    margin-top: 5px;
+}
+
+table#bookTable tbody tr td input.book-quantity{
+    text-align: center;
+    width: 40px;
+}
+
+table#bookTable {
+    margin: 0 auto 0 auto;
+    width: 800px;
+}
+
+div#nav-buttons {
+    height: 70px;
+    margin: 0 auto;
+}
+
+div#nav-buttons ul li{
+    padding-left: 18%;
+    padding-right: 1%;
 }

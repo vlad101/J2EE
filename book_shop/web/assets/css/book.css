@@ -8,6 +8,11 @@
     text-align: left;
 }
 
+#leftColumn p .book-quantity{
+    width: 50px;
+    text-align: center;
+}
+
 #nav-buttons {
     margin-left: 0%;
 }

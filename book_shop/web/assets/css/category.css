@@ -5,9 +5,7 @@
 
 /* category page styles */
 #categoryCenterColumn {
-    margin-top: 10px;
-    width: 650px;
-    float: left;
+    width: 100%;
 }
 
 #back-button {
@@ -34,25 +32,20 @@
     font-size: x-large;
 }
 
-#bookTable {
-    margin-left: 4%;
-    margin-bottom: 2%;
-    width: 800px;
-}
-
-#bookTable tr { 
-    height: 90px; 
-}
-
-#bookTable td { 
-    width: 145px; 
-}
-
-#nav-buttons {
-    margin-left: 18%;
-}
-
 table#bookTable tbody tr td input.book-quantity{
     text-align: center;
     width: 40px;
+}
+
+table#bookTable {
+    margin: 0 auto 0 auto;
+    width: 800px;
+}
+
+table#bookTable td {
+    height: 100px;
+}
+
+#nav-buttons {
+    margin-left: 12%;
 }

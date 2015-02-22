@@ -2,11 +2,15 @@ package com.serendipity.controller;
 
 import com.serendipity.dao.DAOBook;
 import com.serendipity.dao.DAOCategory;
+import com.serendipity.dao.DAOImage;
 import com.serendipity.model.Book;
 import com.serendipity.model.Category;
+import com.serendipity.model.Image;
 import java.io.IOException;
 import java.text.ParseException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -43,7 +47,9 @@ public class BookController extends HttpServlet {
 
 //      get - book list page request
         if(action.equalsIgnoreCase("/book/booklist")) {
+            List bookList = getBookList();
             request.setAttribute("bookList", getBookList());
+            request.setAttribute("defaultImageMap", getDefaultImageMap(bookList));
             forward = "/booklist";
         }
         
@@ -138,20 +144,6 @@ public class BookController extends HttpServlet {
         List<Book> bookList = daoBook.getBookList();
         return bookList;
     }
-    
-    /**
-     * Determine if category is an integer value
-     * @param str
-     * @return 
-     */
-    private boolean isInteger(String str) {
-        try {
-            Integer.parseInt(str);
-        } catch(NumberFormatException e) {
-            return false;
-        }
-        return true;
-    }
 
     private Book getBookByBookId(int bookId) {
         DAOBook daoBook = new DAOBook();
@@ -167,5 +159,30 @@ public class BookController extends HttpServlet {
         if(category != null)
             return category;
         return null;
+    }
+    
+    /**
+     * Get default image maps with key book id and value default image map
+     * If image contains a default image, the actual image path will be used
+     * If image does not contain a default image, the default "no_image.jpg" will be used
+     * 
+     * @param bookList
+     * @return 
+     */
+    private Map<Integer, String> getDefaultImageMap(List<Book> bookList) {
+        Map<Integer, String> defaultImageMap = new HashMap<Integer, String>();
+        for(Book book : bookList) {
+            int bookId = book.getBookId();
+            DAOImage daoImage = new DAOImage();
+            Image image = daoImage.getDefaultImageByBookId(bookId);
+
+            if(image != null) {
+                String defaultImagePath = image.getPath();
+                defaultImageMap.put(bookId, defaultImagePath);
+            } else {
+                defaultImageMap.put(bookId, "no_image.jpg");
+            }
+        }
+        return defaultImageMap;
     }
 }
