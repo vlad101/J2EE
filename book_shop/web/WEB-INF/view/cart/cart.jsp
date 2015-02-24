@@ -19,7 +19,7 @@
                 <a href="#" class="bubble hMargin">proceed to checkout</a>
             </div>
 
-            <h4 id="subtotal">[ subtotal: xxx ]</h4>
+            <h4 id="subtotal"><b>Subtotal: </b>$${subtotal}</h4>
             
             <table id="cartTable">
                 <tr class="header">

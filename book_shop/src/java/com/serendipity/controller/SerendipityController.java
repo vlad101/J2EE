@@ -30,8 +30,6 @@ import javax.servlet.http.HttpSession;
             urlPatterns = { "/search",
                             "/customerservice",
                             "/index",
-                            "/checkout",
-                            "/purchase",
                             "/chooseLanguage"})
 public class SerendipityController extends HttpServlet {
 
@@ -96,14 +94,6 @@ public class SerendipityController extends HttpServlet {
             forward = "/customerservice";
         }
         
-//      get - checkout page request
-        else if(action.equalsIgnoreCase("/checkout")) {
-        
-//          TODO: checkout
-            forward = "/checkout";
-            
-        }
-        
 //      get - switch language request
         else if(action.equalsIgnoreCase("chooselanguage")) {
         
@@ -111,13 +101,6 @@ public class SerendipityController extends HttpServlet {
         
         }
         
-//      post - purchase request
-        else if(action.equalsIgnoreCase("/purchase")) {
-        
-//          TODO: implement purchase
-            forward = "/confirmation";
-        
-        }
 //     error page   
         else {
             forward = "/error/error_404";

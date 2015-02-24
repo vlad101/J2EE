@@ -12,6 +12,7 @@ import com.serendipity.model.Customer;
 import com.serendipity.model.Image;
 import com.serendipity.model.User;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -91,6 +92,7 @@ public class ShoppingCartController extends HttpServlet {
                             request.setAttribute("bookList", bookList);
                             request.setAttribute("defaultImageMap", getDefaultImageMap(bookList));
                             request.setAttribute("shoppingCartBookQtyMap", getShoppingCartBookQtyMap(bookList, user.getUserId()));
+                            request.setAttribute("subtotal", getShoppingCartSubTotal(bookList, user.getUserId()));
                         }
                         
     //                  Get customer info
@@ -285,9 +287,7 @@ public class ShoppingCartController extends HttpServlet {
     }
     
     /**
-     * Get default image maps with key book id and value default image map
-     * If image contains a default image, the actual image path will be used
-     * If image does not contain a default image, the default "no_image.jpg" will be used
+     * Get book id maps with key book id and its shopping cart quantity
      * 
      * @param bookList
      * @return 
@@ -303,6 +303,27 @@ public class ShoppingCartController extends HttpServlet {
             }
         }
         return shoppingCartBookQty;
+    }
+    
+    /**
+     * Get shopping cart subtotal
+     * 
+     * @param bookList
+     * @param userId
+     * @return 
+     */
+    private double getShoppingCartSubTotal(List<Book> bookList, int userId) {
+        DecimalFormat decFormat = new DecimalFormat("#.##");
+        double subTotal = 0;
+        for(Book book : bookList) {
+            int bookId = book.getBookId();
+            DAOShoppingCart daoShoppingCart = new DAOShoppingCart();
+            ShoppingCart shoppingCart = daoShoppingCart.getShoppingCartByBookId(userId, bookId);
+            if(shoppingCart != null) {
+                subTotal += shoppingCart.getQuantity() * book.getPrice();
+            }
+        }
+        return Double.parseDouble(decFormat.format(subTotal));
     }
     
     private List<Book> getBookList(List<ShoppingCart> shoppingCartList) {

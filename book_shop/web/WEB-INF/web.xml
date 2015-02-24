@@ -73,6 +73,12 @@
         <servlet-name>EmailListController</servlet-name>
         <servlet-class>com.serendipity.controller.EmailListController</servlet-class>
     </servlet>
+    <!-- Purchase controller -->
+    <servlet>
+        <display-name>PurchaseController</display-name>
+        <servlet-name>PurchaseController</servlet-name>
+        <servlet-class>com.serendipity.controller.PurchaseController</servlet-class>
+    </servlet>
     <!-- REST Web API controller -->
     <servlet>
         <servlet-name>Jersey REST Service</servlet-name>
@@ -132,6 +138,11 @@
     <servlet-mapping>
         <servlet-name>EmailListController</servlet-name>
         <url-pattern>/email/emaillist</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PurchaseController</servlet-name>
+        <url-pattern>/purchase/checkout</url-pattern>
+        <url-pattern>/purchase/confirmation</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Jersey REST Service</servlet-name>
