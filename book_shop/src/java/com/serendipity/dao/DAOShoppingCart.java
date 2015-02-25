@@ -123,11 +123,12 @@ public class DAOShoppingCart {
      * Consider storing data in the temporary table and not to delete completely.
      * 
      * @param customerId
+     * @param bookId
      * @return HTTP status
      */
-    public int deleteShoppingCartByCustomerId(int customerId) {
+    public int deleteShoppingCartByCustomerIdAndBookId(int customerId, int bookId) {
          
-        String sql = "DELETE FROM shopping_cart WHERE customer_id=?;";
+        String sql = "DELETE FROM shopping_cart WHERE customer_id=? AND book_id=?;";
         
         try {
         
@@ -135,6 +136,7 @@ public class DAOShoppingCart {
             conn.setAutoCommit(false);
             preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setInt(1, customerId);
+            preparedStatement.setInt(2, bookId);
             preparedStatement.executeUpdate();
             conn.commit();
             

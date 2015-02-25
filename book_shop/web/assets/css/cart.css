@@ -12,7 +12,10 @@
 
 #subtotal { margin: 40px 0 20px 430px }
 
-#cartTable { width: 750px }
+#cartTable { 
+    width: 750px; 
+    margin: 0 auto;
+}
 
 #cartTable td {
     width: 145px;

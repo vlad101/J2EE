@@ -1,5 +1,7 @@
 package com.serendipity.controller;
 
+import com.google.gson.Gson;
+import com.serendipity.dao.DAOBook;
 import com.serendipity.dao.DAOCategory;
 import com.serendipity.dao.DAOCustomer;
 import com.serendipity.dao.DAOShoppingCart;
@@ -20,6 +22,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
 
 /**
  *
@@ -41,11 +45,12 @@ public class PurchaseController extends HttpServlet {
     
     @SuppressWarnings("UseSpecificCatch")
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ParseException {
+            throws ServletException, IOException, ParseException, JSONException {
 
         String forward = "";
         HttpSession session = request.getSession();
         String action = request.getServletPath();
+        JSONObject json = new JSONObject();
         
         // Get shopping cart items
         if(session.getAttribute("username") != null) {
@@ -77,7 +82,7 @@ public class PurchaseController extends HttpServlet {
         }
         
 //      get - checkout page request
-        else if(action.equalsIgnoreCase("/purchase/checkout")) {
+        if(action.equalsIgnoreCase("/purchase/checkout")) {
         
 //          TODO: checkout
             forward = "/checkout";
@@ -126,6 +131,8 @@ public class PurchaseController extends HttpServlet {
             processRequest(request, response);
         } catch (ParseException ex) {
             Logger.getLogger(PurchaseController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (JSONException ex) {
+            Logger.getLogger(PurchaseController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -135,6 +142,8 @@ public class PurchaseController extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ParseException ex) {
+            Logger.getLogger(PurchaseController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (JSONException ex) {
             Logger.getLogger(PurchaseController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

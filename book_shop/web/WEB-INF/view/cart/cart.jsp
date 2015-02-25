@@ -4,7 +4,11 @@
     Author     : Vladimir
 --%>
 
+<!-- custom edit cart page js -->
 <link type="text/css" rel="stylesheet" href="<c:url value="/assets/css/cart.css" />" />
+
+<!-- custom edit cart page js -->
+<script type="text/javascript" src="<c:url value="/assets/js/cart.js" />" ></script>
 
 <div id="centerColumn">
 
@@ -48,13 +52,13 @@
                         </td>
                         <td>
                             <p>
-                                <input type="text" id="book_id-${book.getBookId()}-qty-${book.getQuantity()}" class="book-quantity" value="${shoppingCartBookQtyMap[book.getBookId()]}" >
-                                <span id="book_id-${book.getBookId()}-invalid-qty" ></span>
+                                <input type="text" id="book_id-${book.getBookId()}-qty-${shoppingCartBookQtyMap[book.getBookId()]}" class="book-quantity" value="${shoppingCartBookQtyMap[book.getBookId()]}" >
+<!--                                <span id="book_id-${book.getBookId()}-invalid-qty" ></span>-->
                             </p>
                         </td>
                         <td>
                             <p>
-                                <button type="button" id="add_book_${book.getBookId()}_to_cart_button" class="btn btn-primary btn-small" >Update</button>
+                                <button type="button" id="update_cart_${book.getBookId()}_button" class="btn btn-primary btn-small" >Update</button>
                             </p>
                         </td>
                     </tr>
