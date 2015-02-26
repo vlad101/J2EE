@@ -119,6 +119,49 @@ public class DAOShoppingCart {
     }
     
     /**
+     * This method will allow you to update shopping cart.
+     * 
+     * @param shoppingCart 
+     * @return HTTP status
+     */
+    public int updateShoppingCartQty(ShoppingCart shoppingCart) {
+                
+        String sql = "UPDATE shopping_cart SET quantity=? WHERE customer_id=? AND book_id=?;";
+        
+        try {
+        
+            conn = db.getConnection();
+            conn.setAutoCommit(false);
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setInt(1, shoppingCart.getQuantity());
+            preparedStatement.setInt(2, shoppingCart.getCustomerId());
+            preparedStatement.setInt(3, shoppingCart.getBookId());
+            preparedStatement.executeUpdate();
+            conn.commit();
+            
+            preparedStatement.close();
+            preparedStatement = null;
+            
+            conn.close();
+            conn = null;
+            
+        } catch (SQLException e) {
+            Logger.getLogger(DAOShoppingCart.class.getName()).log(Level.SEVERE, "Coud not update shopping cart info.", e);
+            try {
+                conn.rollback();
+            } catch (SQLException ex) {
+                Logger.getLogger(DAOShoppingCart.class.getName()).log(Level.SEVERE, "Coud not update shopping cart.", ex);
+                return 500;
+            }
+            return 500;
+        } finally {
+            db.closeConnection();
+        }
+        
+        return 200; // success
+    }
+    
+    /**
      * This method will allow you to delete data in the shopping cart table.
      * Consider storing data in the temporary table and not to delete completely.
      * 
@@ -215,7 +258,7 @@ public class DAOShoppingCart {
      * @param bookId
      * @return user id
      */
-    public ShoppingCart getShoppingCartByBookId(int customerId, int bookId){
+    public ShoppingCart getShoppingCartByBookIdCustomerId(int customerId, int bookId){
         
         ShoppingCart shoppingCart = null;
         String sql = "SELECT shopping_cart_id, book_id, quantity, customer_id FROM shopping_cart WHERE customer_id=? AND book_id=?;";
