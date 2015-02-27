@@ -223,14 +223,15 @@ public class ShoppingCartController extends HttpServlet {
                                     System.err.println("!!!!!!!!!!!!");
                                     
                                     if(updateBookQty >= cartBookQty) {
-                                        qtyUpdate = (new DAOBook()).updateQuantityByBookId(shoppingCart.getBookId(), updateBookQty - cartBookQty);
+                                        qtyUpdate = (new DAOBook()).updateQuantityByBookId(shoppingCart.getBookId(), book.getQuantity() + shoppingCartEntry.getQuantity());
                                     } else {
                                         qtyUpdate = 500;
                                     }
                                     
                                     if(qtyUpdate == 200 && shoppingCart.getQuantity() <= updateBookQty) {
                                         //                        update book quantity from book table back to original qty
-                                        int httpUpdateInitAmount = (new DAOBook()).updateBookQuantityByBookId(book.getBookId(), bookQty + shoppingCartEntry.getQuantity());
+                                        book = (new DAOBook()).getBookById(shoppingCart.getBookId());
+                                        int httpUpdateInitAmount = (new DAOBook()).updateBookQuantityByBookId(book.getBookId(), book.getQuantity() - cartBookQty);
                         
                                         if(httpUpdateInitAmount == 200) {
                                             if(bookQty >= cartBookQty) {

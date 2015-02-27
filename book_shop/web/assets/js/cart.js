@@ -62,6 +62,43 @@ $( document ).ready(function() {
             $.ajax(ajaxObj);
         }
     });
+    
+    $('[id^=delete_cart_]').click(function(e){
+        
+        var customerId = -1;
+        var bookId = -1;
+        var bookQty = 0;
+        
+//        get client id
+        customerId = $('#customer-id').text().trim();
+        
+//        get book id
+        bookId = $(this).attr('id').replace(/\D/g,'');
+        
+        // !!!!! get current book qty by customer id and book id from database [and ajax request to backend!] !!!!
+        alert("customer id: " + customerId + "\nbook id: " + bookId + "\nbook qty: " + bookQty);
+        
+        if(customerId == -1) {
+            window.location.href = "/book_shop/login/login";
+            return;
+        }
+        
+        if(bookId != -1 && bookQty != -1) {
+            var ajaxObj = {
+                        type: "POST",
+                        url: base_url + "/book_shop/cart/updateCart" + csrf,
+                        data: JSON.stringify({'customerId':customerId,'bookId':bookId,'quantity':bookQty}),
+                        contentType: "application/json",
+                        error: function(jqXHR, textStatus, errorThrown) {
+                            console.log("Error " + jqXHR.getAllResponseHeaders() + " " + errorThrown);
+                        },
+                        success: updateCart,
+                        dataType: "json" // request json
+            };
+        
+            $.ajax(ajaxObj);
+        }
+    });
 });
 
 function updateCart(content) {

@@ -57,9 +57,14 @@
                             </p>
                         </td>
                         <td>
+                            <br>
                             <p>
                                 <button type="button" id="update_cart_${book.getBookId()}_button" class="btn btn-primary btn-small" >Update</button>
                             </p>
+                            <p>
+                                <button type="button" id="delete_cart_${book.getBookId()}_button" class="btn btn-danger btn-small" >Delete</button>
+                            </p>
+                            <br>
                         </td>
                     </tr>
                 </c:forEach>

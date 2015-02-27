@@ -29,6 +29,7 @@ $( document ).ready(function() {
         if($(this).val() > qty) {
            $(this).val(qty);
            $('table tbody tr td span#book_id-' + bookId + '-invalid-qty').html("<br>Only " + qty + " in stock").css({'color' : 'red'});
+           return;
         } else {
             $(this).val($(this).val());
         }
