@@ -18,9 +18,10 @@
             <p>Your shopping cart contains ${shoppingCartListCount} items.</p>
             
             <div id="actionBar">
-                <a href="#" class="bubble hMargin">clear cart</a>
-                <a href="#" class="bubble hMargin">continue shopping</a>
-                <a href="#" class="bubble hMargin">proceed to checkout</a>
+                <!-- class="bubble hMargin"  -->
+                <button type="button" id="clear_cart_customer_id_${sessionScope.customer.getCustomerId()}_button" class="btn btn-danger btn-small" >Clear Cart</button>
+                <button type="button" id="continue_shopping_button" class="btn btn-primary btn-small" >Continue Shopping</button>
+                <button type="button" id="checkout_button" class="btn btn-success btn-small" >Proceed to Checkout</button>
             </div>
 
             <h4 id="subtotal"><b>Subtotal: </b>$${subtotal}</h4>

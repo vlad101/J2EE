@@ -76,7 +76,6 @@ $( document ).ready(function() {
 
 function addToCart(content) {
     if(content.add == true) {
-        alert('Very Good');
     } else {
         alert(content.error);
     }

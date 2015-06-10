@@ -165,21 +165,19 @@ public class DAOShoppingCart {
      * This method will allow you to delete data in the shopping cart table.
      * Consider storing data in the temporary table and not to delete completely.
      * 
-     * @param customerId
-     * @param bookId
+     * @param shoppingCartId
      * @return HTTP status
      */
-    public int deleteShoppingCartByCustomerIdAndBookId(int customerId, int bookId) {
+    public int deleteShoppingCartByCustomerIdAndBookId(int shoppingCartId) {
          
-        String sql = "DELETE FROM shopping_cart WHERE customer_id=? AND book_id=?;";
+        String sql = "DELETE FROM shopping_cart WHERE shopping_cart_id=?;";
         
         try {
         
             conn = db.getConnection();
             conn.setAutoCommit(false);
             preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setInt(1, customerId);
-            preparedStatement.setInt(2, bookId);
+            preparedStatement.setInt(1, shoppingCartId);
             preparedStatement.executeUpdate();
             conn.commit();
             

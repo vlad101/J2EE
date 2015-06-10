@@ -23,7 +23,7 @@ $( document ).ready(function() {
         }
     });
     
-    $('[id^=update_cart_]').click(function(e){
+    $('[id^=update_cart_],[id^=delete_cart_]').click(function(e){
         
         var customerId = -1;
         var bookId = -1;
@@ -38,52 +38,20 @@ $( document ).ready(function() {
 //        get book qty
         bookQty = $(this).closest("tr").find('td:eq(3)').find('.book-quantity').val();
         
-        // !!!!! get current book qty by customer id and book id from database [and ajax request to backend!] !!!!
-        alert("customer id: " + customerId + "\nbook id: " + bookId + "\nbook qty: " + bookQty);
-        
-        if(customerId == -1) {
-            window.location.href = "/book_shop/login/login";
-            return;
+//        if delete button is pressed, set book qty to 0
+        if($(this).attr('id').indexOf('delete_cart_')  !== -1) {
+            bookQty = 0;
         }
-        
-        if(bookId != -1 && bookQty != -1) {
-            var ajaxObj = {
-                        type: "POST",
-                        url: base_url + "/book_shop/cart/updateCart" + csrf,
-                        data: JSON.stringify({'customerId':customerId,'bookId':bookId,'quantity':bookQty}),
-                        contentType: "application/json",
-                        error: function(jqXHR, textStatus, errorThrown) {
-                            console.log("Error " + jqXHR.getAllResponseHeaders() + " " + errorThrown);
-                        },
-                        success: updateCart,
-                        dataType: "json" // request json
-            };
-        
-            $.ajax(ajaxObj);
-        }
-    });
-    
-    $('[id^=delete_cart_]').click(function(e){
-        
-        var customerId = -1;
-        var bookId = -1;
-        var bookQty = 0;
-        
-//        get client id
-        customerId = $('#customer-id').text().trim();
-        
-//        get book id
-        bookId = $(this).attr('id').replace(/\D/g,'');
         
         // !!!!! get current book qty by customer id and book id from database [and ajax request to backend!] !!!!
         alert("customer id: " + customerId + "\nbook id: " + bookId + "\nbook qty: " + bookQty);
         
-        if(customerId == -1) {
+        if(customerId === -1) {
             window.location.href = "/book_shop/login/login";
             return;
         }
         
-        if(bookId != -1 && bookQty != -1) {
+        if(bookId !== -1 && bookQty !== -1) {
             var ajaxObj = {
                         type: "POST",
                         url: base_url + "/book_shop/cart/updateCart" + csrf,
