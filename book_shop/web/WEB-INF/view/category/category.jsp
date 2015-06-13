@@ -15,7 +15,10 @@
     <p id="pageTitle">${category.getCategoryName()}</p>
     
     <div id="csrf" style="visibility: hidden;">${csrfPreventionSalt}</div>
-       
+
+    <div id="ajax_add_book_response_error" class="alert alert-danger"></div>
+    <div id="ajax_add_book_response_success" class="alert alert-success"></div>
+    
     <br>
     <c:choose>
         <c:when test="${not empty bookList}">

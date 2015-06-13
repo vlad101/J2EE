@@ -72,7 +72,7 @@
             </table>
         </c:when>
         <c:otherwise>
-            <br><p><b>OOPS! Empty category cart!</b><br><br></p>
+            <br><p><b>OOPS! Empty cart!</b><br><br></p>
         </c:otherwise>
     </c:choose>                
 </div>

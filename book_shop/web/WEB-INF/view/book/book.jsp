@@ -22,6 +22,8 @@
 
         <!--Redirect to the book error-->
         <div id="ajax_book_response_error" class="alert alert-danger"></div>
+        <div id="ajax_add_book_response_error" class="alert alert-danger"></div>
+        <div id="ajax_add_book_response_success" class="alert alert-success"></div>
         <br />
     </div>
 

@@ -7,6 +7,10 @@ $( document ).ready(function() {
     function setEventHandlers() {
         
         $('#ajax_book_response_error').hide();
+        $('#ajax_add_book_response_success').hide();
+        $('#ajax_add_book_response_error').hide();
+        
+        // store and hide book_id
         $('#book_id').hide();
         
         // set csrf token value
@@ -187,8 +191,8 @@ function doGetBookData(book_list) {
 
 function addToCart(content) {
     if(content.add == true) {
-        alert('Very Good');
+        $('#ajax_add_book_response_success').css({ 'width': '60%', 'margin': '0 auto' }).show().html( '<strong>Success! </strong>' );
     } else {
-        alert(content.error);
+        $('#ajax_add_book_response_error').css({ 'width': '60%', 'margin': '0 auto' }).show().html( '<strong>Oh snap! ' + content.error +'!' + ' Try again! </strong>' );
     }
 }

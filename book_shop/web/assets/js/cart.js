@@ -43,9 +43,6 @@ $( document ).ready(function() {
             bookQty = 0;
         }
         
-        // !!!!! get current book qty by customer id and book id from database [and ajax request to backend!] !!!!
-        alert("customer id: " + customerId + "\nbook id: " + bookId + "\nbook qty: " + bookQty);
-        
         if(customerId === -1) {
             window.location.href = "/book_shop/login/login";
             return;
@@ -72,16 +69,8 @@ $( document ).ready(function() {
 function updateCart(content) {
 //    if(content.update == true && content.hasOwnProperty("quantity")) {
     if(content.update == true) {
-            //do something
-            alert("Very Good!");
+            window.location.href = '/book_shop/cart/cart';
     } else {
         alert(content.error);
     }
-//        check if quantity is valid
-//    if($(this).val() > qty) {
-//       $(this).val(qty);
-//       $('table tbody tr td span#book_id-' + bookId + '-invalid-qty').html("<br>Only " + qty + " in stock").css({'color' : 'red'});
-//    } else {
-//        $(this).val($(this).val());
-//    }
 }

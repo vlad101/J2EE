@@ -4,6 +4,10 @@ var csrf;
 $( document ).ready(function() {
     
     function setEventHandlers() {
+        
+        $('#ajax_add_book_response_success').hide();
+        $('#ajax_add_book_response_error').hide();
+        
         // set csrf token value
         csrf = "?csrfPreventionSalt="+ $('#csrf').text();
     }
@@ -76,7 +80,8 @@ $( document ).ready(function() {
 
 function addToCart(content) {
     if(content.add == true) {
+        $('#ajax_add_book_response_success').css({ 'width': '60%', 'margin': '0 auto' }).show().html( '<strong>Success! </strong>' );
     } else {
-        alert(content.error);
+        $('#ajax_add_book_response_error').css({ 'width': '60%', 'margin': '0 auto' }).show().html( '<strong>Oh snap! ' + content.error +'!' + ' Try again! </strong>' );
     }
 }
