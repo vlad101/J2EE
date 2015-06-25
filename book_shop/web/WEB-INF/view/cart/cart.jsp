@@ -10,6 +10,9 @@
 <!-- custom edit cart page js -->
 <script type="text/javascript" src="<c:url value="/assets/js/cart.js" />" ></script>
 
+ <!--id-->
+<div id="customer-id" style="visibility:hidden">${sessionScope.customer.getCustomerId()}</div>
+ 
 <div id="centerColumn">
 
     <c:choose>
@@ -19,7 +22,7 @@
             
             <div id="actionBar">
                 <!-- class="bubble hMargin"  -->
-                <button type="button" id="clear_cart_customer_id_${sessionScope.customer.getCustomerId()}_button" class="btn btn-danger btn-small" >Clear Cart</button>
+                <button type="button" id="clear_cart_button" class="btn btn-danger btn-small" >Clear Cart</button>
                 <button type="button" id="continue_shopping_button" class="btn btn-primary btn-small" >Continue Shopping</button>
                 <button type="button" id="checkout_button" class="btn btn-success btn-small" >Proceed to Checkout</button>
             </div>

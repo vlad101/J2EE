@@ -64,11 +64,38 @@ $( document ).ready(function() {
             $.ajax(ajaxObj);
         }
     });
+    
+    $('#clear_cart_button').click(function(e){
+        var customerId =+ $('#customer-id').text().trim();
+        
+        var ajaxObj = {
+                    type: "POST",
+                    url: base_url + "/book_shop/cart/deleteCart" + csrf,
+                    data: JSON.stringify({'customerId':customerId}),
+                    contentType: "application/json",
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        alert(content.error);
+                        console.log("Error " + jqXHR.getAllResponseHeaders() + " " + errorThrown);
+                    },
+                    success: deleteCart,
+                    dataType: "json" // request json
+        };
+
+        $.ajax(ajaxObj);
+        
+    });
 });
 
 function updateCart(content) {
-//    if(content.update == true && content.hasOwnProperty("quantity")) {
     if(content.update == true) {
+            window.location.href = '/book_shop/cart/cart';
+    } else {
+        alert(content.error);
+    }
+}
+
+function deleteCart(content) {
+    if(content.delete == true) {
             window.location.href = '/book_shop/cart/cart';
     } else {
         alert(content.error);

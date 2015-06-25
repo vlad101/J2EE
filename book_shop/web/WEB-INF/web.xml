@@ -106,6 +106,7 @@
         <url-pattern>/cart/cart</url-pattern>
         <url-pattern>/cart/addToCart</url-pattern>
         <url-pattern>/cart/updateCart</url-pattern>
+        <url-pattern>/cart/deleteCart</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>BookController</servlet-name>

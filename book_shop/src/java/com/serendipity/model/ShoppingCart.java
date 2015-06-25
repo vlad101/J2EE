@@ -28,6 +28,11 @@ public class ShoppingCart {
         this.customerId = customerId;
     }
     
+    // Constructor used for gson at cart page, clear cart method
+    public ShoppingCart(int customerId) {
+        this.customerId = customerId;
+    }
+    
     public void setShoppingCartId(int shoppingCartId) {
         this.shoppingCartId = shoppingCartId;
     }
