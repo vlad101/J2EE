@@ -332,8 +332,8 @@ public class ShoppingCartController extends HttpServlet {
                 }
                 
             } catch (Exception ex) {
-                json.put("update", false);
-                json.put("error", "Update cart request error");
+                json.put("delete", false);
+                json.put("error", "Delete cart request error");
                 response.setContentType("application/json");
                 response.getWriter().write(json.toString());
                 return;
@@ -342,7 +342,7 @@ public class ShoppingCartController extends HttpServlet {
 //            check shopping cart
             shoppingCart = (ShoppingCart) gson.fromJson(sb.toString(), ShoppingCart.class);
             if(shoppingCart == null) {
-                json.put("update", false);
+                json.put("delete", false);
                 json.put("error", "Shopping cart error");
                 response.setContentType("application/json");
                 response.getWriter().write(json.toString());
@@ -351,7 +351,6 @@ public class ShoppingCartController extends HttpServlet {
             
 //            check the customerId is valid integer
             String customerIdStr = Integer.toString(shoppingCart.getCustomerId());
-            System.out.println("Customer ID: " + customerIdStr);
             
             if(customerIdStr.equals("0")) {
                 json.put("delete", false);
@@ -361,99 +360,44 @@ public class ShoppingCartController extends HttpServlet {
                 return;
             }
             
+            int customerId = shoppingCart.getCustomerId();
+            
             // Get all shopping Carts by customer id
-            
-            // add books quantity for each book for original db book
-            
-            // Remove all shopping carts by customer id
-            
+            DAOShoppingCart daoShoppingCart = new DAOShoppingCart();
+            List<ShoppingCart> shoppingCartList = daoShoppingCart.getShoppingCartByCustomerId(customerId);
 
-//                
-////            get existing shopping cart items using book and customer id
-//            daoShoppingCart = new DAOShoppingCart();
-//            ShoppingCart shoppingCartEntry = daoShoppingCart.getShoppingCartByBookIdCustomerId(shoppingCart.getCustomerId(), shoppingCart.getBookId());
-//            
-//            if(shoppingCartEntry == null) {
-//                json.put("update", false);
-//                json.put("error", "Shopping cart entry error");
-//                response.setContentType("application/json");
-//                response.getWriter().write(json.toString());
-//                return;
-//            }
-//            
-////            get current db book quantity
-//            int bookQty = book.getQuantity();
-//            
-////            get new update cart book quantity                
-//            int cartBookQty;
-//            // check update book qty valid integer
-//            try {
-//                cartBookQty = shoppingCart.getQuantity();
-//            } catch (NumberFormatException e) {
-//                json.put("update", false);
-//                json.put("error", " Book qty update invalid integer error");
-//                response.setContentType("application/json");
-//                response.getWriter().write(json.toString());
-//                return;
-//            }
-//            
-////            get book qty of shopping cart
-//            int bookCartEntryQty = shoppingCartEntry.getQuantity();
-//            
-//            if(bookQty + bookCartEntryQty < cartBookQty) {
-//                json.put("update", false);
-//                json.put("error", " Book qty error");
-//                response.setContentType("application/json");
-//                response.getWriter().write(json.toString());
-//                return;
-//            }
-//
-////            add book qty to original book
-//            daoBook = new DAOBook();
-//            int qtyDbQtyUpdate= daoBook.updateQtyByBookId(shoppingCart.getBookId(), bookQty + bookCartEntryQty);
-//            if(qtyDbQtyUpdate == 500) {
-//                json.put("update", false);
-//                json.put("error", "Original Book qty update error");
-//                response.setContentType("application/json");
-//                response.getWriter().write(json.toString());
-//                return;
-//            }
-//            
-////            delete shopping cart entry
-//            if(cartBookQty == 0) {
-////                remove shopping cart entry
-//                daoShoppingCart = new DAOShoppingCart();
-//                int deleteShoppingCart = daoShoppingCart.deleteShoppingCartByCustomerIdAndBookId(shoppingCartEntry.getShoppingCartId());
-//                
-//                if(deleteShoppingCart != 200) {
-//                    json.put("update", false);
-//                    json.put("error", "Delete shopping cart error");
-//                } else {
-//                    json.put("update", true);
-//                }
-//                response.setContentType("application/json");
-//                response.getWriter().write(json.toString());
-//                return;
-//            }
-//
-////            update shopping cart entry book qty
-//            daoShoppingCart = new DAOShoppingCart();
-//            shoppingCartEntry.setQuantity(shoppingCart.getQuantity());
-//            int updateShoppingCartEntryQty = daoShoppingCart.updateShoppingCartQty(shoppingCartEntry);
-//
-////            update book qty
-//            int updateBookQty = 500;
-//            if(updateShoppingCartEntryQty == 200) {
-//                daoBook = new DAOBook();
-//                updateBookQty = daoBook.updateQtyByBookId(shoppingCart.getBookId(), bookQty + bookCartEntryQty - cartBookQty);
-//            }
-//            
-//            if(updateShoppingCartEntryQty == 200 && updateBookQty == 200) {
-//                json.put("update", true);
-//            } else {
-//                json.put("update", false);
-//                json.put("error", "Invalid shopping cart qty update");      
-//            }
+            for(ShoppingCart shoppingCartEntry : shoppingCartList) {
+                DAOBook daoBook = new DAOBook();
+                Book book = daoBook.getBookById(shoppingCartEntry.getBookId());
+                int bookId, bookQty,http;
+                if(book != null) {
+                    bookId = book.getBookId();
+                    bookQty = shoppingCartEntry.getQuantity();
+                    // Add books quantity for each book for original db book
+                    daoBook = new DAOBook();
+                    http = daoBook.updateQtyByBookIdonClearShoppingCart(bookId, bookQty);
+                    if(http == 200) {
+                        // Remove all shopping carts by book id AND customer id
+                        daoShoppingCart = new DAOShoppingCart();
+                        http = daoShoppingCart.clearShoppingCart(customerId, bookId);
+                        if(http != 200) {
+                            json.put("delete", false);
+                            json.put("error", "Cart cannot be cleared");
+                            response.setContentType("application/json");
+                            response.getWriter().write(json.toString());
+                            return;
+                        }
+                    }
+                } else {
+                    json.put("delete", false);
+                    json.put("error", "Cart cannot be cleared");
+                    response.setContentType("application/json");
+                    response.getWriter().write(json.toString());
+                    return;
+                }
+            }
+            
+            json.put("delete", true);
             response.setContentType("application/json");
             response.getWriter().write(json.toString());
             return;

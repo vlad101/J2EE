@@ -296,6 +296,51 @@ public class DAOShoppingCart {
     }
     
     /**
+     * This method will allow you to delete data in the shopping cart table when the cart is cleared.
+     * Consider storing data in the temporary table and not to delete completely.
+     * 
+     * @param customerId
+     * @param bookId
+     * @return HTTP status
+     */
+    public int clearShoppingCart(int customerId, int bookId) {
+         
+        String sql = "DELETE FROM shopping_cart WHERE customer_id=? AND book_id=?;";
+        
+        try {
+        
+            conn = db.getConnection();
+            conn.setAutoCommit(false);
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setInt(1, customerId);
+            preparedStatement.setInt(2, bookId);
+            preparedStatement.executeUpdate();
+            conn.commit();
+            
+            preparedStatement.close();
+            preparedStatement = null;
+            
+            conn.close();
+            conn = null;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOShoppingCart.class.getName()).log(Level.SEVERE, 
+                    "Coud not delete shoppoing cart books on clear cart.", ex);
+            try {
+                conn.rollback();
+            } catch (SQLException ex1) {
+                Logger.getLogger(DAOShoppingCart.class.getName()).log(Level.SEVERE, null, ex1);
+                return 500;
+            }
+            return 500;
+        } finally {
+            db.closeConnection();
+        }
+        
+        return 200; // success
+    }
+    
+    /**
      * This method will allow you to get all user shopping cart data from the email list table.
      * 
      * @return JSON object with all email data from the table. 
